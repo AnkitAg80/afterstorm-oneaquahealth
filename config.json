@@ -1,0 +1,7 @@
+{
+  "RAIN_MM": 20,
+  "TEST_MIN": 0.5,
+  "ADVISORY_MIN": 0.5,
+  "VISITS_PER_CITY": 5,
+  "WINDOW_DAYS": 2
+}
