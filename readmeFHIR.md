@@ -177,3 +177,23 @@ cached 7-day forecast; no storm sampling needed.”, 17.4 mm on 8 Oct under the
 20 mm line, zero visits, and a disabled download button. Benevento LIVE also
 had no visits. Coimbra, Ghent, and Toulouse LIVE said no storm and still listed
 their baseline visits. Those LIVE screens did not show the Coimbra resource ids.
+
+## Resource shape v1 (filed) vs v2 (current)
+
+ServiceRequests 1046–1050 were filed on 2026-10-03 with resource shape v1.
+In that shape, `ServiceRequest.code` held several codings, one per category
+(faecal, pathogen, antibiotic resistance). FHIR treats codings inside one
+CodeableConcept as equivalent representations of the same concept, so a list
+of different categories does not belong there.
+
+The current export uses resource shape v2. `code` is one request type:
+`post-storm-reassessment` or `first-baseline-assessment`, from
+`urn:afterstorm:request-type`. Each category is its own `orderDetail`
+CodeableConcept, still from `urn:afterstorm:assessment-category`, in the
+site's category order. Every new resource carries
+`meta.tag` code `resource-shape-v2`.
+
+`web/data/filed.json` and `web/data/fhir-bundle-coimbra-replay.json` were not
+rewritten and were not posted again. The page labels 1046–1050 as filed with
+resource shape v1. A download from the current page uses the v2 resources
+built by `plan.py`. The `urn:uuid` fullUrls are unchanged.

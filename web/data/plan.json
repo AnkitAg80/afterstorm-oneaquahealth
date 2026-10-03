@@ -2629,21 +2629,47 @@
                   },
                   "display": "Cretarossa"
                 },
-                "code": {
-                  "text": "New assessment: antibiotic resistance, pathogen",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "pathogen",
-                      "display": "pathogen"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "post-storm-reassessment",
+                      "display": "Post-storm reassessment (experimental)"
+                    }
+                  ],
+                  "text": "Post-storm reassessment (experimental)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "pathogen",
+                        "display": "pathogen"
+                      }
+                    ],
+                    "text": "pathogen"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "2023 result: antibiotic resistance category 1.00 (highest of 3, relative score); sewage works 3804.69 m; 48.19 mm archived rain at this site on 2026-04-01. New assessment in antibiotic resistance, pathogen; Experimental window (heuristic, not validated): 2026-04-02 to 2026-04-03 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown."
@@ -2743,16 +2769,37 @@
                   },
                   "display": "Ponticelli"
                 },
-                "code": {
-                  "text": "New assessment: faecal",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "post-storm-reassessment",
+                      "display": "Post-storm reassessment (experimental)"
+                    }
+                  ],
+                  "text": "Post-storm reassessment (experimental)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "2023 result: faecal category 0.71 (highest of 3, relative score); sewage works 4936.2 m; 48.19 mm archived rain at this site on 2026-04-01. New assessment in faecal; Experimental window (heuristic, not validated): 2026-04-02 to 2026-04-03 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown."
@@ -3023,16 +3070,37 @@
                   },
                   "display": "Margiacca"
                 },
-                "code": {
-                  "text": "New assessment: faecal",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "post-storm-reassessment",
+                      "display": "Post-storm reassessment (experimental)"
+                    }
+                  ],
+                  "text": "Post-storm reassessment (experimental)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "2023 result: faecal category 0.54 (highest of 3, relative score); sewage works 1615.9 m; 48.19 mm archived rain at this site on 2026-04-01. New assessment in faecal; Experimental window (heuristic, not validated): 2026-04-02 to 2026-04-03 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown."
@@ -3247,21 +3315,47 @@
                   },
                   "display": "Malacagna"
                 },
-                "code": {
-                  "text": "New assessment: faecal, pathogen",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "pathogen",
-                      "display": "pathogen"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "post-storm-reassessment",
+                      "display": "Post-storm reassessment (experimental)"
+                    }
+                  ],
+                  "text": "Post-storm reassessment (experimental)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "pathogen",
+                        "display": "pathogen"
+                      }
+                    ],
+                    "text": "pathogen"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "2023 result: faecal category 0.84 (highest of 3, relative score); sewage works 7142.45 m; 48.19 mm archived rain at this site on 2026-04-01. New assessment in faecal, pathogen; Experimental window (heuristic, not validated): 2026-04-02 to 2026-04-03 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown."
@@ -3703,16 +3797,37 @@
                   },
                   "display": "Lossauro"
                 },
-                "code": {
-                  "text": "New assessment: faecal",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "post-storm-reassessment",
+                      "display": "Post-storm reassessment (experimental)"
+                    }
+                  ],
+                  "text": "Post-storm reassessment (experimental)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "2023 result: faecal category 0.62 (highest of 3, relative score); sewage works 3027.62 m; 48.19 mm archived rain at this site on 2026-04-01. New assessment in faecal; Experimental window (heuristic, not validated): 2026-04-02 to 2026-04-03 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown."
@@ -3926,16 +4041,37 @@
                   },
                   "display": "Lenta"
                 },
-                "code": {
-                  "text": "New assessment: faecal",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "post-storm-reassessment",
+                      "display": "Post-storm reassessment (experimental)"
+                    }
+                  ],
+                  "text": "Post-storm reassessment (experimental)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "2023 result: faecal category 0.51 (highest of 3, relative score); sewage works 50.12 m; 48.19 mm archived rain at this site on 2026-04-01. New assessment in faecal; Experimental window (heuristic, not validated): 2026-04-02 to 2026-04-03 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown."
@@ -5025,26 +5161,57 @@
                   },
                   "display": "Conraria"
                 },
-                "code": {
-                  "text": "First baseline assessment: faecal, pathogen, antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "pathogen",
-                      "display": "pathogen"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "first-baseline-assessment",
+                      "display": "First baseline assessment (no lab result in the public feed)"
+                    }
+                  ],
+                  "text": "First baseline assessment (no lab result in the public feed)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "pathogen",
+                        "display": "pathogen"
+                      }
+                    ],
+                    "text": "pathogen"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "No lab result; take a first baseline assessment in all three categories; sewage works 2611.99 m. Routine visit; no storm window."
@@ -5121,26 +5288,57 @@
                   },
                   "display": "Ponte da Espertina"
                 },
-                "code": {
-                  "text": "First baseline assessment: faecal, pathogen, antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "pathogen",
-                      "display": "pathogen"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "first-baseline-assessment",
+                      "display": "First baseline assessment (no lab result in the public feed)"
+                    }
+                  ],
+                  "text": "First baseline assessment (no lab result in the public feed)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "pathogen",
+                        "display": "pathogen"
+                      }
+                    ],
+                    "text": "pathogen"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "No lab result; take a first baseline assessment in all three categories; sewage works 4294.29 m. Routine visit; no storm window."
@@ -6884,21 +7082,47 @@
                   },
                   "display": "Estação Cbr-B"
                 },
-                "code": {
-                  "text": "New assessment: faecal, pathogen",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "pathogen",
-                      "display": "pathogen"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "post-storm-reassessment",
+                      "display": "Post-storm reassessment (experimental)"
+                    }
+                  ],
+                  "text": "Post-storm reassessment (experimental)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "pathogen",
+                        "display": "pathogen"
+                      }
+                    ],
+                    "text": "pathogen"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "2023 result: faecal category 0.51 (highest of 3, relative score); sewage works 761.69 m; 24.43 mm archived rain at this site on 2026-05-10. New assessment in faecal, pathogen; Experimental window (heuristic, not validated): 2026-05-11 to 2026-05-12 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown."
@@ -7113,21 +7337,47 @@
                   },
                   "display": "Mina Hospital"
                 },
-                "code": {
-                  "text": "New assessment: faecal, pathogen",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "pathogen",
-                      "display": "pathogen"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "post-storm-reassessment",
+                      "display": "Post-storm reassessment (experimental)"
+                    }
+                  ],
+                  "text": "Post-storm reassessment (experimental)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "pathogen",
+                        "display": "pathogen"
+                      }
+                    ],
+                    "text": "pathogen"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "2023 result: faecal and pathogen categories 1.00 (tied highest of 3, relative score); sewage works 2398.28 m; 24.43 mm archived rain at this site on 2026-05-10. New assessment in faecal, pathogen; Experimental window (heuristic, not validated): 2026-05-11 to 2026-05-12 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown."
@@ -7228,21 +7478,47 @@
                   },
                   "display": "Casa do Sal"
                 },
-                "code": {
-                  "text": "New assessment: pathogen, faecal",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "pathogen",
-                      "display": "pathogen"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "post-storm-reassessment",
+                      "display": "Post-storm reassessment (experimental)"
+                    }
+                  ],
+                  "text": "Post-storm reassessment (experimental)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "pathogen",
+                        "display": "pathogen"
+                      }
+                    ],
+                    "text": "pathogen"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "2023 result: pathogen category 0.74 (highest of 3, relative score); sewage works 1276.96 m; 24.43 mm archived rain at this site on 2026-05-10. New assessment in pathogen, faecal; Experimental window (heuristic, not validated): 2026-05-11 to 2026-05-12 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown."
@@ -7342,16 +7618,37 @@
                   },
                   "display": "São Romão"
                 },
-                "code": {
-                  "text": "New assessment: faecal",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "post-storm-reassessment",
+                      "display": "Post-storm reassessment (experimental)"
+                    }
+                  ],
+                  "text": "Post-storm reassessment (experimental)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "2023 result: faecal category 0.57 (highest of 3, relative score); sewage works 4548.51 m; 24.43 mm archived rain at this site on 2026-05-10. New assessment in faecal; Experimental window (heuristic, not validated): 2026-05-11 to 2026-05-12 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown."
@@ -7679,16 +7976,37 @@
                   },
                   "display": "Escola Agrária"
                 },
-                "code": {
-                  "text": "New assessment: faecal",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "post-storm-reassessment",
+                      "display": "Post-storm reassessment (experimental)"
+                    }
+                  ],
+                  "text": "Post-storm reassessment (experimental)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "2023 result: faecal category 0.81 (highest of 3, relative score); sewage works 2815.42 m; 24.43 mm archived rain at this site on 2026-05-10. New assessment in faecal; Experimental window (heuristic, not validated): 2026-05-11 to 2026-05-12 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown."
@@ -7959,16 +8277,37 @@
                   },
                   "display": "Rio Velho"
                 },
-                "code": {
-                  "text": "New assessment: pathogen",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "pathogen",
-                      "display": "pathogen"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "post-storm-reassessment",
+                      "display": "Post-storm reassessment (experimental)"
+                    }
+                  ],
+                  "text": "Post-storm reassessment (experimental)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "pathogen",
+                        "display": "pathogen"
+                      }
+                    ],
+                    "text": "pathogen"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "2023 result: pathogen category 0.51 (highest of 3, relative score); sewage works 572.3 m; 24.43 mm archived rain at this site on 2026-05-10. New assessment in pathogen; Experimental window (heuristic, not validated): 2026-05-11 to 2026-05-12 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown."
@@ -8055,26 +8394,57 @@
                   },
                   "display": "Conraria"
                 },
-                "code": {
-                  "text": "First baseline assessment: faecal, pathogen, antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "pathogen",
-                      "display": "pathogen"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "first-baseline-assessment",
+                      "display": "First baseline assessment (no lab result in the public feed)"
+                    }
+                  ],
+                  "text": "First baseline assessment (no lab result in the public feed)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "pathogen",
+                        "display": "pathogen"
+                      }
+                    ],
+                    "text": "pathogen"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "No lab result; take a first baseline assessment in all three categories; sewage works 2611.99 m. REPLAY storm anchor 2026-05-10; Experimental window (heuristic, not validated): 2026-05-11 to 2026-05-12 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown."
@@ -8161,26 +8531,57 @@
                   },
                   "display": "Ponte da Espertina"
                 },
-                "code": {
-                  "text": "First baseline assessment: faecal, pathogen, antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "pathogen",
-                      "display": "pathogen"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "first-baseline-assessment",
+                      "display": "First baseline assessment (no lab result in the public feed)"
+                    }
+                  ],
+                  "text": "First baseline assessment (no lab result in the public feed)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "pathogen",
+                        "display": "pathogen"
+                      }
+                    ],
+                    "text": "pathogen"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "No lab result; take a first baseline assessment in all three categories; sewage works 4294.29 m. REPLAY storm anchor 2026-05-10; Experimental window (heuristic, not validated): 2026-05-11 to 2026-05-12 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown."
@@ -8273,16 +8674,37 @@
                   },
                   "display": "Escravote"
                 },
-                "code": {
-                  "text": "New assessment: antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "post-storm-reassessment",
+                      "display": "Post-storm reassessment (experimental)"
+                    }
+                  ],
+                  "text": "Post-storm reassessment (experimental)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "2023 result: antibiotic resistance category 0.54 (highest of 3, relative score); sewage works 5317.67 m; 24.43 mm archived rain at this site on 2026-05-10. New assessment in antibiotic resistance; Experimental window (heuristic, not validated): 2026-05-11 to 2026-05-12 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown."
@@ -8375,16 +8797,37 @@
                   },
                   "display": "Corujeira"
                 },
-                "code": {
-                  "text": "New assessment: antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "post-storm-reassessment",
+                      "display": "Post-storm reassessment (experimental)"
+                    }
+                  ],
+                  "text": "Post-storm reassessment (experimental)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "2023 result: antibiotic resistance category 0.56 (highest of 3, relative score); sewage works 1343.43 m; 24.43 mm archived rain at this site on 2026-05-10. New assessment in antibiotic resistance; Experimental window (heuristic, not validated): 2026-05-11 to 2026-05-12 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown."
@@ -8566,26 +9009,57 @@
                   },
                   "display": "Oosterzele1 (O1)"
                 },
-                "code": {
-                  "text": "First baseline assessment: faecal, pathogen, antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "pathogen",
-                      "display": "pathogen"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "first-baseline-assessment",
+                      "display": "First baseline assessment (no lab result in the public feed)"
+                    }
+                  ],
+                  "text": "First baseline assessment (no lab result in the public feed)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "pathogen",
+                        "display": "pathogen"
+                      }
+                    ],
+                    "text": "pathogen"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "No lab result; take a first baseline assessment in all three categories; sewage works 4641.04 m. Routine visit; no storm window."
@@ -9517,26 +9991,57 @@
                   },
                   "display": "Gent1 (G1)"
                 },
-                "code": {
-                  "text": "First baseline assessment: faecal, pathogen, antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "pathogen",
-                      "display": "pathogen"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "first-baseline-assessment",
+                      "display": "First baseline assessment (no lab result in the public feed)"
+                    }
+                  ],
+                  "text": "First baseline assessment (no lab result in the public feed)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "pathogen",
+                        "display": "pathogen"
+                      }
+                    ],
+                    "text": "pathogen"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "No lab result; take a first baseline assessment in all three categories; sewage works 4200.23 m. Routine visit; no storm window."
@@ -9613,26 +10118,57 @@
                   },
                   "display": "Gent2 (G2)"
                 },
-                "code": {
-                  "text": "First baseline assessment: faecal, pathogen, antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "pathogen",
-                      "display": "pathogen"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "first-baseline-assessment",
+                      "display": "First baseline assessment (no lab result in the public feed)"
+                    }
+                  ],
+                  "text": "First baseline assessment (no lab result in the public feed)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "pathogen",
+                        "display": "pathogen"
+                      }
+                    ],
+                    "text": "pathogen"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "No lab result; take a first baseline assessment in all three categories; sewage works 16.3 m. Routine visit; no storm window."
@@ -9709,26 +10245,57 @@
                   },
                   "display": "Gent3 (G3)"
                 },
-                "code": {
-                  "text": "First baseline assessment: faecal, pathogen, antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "pathogen",
-                      "display": "pathogen"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "first-baseline-assessment",
+                      "display": "First baseline assessment (no lab result in the public feed)"
+                    }
+                  ],
+                  "text": "First baseline assessment (no lab result in the public feed)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "pathogen",
+                        "display": "pathogen"
+                      }
+                    ],
+                    "text": "pathogen"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "No lab result; take a first baseline assessment in all three categories; sewage works 4055.4 m. Routine visit; no storm window."
@@ -9805,26 +10372,57 @@
                   },
                   "display": "Gent4 (G4)"
                 },
-                "code": {
-                  "text": "First baseline assessment: faecal, pathogen, antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "pathogen",
-                      "display": "pathogen"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "first-baseline-assessment",
+                      "display": "First baseline assessment (no lab result in the public feed)"
+                    }
+                  ],
+                  "text": "First baseline assessment (no lab result in the public feed)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "pathogen",
+                        "display": "pathogen"
+                      }
+                    ],
+                    "text": "pathogen"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "No lab result; take a first baseline assessment in all three categories; sewage works 2072.33 m. Routine visit; no storm window."
@@ -11509,26 +12107,57 @@
                   },
                   "display": "Oosterzele1 (O1)"
                 },
-                "code": {
-                  "text": "First baseline assessment: faecal, pathogen, antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "pathogen",
-                      "display": "pathogen"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "first-baseline-assessment",
+                      "display": "First baseline assessment (no lab result in the public feed)"
+                    }
+                  ],
+                  "text": "First baseline assessment (no lab result in the public feed)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "pathogen",
+                        "display": "pathogen"
+                      }
+                    ],
+                    "text": "pathogen"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "No lab result; take a first baseline assessment in all three categories; sewage works 4641.04 m. REPLAY storm anchor 2025-07-06; Experimental window (heuristic, not validated): 2025-07-07 to 2025-07-08 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown."
@@ -12020,16 +12649,37 @@
                   },
                   "display": "Zwalm5 (Zw5)"
                 },
-                "code": {
-                  "text": "New assessment: antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "post-storm-reassessment",
+                      "display": "Post-storm reassessment (experimental)"
+                    }
+                  ],
+                  "text": "Post-storm reassessment (experimental)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "2023 result: antibiotic resistance category 0.52 (highest of 3, relative score); sewage works 12474 m; 23.3 mm archived rain at this site on 2025-07-06. New assessment in antibiotic resistance; Experimental window (heuristic, not validated): 2025-07-07 to 2025-07-08 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown."
@@ -12515,26 +13165,57 @@
                   },
                   "display": "Gent1 (G1)"
                 },
-                "code": {
-                  "text": "First baseline assessment: faecal, pathogen, antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "pathogen",
-                      "display": "pathogen"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "first-baseline-assessment",
+                      "display": "First baseline assessment (no lab result in the public feed)"
+                    }
+                  ],
+                  "text": "First baseline assessment (no lab result in the public feed)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "pathogen",
+                        "display": "pathogen"
+                      }
+                    ],
+                    "text": "pathogen"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "No lab result; take a first baseline assessment in all three categories; sewage works 4200.23 m. REPLAY storm anchor 2025-07-06; Experimental window (heuristic, not validated): 2025-07-07 to 2025-07-08 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown."
@@ -12621,26 +13302,57 @@
                   },
                   "display": "Gent2 (G2)"
                 },
-                "code": {
-                  "text": "First baseline assessment: faecal, pathogen, antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "pathogen",
-                      "display": "pathogen"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "first-baseline-assessment",
+                      "display": "First baseline assessment (no lab result in the public feed)"
+                    }
+                  ],
+                  "text": "First baseline assessment (no lab result in the public feed)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "pathogen",
+                        "display": "pathogen"
+                      }
+                    ],
+                    "text": "pathogen"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "No lab result; take a first baseline assessment in all three categories; sewage works 16.3 m. REPLAY storm anchor 2025-07-06; Experimental window (heuristic, not validated): 2025-07-07 to 2025-07-08 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown."
@@ -12727,26 +13439,57 @@
                   },
                   "display": "Gent3 (G3)"
                 },
-                "code": {
-                  "text": "First baseline assessment: faecal, pathogen, antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "pathogen",
-                      "display": "pathogen"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "first-baseline-assessment",
+                      "display": "First baseline assessment (no lab result in the public feed)"
+                    }
+                  ],
+                  "text": "First baseline assessment (no lab result in the public feed)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "pathogen",
+                        "display": "pathogen"
+                      }
+                    ],
+                    "text": "pathogen"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "No lab result; take a first baseline assessment in all three categories; sewage works 4055.4 m. REPLAY storm anchor 2025-07-06; Experimental window (heuristic, not validated): 2025-07-07 to 2025-07-08 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown."
@@ -12833,26 +13576,57 @@
                   },
                   "display": "Gent4 (G4)"
                 },
-                "code": {
-                  "text": "First baseline assessment: faecal, pathogen, antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "pathogen",
-                      "display": "pathogen"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "first-baseline-assessment",
+                      "display": "First baseline assessment (no lab result in the public feed)"
+                    }
+                  ],
+                  "text": "First baseline assessment (no lab result in the public feed)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "pathogen",
+                        "display": "pathogen"
+                      }
+                    ],
+                    "text": "pathogen"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "No lab result; take a first baseline assessment in all three categories; sewage works 2072.33 m. REPLAY storm anchor 2025-07-06; Experimental window (heuristic, not validated): 2025-07-07 to 2025-07-08 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown."
@@ -15640,16 +16414,37 @@
                   },
                   "display": "Makrellbekken - Dronningfossen"
                 },
-                "code": {
-                  "text": "New assessment: antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "post-storm-reassessment",
+                      "display": "Post-storm reassessment (experimental)"
+                    }
+                  ],
+                  "text": "Post-storm reassessment (experimental)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "2023 result: antibiotic resistance category 0.54 (highest of 3, relative score); sewage works 21668.6 m; 27.1 mm archived rain at this site on 2026-06-09. New assessment in antibiotic resistance; Experimental window (heuristic, not validated): 2026-06-10 to 2026-06-11 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown."
@@ -16084,16 +16879,37 @@
                   },
                   "display": "Mærradalsbekken - Radiumhospital"
                 },
-                "code": {
-                  "text": "New assessment: antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "post-storm-reassessment",
+                      "display": "Post-storm reassessment (experimental)"
+                    }
+                  ],
+                  "text": "Post-storm reassessment (experimental)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "2023 result: antibiotic resistance category 0.60 (highest of 3, relative score); sewage works 19636.7 m; 27.1 mm archived rain at this site on 2026-06-09. New assessment in antibiotic resistance; Experimental window (heuristic, not validated): 2026-06-10 to 2026-06-11 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown."
@@ -16186,16 +17002,37 @@
                   },
                   "display": "Makrellbekken – ring3"
                 },
-                "code": {
-                  "text": "New assessment: antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "post-storm-reassessment",
+                      "display": "Post-storm reassessment (experimental)"
+                    }
+                  ],
+                  "text": "Post-storm reassessment (experimental)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "2023 result: antibiotic resistance category 0.68 (highest of 3, relative score); sewage works 21549.3 m; 27.1 mm archived rain at this site on 2026-06-09. New assessment in antibiotic resistance; Experimental window (heuristic, not validated): 2026-06-10 to 2026-06-11 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown."
@@ -16288,16 +17125,37 @@
                   },
                   "display": "Mærradalsbekken – Huseby skole"
                 },
-                "code": {
-                  "text": "New assessment: antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "post-storm-reassessment",
+                      "display": "Post-storm reassessment (experimental)"
+                    }
+                  ],
+                  "text": "Post-storm reassessment (experimental)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "2023 result: antibiotic resistance category 0.54 (highest of 3, relative score); sewage works 19994.8 m; 27.1 mm archived rain at this site on 2026-06-09. New assessment in antibiotic resistance; Experimental window (heuristic, not validated): 2026-06-10 to 2026-06-11 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown."
@@ -16390,16 +17248,37 @@
                   },
                   "display": "Hovinbekken - Krokliveien"
                 },
-                "code": {
-                  "text": "New assessment: antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "post-storm-reassessment",
+                      "display": "Post-storm reassessment (experimental)"
+                    }
+                  ],
+                  "text": "Post-storm reassessment (experimental)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "2023 result: antibiotic resistance category 0.60 (highest of 3, relative score); sewage works 34814.1 m; 27.1 mm archived rain at this site on 2026-06-09. New assessment in antibiotic resistance; Experimental window (heuristic, not validated): 2026-06-10 to 2026-06-11 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown."
@@ -17667,26 +18546,57 @@
                   },
                   "display": "Fossé Mère (ou Ruisseau Le Négogousses)"
                 },
-                "code": {
-                  "text": "First baseline assessment: faecal, pathogen, antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "pathogen",
-                      "display": "pathogen"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "first-baseline-assessment",
+                      "display": "First baseline assessment (no lab result in the public feed)"
+                    }
+                  ],
+                  "text": "First baseline assessment (no lab result in the public feed)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "pathogen",
+                        "display": "pathogen"
+                      }
+                    ],
+                    "text": "pathogen"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "No lab result; take a first baseline assessment in all three categories; sewage works 4839.19 m. Routine visit; no storm window."
@@ -18048,26 +18958,57 @@
                   },
                   "display": "T21"
                 },
-                "code": {
-                  "text": "First baseline assessment: faecal, pathogen, antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "pathogen",
-                      "display": "pathogen"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "first-baseline-assessment",
+                      "display": "First baseline assessment (no lab result in the public feed)"
+                    }
+                  ],
+                  "text": "First baseline assessment (no lab result in the public feed)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "pathogen",
+                        "display": "pathogen"
+                      }
+                    ],
+                    "text": "pathogen"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "No lab result; take a first baseline assessment in all three categories; missing sewage distance; ranked last among baseline sites when baseline ordering applies. Routine visit; no storm window."
@@ -18201,26 +19142,57 @@
                   },
                   "display": "T24"
                 },
-                "code": {
-                  "text": "First baseline assessment: faecal, pathogen, antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "pathogen",
-                      "display": "pathogen"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "first-baseline-assessment",
+                      "display": "First baseline assessment (no lab result in the public feed)"
+                    }
+                  ],
+                  "text": "First baseline assessment (no lab result in the public feed)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "pathogen",
+                        "display": "pathogen"
+                      }
+                    ],
+                    "text": "pathogen"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "No lab result; take a first baseline assessment in all three categories; missing sewage distance; ranked last among baseline sites when baseline ordering applies. Routine visit; no storm window."
@@ -19863,16 +20835,37 @@
                   },
                   "display": "Ruisseau du Palays"
                 },
-                "code": {
-                  "text": "New assessment: faecal",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "post-storm-reassessment",
+                      "display": "Post-storm reassessment (experimental)"
+                    }
+                  ],
+                  "text": "Post-storm reassessment (experimental)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "2023 result: faecal category 0.53 (highest of 3, relative score); sewage works 2189.89 m; 32.76 mm archived rain at this site on 2026-08-03. New assessment in faecal; Experimental window (heuristic, not validated): 2026-08-04 to 2026-08-05 inclusive. The next date is absent or unknown; this is the last qualifying wet day in the selected data, not confirmation that rain stopped."
@@ -20086,16 +21079,37 @@
                   },
                   "display": "Hers"
                 },
-                "code": {
-                  "text": "New assessment: faecal",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "post-storm-reassessment",
+                      "display": "Post-storm reassessment (experimental)"
+                    }
+                  ],
+                  "text": "Post-storm reassessment (experimental)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "2023 result: faecal category 0.51 (highest of 3, relative score); sewage works 4085.24 m; 32.76 mm archived rain at this site on 2026-08-03. New assessment in faecal; Experimental window (heuristic, not validated): 2026-08-04 to 2026-08-05 inclusive. The next date is absent or unknown; this is the last qualifying wet day in the selected data, not confirmation that rain stopped."
@@ -20195,16 +21209,37 @@
                   },
                   "display": "Marcaissonne aval"
                 },
-                "code": {
-                  "text": "New assessment: faecal",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "post-storm-reassessment",
+                      "display": "Post-storm reassessment (experimental)"
+                    }
+                  ],
+                  "text": "Post-storm reassessment (experimental)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "2023 result: faecal category 0.85 (highest of 3, relative score); sewage works 4882.01 m; 32.76 mm archived rain at this site on 2026-08-03. New assessment in faecal; Experimental window (heuristic, not validated): 2026-08-04 to 2026-08-05 inclusive. The next date is absent or unknown; this is the last qualifying wet day in the selected data, not confirmation that rain stopped."
@@ -20304,16 +21339,37 @@
                   },
                   "display": "Marcaissonne amont"
                 },
-                "code": {
-                  "text": "New assessment: faecal",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "post-storm-reassessment",
+                      "display": "Post-storm reassessment (experimental)"
+                    }
+                  ],
+                  "text": "Post-storm reassessment (experimental)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "2023 result: faecal category 0.51 (highest of 3, relative score); sewage works 5378.51 m; 32.76 mm archived rain at this site on 2026-08-03. New assessment in faecal; Experimental window (heuristic, not validated): 2026-08-04 to 2026-08-05 inclusive. The next date is absent or unknown; this is the last qualifying wet day in the selected data, not confirmation that rain stopped."
@@ -20577,16 +21633,37 @@
                   },
                   "display": "Canal de Saint Martory"
                 },
-                "code": {
-                  "text": "New assessment: antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "post-storm-reassessment",
+                      "display": "Post-storm reassessment (experimental)"
+                    }
+                  ],
+                  "text": "Post-storm reassessment (experimental)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "2023 result: antibiotic resistance category 0.64 (highest of 3, relative score); sewage works 4836.49 m; 25 mm archived rain at this site on 2026-08-03. New assessment in antibiotic resistance; Experimental window (heuristic, not validated): 2026-08-04 to 2026-08-05 inclusive. The next date is absent or unknown; this is the last qualifying wet day in the selected data, not confirmation that rain stopped."
@@ -20686,16 +21763,37 @@
                   },
                   "display": "Fossé de Larramet amont"
                 },
-                "code": {
-                  "text": "New assessment: faecal",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "post-storm-reassessment",
+                      "display": "Post-storm reassessment (experimental)"
+                    }
+                  ],
+                  "text": "Post-storm reassessment (experimental)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "2023 result: faecal category 0.55 (highest of 3, relative score); sewage works 4488.74 m; 25 mm archived rain at this site on 2026-08-03. New assessment in faecal; Experimental window (heuristic, not validated): 2026-08-04 to 2026-08-05 inclusive. The next date is absent or unknown; this is the last qualifying wet day in the selected data, not confirmation that rain stopped."
@@ -20788,16 +21886,37 @@
                   },
                   "display": "Fossé de Larramet médian"
                 },
-                "code": {
-                  "text": "New assessment: antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "post-storm-reassessment",
+                      "display": "Post-storm reassessment (experimental)"
+                    }
+                  ],
+                  "text": "Post-storm reassessment (experimental)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "2023 result: antibiotic resistance category 0.65 (highest of 3, relative score); sewage works 3025.1 m; 25 mm archived rain at this site on 2026-08-03. New assessment in antibiotic resistance; Experimental window (heuristic, not validated): 2026-08-04 to 2026-08-05 inclusive. The next date is absent or unknown; this is the last qualifying wet day in the selected data, not confirmation that rain stopped."
@@ -20890,16 +22009,37 @@
                   },
                   "display": "Ruisseau du Roussimort aval"
                 },
-                "code": {
-                  "text": "New assessment: antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "post-storm-reassessment",
+                      "display": "Post-storm reassessment (experimental)"
+                    }
+                  ],
+                  "text": "Post-storm reassessment (experimental)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "2023 result: antibiotic resistance category 0.60 (highest of 3, relative score); sewage works 807.03 m; 32.76 mm archived rain at this site on 2026-08-03. New assessment in antibiotic resistance; Experimental window (heuristic, not validated): 2026-08-04 to 2026-08-05 inclusive. The next date is absent or unknown; this is the last qualifying wet day in the selected data, not confirmation that rain stopped."
@@ -21000,21 +22140,47 @@
                   },
                   "display": "Canal agricole (depuis la Saudrune)"
                 },
-                "code": {
-                  "text": "New assessment: faecal, antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "post-storm-reassessment",
+                      "display": "Post-storm reassessment (experimental)"
+                    }
+                  ],
+                  "text": "Post-storm reassessment (experimental)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "2023 result: faecal category 0.58 (highest of 3, relative score); sewage works 1136.04 m; 32.76 mm archived rain at this site on 2026-08-03. New assessment in faecal, antibiotic resistance; Experimental window (heuristic, not validated): 2026-08-04 to 2026-08-05 inclusive. The next date is absent or unknown; this is the last qualifying wet day in the selected data, not confirmation that rain stopped."
@@ -21101,26 +22267,57 @@
                   },
                   "display": "Fossé Mère (ou Ruisseau Le Négogousses)"
                 },
-                "code": {
-                  "text": "First baseline assessment: faecal, pathogen, antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "pathogen",
-                      "display": "pathogen"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "first-baseline-assessment",
+                      "display": "First baseline assessment (no lab result in the public feed)"
+                    }
+                  ],
+                  "text": "First baseline assessment (no lab result in the public feed)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "pathogen",
+                        "display": "pathogen"
+                      }
+                    ],
+                    "text": "pathogen"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "No lab result; take a first baseline assessment in all three categories; sewage works 4839.19 m. REPLAY storm anchor 2026-08-03; Experimental window (heuristic, not validated): 2026-08-04 to 2026-08-05 inclusive. The next date is absent or unknown; this is the last qualifying wet day in the selected data, not confirmation that rain stopped."
@@ -21277,16 +22474,37 @@
                   },
                   "display": "Fossé de pluvial avant rejet dans fossé de Larramet"
                 },
-                "code": {
-                  "text": "New assessment: faecal",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "post-storm-reassessment",
+                      "display": "Post-storm reassessment (experimental)"
+                    }
+                  ],
+                  "text": "Post-storm reassessment (experimental)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "2023 result: faecal category 1.00 (highest of 3, relative score); sewage works 2012.68 m; 25 mm archived rain at this site on 2026-08-03. New assessment in faecal; Experimental window (heuristic, not validated): 2026-08-04 to 2026-08-05 inclusive. The next date is absent or unknown; this is the last qualifying wet day in the selected data, not confirmation that rain stopped."
@@ -21493,16 +22711,37 @@
                   },
                   "display": "Canal de Moulin"
                 },
-                "code": {
-                  "text": "New assessment: antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "post-storm-reassessment",
+                      "display": "Post-storm reassessment (experimental)"
+                    }
+                  ],
+                  "text": "Post-storm reassessment (experimental)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "2023 result: antibiotic resistance category 0.51 (highest of 3, relative score); sewage works 1549.26 m; 25 mm archived rain at this site on 2026-08-03. New assessment in antibiotic resistance; Experimental window (heuristic, not validated): 2026-08-04 to 2026-08-05 inclusive. The next date is absent or unknown; this is the last qualifying wet day in the selected data, not confirmation that rain stopped."
@@ -21589,26 +22828,57 @@
                   },
                   "display": "T21"
                 },
-                "code": {
-                  "text": "First baseline assessment: faecal, pathogen, antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "pathogen",
-                      "display": "pathogen"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "first-baseline-assessment",
+                      "display": "First baseline assessment (no lab result in the public feed)"
+                    }
+                  ],
+                  "text": "First baseline assessment (no lab result in the public feed)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "pathogen",
+                        "display": "pathogen"
+                      }
+                    ],
+                    "text": "pathogen"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "No lab result; take a first baseline assessment in all three categories; missing sewage distance; ranked last among baseline sites when baseline ordering applies. REPLAY storm anchor 2026-08-03; Experimental window (heuristic, not validated): 2026-08-04 to 2026-08-05 inclusive. The next date is absent or unknown; this is the last qualifying wet day in the selected data, not confirmation that rain stopped."
@@ -21701,16 +22971,37 @@
                   },
                   "display": "Ruisseau de l’Armurié"
                 },
-                "code": {
-                  "text": "New assessment: antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "post-storm-reassessment",
+                      "display": "Post-storm reassessment (experimental)"
+                    }
+                  ],
+                  "text": "Post-storm reassessment (experimental)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "2023 result: antibiotic resistance category 0.54 (highest of 3, relative score); sewage works 4352.86 m; 25 mm archived rain at this site on 2026-08-03. New assessment in antibiotic resistance; Experimental window (heuristic, not validated): 2026-08-04 to 2026-08-05 inclusive. The next date is absent or unknown; this is the last qualifying wet day in the selected data, not confirmation that rain stopped."
@@ -21797,26 +23088,57 @@
                   },
                   "display": "T24"
                 },
-                "code": {
-                  "text": "First baseline assessment: faecal, pathogen, antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "faecal",
-                      "display": "faecal"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "pathogen",
-                      "display": "pathogen"
-                    },
-                    {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "first-baseline-assessment",
+                      "display": "First baseline assessment (no lab result in the public feed)"
+                    }
+                  ],
+                  "text": "First baseline assessment (no lab result in the public feed)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "faecal",
+                        "display": "faecal"
+                      }
+                    ],
+                    "text": "faecal"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "pathogen",
+                        "display": "pathogen"
+                      }
+                    ],
+                    "text": "pathogen"
+                  },
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "No lab result; take a first baseline assessment in all three categories; missing sewage distance; ranked last among baseline sites when baseline ordering applies. REPLAY storm anchor 2026-08-03; Experimental window (heuristic, not validated): 2026-08-04 to 2026-08-05 inclusive. The next date is absent or unknown; this is the last qualifying wet day in the selected data, not confirmation that rain stopped."
@@ -21909,16 +23231,37 @@
                   },
                   "display": "Ruisseau de l’Armurié"
                 },
-                "code": {
-                  "text": "New assessment: antibiotic resistance",
-                  "coding": [
+                "meta": {
+                  "tag": [
                     {
-                      "system": "urn:afterstorm:assessment-category",
-                      "code": "antibiotic-resistance",
-                      "display": "antibiotic resistance"
+                      "system": "urn:afterstorm:export",
+                      "code": "resource-shape-v2",
+                      "display": "One request-type code; categories in orderDetail"
                     }
                   ]
                 },
+                "code": {
+                  "coding": [
+                    {
+                      "system": "urn:afterstorm:request-type",
+                      "code": "post-storm-reassessment",
+                      "display": "Post-storm reassessment (experimental)"
+                    }
+                  ],
+                  "text": "Post-storm reassessment (experimental)"
+                },
+                "orderDetail": [
+                  {
+                    "coding": [
+                      {
+                        "system": "urn:afterstorm:assessment-category",
+                        "code": "antibiotic-resistance",
+                        "display": "antibiotic resistance"
+                      }
+                    ],
+                    "text": "antibiotic resistance"
+                  }
+                ],
                 "reasonCode": [
                   {
                     "text": "2023 result: antibiotic resistance category 0.51 (highest of 3, relative score); sewage works 534.58 m; 52.15 mm archived rain at this site on 2026-08-03. New assessment in antibiotic resistance; Experimental window (heuristic, not validated): 2026-08-04 to 2026-08-05 inclusive. The next date is absent or unknown; this is the last qualifying wet day in the selected data, not confirmation that rain stopped."
@@ -22842,7 +24185,7 @@
     "Visit allocation is greedy; thresholds and sewage-distance ordering are prototype policy.",
     "Notices require coordinator review; no field validation has been performed."
   ],
-  "generated_at": "2026-10-03T20:04:34Z",
+  "generated_at": "2026-10-03T22:25:45Z",
   "fhir": {
     "profile": "http://hl7.org/fhir/StructureDefinition/ServiceRequest",
     "profile_note": "Checked hl7-eu/oah master input/fsh on 2026-10-04: 61 FSH files declare GroupOah, LibraryOah, LocationOah, ObservationHealthMeasureOah, ObservationIndicatorsOah, ObservationWithCompOah, and SpecimenOah. No line contained ServiceRequest or Task. Resources are base FHIR R4 ServiceRequest, not an OneAquaHealth profile, and are not sandbox-certified.",
@@ -22861,7 +24204,7 @@
       "statement": "replay scenario of the real 2026-05-10 storm — demonstration"
     },
     "reference_policy": "Saved resources omit subject.reference. An approved --post may add Location/{id} only when the sandbox returns exactly one Location with this site identifier. Duplicate Locations are logged and not chosen.",
-    "built_at": "2026-10-03T20:05:03Z",
+    "built_at": "2026-10-03T22:25:45Z",
     "default_bundle": {
       "city": "OS",
       "mode": "live",

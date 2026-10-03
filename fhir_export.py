@@ -23,7 +23,13 @@ from fetch import utc_now, write_json
 ROOT = Path(__file__).resolve().parent
 SITE_SYSTEM = "https://api.enora-oah.eu/api/sites"
 CODE_SYSTEM = "urn:afterstorm:assessment-category"
+REQUEST_SYSTEM = "urn:afterstorm:request-type"
 EXPORT_SYSTEM = "urn:afterstorm:export"
+SHAPE_TAG = {
+    "system": EXPORT_SYSTEM,
+    "code": "resource-shape-v2",
+    "display": "One request-type code; categories in orderDetail",
+}
 PROFILE_SYSTEM = "urn:afterstorm:profile-choice"
 SANDBOX = "https://sandbox.hl7europe.eu/oneaquahealth/fhir"
 # Local namespace for stable proposal URNs. Not an HL7 identifier.
@@ -81,18 +87,29 @@ def note_text(site, mode, extra=None):
     return " ".join(parts)
 
 
-def codeable_concept(site):
-    coding = []
+def request_code(site):
+    """One concept for ServiceRequest.code. Categories are not equivalent codings."""
+    if site["action"] == "new category assessment":
+        code, display = "post-storm-reassessment", "Post-storm reassessment (experimental)"
+    elif site["action"] == "first baseline assessment":
+        code, display = (
+            "first-baseline-assessment",
+            "First baseline assessment (no lab result in the public feed)",
+        )
+    else:
+        raise ValueError(f"No request type for action {site['action']!r}")
+    return {"coding": [{"system": REQUEST_SYSTEM, "code": code, "display": display}], "text": display}
+
+
+def order_details(site):
+    """One CodeableConcept per category, in the site's category order."""
+    details = []
     for label in site["categories"]:
         token = CATEGORY_CODES.get(label)
         if token is None:
             raise ValueError(f"No local assessment code for {label}")
-        coding.append({"system": CODE_SYSTEM, "code": token, "display": label})
-    if site["action"] == "first baseline assessment":
-        text = "First baseline assessment: " + ", ".join(site["categories"])
-    else:
-        text = "New assessment: " + ", ".join(site["categories"])
-    return {"text": text, "coding": coding}
+        details.append({"coding": [{"system": CODE_SYSTEM, "code": token, "display": label}], "text": label})
+    return details
 
 
 def coimbra_demonstration(plan):
@@ -114,7 +131,9 @@ def build_service_request(city_id, mode, site, extra_note=None):
         "intent": "proposal",
         "subject": {"identifier": {"system": SITE_SYSTEM, "value": site["code"]},
                     "display": site.get("name") or site["code"]},
-        "code": codeable_concept(site),
+        "meta": {"tag": [dict(SHAPE_TAG)]},
+        "code": request_code(site),
+        "orderDetail": order_details(site),
         "reasonCode": [{"text": site["reason"]}],
         "note": [{"text": note_text(site, mode, extra_note)}],
     }
@@ -282,18 +301,47 @@ def structural_report(plan, city_id, mode, budget):
     add("Saved ServiceRequest.subject has no reference field", bad_reference,
         f"{len(ranked)} saved subjects and {len(bundle.get('entry') or [])} bundle entries")
 
-    bad_code = []
+    bad_request = []
+    bad_order = []
+    bad_shape = []
     bad_text = []
     for c, m, s, r in ranked:
-        concept = r.get("code") if isinstance(r, dict) else None
-        expected = [{"system": CODE_SYSTEM, "code": CATEGORY_CODES[label], "display": label}
-                    for label in s["categories"]]
-        if not isinstance(concept, dict) or concept.get("coding") != expected:
-            bad_code.append(_where(c, m, s))
+        if not isinstance(r, dict):
+            bad_request.append(_where(c, m, s))
+            bad_order.append(_where(c, m, s))
+            bad_shape.append(_where(c, m, s))
+            bad_text.append(_where(c, m, s))
+            continue
+        expected_request = ("post-storm-reassessment" if s["action"] == "new category assessment"
+                            else "first-baseline-assessment" if s["action"] == "first baseline assessment"
+                            else None)
+        concept = r.get("code")
+        coding = concept.get("coding") if isinstance(concept, dict) else None
+        if (not isinstance(coding, list) or len(coding) != 1 or not isinstance(coding[0], dict)
+                or coding[0].get("system") != REQUEST_SYSTEM or coding[0].get("code") != expected_request
+                or coding[0].get("display") != (concept.get("text") if isinstance(concept, dict) else None)):
+            bad_request.append(_where(c, m, s))
+        expected_details = [
+            {"coding": [{"system": CODE_SYSTEM, "code": CATEGORY_CODES[label], "display": label}], "text": label}
+            for label in s["categories"]]
+        details = r.get("orderDetail")
+        one_each = (isinstance(details, list) and len(details) == len(s["categories"])
+                    and all(isinstance(item, dict) and isinstance(item.get("coding"), list)
+                            and len(item["coding"]) == 1 and item["coding"][0].get("system") == CODE_SYSTEM
+                            for item in details))
+        if not one_each or details != expected_details:
+            bad_order.append(_where(c, m, s))
+        tags = (r.get("meta") or {}).get("tag") or []
+        if not any(isinstance(tag, dict) and tag.get("system") == EXPORT_SYSTEM
+                   and tag.get("code") == "resource-shape-v2" for tag in tags):
+            bad_shape.append(_where(c, m, s))
         if not isinstance(concept, dict) or not isinstance(concept.get("text"), str) or not concept["text"].strip():
             bad_text.append(_where(c, m, s))
-    add("code is one CodeableConcept; coding system is urn:afterstorm:assessment-category; "
-        "codes and displays match the site categories in order", bad_code, f"{len(ranked)} code elements")
+    add("code.coding has exactly one entry from urn:afterstorm:request-type, and the code matches the site action",
+        bad_request, f"{len(ranked)} request codes")
+    add("orderDetail has one CodeableConcept per category, each with one coding from "
+        "urn:afterstorm:assessment-category, in category order", bad_order, f"{len(ranked)} orderDetail lists")
+    add("meta.tag contains resource-shape-v2", bad_shape, f"{len(ranked)} resources")
     add("code.text is a non-empty string", bad_text, f"{len(ranked)} code.text values")
 
     bad_period = []

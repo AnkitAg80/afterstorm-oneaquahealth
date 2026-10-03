@@ -33,6 +33,7 @@
     .visit-card{transition:background-color .2s,box-shadow .2s}.visit-card.hl{background:#f1f6ef;box-shadow:inset 4px 0 0 var(--green)}
     .budget-range{width:100%;max-width:160px;margin:10px 0 0;accent-color:var(--green);height:22px}
     @media(max-width:760px){.map-panel{position:static}}
+    .stale-chip{display:inline-block;margin:6px 0;padding:4px 8px;border-radius:6px;background:#fbf3e4;color:#7a5114;border:1px solid #e6d3a8;font-size:13px;font-weight:600}.visit-card .stale-chip{margin-left:42px}.review-history{margin:4px 0 8px 42px;font-size:13px;color:var(--muted)}.notice-row .review-history,.notice-row .stale-chip{margin-left:0}.review-history ul{margin:6px 0 0;padding-left:18px}
     .review{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0 10px 42px}.rv{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid #cfd8cf;border-radius:999px;background:#fff;font-size:14px;font-weight:600;color:var(--muted)}.rv svg{width:14px;height:14px}.rv.approve[aria-pressed=true]{background:var(--green);border-color:var(--green);color:#fff}.rv.hold[aria-pressed=true]{background:#7a5114;border-color:#7a5114;color:#fff}.rv.approve:hover{border-color:var(--green);color:var(--green)}.rv.hold:hover{border-color:#b88a3e;color:var(--amber)}.rv[aria-pressed=true]:hover{color:#fff;filter:brightness(1.08)}
     .visit-card.rv-hold{background:#fbf8f1}.visit-card.rv-hold .site-title,.visit-card.rv-hold .visit-time{opacity:.6}.visit-card.rv-approve .rank-number{background:var(--green);border-color:var(--green);color:#fff}.pin.ok{border-color:#c8f0d2}
     .review-progress{margin:12px 22px 0;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:#fafbf8;scroll-margin-top:90px}.rp-top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;font-size:14px}.rp-top span{color:var(--muted)}.rp-clear{margin-left:auto;border:0;background:none;color:var(--green);font-size:13px;font-weight:600;text-decoration:underline;text-underline-offset:3px;padding:2px 4px}.rp-bar{height:8px;border-radius:99px;background:#e4e9e1;overflow:hidden;margin:8px 0 6px}.rp-bar i{display:block;height:100%;background:linear-gradient(90deg,#2f5a46,#4c8a6c);border-radius:99px;transition:width .35s cubic-bezier(.22,1,.36,1)}.rp-note{font-size:13px;color:var(--muted)}
@@ -105,7 +106,7 @@
           <p class="hero-lede">AfterStorm proposes which streams to sample after heavy rain, what to test for, and when. <span id="evidence-age"></span></p>
           <div class="hero-bar" role="group" aria-label="Plan controls">
             <div class="city-control"><span class="control-label" id="city-label">City</span><div class="city-pills" id="city-pills" role="group" aria-labelledby="city-label"></div><label class="sr-only" for="city-select">City</label><select id="city-select" class="sr-only" tabindex="-1" aria-hidden="true"></select></div>
-            <div class="mode-control"><span class="control-label" id="mode-label">Evidence mode</span><div class="mode-toggle" role="group" aria-labelledby="mode-label"><button id="mode-live" type="button" aria-pressed="true">Live forecast</button><button id="mode-replay" type="button" aria-pressed="false">Archive replay</button></div><div class="mode-meta"><span id="fetched-at" class="timestamp"></span></div></div>
+            <div class="mode-control"><span class="control-label" id="mode-label">Evidence mode</span><div class="mode-toggle" role="group" aria-labelledby="mode-label"><button id="mode-live" type="button" aria-pressed="true">Latest forecast</button><button id="mode-replay" type="button" aria-pressed="false">Archive replay</button></div><div class="mode-meta"><span id="fetched-at" class="timestamp"></span></div></div>
         
             <div class="budget-control"><label class="control-label" for="budget">Site-visit budget</label><div class="stepper"><button id="budget-minus" type="button" aria-label="Decrease visit budget">−</button><input id="budget" type="number" min="0" step="1" value="5" aria-describedby="budget-note budget-error"><button id="budget-plus" type="button" aria-label="Increase visit budget">+</button></div><input id="budget-range" class="budget-range" type="range" min="0" max="20" step="1" value="5" aria-label="Site-visit budget slider" aria-describedby="budget-note"><p class="budget-note" id="budget-note">1 visit = 1 trip to 1 stream</p><p id="budget-error" class="budget-error" role="status" hidden></p></div>
       
@@ -188,11 +189,13 @@
   }
   function renderWeather(city,plan,allocated){
     const storm=plan.storm;
-    const tag=storm?(mode==='live'?'Storm forecast':'Past storm'):plan.weather_status==='unknown'?'Rain data incomplete':'No storm forecast';
+    const unknown=plan.weather_status==='unknown';
+    const tag=unknown?'Rain data incomplete':storm?(mode==='live'?'Storm forecast':'Past storm'):'No storm forecast';
     const baseline=plan.sites.filter(s=>s.action==='first baseline assessment').length;
-    const why=storm?`<strong>${escapeHTML(boundaryText(storm))}</strong> A day with ${data.config.RAIN_MM} mm of rain or more triggers a plan. What's in the water is unknown until it's sampled.`
-      :mode==='live'?`No day in the next week reaches ${data.config.RAIN_MM} mm, so there's no storm sampling to plan.${baseline?' Streams that have never been sampled are still listed.':''}`:escapeHTML(plan.message);
-    const rule=mode==='live'?'One forecast covers the whole city, so every site shares the same storm day.':`A past day qualifies only if <strong>every</strong> site in the city had ${data.config.RAIN_MM} mm or more. Days with missing data are never counted as dry or wet.`;
+    const why=unknown?`Rain data for ${escapeHTML(city.name)} is incomplete, so a storm can't be ruled out. Only visits to streams with no lab result in the public feed are planned.`
+      :storm?`<strong>${escapeHTML(boundaryText(storm))}</strong> A day with ${data.config.RAIN_MM} mm of rain or more triggers a plan. What's in the water is unknown until it's sampled.`
+      :mode==='live'?`No day in the next week reaches ${data.config.RAIN_MM} mm, so there's no storm sampling to plan.${baseline?' Streams with no lab result in the public feed are still listed.':''}`:escapeHTML(plan.message);
+    const rule=(mode==='live'?'One forecast covers the whole city, so every site shares the same storm day.':`A past day qualifies only if <strong>every</strong> site in the city had ${data.config.RAIN_MM} mm or more. Days with missing data are never counted as dry or wet.`)+' 20 mm is a prototype setting.';
     const chart=mode==='live'?rainChart(plan.forecast_period):siteRainChart(plan);
     const caption=mode==='live'?`Daily rain forecast for ${escapeHTML(city.name)}, mm. Dashed line: ${data.config.RAIN_MM} mm.`:storm?`Rain at every ${escapeHTML(city.name)} site on ${escapeHTML(fullDate(storm.anchor_date))}, mm, highest first. Dashed line: ${data.config.RAIN_MM} mm storm line.`:'';
     $('weather').innerHTML=`<div class="weather-top"><h2>Rain evidence · ${escapeHTML(city.name)}</h2><span class="badge ${mode==='replay'?'replay':''}">${escapeHTML(tag)}</span></div><div class="weather-bottom"><div class="weather-explain"><p>${why}</p><p style="margin-top:10px">${rule}</p></div><figure class="chart-fig">${chart||'<p class="weather-explain">No rain chart for this view.</p>'}${caption?`<figcaption>${caption}</figcaption>`:''}</figure></div>`;
@@ -229,15 +232,20 @@
     const allBaselines=plan.sites.filter(s=>s.action==='first baseline assessment').length;
     const b=t=>`<strong>${escapeHTML(t)}</strong>`, plural=(k,w)=>`${k} ${w}${k===1?'':'s'}`;
     let answer, s1, s2, s3;
-    if(storm){
+    if(plan.weather_status==='unknown'){
+      const second=n?'Only visits to streams with no lab result in the public feed are planned.'
+        :'Only visits to streams with no lab result in the public feed are planned, and none are needed.';
+      answer=`Rain data for ${b(city.name)} is incomplete, so a storm can't be ruled out. ${second}`;
+      s1='Rain data incomplete';
+    }else if(storm){
       const when=mode==='live'?`Heavy rain is forecast for ${b(city.name)} on ${b(fullDate(storm.anchor_date))}.`:`Replay: heavy rain hit ${b(city.name)} on ${b(fullDate(storm.anchor_date))}.`;
       const win=`${shortDate(storm.window.start_date)} – ${shortDate(storm.window.end_date)}`;
-      answer=n?`${when} Sample ${b(plural(n,'stream'))} on ${b(win)}${baselines?` (including ${plural(baselines,'first sample')})`:''}.${notices?` ${b(plural(notices,'contact notice'))} ${notices===1?'needs':'need'} your review.`:''}`
+      answer=n?`${when} Plan post-storm reassessment at ${b(plural(n,'stream'))} on ${b(win)} (dates to confirm)${baselines?` (including ${plural(baselines,'first sample')})`:''}.${notices?` ${b(plural(notices,'contact notice'))} ${notices===1?'needs':'need'} your review.`:''}`
               :`${when} ${budget===0?'Your visit budget is 0, so no visits are planned.':'No stream meets the threshold for a new test.'}`;
       s1=mode==='live'?`Forecast · ${shortDate(storm.anchor_date)}`:`Past storm · ${shortDate(storm.anchor_date)}`;
     }else{
       const nothing=mode==='live'?`No storm is forecast for ${b(city.name)} this week.`:`No past storm reached ${RAIN} mm at every ${escapeHTML(city.name)} site.`;
-      answer=n?`${nothing} Use the quiet week to take ${b(plural(n,'first sample'))} at streams that have never been tested.`
+      answer=n?`${nothing} Use the quiet week to take ${b(plural(n,'first sample'))} at streams with no lab result in the public feed.`
               :`${nothing} Every stream already has a lab result, so there's nothing to do now.${mode==='live'?' Check again after the next forecast update.':''}`;
       s1=mode==='live'?'No storm this week':'No qualifying storm';
     }
@@ -248,26 +256,28 @@
     const steps=[['Storm',s1,'weather'],['Plan visits',s2,'visit-panel'],['Review & file',s3,'review-progress']];
     // KPI tiles
     let rainVal,rainUnit='mm',rainLabel,rainSub,bars;
-    if(storm&&mode==='live'){const v=storm.rain_mm_by_date[storm.anchor_date];rainLabel='Heavy rain forecast';rainVal=`<span data-count="${v}">${v}</span>`;rainSub=`${fullDate(storm.anchor_date)} · storm line ${RAIN} mm`;bars=miniBars(Object.values(plan.forecast_period?.rain_mm_by_date||{}),RAIN);}
+    if(plan.weather_status==='unknown'){rainLabel='Rain data';rainVal='?';rainUnit='';rainSub='Some days have no data; they are never counted as dry';bars='';}
+    else if(storm&&mode==='live'){const v=storm.rain_mm_by_date[storm.anchor_date];rainLabel='Heavy rain forecast';rainVal=`<span data-count="${v}">${v}</span>`;rainSub=`${fullDate(storm.anchor_date)} · storm line ${RAIN} mm`;bars=miniBars(Object.values(plan.forecast_period?.rain_mm_by_date||{}),RAIN);}
     else if(storm){const r=storm.rain_range_mm_by_date[storm.anchor_date];rainLabel='Rain that day, every site';rainVal=r.min===r.max?`<span data-count="${r.min}">${r.min}</span>`:`<span data-count="${r.min}">${r.min}</span><span class="kpi-dash">–</span><span data-count="${r.max}">${r.max}</span>`;rainSub=`${fullDate(storm.anchor_date)} · all ${Object.keys(storm.rain_mm_by_site_by_date).length} sites above ${RAIN} mm`;bars=miniBars(Object.values(storm.rain_mm_by_site_by_date).map(d=>d[storm.anchor_date]).sort((x,y)=>y-x),RAIN);}
     else if(mode==='live'&&plan.forecast_period){const vals=Object.values(plan.forecast_period.rain_mm_by_date).filter(numeric),mx=vals.length?Math.max(...vals):0;rainLabel='Wettest day this week';rainVal=`<span data-count="${mx}">${mx}</span>`;rainSub=`Below the ${RAIN} mm storm line · no storm`;bars=miniBars(vals,RAIN);}
     else{rainLabel='Past rain';rainVal='—';rainUnit='';rainSub=`No day reached ${RAIN} mm at every site`;bars='';}
-    const dateTile=storm?`<div class="cal">${calTile(storm.window.start_date)}<span class="cal-arrow" aria-hidden="true">→</span>${calTile(storm.window.end_date)}</div><span class="window-tag">Experimental window (heuristic, not validated)</span>`
-      :`<div class="kpi-value small">${allBaselines?'Any day':'—'}</div><p class="kpi-sub">${allBaselines?`${plural(allBaselines,'stream')} never sampled · no storm timing needed`:'No storm, so no sampling window'}</p>`;
+    const dateTile=plan.weather_status==='unknown'?`<div class="kpi-value small">${allBaselines?'Any day':'?'}</div><p class="kpi-sub">${allBaselines?`${plural(allBaselines,'stream')} with no public lab result`:'Rain data is incomplete, so no sampling window is set'}</p>`
+      :storm?`<div class="cal">${calTile(storm.window.start_date)}<span class="cal-arrow" aria-hidden="true">→</span>${calTile(storm.window.end_date)}</div><span class="window-tag">Experimental window (heuristic, not validated)</span><p class="kpi-sub">The coordinator confirms the dates. Some contaminants peak during the storm itself; this window is a post-storm reassessment, not peak sampling.</p>`
+      :`<div class="kpi-value small">${allBaselines?'Any day':'—'}</div><p class="kpi-sub">${allBaselines?`${plural(allBaselines,'stream')} with no public lab result · no storm timing needed`:'No storm, so no sampling window'}</p>`;
     const pct=budget?Math.min(100,n/budget*100):0;
     const ring=`<svg class="ring" viewBox="0 0 84 84" aria-hidden="true"><circle cx="42" cy="42" r="36" pathLength="100" class="ring-bg"/><circle cx="42" cy="42" r="36" pathLength="100" class="ring-fg" style="stroke-dashoffset:${100-pct}"/></svg>`;
-    const kicker=mode==='live'?`<span class="pulse${storm?' warn':''}"></span>Live forecast · updated ${escapeHTML(niceTime(data.sources[`forecasts/${cityId}.json`]?.fetched_at))}`:`<span class="pulse replay"></span>Archive replay · past data`;
+    const kicker=mode==='live'?`<span class="pulse${storm&&plan.weather_status!=='unknown'?' warn':''}"></span>Latest saved forecast · fetched ${escapeHTML(niceTime(data.sources[`forecasts/${cityId}.json`]?.fetched_at))}`:`<span class="pulse replay"></span>Archive replay · past data`;
     $('decision').innerHTML=`<p class="hero-kicker">${kicker}</p><h1 class="decision-answer" id="decision-answer">${answer}</h1>
       <div class="kpis">
         <div class="kpi"><p class="kpi-label">${escapeHTML(rainLabel)}</p><div class="kpi-value">${rainVal}${rainUnit?`<span class="kpi-unit">${rainUnit}</span>`:''}</div>${bars}<p class="kpi-sub">${escapeHTML(rainSub)}</p></div>
-        <div class="kpi"><p class="kpi-label">${storm?'Sample on':'Sampling window'}</p>${dateTile}</div>
-        <div class="kpi kpi-ring"><div class="ring-wrap">${ring}<span class="ring-num"><span data-count="${n}">${n}</span><small>of ${budget}</small></span></div><div><p class="kpi-label">Site visits</p><p class="kpi-big-sub">${n?plural(n,'stream'):'No visits'}</p><p class="kpi-sub">${plan.ranking.length} qualify${allBaselines?` · ${allBaselines} never sampled`:''}<br>One trip covers every test at a site</p></div></div>
+        <div class="kpi"><p class="kpi-label">${storm&&plan.weather_status!=='unknown'?'Proposed reassessment dates':'Sampling window'}</p>${dateTile}</div>
+        <div class="kpi kpi-ring"><div class="ring-wrap">${ring}<span class="ring-num"><span data-count="${n}">${n}</span><small>of ${budget}</small></span></div><div><p class="kpi-label">Site visits</p><p class="kpi-big-sub">${n?plural(n,'stream'):'No visits'}</p><p class="kpi-sub">${plan.ranking.length} qualify${allBaselines?` · ${allBaselines} with no public lab result`:''}<br>One trip covers every test at a site</p></div></div>
       </div>
       <nav aria-label="Plan progress"><ol class="steps">${steps.map(([title,status,target],i)=>`<li class="step ${state[i]}"><button type="button" data-jump="${target}" ${state[i]==='current'?'aria-current="step"':''}><span class="step-dot" aria-hidden="true">${state[i]==='done'?'<svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>':i+1}</span><span class="step-text"><span class="step-title">${escapeHTML(title)}</span><span class="step-status">${escapeHTML(status)}</span></span><span class="step-go" aria-hidden="true">→</span></button></li>`).join('')}</ol></nav>`;
-    $('hero').classList.toggle('storm',!!storm);$('hero').classList.toggle('replay',mode==='replay');
+    $('hero').classList.toggle('storm',!!storm&&plan.weather_status!=='unknown');$('hero').classList.toggle('replay',mode==='replay');
     const key=`${cityId}|${mode}`; if(key!==lastHeroKey){lastHeroKey=key;countUp($('decision'));}
     // city pills: pressed state + storm marker for the current mode
-    $('city-pills').querySelectorAll('[data-city]').forEach(btn=>{const id=btn.dataset.city,has=!!data.cities[id].modes[mode].storm;btn.setAttribute('aria-pressed',String(id===cityId));btn.classList.toggle('has-storm',has);btn.title=has?(mode==='live'?'Storm forecast':'Past storm available'):'No storm';});
+    $('city-pills').querySelectorAll('[data-city]').forEach(btn=>{const id=btn.dataset.city,modePlan=data.cities[id].modes[mode],has=modePlan.weather_status!=='unknown'&&!!modePlan.storm;btn.setAttribute('aria-pressed',String(id===cityId));btn.classList.toggle('has-storm',has);btn.title=modePlan.weather_status==='unknown'?'Rain data incomplete':has?(mode==='live'?'Storm in the latest saved forecast':'Past storm available'):'No storm';});
   }
   function jumpTo(id){
     const el=$(id); if(!el) return;
@@ -282,7 +292,7 @@
     $('visit-count').textContent=`${selected.length} planned`;
     $('visit-subtitle').textContent=plan.storm?'Within the experimental post-rain window':'Routine baseline visits where lab evidence is missing';
     if(selected.length){
-      $('visits').innerHTML=`<ol class="visit-list">${selected.map(site=>`<li class="visit-card rv-${reviewOf('visit',site.code)||'none'}" id="visit-${escapeHTML(site.code)}" data-code="${escapeHTML(site.code)}"><div class="visit-heading"><span class="rank-number">${site.rank}</span><div class="site-title"><h3><code>${escapeHTML(site.code)}</code>${escapeHTML(site.name)}</h3><p class="category-text">${site.action==='first baseline assessment'?'<span class="badge blue">First baseline</span> ':''}${escapeHTML(site.categories.join(' + '))}</p></div>${site.position?`<button type="button" class="locate" data-locate="${escapeHTML(site.code)}" aria-label="Show ${escapeHTML(site.code)} on map">Show on map</button>`:''}</div><p class="visit-time"><strong>${escapeHTML(dateRange(site.window))}</strong>${site.window?'<span class="small-window">Experimental window (heuristic, not validated)</span>':'<span class="small-window">No storm window</span>'}</p>${filedLine(site.code)}${reviewButtons('visit',site.code,site.code+' '+site.name)}${site.action==='first baseline assessment'&&site.sewage_distance_m===null?'<p class="distance-note">Missing sewage distance · last among baseline sites</p>':''}${sourceDetails(site,plan)}${site.map_note?`<p class="reason muted small">${escapeHTML(site.map_note)}</p>`:''}</li>`).join('')}</ol>`;
+      $('visits').innerHTML=`<ol class="visit-list">${selected.map(site=>`<li class="visit-card rv-${reviewOf('visit',site.code)||'none'}" id="visit-${escapeHTML(site.code)}" data-code="${escapeHTML(site.code)}"><div class="visit-heading"><span class="rank-number">${site.rank}</span><div class="site-title"><h3><code>${escapeHTML(site.code)}</code>${escapeHTML(site.name)}</h3><p class="category-text">${site.action==='first baseline assessment'?'<span class="badge blue">First baseline</span> ':''}${escapeHTML(site.categories.join(' + '))}</p></div>${site.position?`<button type="button" class="locate" data-locate="${escapeHTML(site.code)}" aria-label="Show ${escapeHTML(site.code)} on map">Show on map</button>`:''}</div><p class="visit-time"><strong>${escapeHTML(dateRange(site.window))}</strong>${site.window?'<span class="small-window">Experimental window (heuristic, not validated)</span>':'<span class="small-window">No storm window</span>'}</p>${filedLine(site.code)}${reviewNote('visit',site.code)}${reviewButtons('visit',site.code,site.code+' '+site.name)}${site.action==='first baseline assessment'&&site.sewage_distance_m===null?'<p class="distance-note">Missing sewage distance · last among baseline sites</p>':''}${sourceDetails(site,plan)}${site.map_note?`<p class="reason muted small">${escapeHTML(site.map_note)}</p>`:''}</li>`).join('')}</ol>`;
     }else{
       let reason;
       if(budget===0) reason='The site-visit budget is zero. Increase it to allocate eligible visits; the full roster and evidence remain available.';
@@ -299,7 +309,7 @@
   function updateFhirChrome(selected){
     const saved=data.fhir?.default_bundle, savedCity=saved&&data.cities[saved.city];
     if(savedCity){
-      $('default-fhir').textContent=`Saved file: ${savedCity.name} ${saved.mode==='live'?'LIVE':'REPLAY'}, budget ${saved.budget}`;
+      $('default-fhir').textContent=`Saved file: ${savedCity.name} ${saved.mode==='live'?'latest saved forecast':'REPLAY'}, budget ${saved.budget}`;
       $('default-fhir').download=`afterstorm-${saved.city}-${saved.mode}-budget-${saved.budget}.json`;
     }
     const sendable=selected.filter(site=>reviewOf('visit',site.code)!=='hold'),held=selected.length-sendable.length;
@@ -322,37 +332,68 @@
   function filedLine(code){
     if(!filedMatches()) return '';
     const item=filed.resources.find(row=>row.code===code&&row.id);
-    return item?`<p class="filed-note">Filed as FHIR ServiceRequest/${escapeHTML(item.id)}</p>`:'';
+    return item?`<p class="filed-note">Filed as FHIR ServiceRequest/${escapeHTML(item.id)} (filed with resource shape v1)</p>`:'';
   }
   function filedSummary(){
     if(!filedMatches()) return '';
     const shown=filed.resources.filter(item=>item.id);
     if(!shown.length) return '';
-    return ` Already filed once to the HL7 Europe sandbox as drafts: ${shown.map(item=>`${item.code} → ServiceRequest ${item.id}`).join(', ')}.`;
+    return ` Already filed once to the HL7 Europe sandbox as drafts (filed with resource shape v1): ${shown.map(item=>`${item.code} → ServiceRequest ${item.id}`).join(', ')}.`;
   }
-  const REVIEW_KEY='afterstorm-review-v1';
+  const REVIEW_KEY='afterstorm-review-v2';
   let reviews={};try{reviews=JSON.parse(localStorage.getItem(REVIEW_KEY))||{};}catch{reviews={};}
   const rkey=(kind,code)=>`${cityId}|${mode}|${kind}|${code}`;
-  function reviewOf(kind,code){return reviews[rkey(kind,code)]||null;}
+  function evidenceSig(kind,code){
+    const {plan}=view(), storm=plan.storm;
+    if(kind==='visit'){
+      const site=plan.sites.find(s=>s.code===code)||{};
+      return [storm?.anchor_date||'no-storm', site.action||'', (site.categories||[]).join('+'), site.window?`${site.window.start_date}/${site.window.end_date}`:'no-window', site.sample_date||'no-lab'].join('|');
+    }
+    const notice=(plan.notices||[]).find(n=>n.code===code)||{};
+    return [storm?.anchor_date, notice.basis, notice.text].join('|');
+  }
+  function reviewOf(kind,code){
+    const stored=reviews[rkey(kind,code)];
+    if(!stored||typeof stored!=='object'||!stored.decision) return null;
+    return stored.sig===evidenceSig(kind,code)?stored.decision:'stale';
+  }
+  function reviewStamp(at){return at?String(at).replace('T',' ').replace(/\.\d+Z$/,' UTC').replace(/Z$/,' UTC'):'';}
+  function reviewHistory(kind,code){
+    const stored=reviews[rkey(kind,code)];
+    const history=stored&&Array.isArray(stored.history)?stored.history:[];
+    if(!history.length) return '';
+    return `<details class="review-history" data-keep="hist-${kind}-${escapeHTML(code)}"><summary>Review history</summary><ul>${history.map(item=>`<li>${escapeHTML(item.decision)} · ${escapeHTML(reviewStamp(item.at))}</li>`).join('')}</ul></details>`;
+  }
+  function reviewNote(kind,code){
+    const chip=reviewOf(kind,code)==='stale'?'<p class="stale-chip">Evidence changed since your review — review again</p>':'';
+    return chip+reviewHistory(kind,code);
+  }
   function reviewButtons(kind,code,label){
     const v=reviewOf(kind,code),c=escapeHTML(code);
     return `<div class="review" role="group" aria-label="Your review of ${escapeHTML(label)}"><button type="button" class="rv approve" data-review="${kind}" data-code="${c}" data-val="approve" aria-pressed="${v==='approve'}"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>${kind==='notice'?'Approve to issue':'Approve'}</button><button type="button" class="rv hold" data-review="${kind}" data-code="${c}" data-val="hold" aria-pressed="${v==='hold'}"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5.5 3.5v9M10.5 3.5v9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Hold</button></div>`;
   }
   function reviewTally(plan){
     const items=[...plan.ranking.slice(0,budget).map(c=>['visit',c]),...plan.notices.map(n=>['notice',n.code])];
-    const done=items.filter(([k,c])=>reviewOf(k,c)).length;
+    const decided=decision=>decision==='approve'||decision==='hold';
+    const done=items.filter(([k,c])=>decided(reviewOf(k,c))).length;
     return {total:items.length,done,approved:items.filter(([k,c])=>reviewOf(k,c)==='approve').length};
   }
   function setReview(kind,code,val){
-    const k=rkey(kind,code);
-    if(reviews[k]===val) delete reviews[k]; else reviews[k]=val;
+    const k=rkey(kind,code), sig=evidenceSig(kind,code), prev=reviews[k];
+    const same=prev&&typeof prev==='object'&&prev.decision===val&&prev.sig===sig;
+    if(same) delete reviews[k];
+    else{
+      const history=Array.isArray(prev?.history)?prev.history.slice():[];
+      if(prev&&typeof prev==='object'&&prev.decision&&prev.at) history.push({decision:prev.decision,sig:prev.sig,at:prev.at});
+      reviews[k]={decision:val,sig,at:new Date().toISOString(),history:history.slice(-10)};
+    }
     try{localStorage.setItem(REVIEW_KEY,JSON.stringify(reviews));}catch{}
     const open=[...document.querySelectorAll('details[open][data-keep]')].map(d=>d.dataset.keep);
     render();
     open.forEach(key=>document.querySelector(`details[data-keep="${CSS.escape(key)}"]`)?.setAttribute('open',''));
     document.querySelector(`[data-review="${kind}"][data-code="${CSS.escape(code)}"][data-val="${val}"]`)?.focus({preventScroll:true});
     const now=reviews[k];
-    $('plan-status').textContent=`${code} ${kind}: ${now==='approve'?'approved':now==='hold'?'on hold':'review cleared'}. Saved in this browser only.`;
+    $('plan-status').textContent=`${code} ${kind}: ${!now?'review cleared':now.decision==='approve'?'approved':'on hold'}. Saved in this browser only.`;
   }
   function renderReview(plan){
     const t=reviewTally(plan),pct=t.total?Math.round(t.done/t.total*100):0;
@@ -385,7 +426,7 @@
     const noticeRows=plan.notices.map(notice=>{
       const site=plan.sites.find(s=>s.code===notice.code);
       const v=reviewOf('notice',notice.code);
-      return `<div class="notice-row rv-${v||'none'}" data-code="${escapeHTML(notice.code)}"><div class="notice-head"><code>${escapeHTML(notice.code)}</code><span class="notice-name">${escapeHTML(site?.name||notice.code)}<span class="notice-state">${v==='approve'?'Approved to issue · not sent':v==='hold'?'On hold':'Draft — needs review'}</span></span>${reviewButtons('notice',notice.code,'notice for '+notice.code)}</div><details class="notice-more" data-keep="notice-${escapeHTML(notice.code)}"><summary>Read the draft notice</summary><p class="notice-tag" style="margin-top:10px">${escapeHTML(notice.label)}</p><p class="notice-text">${escapeHTML(notice.text)}</p><p class="notice-basis">${escapeHTML(notice.basis)}</p><p class="notice-basis">${escapeHTML(notice.review)}</p></details></div>`;
+      return `<div class="notice-row rv-${v||'none'}" data-code="${escapeHTML(notice.code)}"><div class="notice-head"><code>${escapeHTML(notice.code)}</code><span class="notice-name">${escapeHTML(site?.name||notice.code)}<span class="notice-state">${v==='approve'?'Approved to issue · not sent':v==='hold'?'On hold':'Draft — needs review'}</span></span>${reviewButtons('notice',notice.code,'notice for '+notice.code)}</div>${reviewNote('notice',notice.code)}<details class="notice-more" data-keep="notice-${escapeHTML(notice.code)}"><summary>Read the draft notice</summary><p class="notice-tag" style="margin-top:10px">${escapeHTML(notice.label)}</p><p class="notice-text">${escapeHTML(notice.text)}</p><p class="notice-basis">${escapeHTML(notice.basis)}</p><p class="notice-basis">${escapeHTML(notice.review)}</p></details></div>`;
     }).join('');
     $('notices').innerHTML='<p class="notice-description">Draft — requires coordinator review. You decide whether to issue each notice and when to lift it. Approving here only records your decision; nothing is sent.</p>'+noticeRows;
   }
@@ -474,7 +515,7 @@
   }
   function renderSources(){
     const refs=[['sites.json','Official site roster'],['health-risks.json','Lab category results'],['urban-parameters.json','Urban parameters'],[`forecasts/${cityId}.json`,'City forecast']];
-    $('source-summary').innerHTML=refs.map(([name,label])=>{const s=data.sources[name]||{};return `<p>${link(s.url,label)} · fetched <span class="mono">${escapeHTML(timestamp(s.fetched_at))}</span></p>`;}).join('')+`<p>Settings used: a storm is ${data.config.RAIN_MM} mm of rain or more in a day. A test is proposed when its 2023–24 score is ${data.config.TEST_MIN} or higher. A contact notice is drafted when the faecal or pathogen score is ${data.config.ADVISORY_MIN} or higher. Sampling covers the ${data.config.WINDOW_DAYS} days after the rain. Changing the visit budget never changes the scores or the order.</p>`;
+    $('source-summary').innerHTML=refs.map(([name,label])=>{const s=data.sources[name]||{};return `<p>${link(s.url,label)} · fetched <span class="mono">${escapeHTML(timestamp(s.fetched_at))}</span></p>`;}).join('')+`<p><strong>Prototype settings, not validated environmental rules:</strong> a storm is ${data.config.RAIN_MM} mm of rain or more in a day. A test is proposed when its 2023–24 score is ${data.config.TEST_MIN} or higher. A contact notice is drafted when the faecal or pathogen score is ${data.config.ADVISORY_MIN} or higher. Sampling covers the ${data.config.WINDOW_DAYS} days after the rain. Changing the visit budget never changes the scores or the order.</p>`;
   }
   function render(){
     const {city,plan,allocated}=view();
@@ -482,12 +523,12 @@
     $('mode-live').setAttribute('aria-pressed',String(mode==='live'));
     $('mode-replay').setAttribute('aria-pressed',String(mode==='replay'));
     const ref=data.sources[`forecasts/${cityId}.json`];
-    $('fetched-at').textContent=mode==='live'?`Forecast updated ${niceTime(ref?.fetched_at)}`:'Past rainfall from the OneAquaHealth archive';
+    $('fetched-at').textContent=mode==='live'?`Latest saved forecast fetched ${niceTime(ref?.fetched_at)}`:'Past rainfall from the OneAquaHealth archive';
     $('budget').max=String(plan.sites.length);$('budget').value=String(budget);
     $('budget-minus').disabled=budget===0;$('budget-plus').disabled=budget===plan.sites.length;
     const range=$('budget-range');range.max=String(Math.max(plan.ranking.length,budget,1));range.value=String(budget);range.setAttribute('aria-valuetext',`${budget} site visits`);
     renderWeather(city,plan,allocated);renderVisits(plan,allocated);renderDecision(city,plan,allocated);renderNotices(plan);renderReview(plan);renderRoster(plan,allocated);renderCoverage(plan);renderMap(city,plan,allocated);renderSources();
-    $('plan-status').textContent=`${city.name} · ${mode==='live'?'LIVE forecast':plan.label} · ${allocated.size} visits proposed · ${plan.notices.length} draft notices requiring coordinator review`;
+    $('plan-status').textContent=`${city.name} · ${mode==='live'?'latest saved forecast':plan.label} · ${allocated.size} visits proposed · ${plan.notices.length} draft notices requiring coordinator review`;
     history.replaceState(null,'',`?city=${encodeURIComponent(cityId)}&mode=${mode}&visits=${budget}`);
   }
   function applyBudget(value){
@@ -508,8 +549,10 @@
         if(filedResponse.ok) filed=await filedResponse.json();
       }catch(_error){filed=null;}
       const params=new URLSearchParams(location.search);
-      cityId=Object.hasOwn(data.cities,params.get('city'))?params.get('city'):Object.hasOwn(data.cities,'OS')?'OS':Object.keys(data.cities)[0];
-      mode=params.get('mode')==='replay'?'replay':'live';
+      if(params.has('city')&&Object.hasOwn(data.cities,params.get('city'))) cityId=params.get('city');
+      else if(!params.has('city')&&Object.hasOwn(data.cities,'CO')) cityId='CO';
+      else cityId=Object.hasOwn(data.cities,'OS')?'OS':Object.keys(data.cities)[0];
+      mode=params.has('mode')?(params.get('mode')==='replay'?'replay':'live'):'replay';
       const proposed=params.has('visits')?Number(params.get('visits')):data.config.VISITS_PER_CITY;
       const maximum=data.cities[cityId].modes[mode].sites.length;
       budget=Number.isInteger(proposed)&&proposed>=0?Math.min(proposed,maximum):Math.min(data.config.VISITS_PER_CITY,maximum);

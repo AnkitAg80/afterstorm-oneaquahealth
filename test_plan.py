@@ -324,7 +324,7 @@ def test_c5_replay_tie_and_fhir_requests():
     fhir_export.attach_requests(output)
     checks, failures, bundle = fhir_export.structural_report(output, "OS", "live", CONFIG["VISITS_PER_CITY"])
     assert not failures, failures
-    assert len(checks) == 22 and all(check["passed"] for check in checks)
+    assert len(checks) == 24 and all(check["passed"] for check in checks)
     oslo_ranking = output["cities"]["OS"]["modes"]["live"]["ranking"]
     assert len(bundle["entry"]) == min(CONFIG["VISITS_PER_CITY"], len(oslo_ranking))
     assert [entry["resource"]["subject"]["identifier"]["value"] for entry in bundle["entry"]] == (
@@ -335,6 +335,16 @@ def test_c5_replay_tie_and_fhir_requests():
         if note:
             assert fhir_export.DEMONSTRATION not in note[0]["text"]
     request = site["service_request"]
+    assert request["code"]["coding"] == [{
+        "system": fhir_export.REQUEST_SYSTEM,
+        "code": "post-storm-reassessment",
+        "display": "Post-storm reassessment (experimental)",
+    }]
+    assert [item["text"] for item in request["orderDetail"]] == ["faecal", "pathogen"]
+    assert all(len(item["coding"]) == 1 and item["coding"][0]["system"] == fhir_export.CODE_SYSTEM
+               for item in request["orderDetail"])
+    assert any(tag.get("system") == fhir_export.EXPORT_SYSTEM and tag.get("code") == "resource-shape-v2"
+               for tag in request["meta"]["tag"])
     assert request["reasonCode"][0]["text"] == site["reason"]
     assert "1.00" in request["reasonCode"][0]["text"]
     assert "reference" not in request["subject"]
@@ -385,6 +395,16 @@ def test_fhir_slice_baseline_window_and_sandbox_reference_policy():
     baseline = row(dry["cities"]["TO"]["modes"]["live"], "T2")
     assert "occurrencePeriod" not in baseline["service_request"]
     assert "no lab result on file; live" in baseline["service_request"]["note"][0]["text"]
+    assert baseline["service_request"]["code"]["coding"] == [{
+        "system": fhir_export.REQUEST_SYSTEM,
+        "code": "first-baseline-assessment",
+        "display": "First baseline assessment (no lab result in the public feed)",
+    }]
+    assert [item["coding"][0]["code"] for item in baseline["service_request"]["orderDetail"]] == [
+        "faecal", "pathogen", "antibiotic-resistance"]
+    storm_request = t1["service_request"]
+    assert storm_request["code"]["coding"][0]["code"] == "post-storm-reassessment"
+    assert [item["text"] for item in storm_request["orderDetail"]] == ["faecal", "pathogen"]
     assert "service_request" not in row(dry["cities"]["TO"]["modes"]["live"], "T1")
     empty_checks, empty_failures, empty = fhir_export.structural_report(dry, "TO", "live", 0)
     assert not empty_failures, empty_failures
