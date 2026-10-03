@@ -2881,6 +2881,12 @@
               },
               "status": "sample this storm",
               "reason": "2023 result: antibiotic resistance category 1.00 (highest of 3, relative score); sewage works 3804.69 m; 48.19 mm archived rain at this site on 2026-04-01. New assessment in antibiotic resistance, pathogen; Experimental window (heuristic, not validated): 2026-04-02 to 2026-04-03 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown.",
+              "confirmation_sample": {
+                "purpose": "Confirm whether the short-term pollution incident has ended, so the coordinator can lift or keep the notice.",
+                "not_a_class": "This sample is not part of a bathing-water quality classification.",
+                "date": null,
+                "date_note": "The coordinator sets the day, after the experimental window. The page does not choose it."
+              },
               "service_request_full_url": "urn:uuid:d869c06a-f759-5bd0-ad12-1a112eb14c80",
               "service_request": {
                 "resourceType": "ServiceRequest",
@@ -3033,6 +3039,12 @@
               },
               "status": "sample this storm",
               "reason": "2023 result: faecal category 0.71 (highest of 3, relative score); sewage works 4936.2 m; 48.19 mm archived rain at this site on 2026-04-01. New assessment in faecal; Experimental window (heuristic, not validated): 2026-04-02 to 2026-04-03 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown.",
+              "confirmation_sample": {
+                "purpose": "Confirm whether the short-term pollution incident has ended, so the coordinator can lift or keep the notice.",
+                "not_a_class": "This sample is not part of a bathing-water quality classification.",
+                "date": null,
+                "date_note": "The coordinator sets the day, after the experimental window. The page does not choose it."
+              },
               "service_request_full_url": "urn:uuid:b2e90b76-2e53-53f6-b3da-8163ae663811",
               "service_request": {
                 "resourceType": "ServiceRequest",
@@ -3382,6 +3394,12 @@
               },
               "status": "sample this storm",
               "reason": "2023 result: faecal category 0.54 (highest of 3, relative score); sewage works 1615.9 m; 48.19 mm archived rain at this site on 2026-04-01. New assessment in faecal; Experimental window (heuristic, not validated): 2026-04-02 to 2026-04-03 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown.",
+              "confirmation_sample": {
+                "purpose": "Confirm whether the short-term pollution incident has ended, so the coordinator can lift or keep the notice.",
+                "not_a_class": "This sample is not part of a bathing-water quality classification.",
+                "date": null,
+                "date_note": "The coordinator sets the day, after the experimental window. The page does not choose it."
+              },
               "service_request_full_url": "urn:uuid:bb13eae3-0432-5a5c-8e0a-5bfe9c308a6e",
               "service_request": {
                 "resourceType": "ServiceRequest",
@@ -3663,6 +3681,12 @@
               },
               "status": "sample this storm",
               "reason": "2023 result: faecal category 0.84 (highest of 3, relative score); sewage works 7142.45 m; 48.19 mm archived rain at this site on 2026-04-01. New assessment in faecal, pathogen; Experimental window (heuristic, not validated): 2026-04-02 to 2026-04-03 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown.",
+              "confirmation_sample": {
+                "purpose": "Confirm whether the short-term pollution incident has ended, so the coordinator can lift or keep the notice.",
+                "not_a_class": "This sample is not part of a bathing-water quality classification.",
+                "date": null,
+                "date_note": "The coordinator sets the day, after the experimental window. The page does not choose it."
+              },
               "service_request_full_url": "urn:uuid:d8872660-7f98-5150-9da4-2cd802249737",
               "service_request": {
                 "resourceType": "ServiceRequest",
@@ -4229,6 +4253,12 @@
               },
               "status": "sample this storm",
               "reason": "2023 result: faecal category 0.62 (highest of 3, relative score); sewage works 3027.62 m; 48.19 mm archived rain at this site on 2026-04-01. New assessment in faecal; Experimental window (heuristic, not validated): 2026-04-02 to 2026-04-03 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown.",
+              "confirmation_sample": {
+                "purpose": "Confirm whether the short-term pollution incident has ended, so the coordinator can lift or keep the notice.",
+                "not_a_class": "This sample is not part of a bathing-water quality classification.",
+                "date": null,
+                "date_note": "The coordinator sets the day, after the experimental window. The page does not choose it."
+              },
               "service_request_full_url": "urn:uuid:6ca0de63-4520-5c74-aff2-e2abfe59683a",
               "service_request": {
                 "resourceType": "ServiceRequest",
@@ -4509,6 +4539,12 @@
               },
               "status": "sample this storm",
               "reason": "2023 result: faecal category 0.51 (highest of 3, relative score); sewage works 50.12 m; 48.19 mm archived rain at this site on 2026-04-01. New assessment in faecal; Experimental window (heuristic, not validated): 2026-04-02 to 2026-04-03 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown.",
+              "confirmation_sample": {
+                "purpose": "Confirm whether the short-term pollution incident has ended, so the coordinator can lift or keep the notice.",
+                "not_a_class": "This sample is not part of a bathing-water quality classification.",
+                "date": null,
+                "date_note": "The coordinator sets the day, after the experimental window. The page does not choose it."
+              },
               "service_request_full_url": "urn:uuid:921b4668-2369-5bfd-ad9d-82ea013da210",
               "service_request": {
                 "resourceType": "ServiceRequest",
@@ -7814,6 +7850,12 @@
               },
               "status": "sample this storm",
               "reason": "2023 result: faecal category 0.51 (highest of 3, relative score); sewage works 761.69 m; 24.43 mm archived rain at this site on 2026-05-10. New assessment in faecal, pathogen; Experimental window (heuristic, not validated): 2026-05-11 to 2026-05-12 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown.",
+              "confirmation_sample": {
+                "purpose": "Confirm whether the short-term pollution incident has ended, so the coordinator can lift or keep the notice.",
+                "not_a_class": "This sample is not part of a bathing-water quality classification.",
+                "date": null,
+                "date_note": "The coordinator sets the day, after the experimental window. The page does not choose it."
+              },
               "service_request_full_url": "urn:uuid:cf5d43fc-0b79-5155-bdd6-a34b7cca917c",
               "service_request": {
                 "resourceType": "ServiceRequest",
@@ -8105,6 +8147,12 @@
               },
               "status": "sample this storm",
               "reason": "2023 result: faecal and pathogen categories 1.00 (tied highest of 3, relative score); sewage works 2398.28 m; 24.43 mm archived rain at this site on 2026-05-10. New assessment in faecal, pathogen; Experimental window (heuristic, not validated): 2026-05-11 to 2026-05-12 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown.",
+              "confirmation_sample": {
+                "purpose": "Confirm whether the short-term pollution incident has ended, so the coordinator can lift or keep the notice.",
+                "not_a_class": "This sample is not part of a bathing-water quality classification.",
+                "date": null,
+                "date_note": "The coordinator sets the day, after the experimental window. The page does not choose it."
+              },
               "service_request_full_url": "urn:uuid:2c59d1cc-9d21-5273-8cc9-222be6474bb0",
               "service_request": {
                 "resourceType": "ServiceRequest",
@@ -8258,6 +8306,12 @@
               },
               "status": "sample this storm",
               "reason": "2023 result: pathogen category 0.74 (highest of 3, relative score); sewage works 1276.96 m; 24.43 mm archived rain at this site on 2026-05-10. New assessment in pathogen, faecal; Experimental window (heuristic, not validated): 2026-05-11 to 2026-05-12 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown.",
+              "confirmation_sample": {
+                "purpose": "Confirm whether the short-term pollution incident has ended, so the coordinator can lift or keep the notice.",
+                "not_a_class": "This sample is not part of a bathing-water quality classification.",
+                "date": null,
+                "date_note": "The coordinator sets the day, after the experimental window. The page does not choose it."
+              },
               "service_request_full_url": "urn:uuid:01a4fa4f-572d-528a-b230-c4f9f6564659",
               "service_request": {
                 "resourceType": "ServiceRequest",
@@ -8410,6 +8464,12 @@
               },
               "status": "sample this storm",
               "reason": "2023 result: faecal category 0.57 (highest of 3, relative score); sewage works 4548.51 m; 24.43 mm archived rain at this site on 2026-05-10. New assessment in faecal; Experimental window (heuristic, not validated): 2026-05-11 to 2026-05-12 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown.",
+              "confirmation_sample": {
+                "purpose": "Confirm whether the short-term pollution incident has ended, so the coordinator can lift or keep the notice.",
+                "not_a_class": "This sample is not part of a bathing-water quality classification.",
+                "date": null,
+                "date_note": "The coordinator sets the day, after the experimental window. The page does not choose it."
+              },
               "service_request_full_url": "urn:uuid:e18da4f7-d8a4-5b20-a11c-41f0f759ab96",
               "service_request": {
                 "resourceType": "ServiceRequest",
@@ -8828,6 +8888,12 @@
               },
               "status": "sample this storm",
               "reason": "2023 result: faecal category 0.81 (highest of 3, relative score); sewage works 2815.42 m; 24.43 mm archived rain at this site on 2026-05-10. New assessment in faecal; Experimental window (heuristic, not validated): 2026-05-11 to 2026-05-12 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown.",
+              "confirmation_sample": {
+                "purpose": "Confirm whether the short-term pollution incident has ended, so the coordinator can lift or keep the notice.",
+                "not_a_class": "This sample is not part of a bathing-water quality classification.",
+                "date": null,
+                "date_note": "The coordinator sets the day, after the experimental window. The page does not choose it."
+              },
               "service_request_full_url": "urn:uuid:08abf070-14a4-5a2d-b2de-f37c275dabfb",
               "service_request": {
                 "resourceType": "ServiceRequest",
@@ -9177,6 +9243,12 @@
               },
               "status": "sample this storm",
               "reason": "2023 result: pathogen category 0.51 (highest of 3, relative score); sewage works 572.3 m; 24.43 mm archived rain at this site on 2026-05-10. New assessment in pathogen; Experimental window (heuristic, not validated): 2026-05-11 to 2026-05-12 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown.",
+              "confirmation_sample": {
+                "purpose": "Confirm whether the short-term pollution incident has ended, so the coordinator can lift or keep the notice.",
+                "not_a_class": "This sample is not part of a bathing-water quality classification.",
+                "date": null,
+                "date_note": "The coordinator sets the day, after the experimental window. The page does not choose it."
+              },
               "service_request_full_url": "urn:uuid:8f0d8c13-a52e-5493-a093-f168fb528949",
               "service_request": {
                 "resourceType": "ServiceRequest",
@@ -23091,6 +23163,12 @@
               },
               "status": "sample this storm",
               "reason": "2023 result: faecal category 0.53 (highest of 3, relative score); sewage works 2189.89 m; 32.76 mm archived rain at this site on 2026-08-03. New assessment in faecal; Experimental window (heuristic, not validated): 2026-08-04 to 2026-08-05 inclusive. The next date is absent or unknown; this is the last qualifying wet day in the selected data, not confirmation that rain stopped.",
+              "confirmation_sample": {
+                "purpose": "Confirm whether the short-term pollution incident has ended, so the coordinator can lift or keep the notice.",
+                "not_a_class": "This sample is not part of a bathing-water quality classification.",
+                "date": null,
+                "date_note": "The coordinator sets the day, after the experimental window. The page does not choose it."
+              },
               "service_request_full_url": "urn:uuid:da53cb37-874a-5ed2-b82b-4f4996076712",
               "service_request": {
                 "resourceType": "ServiceRequest",
@@ -23371,6 +23449,12 @@
               },
               "status": "sample this storm",
               "reason": "2023 result: faecal category 0.51 (highest of 3, relative score); sewage works 4085.24 m; 32.76 mm archived rain at this site on 2026-08-03. New assessment in faecal; Experimental window (heuristic, not validated): 2026-08-04 to 2026-08-05 inclusive. The next date is absent or unknown; this is the last qualifying wet day in the selected data, not confirmation that rain stopped.",
+              "confirmation_sample": {
+                "purpose": "Confirm whether the short-term pollution incident has ended, so the coordinator can lift or keep the notice.",
+                "not_a_class": "This sample is not part of a bathing-water quality classification.",
+                "date": null,
+                "date_note": "The coordinator sets the day, after the experimental window. The page does not choose it."
+              },
               "service_request_full_url": "urn:uuid:3c9a6f93-5da9-5151-a209-54cb71075154",
               "service_request": {
                 "resourceType": "ServiceRequest",
@@ -23513,6 +23597,12 @@
               },
               "status": "sample this storm",
               "reason": "2023 result: faecal category 0.85 (highest of 3, relative score); sewage works 4882.01 m; 32.76 mm archived rain at this site on 2026-08-03. New assessment in faecal; Experimental window (heuristic, not validated): 2026-08-04 to 2026-08-05 inclusive. The next date is absent or unknown; this is the last qualifying wet day in the selected data, not confirmation that rain stopped.",
+              "confirmation_sample": {
+                "purpose": "Confirm whether the short-term pollution incident has ended, so the coordinator can lift or keep the notice.",
+                "not_a_class": "This sample is not part of a bathing-water quality classification.",
+                "date": null,
+                "date_note": "The coordinator sets the day, after the experimental window. The page does not choose it."
+              },
               "service_request_full_url": "urn:uuid:6cae042f-663a-57ac-ba2e-59c2c0399617",
               "service_request": {
                 "resourceType": "ServiceRequest",
@@ -23655,6 +23745,12 @@
               },
               "status": "sample this storm",
               "reason": "2023 result: faecal category 0.51 (highest of 3, relative score); sewage works 5378.51 m; 32.76 mm archived rain at this site on 2026-08-03. New assessment in faecal; Experimental window (heuristic, not validated): 2026-08-04 to 2026-08-05 inclusive. The next date is absent or unknown; this is the last qualifying wet day in the selected data, not confirmation that rain stopped.",
+              "confirmation_sample": {
+                "purpose": "Confirm whether the short-term pollution incident has ended, so the coordinator can lift or keep the notice.",
+                "not_a_class": "This sample is not part of a bathing-water quality classification.",
+                "date": null,
+                "date_note": "The coordinator sets the day, after the experimental window. The page does not choose it."
+              },
               "service_request_full_url": "urn:uuid:ef63b924-6cde-58ba-afe7-3535d7384acb",
               "service_request": {
                 "resourceType": "ServiceRequest",
@@ -24139,6 +24235,12 @@
               },
               "status": "sample this storm",
               "reason": "2023 result: faecal category 0.55 (highest of 3, relative score); sewage works 4488.74 m; 25 mm archived rain at this site on 2026-08-03. New assessment in faecal; Experimental window (heuristic, not validated): 2026-08-04 to 2026-08-05 inclusive. The next date is absent or unknown; this is the last qualifying wet day in the selected data, not confirmation that rain stopped.",
+              "confirmation_sample": {
+                "purpose": "Confirm whether the short-term pollution incident has ended, so the coordinator can lift or keep the notice.",
+                "not_a_class": "This sample is not part of a bathing-water quality classification.",
+                "date": null,
+                "date_note": "The coordinator sets the day, after the experimental window. The page does not choose it."
+              },
               "service_request_full_url": "urn:uuid:8d28f482-8444-55c3-9d8e-5fb4b01792c2",
               "service_request": {
                 "resourceType": "ServiceRequest",
@@ -24552,6 +24654,12 @@
               },
               "status": "sample this storm",
               "reason": "2023 result: faecal category 0.58 (highest of 3, relative score); sewage works 1136.04 m; 32.76 mm archived rain at this site on 2026-08-03. New assessment in faecal, antibiotic resistance; Experimental window (heuristic, not validated): 2026-08-04 to 2026-08-05 inclusive. The next date is absent or unknown; this is the last qualifying wet day in the selected data, not confirmation that rain stopped.",
+              "confirmation_sample": {
+                "purpose": "Confirm whether the short-term pollution incident has ended, so the coordinator can lift or keep the notice.",
+                "not_a_class": "This sample is not part of a bathing-water quality classification.",
+                "date": null,
+                "date_note": "The coordinator sets the day, after the experimental window. The page does not choose it."
+              },
               "service_request_full_url": "urn:uuid:3f2e79a5-3d95-52cc-89e8-0087eab52d93",
               "service_request": {
                 "resourceType": "ServiceRequest",
@@ -24922,6 +25030,12 @@
               },
               "status": "sample this storm",
               "reason": "2023 result: faecal category 1.00 (highest of 3, relative score); sewage works 2012.68 m; 25 mm archived rain at this site on 2026-08-03. New assessment in faecal; Experimental window (heuristic, not validated): 2026-08-04 to 2026-08-05 inclusive. The next date is absent or unknown; this is the last qualifying wet day in the selected data, not confirmation that rain stopped.",
+              "confirmation_sample": {
+                "purpose": "Confirm whether the short-term pollution incident has ended, so the coordinator can lift or keep the notice.",
+                "not_a_class": "This sample is not part of a bathing-water quality classification.",
+                "date": null,
+                "date_note": "The coordinator sets the day, after the experimental window. The page does not choose it."
+              },
               "service_request_full_url": "urn:uuid:0cc28300-fc26-5969-9169-25cb02ae32e1",
               "service_request": {
                 "resourceType": "ServiceRequest",
@@ -26729,7 +26843,7 @@
     "Visit allocation is greedy; thresholds and sewage-distance ordering are prototype policy.",
     "Notices require coordinator review; no field validation has been performed."
   ],
-  "generated_at": "2026-10-03T22:43:27Z",
+  "generated_at": "2026-10-03T22:53:02Z",
   "fhir": {
     "profile": "http://hl7.org/fhir/StructureDefinition/ServiceRequest",
     "profile_note": "Checked hl7-eu/oah master input/fsh on 2026-10-04: 61 FSH files declare GroupOah, LibraryOah, LocationOah, ObservationHealthMeasureOah, ObservationIndicatorsOah, ObservationWithCompOah, and SpecimenOah. No line contained ServiceRequest or Task. Resources are base FHIR R4 ServiceRequest, not an OneAquaHealth profile, and are not sandbox-certified.",
@@ -26748,7 +26862,7 @@
       "statement": "replay scenario of the real 2026-05-10 storm — demonstration"
     },
     "reference_policy": "Saved resources omit subject.reference. An approved --post may add Location/{id} only when the sandbox returns exactly one Location with this site identifier. Duplicate Locations are logged and not chosen.",
-    "built_at": "2026-10-03T22:43:27Z",
+    "built_at": "2026-10-03T22:53:02Z",
     "default_bundle": {
       "city": "OS",
       "mode": "live",

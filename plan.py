@@ -293,6 +293,13 @@ def city_plan(sites, labs, parameters, weather_plan, config, duplicates, sources
                                    "text": "Precautionary: avoid water contact for people and pets after heavy rain until new results are reviewed.",
                                    "basis": f"Based on {health_day[:4]} relative faecal/pathogen categories and a {mode} storm scenario; current contamination is unknown.",
                                    "review": "The coordinator decides whether to issue the notice and when to lift it."}
+            if storm.get("window"):
+                row["confirmation_sample"] = {
+                    "purpose": "Confirm whether the short-term pollution incident has ended, so the coordinator can lift or keep the notice.",
+                    "not_a_class": "This sample is not part of a bathing-water quality classification.",
+                    "date": None,
+                    "date_note": "The coordinator sets the day, after the experimental window. The page does not choose it.",
+                }
         rows.append(row)
     # ponytail: greedy by dominant-risk, upgrade to value-of-information if real lab data arrives
     eligible = [row for row in rows if row["action"] != "none"]

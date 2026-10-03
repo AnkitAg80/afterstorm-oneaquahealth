@@ -33,7 +33,7 @@
     .visit-card{transition:background-color .2s,box-shadow .2s}.visit-card.hl{background:#f1f6ef;box-shadow:inset 4px 0 0 var(--green)}
     .budget-range{width:100%;max-width:160px;margin:10px 0 0;accent-color:var(--green);height:22px}
     @media(max-width:760px){.map-panel{position:static}}
-    #print-area{display:none}body.print-card{background:#fff}body.print-card>*:not(#print-area){display:none!important}body.print-card #print-area{display:block!important}.task-sheet{break-after:page;padding:24px;color:#111;font:16px/1.5 var(--sans)}.task-card{margin:8px 0 4px 42px}.task-card summary{font-size:14px;font-weight:600;color:var(--green)}.task-body{padding:8px 0 2px;font-size:14px;line-height:1.5}.task-body h3{font-size:16px;margin-bottom:6px}.task-safety{font-weight:700}.task-body fieldset{border:1px solid var(--line);border-radius:6px;margin:0 0 8px;padding:8px 10px}.task-body legend{font-size:14px;padding:0 4px}.task-choice{margin-right:12px;font-weight:500}.task-body label.field{display:block;margin:8px 0;font-weight:600}.task-body input[type=text]{display:block;width:100%;max-width:420px;margin-top:4px;border:1px solid #cfd8cf;border-radius:6px;padding:6px 8px;font-weight:400}.task-body .print-one{margin-top:8px}
+    #print-area{display:none}body.print-card{background:#fff}body.print-card>*:not(#print-area){display:none!important}body.print-card #print-area{display:block!important}.task-sheet{break-after:page;padding:24px;color:#111;font:16px/1.5 var(--sans)}.task-card{margin:8px 0 4px 42px}.task-card summary{font-size:14px;font-weight:600;color:var(--green)}.task-body{padding:8px 0 2px;font-size:14px;line-height:1.5}.task-body h3{font-size:16px;margin-bottom:6px}.task-safety{font-weight:700}.task-body fieldset{border:1px solid var(--line);border-radius:6px;margin:0 0 8px;padding:8px 10px}.task-body legend{font-size:14px;padding:0 4px}.task-choice{margin-right:12px;font-weight:500}.task-body label.field{display:block;margin:8px 0;font-weight:600}.task-body input[type=text],.confirm-sample input[type=date]{display:block;width:100%;max-width:420px;margin-top:4px;border:1px solid #cfd8cf;border-radius:6px;padding:6px 8px;font-weight:400}.task-body .print-one{margin-top:8px}
     .setting-line{margin:8px 0 0;font-size:13px;color:var(--muted);line-height:1.5}.setting-block{margin-top:12px}.setting-block ul{margin:8px 0;padding-left:18px;font-size:14px;line-height:1.55}.setting-note{font-size:13px;color:var(--muted)}
     .protection{border-left:4px solid var(--amber)}.protection-body{padding:0 22px 18px;font-size:15px;line-height:1.55}.protection-body p{margin:0 0 12px}.protection-body .cover-notices{display:inline-block;margin:0 0 14px;padding:8px 12px;border:1px solid #c2a064;border-radius:6px;background:#fff;color:var(--amber);font-size:14px;font-weight:600}.protection-foot{color:var(--muted);font-size:14px}
     .stale-chip{display:inline-block;margin:6px 0;padding:4px 8px;border-radius:6px;background:#fbf3e4;color:#7a5114;border:1px solid #e6d3a8;font-size:13px;font-weight:600}.visit-card .stale-chip{margin-left:42px}.review-history{margin:4px 0 8px 42px;font-size:13px;color:var(--muted)}.notice-row .review-history,.notice-row .stale-chip{margin-left:0}.review-history ul{margin:6px 0 0;padding-left:18px}
@@ -442,6 +442,23 @@
       ]
     };
   }
+  const CONFIRM_KEY='afterstorm-confirm-v1';
+  const CONFIRM_DIRECTIVE='Directive 2006/7/EC Annex IV.4: In the event of short-term pollution, one additional sample is to be taken to confirm that the incident has ended. This sample is not to be part of the set of bathing water quality data.';
+  let confirmDates={};try{confirmDates=JSON.parse(localStorage.getItem(CONFIRM_KEY))||{};}catch{confirmDates={};}
+  function confirmStoreKey(code){return `${cityId}|${mode}|${code}|${view().plan.storm?.anchor_date||''}`;}
+  function saveConfirmDate(input){
+    const key=confirmStoreKey(input.dataset.confirmDate);
+    if(/^\d{4}-\d{2}-\d{2}$/.test(input.value)) confirmDates[key]=input.value;
+    else delete confirmDates[key];
+    try{localStorage.setItem(CONFIRM_KEY,JSON.stringify(confirmDates));}catch{}
+  }
+  function confirmationBlock(site){
+    const sample=site?.confirmation_sample;
+    if(!sample) return '';
+    const saved=confirmDates[confirmStoreKey(site.code)];
+    const value=/^\d{4}-\d{2}-\d{2}$/.test(saved||'')?` value="${saved}"`:'';
+    return `<div class="setting-block confirm-sample"><p><strong>Confirmation sample</strong></p><p>${escapeHTML(sample.purpose)}</p><p>${escapeHTML(sample.not_a_class)}</p><label class="field">Confirmation sample date<input type="date" data-confirm-date="${escapeHTML(site.code)}"${value}></label><p class="setting-note">${escapeHTML(sample.date_note)}</p><p class="setting-note">${escapeHTML(CONFIRM_DIRECTIVE)}</p></div>`;
+  }
   function renderNotices(plan){
     $('notice-count').textContent=String(plan.notices.length);
     if(!plan.notices.length){
@@ -453,7 +470,7 @@
       const site=plan.sites.find(s=>s.code===notice.code);
       const v=reviewOf('notice',notice.code);
       const setting=settingRows(site);
-      return `<div class="notice-row rv-${v||'none'}" data-code="${escapeHTML(notice.code)}"><div class="notice-head"><code>${escapeHTML(notice.code)}</code><span class="notice-name">${escapeHTML(site?.name||notice.code)}<span class="notice-state">${v==='approve'?'Approved to issue · not sent':v==='hold'?'On hold':'Draft — needs review'}</span></span>${reviewButtons('notice',notice.code,'notice for '+notice.code)}</div><p class="setting-line">${escapeHTML(setting.compact)}</p>${reviewNote('notice',notice.code)}<details class="notice-more" data-keep="notice-${escapeHTML(notice.code)}"><summary>Read the draft notice</summary><p class="notice-tag" style="margin-top:10px">${escapeHTML(notice.label)}</p><p class="notice-text">${escapeHTML(notice.text)}</p><p class="notice-basis">${escapeHTML(notice.basis)}</p><p class="notice-basis">${escapeHTML(notice.review)}</p><div class="setting-block"><p><strong>Setting around this stream</strong> (stored values from the Resilience Map urban parameters)</p><ul>${setting.rows.map(line=>`<li>${escapeHTML(line)}</li>`).join('')}</ul><p class="setting-note">These values describe the surroundings. They don't change the visit order or the notice.</p></div></details></div>`;
+      return `<div class="notice-row rv-${v||'none'}" data-code="${escapeHTML(notice.code)}"><div class="notice-head"><code>${escapeHTML(notice.code)}</code><span class="notice-name">${escapeHTML(site?.name||notice.code)}<span class="notice-state">${v==='approve'?'Approved to issue · not sent':v==='hold'?'On hold':'Draft — needs review'}</span></span>${reviewButtons('notice',notice.code,'notice for '+notice.code)}</div><p class="setting-line">${escapeHTML(setting.compact)}</p>${reviewNote('notice',notice.code)}<details class="notice-more" data-keep="notice-${escapeHTML(notice.code)}"><summary>Read the draft notice</summary><p class="notice-tag" style="margin-top:10px">${escapeHTML(notice.label)}</p><p class="notice-text">${escapeHTML(notice.text)}</p><p class="notice-basis">${escapeHTML(notice.basis)}</p><p class="notice-basis">${escapeHTML(notice.review)}</p><div class="setting-block"><p><strong>Setting around this stream</strong> (stored values from the Resilience Map urban parameters)</p><ul>${setting.rows.map(line=>`<li>${escapeHTML(line)}</li>`).join('')}</ul><p class="setting-note">These values describe the surroundings. They don't change the visit order or the notice.</p></div>${confirmationBlock(site)}</details></div>`;
     }).join('');
     $('notices').innerHTML='<p class="notice-description">Draft — requires coordinator review. You decide whether to issue each notice and when to lift it. Approving here only records your decision; nothing is sent.</p>'+noticeRows;
   }
@@ -546,7 +563,7 @@
   let citizenAnswers={};try{citizenAnswers=JSON.parse(localStorage.getItem(CITIZEN_KEY))||{};}catch{citizenAnswers={};}
   function citizenStoreKey(code){return `${cityId}|${mode}|${code}|${evidenceSig('visit',code)}`;}
   function citizenTitle(site){return site.action==='first baseline assessment'?'First look — citizen task card':'After-storm look — citizen task card';}
-  function citizenWhen(site){return site.window?dateRange(site.window):'any day';}
+  function citizenWhen(site){return site.window?`${dateRange(site.window)} (experimental window)`:'any day';}
   function citizenWhere(site){const pos=site.position;return pos&&numeric(pos.latitude)&&numeric(pos.longitude)?`${Number(pos.latitude).toFixed(5)}, ${Number(pos.longitude).toFixed(5)}`:'No coordinates';}
   function readCitizenCard(card){
     const answers={};
@@ -691,7 +708,7 @@
       $('download-fhir').addEventListener('click',downloadFhir);
       $('print-all-cards').addEventListener('click',()=>printTaskCards(view().plan.ranking.slice(0,budget)));
       document.addEventListener('click',event=>{const button=event.target.closest('[data-print-card]');if(!button)return;printTaskCards([button.dataset.printCard]);});
-      document.addEventListener('change',event=>{const card=event.target.closest('.task-card');if(card&&event.target.matches('input'))saveCitizenCard(card);});
+      document.addEventListener('change',event=>{const card=event.target.closest('.task-card');if(card&&event.target.matches('input'))saveCitizenCard(card);const confirm=event.target.closest('[data-confirm-date]');if(confirm)saveConfirmDate(confirm);});
       document.addEventListener('input',event=>{const card=event.target.closest('.task-card');if(card&&event.target.matches('[data-q-text]'))saveCitizenCard(card);});
       document.addEventListener('click',event=>{const button=event.target.closest('[data-cover-notices]');if(!button)return;const visits=Number(button.dataset.coverNotices);applyBudget(visits);$('plan-status').textContent=`Visit budget is now ${visits}, which covers every notice site. The visit order is unchanged.`;});
       document.addEventListener('click',e=>{const b=e.target.closest('[data-review]');if(b){setReview(b.dataset.review,b.dataset.code,b.dataset.val);return;}if(e.target.closest('[data-clear-review]')){const pre=`${cityId}|${mode}|`;Object.keys(reviews).filter(k=>k.startsWith(pre)).forEach(k=>delete reviews[k]);try{localStorage.setItem(REVIEW_KEY,JSON.stringify(reviews));}catch{}render();$('plan-status').textContent='Review cleared for this city and mode.';}});
