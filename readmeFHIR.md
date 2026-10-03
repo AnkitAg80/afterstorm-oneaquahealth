@@ -1,10 +1,15 @@
 # Phase 4 — draft FHIR export
 
 Phase 4 adds base FHIR R4 `ServiceRequest` proposals to the sampling plan and
-checks their shape in Python. It does not post anything to the public sandbox.
+checks their shape in Python. `python plan.py` writes both `web/data/plan.json`
+and the default Oslo LIVE bundle.
 
-The deadline is **October 5, 2026, 04:00 UTC / 09:30 IST**. Submission text,
-the video script, and a public repository are later phases.
+One sandbox write was approved and completed: the Coimbra REPLAY budget-5
+bundle. The Oslo LIVE bundle was not posted. This is not sandbox certification.
+
+The deadline is **October 5, 2026, 04:00 UTC / 09:30 IST**. The Phase 5 video
+script is not written here. When it is written, it must open on Coimbra REPLAY,
+then show LIVE honestly reporting no storm.
 
 ## Profile check
 
@@ -22,97 +27,122 @@ On 2026-10-04 the `hl7-eu/oah` master tree contained 61 FSH files under
 No line in those files contains `ServiceRequest` or `Task`. AfterStorm therefore
 uses base FHIR R4 `ServiceRequest`
 (`http://hl7.org/fhir/StructureDefinition/ServiceRequest`). The resources do not
-claim an OneAquaHealth profile. This is not sandbox certification. The HL7
-validator jar was not downloaded, and sandbox `$validate` was not called.
+claim an OneAquaHealth profile. The HL7 validator jar was not downloaded, and
+sandbox `$validate` was not called.
 
 ## What changed, where, and why
 
-1. **`plan.py`: two-decimal category scores, and "tied highest" when the top
-   values are equal.** `highest_category_phrase` compares the stored numbers.
-   Equal top categories stay in `faecal`, `pathogen`, `antibiotic resistance`
-   order. C5 is the real example: faecal and pathogen are both 1, so the reason
-   says `faecal and pathogen categories 1.00 (tied highest of 3, relative score)`.
-   A single top value still says `highest of 3`. Rain millimetres and sewage
-   distance keep their source formatting. `source_health` is not rounded.
-   Ranking math is unchanged. Rerunning `python plan.py` rebuilds `plan.json`
-   and removes any ServiceRequest fields until `fhir_export.py` runs again.
+1. **`plan.py` calls `fhir_export.write_export` at the end.** One command
+   rebuilds the visit plan, stores a draft ServiceRequest on every ranked site,
+   runs the structural checks, and writes `web/data/plan.json` plus
+   `web/data/fhir-bundle.json`. The default bundle is always Oslo LIVE at the
+   configured budget of 5. Tied scores still say `tied highest` to two decimals.
+   C5 remains the real example: faecal and pathogen are both 1.
 
-2. **`web/index.html`: the same scores in the Why card.** Faecal, pathogen, and
-   antibiotic-resistance values render with two decimals. When two decimals
-   would hide a difference, the source number stays beside them. C5 shows
-   `1.00`, `1.00`, and `0.35 (source 0.3465)`. Sewage distance and rain still
-   use the source numbers (`2398.28 m`, `24.43 mm` on the C5 replay).
+2. **`fhir_export.py`: the demonstration sentence is added only for Coimbra
+   replay while the archive anchor is `2026-05-10`.** The exact sentence is
+   `replay scenario of the real 2026-05-10 storm — demonstration`. It is appended
+   to each Coimbra-replay note and added as `Bundle.meta.tag`. Other cities and
+   LIVE notes do not carry it. `plan.fhir.demonstration` lets the page copy that
+   tag into a download. `--post` refuses every target except
+   `--city CO --mode replay --budget 5`, and it refuses again when
+   `web/data/filed.json` already lists resources. The saved default bundle is
+   not replaced by the posted payload.
 
-3. **`fhir_export.py`: one draft ServiceRequest per ranked site.** It writes the
-   resource onto every site in `ranking`, for every city and both modes, in that
-   order. Sites outside the ranking get none. The local category system is
-   `urn:afterstorm:assessment-category` (`faecal`, `pathogen`,
-   `antibiotic-resistance`). It is not an HL7 or OneAquaHealth code system.
-   `ServiceRequest.code` is one CodeableConcept, which is the R4 limit, with one
-   coding entry per recommended category. `subject` is an identifier only:
-   system `https://api.enora-oah.eu/api/sites`, value = site code. There is no
-   `subject.reference` in the saved file. `occurrencePeriod` uses date precision
-   and is omitted when the visit has no storm window. `reasonCode.text` is the
-   site reason. The note says `precautionary`, the mode, and the sample year
-   when a lab date exists; a baseline says `no lab result on file`. A draft
-   contact notice is copied into that note. It is not a `Communication`, and it
-   is not marked completed or sent.
+3. **`web/data/fhir-bundle.json`: Oslo LIVE, and it is empty.** After the
+   forecast refresh, Oslo has no day at or above 20 mm and every Oslo site
+   already has a lab result, so the ranking is empty. The file is a transaction
+   Bundle with 0 entries. Its tag says `mode=live; budget=5; city=OS`. It was
+   not posted.
 
-4. **`web/data/fhir-bundle.json`: the default screen.** Oslo LIVE, budget 5 from
-   `config.json`. `Bundle.type` is `transaction`. `Bundle.meta.tag` says
-   `mode=live; budget=5; city=OS`. The five entries are O12, O11, O14, O13, O4,
-   with `occurrencePeriod` `2026-10-09` to `2026-10-10`. The page link "Saved
-   file: Oslo LIVE, budget 5" points at this file.
+4. **`web/data/fhir-bundle-coimbra-replay.json`: the payload that was posted,
+   saved before any sandbox Location reference was added.** Five entries, in
+   ranking order: C5, C12, C6, C7, C20. `subject` in this file is identifier
+   only. The tag list includes the demonstration sentence.
 
-5. **`web/index.html`: "Download FHIR bundle".** The button slices
-   `ranking` to the current budget and wraps the Python-built resources in a
-   transaction Bundle. The script does not create resource content. Changing
-   Coimbra replay from budget 5 to budget 1 changes the download from
-   C5, C12, C6, C7, C20 to C5 alone. Budget 0 disables the button. Benevento
-   LIVE has no visits, so the button stays disabled and the empty-state sentence
-   remains.
+5. **`web/data/filed.json` and the page.** The returned ids are below. Coimbra
+   replay shows `Filed as FHIR ServiceRequest/{id}` on each of those five visit
+   cards and repeats the ids in the FHIR status line. LIVE screens do not show
+   those ids. The download button still only slices and wraps the Python
+   resources. It does not build them and it does not send them.
 
-6. **`test_plan.py`: tie wording and structure.** Twenty-one assert checks
-   passed, including the C5 tie, a budget slice, a baseline with no window, and
-   a corrupted `completed` status or a premature `subject.reference`, both of
-   which fail the checker. `--post` is covered only by an in-memory rule: a
-   sandbox reference is added only when exactly one Location id matches; two ids
-   are logged and neither is chosen. That test does not contact the sandbox.
+6. **`python fetch.py` on 2026-10-03 20:04 UTC.** 114 live responses. Roster
+   106, lab records 96, coordinates 106. The same 10 sites still have no lab
+   result. No city forecast day from 3 Oct through 9 Oct reaches 20 mm:
+
+   | City | Highest day | mm |
+   | --- | --- | --- |
+   | Benevento | 2026-10-08 | 17.1 |
+   | Coimbra | 2026-10-06 | 4.3 |
+   | Ghent | 2026-10-08 | 18.0 |
+   | Oslo | 2026-10-08 | 17.4 |
+   | Toulouse | 2026-10-07 | 9.3 |
+
+   Oslo’s 8 Oct total is 17.4 mm, down from the earlier cached 42.9 mm. LIVE
+   for every city says no storm. Oslo and Benevento plan no visits. Coimbra,
+   Ghent, and Toulouse still list first-baseline visits for sites with no lab
+   result. Those baseline visits are not storm visits.
+
+## Sandbox resources
+
+Posted once at `2026-10-03T20:05:07Z` to
+`https://sandbox.hl7europe.eu/oneaquahealth/fhir`. HTTP 200. Each entry was
+`201 Created`. A second `--post` of the same command stopped before any network
+call because `filed.json` already had resources.
+
+| Site | ServiceRequest id | Location header |
+| --- | --- | --- |
+| C5 | 1046 | `ServiceRequest/1046/_history/1` |
+| C12 | 1047 | `ServiceRequest/1047/_history/1` |
+| C6 | 1048 | `ServiceRequest/1048/_history/1` |
+| C7 | 1049 | `ServiceRequest/1049/_history/1` |
+| C20 | 1050 | `ServiceRequest/1050/_history/1` |
+
+The search before that post found exactly one sandbox Location per site
+(C5 `892`, C12 `899`, C6 `893`, C7 `894`, C20 `907`). Those references were
+added only on the copy sent to the sandbox. The saved bundle and `plan.json`
+still have no `subject.reference`. Sandbox coordinates were not used for the
+plan. Returned ids are sandbox assignments, not certification.
 
 ## Structural checks that ran
 
-`python fhir_export.py` checked the saved plan (58 ranked ServiceRequests across
-five cities and both modes; 154 unranked sites have none) and the Oslo LIVE
-budget-5 bundle. All 21 passed:
+`python plan.py` checked the refreshed plan: 53 ranked ServiceRequests across
+five cities and both modes, 159 unranked sites with none, and the empty Oslo
+LIVE budget-5 bundle. The Coimbra replay budget-5 bundle was checked again
+immediately before the post. All 22 passed both times:
 
-1. Every ranked site has resourceType ServiceRequest — 58 ranked sites
-2. Every ServiceRequest status is draft — 58 status fields
-3. Every ServiceRequest intent is proposal — 58 intent fields
-4. subject.identifier.system is https://api.enora-oah.eu/api/sites — 58 identifiers
-5. subject.identifier.value equals the site code — 58 site codes
-6. Saved ServiceRequest.subject has no reference field — 58 saved subjects and 5 bundle entries
-7. code is one CodeableConcept; coding system is urn:afterstorm:assessment-category; codes and displays match the site categories in order — 58 code elements
-8. code.text is a non-empty string — 58 code.text values
-9. occurrencePeriod is date-only and matches the site window, or is omitted when the site has no window — 58 windows compared
-10. reasonCode has one text entry equal to the site reason — 58 reason texts
-11. note contains precautionary, the mode, and the sample year when a sample date exists; baselines say no lab result — 58 notes
-12. A draft notice, when present, is copied into the note; no Communication resource exists; every status field is draft — 63 resources walked for status
-13. code.text, reasonCode text, and note text do not contain the whole words Good, Moderate, or Poor — 58 resources scanned
-14. The export bundle resourceType is Bundle and type is transaction — city=OS mode=live budget=5
-15. Bundle.meta.tag states the city, mode, and budget — mode=live; budget=5; city=OS
-16. Bundle entry count equals the ranked sites inside the budget — 5 entries
-17. Bundle entry order matches ranking order — O12 > O11 > O14 > O13 > O4
-18. Each entry is a POST to ServiceRequest and its fullUrl is the site urn:uuid — 5 entries
-19. Each entry resource equals the ServiceRequest stored on that ranked site — 5 resources copied, not rebuilt
-20. Sites outside the ranking have no ServiceRequest — 154 unranked sites
-21. fullUrl values are unique urn:uuid URNs — 58 URNs
+1. Every ranked site has resourceType ServiceRequest — 53 ranked sites
+2. Every ServiceRequest status is draft — 53 status fields
+3. Every ServiceRequest intent is proposal — 53 intent fields
+4. subject.identifier.system is https://api.enora-oah.eu/api/sites — 53 identifiers
+5. subject.identifier.value equals the site code — 53 site codes
+6. Saved ServiceRequest.subject has no reference field — 53 saved subjects; 0 entries in the Oslo bundle, 5 in the Coimbra bundle
+7. code is one CodeableConcept; coding system is urn:afterstorm:assessment-category; codes and displays match the site categories in order — 53 code elements
+8. code.text is a non-empty string — 53 code.text values
+9. occurrencePeriod is date-only and matches the site window, or is omitted when the site has no window — 53 windows compared
+10. reasonCode has one text entry equal to the site reason — 53 reason texts
+11. note contains precautionary, the mode, and the sample year when a sample date exists; baselines say no lab result — 53 notes
+12. A draft notice, when present, is copied into the note; no Communication resource exists; every status field is draft
+13. code.text, reasonCode text, and note text do not contain the whole words Good, Moderate, or Poor — 53 resources scanned
+14. The export bundle resourceType is Bundle and type is transaction
+15. Bundle.meta.tag states the city, mode, and budget
+16. Bundle entry count equals the ranked sites inside the budget — 0 for Oslo LIVE, 5 for Coimbra replay
+17. Bundle entry order matches ranking order — Oslo is an empty slice; Coimbra is C5 > C12 > C6 > C7 > C20
+18. Each entry is a POST to ServiceRequest and its fullUrl is the site urn:uuid
+19. Each entry resource equals the ServiceRequest stored on that ranked site
+20. Sites outside the ranking have no ServiceRequest — 159 unranked sites
+21. fullUrl values are unique urn:uuid URNs — 53 URNs
+22. The demonstration sentence appears only on the Coimbra replay of 2026-05-10, in each ranked note and as a bundle tag
 
 Not checked:
 
 - The HL7 validator jar was not downloaded and was not run.
 - OneAquaHealth profile conformance was not claimed; the IG has no ServiceRequest or Task profile.
 - Sandbox `$validate` was not called and is not certification.
-- `--post` was not run. The public sandbox was not modified.
+
+`python test_plan.py` passed 22 assert-based checks after the refresh. Those
+checks compare each city’s LIVE storm flag with its forecast file. They do not
+hard-code 17.4 mm. Oslo with no storm must allocate no visits.
 
 ## Run
 
@@ -120,28 +150,30 @@ From `afterstorm/`, Python 3 standard library only:
 
 ```text
 python test_plan.py
+python fetch.py
 python plan.py
-python fhir_export.py
 python -m http.server 8765 --bind 127.0.0.1 --directory web
 ```
 
-Open `http://127.0.0.1:8765/` for Oslo LIVE. Coimbra replay, the C5 tie, is
-`http://127.0.0.1:8765/?city=CO&mode=replay&visits=5`.
+`python plan.py` alone writes the plan and the Oslo LIVE bundle. Open
+`http://127.0.0.1:8765/` for Oslo LIVE, which currently reports no storm.
+Coimbra replay is `http://127.0.0.1:8765/?city=CO&mode=replay&visits=5`.
 
-`python fhir_export.py --post` would POST the default Oslo bundle to
-`https://sandbox.hl7europe.eu/oneaquahealth/fhir`. It first looks up
-`Location?identifier=https://api.enora-oah.eu/api/sites|{code}`. It adds
-`subject.reference` only when that search returns exactly one Location. It does
-not use sandbox coordinates for the plan. Do not run it without explicit
-approval. It was not run for this phase.
+`python fhir_export.py --city CO --mode replay --budget 5 --post` is the only
+command that posts, and it now refuses because `web/data/filed.json` already
+records the five resources. Any other city, mode, or budget is refused before
+the sandbox is contacted. Do not post the Oslo bundle.
 
 ## Page check
 
-Headless Chrome loaded the local page. Coimbra replay showed C5 Mina Hospital
-first, with the tied-highest sentence, Why-card values `1.00`, `1.00`, and
-`0.35 (source 0.3465)`, sewage `2398.28 m`, and archived rain `24.43 mm`.
-Clicking Download FHIR bundle produced a 5-entry draft transaction for
-C5, C12, C6, C7, C20 and did not send it. Budget 1 produced C5 only. Oslo LIVE
-showed 42.9 mm and five planned visits. Benevento LIVE kept the no-visit
-sentence and disabled the button. Desktop (1280) and mobile (390) layouts kept
-the existing controls readable; the download control sits in the visit-list header.
+Headless Chrome loaded the local page on a 1280-wide desktop viewport and a
+390-wide mobile viewport. Coimbra replay showed the demonstration sentence, the
+five visit cards, and ServiceRequest ids 1046, 1047, 1048, 1049, and 1050.
+Clicking Download FHIR bundle saved a local file with those five draft
+resources, the demonstration tag, and no `subject.reference`. It was not sent.
+
+Oslo LIVE, on both viewports, showed “No storm”, the sentence “No storm in the
+cached 7-day forecast; no storm sampling needed.”, 17.4 mm on 8 Oct under the
+20 mm line, zero visits, and a disabled download button. Benevento LIVE also
+had no visits. Coimbra, Ghent, and Toulouse LIVE said no storm and still listed
+their baseline visits. Those LIVE screens did not show the Coimbra resource ids.

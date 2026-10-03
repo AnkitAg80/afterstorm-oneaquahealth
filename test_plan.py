@@ -8,6 +8,8 @@ import io
 import json
 from pathlib import Path
 
+from fetch import valid_number
+
 try:
     import plan
 except ModuleNotFoundError as exc:
@@ -283,10 +285,25 @@ def test_real_cache_modes_anchors_provenance_and_raw_integrity():
             assert site["provenance"]["roster"]["url"].endswith("/api/sites/all")
         assert storm["anchor_date"] in replay["archive"]["valid_dates"]
         assert not set(storm["wet_dates"]) & {"2026-08-04", "2026-08-27"}
-    live = output["cities"]["OS"]["modes"]["live"]
-    assert live["storm"]["anchor_date"] == "2026-10-08"
-    assert live["storm"]["rain_mm_by_date"]["2026-10-08"] == 42.9
-    assert output["cities"]["TO"]["modes"]["live"]["ranking"] == ["T15", "T21", "T24"]
+    for city_id, city in output["cities"].items():
+        forecast = data[4][city_id]
+        daily = dict(zip(forecast["daily"]["time"], forecast["daily"]["precipitation_sum"]))
+        live = city["modes"]["live"]
+        has_storm = any(valid_number(value) and value >= CONFIG["RAIN_MM"] for value in daily.values())
+        if has_storm:
+            assert live["weather_status"] == "storm" and live["storm"] is not None
+            anchor = live["storm"]["anchor_date"]
+            assert valid_number(daily[anchor]) and daily[anchor] >= CONFIG["RAIN_MM"]
+        else:
+            assert live["weather_status"] == "no_storm" and live["storm"] is None
+            assert "no storm" in live["message"].lower()
+    oslo_live = output["cities"]["OS"]["modes"]["live"]
+    if oslo_live["weather_status"] == "no_storm":
+        assert oslo_live["allocated_codes"] == []
+        assert oslo_live["ranking"] == []
+    toulouse_live = output["cities"]["TO"]["modes"]["live"]
+    if toulouse_live["weather_status"] == "no_storm":
+        assert toulouse_live["ranking"] == ["T15", "T21", "T24"]
     assert before == {name: hashlib.sha256((root / name).read_bytes()).hexdigest() for name in sources}
 
 
@@ -307,10 +324,16 @@ def test_c5_replay_tie_and_fhir_requests():
     fhir_export.attach_requests(output)
     checks, failures, bundle = fhir_export.structural_report(output, "OS", "live", CONFIG["VISITS_PER_CITY"])
     assert not failures, failures
-    assert len(checks) == 21 and all(check["passed"] for check in checks)
-    assert len(bundle["entry"]) == CONFIG["VISITS_PER_CITY"]
+    assert len(checks) == 22 and all(check["passed"] for check in checks)
+    oslo_ranking = output["cities"]["OS"]["modes"]["live"]["ranking"]
+    assert len(bundle["entry"]) == min(CONFIG["VISITS_PER_CITY"], len(oslo_ranking))
     assert [entry["resource"]["subject"]["identifier"]["value"] for entry in bundle["entry"]] == (
-        output["cities"]["OS"]["modes"]["live"]["ranking"][:CONFIG["VISITS_PER_CITY"]])
+        oslo_ranking[:CONFIG["VISITS_PER_CITY"]])
+    assert fhir_export.DEMONSTRATION not in [tag.get("display") for tag in bundle["meta"]["tag"]]
+    for oslo_site in output["cities"]["OS"]["modes"]["live"]["sites"]:
+        note = (oslo_site.get("service_request") or {}).get("note")
+        if note:
+            assert fhir_export.DEMONSTRATION not in note[0]["text"]
     request = site["service_request"]
     assert request["reasonCode"][0]["text"] == site["reason"]
     assert "1.00" in request["reasonCode"][0]["text"]
@@ -319,6 +342,23 @@ def test_c5_replay_tie_and_fhir_requests():
     assert all(check["passed"] for check in coimbra)
     assert coimbra_bundle["entry"][0]["resource"]["subject"]["identifier"]["value"] == "C5"
     assert "mode=replay; budget=1; city=CO" in coimbra_bundle["meta"]["tag"][0]["display"]
+    note = request["note"][0]["text"]
+    if replay["storm"]["anchor_date"] == "2026-05-10":
+        assert note.endswith(fhir_export.DEMONSTRATION)
+        assert output["fhir"]["demonstration"]["city"] == "CO"
+        assert output["fhir"]["demonstration"]["mode"] == "replay"
+        assert output["fhir"]["demonstration"]["statement"] == fhir_export.DEMONSTRATION
+        five_checks, five_failures, five_bundle = fhir_export.structural_report(output, "CO", "replay", 5)
+        assert not five_failures, five_failures
+        assert all(check["passed"] for check in five_checks)
+        assert fhir_export.DEMONSTRATION in [tag.get("display") for tag in five_bundle["meta"]["tag"]]
+        assert len(five_bundle["entry"]) == 5
+        assert all(fhir_export.DEMONSTRATION in entry["resource"]["note"][0]["text"]
+                   for entry in five_bundle["entry"])
+        fhir_export.require_demonstration(five_bundle)
+    else:
+        assert fhir_export.DEMONSTRATION not in note
+        assert output["fhir"]["demonstration"] is None
 
 
 def test_fhir_slice_baseline_window_and_sandbox_reference_policy():
@@ -372,6 +412,26 @@ def test_fhir_slice_baseline_window_and_sandbox_reference_policy():
     row(referenced["cities"]["TO"]["modes"]["live"], "T1")["service_request"]["subject"]["reference"] = "Location/1"
     _, reference_failures, _ = fhir_export.structural_report(referenced, "TO", "live", 1)
     assert any("no reference field" in name for name in reference_failures)
+
+
+def test_post_gate_and_location_parser_do_not_call_the_sandbox():
+    fhir_export.require_approved_post("CO", "replay", 5)
+    for bad in (("OS", "live", 5), ("CO", "live", 5), ("CO", "replay", 1), ("CO", "replay", None), ("BE", "replay", 5)):
+        try:
+            fhir_export.require_approved_post(*bad)
+        except ValueError:
+            continue
+        raise AssertionError(bad)
+    assert fhir_export.service_request_id("ServiceRequest/123/_history/1") == "123"
+    assert fhir_export.service_request_id(
+        "https://sandbox.hl7europe.eu/oneaquahealth/fhir/ServiceRequest/456/_history/1") == "456"
+    assert fhir_export.service_request_id("ServiceRequest/_history/1") is None
+    try:
+        fhir_export.require_demonstration({"resourceType": "Bundle", "meta": {"tag": []}, "entry": []})
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("a bundle without the demonstration sentence must be refused")
 
 
 if __name__ == "__main__":

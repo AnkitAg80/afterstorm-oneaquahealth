@@ -48,6 +48,13 @@ PROFILE_TAG = {
     "code": "base-r4-servicerequest",
     "display": "No OneAquaHealth ServiceRequest or Task profile in hl7-eu/oah; base FHIR R4 ServiceRequest",
 }
+# Exact wording required on the one approved Coimbra replay post.
+DEMONSTRATION = "replay scenario of the real 2026-05-10 storm — demonstration"
+DATA_DIR = ROOT / "web" / "data"
+DEFAULT_BUNDLE_PATH = DATA_DIR / "fhir-bundle.json"
+COIMBRA_BUNDLE_PATH = DATA_DIR / "fhir-bundle-coimbra-replay.json"
+FILED_PATH = DATA_DIR / "filed.json"
+SERVICE_REQUEST_ID = re.compile(r"ServiceRequest/([^/?#\s]+)")
 NOT_CHECKED = (
     "HL7 validator jar was not downloaded and was not run.",
     "OneAquaHealth profile conformance was not claimed; the IG has no ServiceRequest or Task profile.",
@@ -59,7 +66,7 @@ def proposal_url(city_id, mode, code):
     return "urn:uuid:" + str(uuid.uuid5(PROPOSAL_NAMESPACE, f"{city_id}|{mode}|{code}"))
 
 
-def note_text(site, mode):
+def note_text(site, mode, extra=None):
     if site.get("sample_date"):
         lead = f"precautionary; based on {site['sample_date'][:4]} results; {mode}"
     else:
@@ -69,6 +76,8 @@ def note_text(site, mode):
     if notice:
         parts.extend((notice["label"], notice["text"], notice["basis"], notice["review"],
                       "The draft notice is not completed and has not been sent."))
+    if extra:
+        parts.append(extra)
     return " ".join(parts)
 
 
@@ -86,7 +95,19 @@ def codeable_concept(site):
     return {"text": text, "coding": coding}
 
 
-def build_service_request(city_id, mode, site):
+def coimbra_demonstration(plan):
+    """The approved sentence, only when Coimbra replay is still anchored on 2026-05-10."""
+    cities = plan.get("cities") if isinstance(plan, dict) else None
+    if not isinstance(cities, dict) or "CO" not in cities:
+        return None
+    replay = (cities["CO"].get("modes") or {}).get("replay") or {}
+    storm = replay.get("storm") or {}
+    if storm.get("anchor_date") == "2026-05-10":
+        return DEMONSTRATION
+    return None
+
+
+def build_service_request(city_id, mode, site, extra_note=None):
     resource = {
         "resourceType": "ServiceRequest",
         "status": "draft",
@@ -95,7 +116,7 @@ def build_service_request(city_id, mode, site):
                     "display": site.get("name") or site["code"]},
         "code": codeable_concept(site),
         "reasonCode": [{"text": site["reason"]}],
-        "note": [{"text": note_text(site, mode)}],
+        "note": [{"text": note_text(site, mode, extra_note)}],
     }
     window = site.get("window")
     if window:
@@ -105,15 +126,17 @@ def build_service_request(city_id, mode, site):
 
 def attach_requests(plan):
     """Store one ServiceRequest on every ranked site. Unranked sites stay without one."""
+    statement = coimbra_demonstration(plan)
     for city_id, city in plan["cities"].items():
         for mode, mode_plan in city["modes"].items():
+            extra = statement if city_id == "CO" and mode == "replay" else None
             by_code = {site["code"]: site for site in mode_plan["sites"]}
             for site in mode_plan["sites"]:
                 site.pop("service_request", None)
                 site.pop("service_request_full_url", None)
             for code in mode_plan["ranking"]:
                 site = by_code[code]
-                full_url, resource = build_service_request(city_id, mode, site)
+                full_url, resource = build_service_request(city_id, mode, site, extra)
                 site["service_request_full_url"] = full_url
                 site["service_request"] = resource
     plan["fhir"] = {
@@ -123,6 +146,10 @@ def attach_requests(plan):
         "code_system": CODE_SYSTEM,
         "subject_identifier_system": SITE_SYSTEM,
         "built_by": "fhir_export.py",
+        "demonstration": (
+            {"city": "CO", "mode": "replay", "anchor_date": "2026-05-10", "statement": statement}
+            if statement else None
+        ),
         "reference_policy": (
             "Saved resources omit subject.reference. An approved --post may add "
             "Location/{id} only when the sandbox returns exactly one Location "
@@ -143,14 +170,20 @@ def bundle_for(plan, city_id, mode, budget):
         if "service_request" not in site:
             raise ValueError(f"Ranked site {code} has no ServiceRequest; attach requests first")
         selected.append(site)
+    tags = [
+        {"system": EXPORT_SYSTEM, "code": f"{mode}-budget-{budget}",
+         "display": f"mode={mode}; budget={budget}; city={city_id}"},
+        dict(PROFILE_TAG),
+    ]
+    demonstration = (plan.get("fhir") or {}).get("demonstration")
+    if (isinstance(demonstration, dict) and demonstration.get("city") == city_id
+            and demonstration.get("mode") == mode and demonstration.get("statement")):
+        tags.append({"system": EXPORT_SYSTEM, "code": "demonstration",
+                     "display": demonstration["statement"]})
     return {
         "resourceType": "Bundle",
         "type": "transaction",
-        "meta": {"tag": [
-            {"system": EXPORT_SYSTEM, "code": f"{mode}-budget-{budget}",
-             "display": f"mode={mode}; budget={budget}; city={city_id}"},
-            dict(PROFILE_TAG),
-        ]},
+        "meta": {"tag": tags},
         "entry": [{
             "fullUrl": site["service_request_full_url"],
             "resource": site["service_request"],
@@ -395,6 +428,36 @@ def structural_report(plan, city_id, mode, budget):
         url_bad.append(f"malformed {malformed[:3]}")
     add("fullUrl values are unique urn:uuid URNs", url_bad, f"{len(urls)} URNs")
 
+    statement = coimbra_demonstration(plan)
+    demo_bad = []
+    for c, m, s, r in ranked:
+        text = ""
+        if isinstance(r, dict):
+            notes = r.get("note") or []
+            if notes and isinstance(notes[0], dict):
+                text = notes[0].get("text") or ""
+        expected = bool(statement) and c == "CO" and m == "replay"
+        if expected and statement not in text:
+            demo_bad.append(f"{_where(c, m, s)} missing demonstration")
+        elif not expected and DEMONSTRATION in text:
+            demo_bad.append(f"{_where(c, m, s)} has the demonstration sentence")
+    bundle_displays = [tag.get("display", "") for tag in (bundle.get("meta") or {}).get("tag") or []]
+    bundle_has = DEMONSTRATION in bundle_displays
+    bundle_should = bool(statement) and city_id == "CO" and mode == "replay"
+    if bundle_should and not bundle_has:
+        demo_bad.append("bundle tag missing the demonstration sentence")
+    if bundle_has and not bundle_should:
+        demo_bad.append("bundle tag includes the demonstration sentence")
+    if bundle_should:
+        for entry in bundle.get("entry") or []:
+            notes = ((entry.get("resource") or {}).get("note") or [{}])
+            text = notes[0].get("text") if notes and isinstance(notes[0], dict) else ""
+            if statement not in (text or ""):
+                demo_bad.append("bundle entry note missing the demonstration sentence")
+    add("The demonstration sentence appears only on the Coimbra replay of 2026-05-10, "
+        "in each ranked note and as a bundle tag", demo_bad,
+        "Coimbra replay 2026-05-10" if statement else "anchor is not 2026-05-10, so the sentence is absent")
+
     failures = [check["name"] for check in checks if not check["passed"]]
     return checks, failures, bundle
 
@@ -453,10 +516,88 @@ def search_location_ids(code, timeout=30):
     return location_ids_from_search(payload, code)
 
 
+def service_request_id(location):
+    """Parse ServiceRequest/{id} from a relative location or a full history URL."""
+    if not isinstance(location, str):
+        return None
+    match = SERVICE_REQUEST_ID.search(location)
+    if not match or match.group(1).startswith("_"):
+        return None
+    return match.group(1)
+
+
+def require_approved_post(city, mode, budget):
+    """The only approved sandbox write is Coimbra replay, budget 5."""
+    if city != "CO" or mode != "replay" or budget != 5:
+        raise ValueError(
+            "Refusing to post. Only python fhir_export.py --city CO --mode replay --budget 5 --post "
+            "is approved. The Oslo LIVE bundle is not posted.")
+
+
+def filed_has_resources(path=FILED_PATH):
+    if not Path(path).exists():
+        return False
+    payload = json.loads(Path(path).read_text(encoding="utf-8"))
+    return bool(isinstance(payload, dict) and payload.get("resources"))
+
+
+def require_demonstration(bundle):
+    """Refuse the post unless the tag and every note carry the exact sentence. No network."""
+    displays = [tag.get("display") for tag in (bundle.get("meta") or {}).get("tag") or []]
+    if "mode=replay; budget=5; city=CO" not in displays:
+        raise ValueError("Refusing to post. Bundle.meta.tag is not Coimbra replay budget 5.")
+    if DEMONSTRATION not in displays:
+        raise ValueError("Refusing to post. Bundle.meta.tag is missing the demonstration statement.")
+    entries = bundle.get("entry") or []
+    if len(entries) != 5:
+        raise ValueError(f"Refusing to post. Expected 5 entries, found {len(entries)}.")
+    for entry in entries:
+        resource = entry.get("resource") or {}
+        notes = resource.get("note") or []
+        text = notes[0].get("text") if notes and isinstance(notes[0], dict) else ""
+        code = ((resource.get("subject") or {}).get("identifier") or {}).get("value")
+        if DEMONSTRATION not in (text or ""):
+            raise ValueError(f"Refusing to post. {code} note is missing the demonstration statement.")
+        if "reference" in (resource.get("subject") or {}):
+            raise ValueError(f"Refusing to post. {code} already has subject.reference in the saved bundle.")
+
+
+def write_export(plan, plan_path, bundle_path=None):
+    """Attach ServiceRequests and write plan.json plus the Oslo LIVE default bundle."""
+    attach_requests(plan)
+    city, mode = "OS", "live"
+    budget = plan["config"]["VISITS_PER_CITY"]
+    checks, failures, bundle = structural_report(plan, city, mode, budget)
+    print_report(checks, posted=False)
+    if failures:
+        raise ValueError(f"{len(failures)} structural checks failed")
+    plan["fhir"]["built_at"] = utc_now()
+    plan["fhir"]["default_bundle"] = {
+        "city": city, "mode": mode, "budget": budget, "file": "web/data/fhir-bundle.json",
+    }
+    bundle_path = Path(bundle_path) if bundle_path else Path(plan_path).parent / "fhir-bundle.json"
+    write_json(plan_path, plan)
+    write_json(bundle_path, bundle)
+    print(f"Saved {plan_path}")
+    print(f"Saved {bundle_path} ({len(bundle['entry'])} ServiceRequests; mode={mode}; budget={budget}; city={city})")
+    return checks, bundle
+
+
+def posted_records(result, codes):
+    entries = result.get("entry") or []
+    records = []
+    for index, code in enumerate(codes):
+        response = (entries[index].get("response") or {}) if index < len(entries) and isinstance(entries[index], dict) else {}
+        location = response.get("location")
+        records.append({"code": code, "status": response.get("status"),
+                        "location": location, "id": service_request_id(location)})
+    return records
+
+
 def post_bundle(bundle, timeout=60):
+    codes = [entry["resource"]["subject"]["identifier"]["value"] for entry in bundle["entry"]]
     ids_by_code = {}
-    for entry in bundle["entry"]:
-        code = entry["resource"]["subject"]["identifier"]["value"]
+    for code in codes:
         ids_by_code[code] = search_location_ids(code, timeout=timeout)
     posted, notes = apply_location_references(bundle, ids_by_code)
     for line in notes:
@@ -475,45 +616,64 @@ def post_bundle(bundle, timeout=60):
         raw = exc.read().decode("utf-8", "replace")
         print(f"Sandbox HTTP {exc.code}", file=sys.stderr)
         print(raw[:4000], file=sys.stderr)
-        return 2
+        print("The POST was sent and failed. Not retrying.", file=sys.stderr)
+        return 2, []
     result = json.loads(raw)
-    for entry in result.get("entry") or []:
-        response = entry.get("response") or {}
-        print(f"Posted {response.get('status')} {response.get('location')}")
-    return 0 if result.get("resourceType") == "Bundle" else 2
+    records = posted_records(result, codes)
+    for record in records:
+        print(f"Posted {record['status']} {record['location']}")
+    if result.get("resourceType") != "Bundle" or any(not record["id"] for record in records):
+        print("The POST was sent. Not retrying.", file=sys.stderr)
+        return 2, records
+    return 0, records
 
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--plan", type=Path, default=ROOT / "web" / "data" / "plan.json")
-    parser.add_argument("--bundle", type=Path, default=ROOT / "web" / "data" / "fhir-bundle.json")
+    parser.add_argument("--plan", type=Path, default=DATA_DIR / "plan.json")
+    parser.add_argument("--bundle", type=Path, default=DEFAULT_BUNDLE_PATH)
     parser.add_argument("--city", default="OS")
     parser.add_argument("--mode", default="live", choices=("live", "replay"))
     parser.add_argument("--budget", type=int, default=None)
     parser.add_argument("--post", action="store_true",
-                        help="POST the bundle to the public sandbox. Requires explicit approval.")
+                        help="POST only the approved Coimbra replay budget-5 bundle.")
     args = parser.parse_args(argv)
     try:
+        if args.post:
+            require_approved_post(args.city, args.mode, args.budget)
+            if filed_has_resources(FILED_PATH):
+                print("Refusing to post. web/data/filed.json already records sandbox resources.",
+                      file=sys.stderr)
+                return 2
         plan = json.loads(args.plan.read_text(encoding="utf-8"))
-        attach_requests(plan)
-        budget = plan["config"]["VISITS_PER_CITY"] if args.budget is None else args.budget
-        checks, failures, bundle = structural_report(plan, args.city, args.mode, budget)
-        print_report(checks, posted=False)
+        # The saved default bundle stays Oslo LIVE even when --post targets Coimbra.
+        write_export(plan, args.plan, DEFAULT_BUNDLE_PATH)
+        if not args.post:
+            if (args.city, args.mode) != ("OS", "live") or args.budget not in (None, plan["config"]["VISITS_PER_CITY"]):
+                print("Saved fhir-bundle.json stays Oslo LIVE. --city, --mode, and --budget apply only with --post.")
+            print("Did not post. The public sandbox was not modified.")
+            return 0
+        _checks, failures, bundle = structural_report(plan, "CO", "replay", 5)
+        print_report(_checks, posted=False)
         if failures:
             print(f"{len(failures)} structural checks failed", file=sys.stderr)
             return 2
-        plan["fhir"]["built_at"] = utc_now()
-        plan["fhir"]["default_bundle"] = {"city": args.city, "mode": args.mode, "budget": budget,
-                                           "file": "web/data/fhir-bundle.json"}
-        write_json(args.plan, plan)
-        write_json(args.bundle, bundle)
-        print(f"Saved {args.plan}")
-        print(f"Saved {args.bundle} ({len(bundle['entry'])} ServiceRequests; mode={args.mode}; budget={budget}; city={args.city})")
-        if not args.post:
-            print("Did not post. Run python fhir_export.py --post only after explicit approval.")
-            return 0
-        print(f"Posting to {SANDBOX}")
-        return post_bundle(bundle)
+        require_demonstration(bundle)
+        write_json(COIMBRA_BUNDLE_PATH, bundle)
+        print(f"Saved {COIMBRA_BUNDLE_PATH} (pre-reference Coimbra replay budget 5; this is the post payload)")
+        print(f"Posting once to {SANDBOX}")
+        print("Approved target: Coimbra REPLAY budget 5. Oslo LIVE is not posted.")
+        code, records = post_bundle(bundle)
+        if any(record.get("id") for record in records):
+            write_json(FILED_PATH, {
+                "city": "CO", "mode": "replay", "budget": 5,
+                "statement": DEMONSTRATION, "posted_at": utc_now(), "sandbox": SANDBOX,
+                "resources": records,
+            })
+            print(f"Recorded {FILED_PATH}")
+            for record in records:
+                print(f"Recorded {record['code']} ServiceRequest/{record['id']}")
+        return code
     except (OSError, ValueError, KeyError, TypeError, URLError, json.JSONDecodeError) as exc:
         print(f"Cannot export FHIR: {exc}", file=sys.stderr)
         return 2

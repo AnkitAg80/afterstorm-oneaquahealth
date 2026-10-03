@@ -1,0 +1,40 @@
+{
+  "city": "CO",
+  "mode": "replay",
+  "budget": 5,
+  "statement": "replay scenario of the real 2026-05-10 storm — demonstration",
+  "posted_at": "2026-10-03T20:05:07Z",
+  "sandbox": "https://sandbox.hl7europe.eu/oneaquahealth/fhir",
+  "resources": [
+    {
+      "code": "C5",
+      "status": "201 Created",
+      "location": "ServiceRequest/1046/_history/1",
+      "id": "1046"
+    },
+    {
+      "code": "C12",
+      "status": "201 Created",
+      "location": "ServiceRequest/1047/_history/1",
+      "id": "1047"
+    },
+    {
+      "code": "C6",
+      "status": "201 Created",
+      "location": "ServiceRequest/1048/_history/1",
+      "id": "1048"
+    },
+    {
+      "code": "C7",
+      "status": "201 Created",
+      "location": "ServiceRequest/1049/_history/1",
+      "id": "1049"
+    },
+    {
+      "code": "C20",
+      "status": "201 Created",
+      "location": "ServiceRequest/1050/_history/1",
+      "id": "1050"
+    }
+  ]
+}

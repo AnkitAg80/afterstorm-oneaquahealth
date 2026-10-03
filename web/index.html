@@ -24,7 +24,7 @@
     .distance-note{font-size:10px;color:var(--amber);margin:0 0 8px 35px}
     @media(max-width:520px){.mode-control{grid-column:1/-1}.budget-control{justify-self:stretch;grid-column:1/-1;display:grid;grid-template-columns:1fr auto;align-items:center}.budget-control .control-label{margin:0}.budget-control .budget-note,.budget-control .budget-error{grid-column:1/-1}.mode-toggle button{white-space:nowrap}.mode-meta{margin-top:8px}}
     @media(prefers-reduced-motion:no-preference){.intro,.controls,.weather,.workspace{animation:appear .4s ease both}.controls{animation-delay:.04s}.weather{animation-delay:.08s}.workspace{animation-delay:.12s}@keyframes appear{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}} @media print{.controls,.map-tools,.locate,.topbar .project-context{display:none}.shell{padding:0}.workspace{display:block}.map-panel{break-inside:avoid}.visits-scroll{max-height:none;overflow:visible}.visit-card{break-inside:avoid}.notice-panel{margin-top:12px}}
-    .visit-actions{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex:none}.visit-actions button{border:1px solid #d5ded6;background:#fff;border-radius:4px;padding:7px 10px;font-size:11px;font-weight:600;color:var(--green)}#fhir-status{margin:0;padding:0 22px 10px;font-size:11px;color:var(--muted);line-height:1.5}.fhir-help a{white-space:nowrap}@media(max-width:760px){.visit-actions{align-items:flex-start}}@media print{#download-fhir,#default-fhir,#fhir-status{display:none!important}}
+    .visit-actions{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex:none}.visit-actions button{border:1px solid #d5ded6;background:#fff;border-radius:4px;padding:7px 10px;font-size:11px;font-weight:600;color:var(--green)}#fhir-status{margin:0;padding:0 22px 10px;font-size:11px;color:var(--muted);line-height:1.5}.filed-note{margin:0 0 8px 35px;font-size:12px;font-weight:600;color:var(--green)}.fhir-help a{white-space:nowrap}@media(max-width:760px){.visit-actions{align-items:flex-start}}@media print{#download-fhir,#default-fhir,#fhir-status{display:none!important}}
   </style>
   <script src="vendor/leaflet.js" defer></script>
 </head>
@@ -87,7 +87,7 @@
     catch { return escapeHTML(label); }
     return `<a href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(label)}</a>`;
   };
-  let data, cityId = 'OS', mode = 'live', budget = 5, leafletMap, tileLayer, markers = new Map();
+  let data, filed = null, cityId = 'OS', mode = 'live', budget = 5, leafletMap, tileLayer, markers = new Map();
   let markerGroup, previousMapCity, tileFailed = false;
 
   function view(){const city=data.cities[cityId], plan=city.modes[mode];return {city,plan,allocated:new Set(plan.ranking.slice(0,budget))};}
@@ -116,7 +116,8 @@
     const eligible=plan.ranking.length,baseline=plan.sites.filter(s=>s.action==='first baseline assessment').length;
     $('weather').innerHTML=`<div class="weather-top"><h2>${escapeHTML(city.name)} · ${storm?'storm assessment':'routine monitoring'}</h2><span class="badge ${mode==='replay'?'replay':''}">${escapeHTML(tag)}</span></div><div class="weather-grid"><div class="metric"><p class="metric-label">${escapeHTML(rainLabel)}</p><div class="metric-value">${escapeHTML(rainValue)}${storm?' <span class="unit">mm</span>':''}</div><p class="metric-note">${escapeHTML(rainNote)}</p></div><div class="metric"><p class="metric-label">${storm?'Proposed sampling dates':'Next monitoring action'}</p><div class="metric-value dates">${storm?escapeHTML(shortDate(storm.window.start_date)+' – '+shortDate(storm.window.end_date)):baseline?'First baseline':'No visit needed'}</div>${storm?`<span class="window-tag">Experimental window (heuristic, not validated)</span><p class="metric-note">${escapeHTML(storm.window.start_date)} to ${escapeHTML(storm.window.end_date)} inclusive</p>`:`<p class="metric-note">${baseline?`${baseline} site${baseline===1?'':'s'} without a lab result`:'Every site has a lab record; see the roster for validity.'}</p>`}</div><div class="metric"><p class="metric-label">Site visits planned</p><div class="metric-value">${allocated.size}<span class="unit"> / ${budget} budget</span></div><p class="metric-note">${eligible} eligible site${eligible===1?'':'s'} · ${baseline} baseline${baseline===1?'':'s'}<br>All categories collected in one trip</p></div></div><div class="weather-bottom"><p class="weather-explain">${storm?`<strong>${escapeHTML(storm.boundary_note)}</strong><br>Rain ≥ ${data.config.RAIN_MM} mm triggers a proposal. Current contamination is unknown.`:escapeHTML(plan.message)}</p>${mode==='live'?rainChart(plan.forecast_period):`<p class="weather-explain">${escapeHTML(plan.archive?.policy||'Archive coverage is unavailable.')}<br>Missing days break wet-day runs. This replay is historical.</p>`}</div>`;
     $('replay-banner').hidden=mode!=='replay';
-    $('replay-banner').innerHTML=`<strong>${escapeHTML(plan.label)}</strong><span>Historical scenario; this is not an upcoming event.</span>`;
+    const sentence=demonstrationSentence();
+    $('replay-banner').innerHTML=`<strong>${escapeHTML(plan.label)}</strong><span>Historical scenario; this is not an upcoming event.</span>${sentence?`<span>${escapeHTML(sentence)}</span>`:''}`;
   }
   function sourceDetails(site,plan){
     const health=site.source_health;
@@ -130,7 +131,7 @@
     $('visit-count').textContent=`${selected.length} planned`;
     $('visit-subtitle').textContent=plan.storm?'Within the experimental post-rain window':'Routine baseline visits where lab evidence is missing';
     if(selected.length){
-      $('visits').innerHTML=`<ol class="visit-list">${selected.map(site=>`<li class="visit-card" id="visit-${escapeHTML(site.code)}" data-code="${escapeHTML(site.code)}"><div class="visit-heading"><span class="rank-number">${site.rank}</span><div class="site-title"><h3><code>${escapeHTML(site.code)}</code>${escapeHTML(site.name)}</h3><p class="category-text">${site.action==='first baseline assessment'?'<span class="badge blue">First baseline</span> ':''}${escapeHTML(site.categories.join(' + '))}</p></div>${site.position?`<button type="button" class="locate" data-locate="${escapeHTML(site.code)}" aria-label="Show ${escapeHTML(site.code)} on map">Show on map</button>`:''}</div><p class="visit-time"><strong>${escapeHTML(dateRange(site.window))}</strong>${site.window?'<span class="small-window">Experimental window (heuristic, not validated)</span>':'<span class="small-window">No storm window</span>'}</p>${site.action==='first baseline assessment'&&site.sewage_distance_m===null?'<p class="distance-note">Missing sewage distance · last among baseline sites</p>':''}${sourceDetails(site,plan)}${site.map_note?`<p class="reason muted small">${escapeHTML(site.map_note)}</p>`:''}</li>`).join('')}</ol>`;
+      $('visits').innerHTML=`<ol class="visit-list">${selected.map(site=>`<li class="visit-card" id="visit-${escapeHTML(site.code)}" data-code="${escapeHTML(site.code)}"><div class="visit-heading"><span class="rank-number">${site.rank}</span><div class="site-title"><h3><code>${escapeHTML(site.code)}</code>${escapeHTML(site.name)}</h3><p class="category-text">${site.action==='first baseline assessment'?'<span class="badge blue">First baseline</span> ':''}${escapeHTML(site.categories.join(' + '))}</p></div>${site.position?`<button type="button" class="locate" data-locate="${escapeHTML(site.code)}" aria-label="Show ${escapeHTML(site.code)} on map">Show on map</button>`:''}</div><p class="visit-time"><strong>${escapeHTML(dateRange(site.window))}</strong>${site.window?'<span class="small-window">Experimental window (heuristic, not validated)</span>':'<span class="small-window">No storm window</span>'}</p>${filedLine(site.code)}${site.action==='first baseline assessment'&&site.sewage_distance_m===null?'<p class="distance-note">Missing sewage distance · last among baseline sites</p>':''}${sourceDetails(site,plan)}${site.map_note?`<p class="reason muted small">${escapeHTML(site.map_note)}</p>`:''}</li>`).join('')}</ol>`;
     }else{
       let reason;
       if(budget===0) reason='The site-visit budget is zero. Increase it to allocate eligible visits; the full roster and evidence remain available.';
@@ -153,8 +154,27 @@
     const ready=selected.length>0&&selected.every(site=>site.service_request&&site.service_request_full_url);
     $('download-fhir').disabled=!ready;
     if(!selected.length) $('fhir-status').textContent='No visits are in this list, so there is nothing to download.';
-    else if(!ready) $('fhir-status').textContent='Run python fhir_export.py, then reload. This page does not build FHIR resources.';
-    else $('fhir-status').textContent=`The button downloads ${selected.length} draft proposal${selected.length===1?'':'s'} from this list. It does not send them. Python built each ServiceRequest; this page only slices and wraps.`;
+    else if(!ready) $('fhir-status').textContent='Run python plan.py, then reload. This page does not build FHIR resources.';
+    else $('fhir-status').textContent=`The button downloads ${selected.length} draft proposal${selected.length===1?'':'s'} from this list. It does not send them. Python built each ServiceRequest; this page only slices and wraps.${demonstrationSentence()?` ${demonstrationSentence()}.`:''}${filedSummary()}`;
+  }
+  function demonstrationSentence(){
+    const demo=data.fhir?.demonstration;
+    if(!demo||demo.city!==cityId||demo.mode!==mode||!demo.statement) return '';
+    return demo.statement;
+  }
+  function filedMatches(){
+    return !!(filed&&filed.city===cityId&&filed.mode===mode&&Array.isArray(filed.resources));
+  }
+  function filedLine(code){
+    if(!filedMatches()) return '';
+    const item=filed.resources.find(row=>row.code===code&&row.id);
+    return item?`<p class="filed-note">Filed as FHIR ServiceRequest/${escapeHTML(item.id)}</p>`:'';
+  }
+  function filedSummary(){
+    if(!filedMatches()) return '';
+    const shown=filed.resources.filter(item=>item.id);
+    if(!shown.length) return '';
+    return ` Filed as ${shown.map(item=>`${item.code} ServiceRequest/${item.id}`).join(', ')}.`;
   }
   function downloadFhir(){
     const {city,plan}=view();
@@ -163,6 +183,8 @@
     if(!selected.length||selected.some(site=>!site?.service_request||!site.service_request_full_url)) return;
     const tags=[{system:'urn:afterstorm:export',code:'screen-slice',display:`mode=${mode}; budget=${budget}; city=${cityId}`}];
     if(data.fhir?.profile_tag) tags.push(data.fhir.profile_tag);
+    const sentence=demonstrationSentence();
+    if(sentence) tags.push({system:'urn:afterstorm:export',code:'demonstration',display:sentence});
     const bundle={resourceType:'Bundle',type:'transaction',meta:{tag:tags},entry:selected.map(site=>({fullUrl:site.service_request_full_url,resource:site.service_request,request:{method:'POST',url:'ServiceRequest'}}))};
     const url=URL.createObjectURL(new Blob([JSON.stringify(bundle,null,2)+'\n'],{type:'application/fhir+json'}));
     const link=document.createElement('a');
@@ -258,6 +280,11 @@
       if(!response.ok) throw new Error('The saved plan could not be loaded.');
       data=await response.json();
       if(data.schema_version!==1||!data.cities||!data.config) throw new Error('The saved plan has an unsupported format.');
+      filed=null;
+      try{
+        const filedResponse=await fetch('data/filed.json',{cache:'no-store'});
+        if(filedResponse.ok) filed=await filedResponse.json();
+      }catch(_error){filed=null;}
       const params=new URLSearchParams(location.search);
       cityId=Object.hasOwn(data.cities,params.get('city'))?params.get('city'):Object.hasOwn(data.cities,'OS')?'OS':Object.keys(data.cities)[0];
       mode=params.get('mode')==='replay'?'replay':'live';

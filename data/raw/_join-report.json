@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-03T15:49:46Z",
+  "generated_at": "2026-10-03T20:04:22Z",
   "counts": {
     "roster_sites": 106,
     "sites_with_lab_result": 96,
@@ -1639,7 +1639,7 @@
     "weather": 127481
   },
   "retrieval_counts": {
-    "offline": 114
+    "live": 114
   },
   "errors": {},
   "cache_directory": "C:\\Users\\ankit\\Downloads\\oneaqua\\afterstorm\\data\\raw"

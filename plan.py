@@ -6,9 +6,10 @@ import hashlib
 from pathlib import Path
 import sys
 
+import fhir_export
 from fetch import (decode_json, index_rows, site_sort_key, source_date, utc_now,
                    valid_number, valid_position, validate_forecast,
-                   validate_health, validate_sites, validate_urban, write_json)
+                   validate_health, validate_sites, validate_urban)
 
 ROOT = Path(__file__).resolve().parent
 CATEGORIES = (("scaledFecalRisk", "faecal"), ("scaledPathogenRisk", "pathogen"),
@@ -367,12 +368,15 @@ def main(argv=None):
         data, sources = load_cache(args.data_dir)
         output = build_plan(*data, load_config(args.config), sources=sources)
         output["generated_at"] = utc_now()
-        write_json(args.output, output)
     except (OSError, ValueError, KeyError, TypeError) as exc:
         print(f"Cannot build plan: {exc}", file=sys.stderr)
         return 2
     print_summary(output)
-    print(f"\nSaved {args.output}")
+    try:
+        fhir_export.write_export(output, args.output, args.output.parent / "fhir-bundle.json")
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        print(f"Cannot export FHIR: {exc}", file=sys.stderr)
+        return 2
     return 0
 
 
