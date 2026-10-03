@@ -33,6 +33,7 @@
     .visit-card{transition:background-color .2s,box-shadow .2s}.visit-card.hl{background:#f1f6ef;box-shadow:inset 4px 0 0 var(--green)}
     .budget-range{width:100%;max-width:160px;margin:10px 0 0;accent-color:var(--green);height:22px}
     @media(max-width:760px){.map-panel{position:static}}
+    .setting-line{margin:8px 0 0;font-size:13px;color:var(--muted);line-height:1.5}.setting-block{margin-top:12px}.setting-block ul{margin:8px 0;padding-left:18px;font-size:14px;line-height:1.55}.setting-note{font-size:13px;color:var(--muted)}
     .protection{border-left:4px solid var(--amber)}.protection-body{padding:0 22px 18px;font-size:15px;line-height:1.55}.protection-body p{margin:0 0 12px}.protection-body .cover-notices{display:inline-block;margin:0 0 14px;padding:8px 12px;border:1px solid #c2a064;border-radius:6px;background:#fff;color:var(--amber);font-size:14px;font-weight:600}.protection-foot{color:var(--muted);font-size:14px}
     .stale-chip{display:inline-block;margin:6px 0;padding:4px 8px;border-radius:6px;background:#fbf3e4;color:#7a5114;border:1px solid #e6d3a8;font-size:13px;font-weight:600}.visit-card .stale-chip{margin-left:42px}.review-history{margin:4px 0 8px 42px;font-size:13px;color:var(--muted)}.notice-row .review-history,.notice-row .stale-chip{margin-left:0}.review-history ul{margin:6px 0 0;padding-left:18px}
     .review{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0 10px 42px}.rv{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid #cfd8cf;border-radius:999px;background:#fff;font-size:14px;font-weight:600;color:var(--muted)}.rv svg{width:14px;height:14px}.rv.approve[aria-pressed=true]{background:var(--green);border-color:var(--green);color:#fff}.rv.hold[aria-pressed=true]{background:#7a5114;border-color:#7a5114;color:#fff}.rv.approve:hover{border-color:var(--green);color:var(--green)}.rv.hold:hover{border-color:#b88a3e;color:var(--amber)}.rv[aria-pressed=true]:hover{color:#fff;filter:brightness(1.08)}
@@ -418,6 +419,27 @@
     document.body.appendChild(link);link.click();link.remove();URL.revokeObjectURL(url);
     $('fhir-status').textContent=`Downloaded ${selected.length} draft ServiceRequest${selected.length===1?'':'s'} for ${city.name}, ${mode}, budget ${budget}. Nothing was sent.`;
   }
+  function groupedMetres(value){
+    const rounded=Math.round(value), text=String(Math.abs(rounded)).replace(/\B(?=(\d{3})+(?!\d))/g,',');
+    return `${rounded<0?'-':''}${text} m`;
+  }
+  function settingRows(site){
+    const setting=site?.urban_setting||{};
+    const hospital=numeric(setting.distanceToHospitals)?setting.distanceToHospitals:null;
+    const impervious=numeric(setting.imperviousPct100m)?setting.imperviousPct100m:null;
+    const veg=numeric(setting.vegCoverFrac100m)?setting.vegCoverFrac100m:null;
+    const density=numeric(setting.humanDensityProxy100m)?setting.humanDensityProxy100m:null;
+    const raw=value=>value===null?'Missing':String(value);
+    return {
+      compact:`Nearest hospital ${hospital===null?'Missing':groupedMetres(hospital)} · impervious surface within 100 m ${impervious===null?'Missing':raw(impervious)+' %'} · vegCoverFrac100m ${raw(veg)} · humanDensityProxy100m ${density===null?'Missing':raw(density)+' — a relative proxy, not a head count'}`,
+      rows:[
+        `Nearest hospital: ${hospital===null?'Missing':groupedMetres(hospital)} (distanceToHospitals)`,
+        `Impervious surface within 100 m: ${impervious===null?'Missing':raw(impervious)+' %'} (imperviousPct100m)`,
+        `vegCoverFrac100m: ${raw(veg)}`,
+        `humanDensityProxy100m: ${density===null?'Missing':raw(density)+' — a relative proxy, not a head count'}`
+      ]
+    };
+  }
   function renderNotices(plan){
     $('notice-count').textContent=String(plan.notices.length);
     if(!plan.notices.length){
@@ -428,7 +450,8 @@
     const noticeRows=plan.notices.map(notice=>{
       const site=plan.sites.find(s=>s.code===notice.code);
       const v=reviewOf('notice',notice.code);
-      return `<div class="notice-row rv-${v||'none'}" data-code="${escapeHTML(notice.code)}"><div class="notice-head"><code>${escapeHTML(notice.code)}</code><span class="notice-name">${escapeHTML(site?.name||notice.code)}<span class="notice-state">${v==='approve'?'Approved to issue · not sent':v==='hold'?'On hold':'Draft — needs review'}</span></span>${reviewButtons('notice',notice.code,'notice for '+notice.code)}</div>${reviewNote('notice',notice.code)}<details class="notice-more" data-keep="notice-${escapeHTML(notice.code)}"><summary>Read the draft notice</summary><p class="notice-tag" style="margin-top:10px">${escapeHTML(notice.label)}</p><p class="notice-text">${escapeHTML(notice.text)}</p><p class="notice-basis">${escapeHTML(notice.basis)}</p><p class="notice-basis">${escapeHTML(notice.review)}</p></details></div>`;
+      const setting=settingRows(site);
+      return `<div class="notice-row rv-${v||'none'}" data-code="${escapeHTML(notice.code)}"><div class="notice-head"><code>${escapeHTML(notice.code)}</code><span class="notice-name">${escapeHTML(site?.name||notice.code)}<span class="notice-state">${v==='approve'?'Approved to issue · not sent':v==='hold'?'On hold':'Draft — needs review'}</span></span>${reviewButtons('notice',notice.code,'notice for '+notice.code)}</div><p class="setting-line">${escapeHTML(setting.compact)}</p>${reviewNote('notice',notice.code)}<details class="notice-more" data-keep="notice-${escapeHTML(notice.code)}"><summary>Read the draft notice</summary><p class="notice-tag" style="margin-top:10px">${escapeHTML(notice.label)}</p><p class="notice-text">${escapeHTML(notice.text)}</p><p class="notice-basis">${escapeHTML(notice.basis)}</p><p class="notice-basis">${escapeHTML(notice.review)}</p><div class="setting-block"><p><strong>Setting around this stream</strong> (stored values from the Resilience Map urban parameters)</p><ul>${setting.rows.map(line=>`<li>${escapeHTML(line)}</li>`).join('')}</ul><p class="setting-note">These values describe the surroundings. They don't change the visit order or the notice.</p></div></details></div>`;
     }).join('');
     $('notices').innerHTML='<p class="notice-description">Draft — requires coordinator review. You decide whether to issue each notice and when to lift it. Approving here only records your decision; nothing is sent.</p>'+noticeRows;
   }

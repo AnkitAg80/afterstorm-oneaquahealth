@@ -15,6 +15,8 @@ ROOT = Path(__file__).resolve().parent
 CATEGORIES = (("scaledFecalRisk", "faecal"), ("scaledPathogenRisk", "pathogen"),
               ("scaledArgRisk", "antibiotic resistance"))
 WINDOW_LABEL = "Experimental window (heuristic, not validated)"
+URBAN_SETTING_FIELDS = ("distanceToHospitals", "humanDensityProxy100m",
+                        "imperviousPct100m", "vegCoverFrac100m")
 WINDOW_REASON = ("Daily totals do not identify when rain stops. The window uses local calendar "
                  "dates after the last qualifying wet day in the selected forecast or archive. It is adjustable and unvalidated; "
                  "the directive's roughly 72 hours describes short-term pollution duration, "
@@ -209,6 +211,13 @@ def source_ref(name, sources):
             "fetched_at": metadata.get("fetched_at"), "sha256": metadata.get("sha256")}
 
 
+def urban_setting(record):
+    """Copy stored surroundings. These values are not used for rank, eligibility, or notices."""
+    record = record or {}
+    return {field: record.get(field) if valid_number(record.get(field)) else None
+            for field in URBAN_SETTING_FIELDS}
+
+
 def city_plan(sites, labs, parameters, weather_plan, config, duplicates, sources, mode):
     storm = weather_plan["storm"]
     rows = []
@@ -216,6 +225,7 @@ def city_plan(sites, labs, parameters, weather_plan, config, duplicates, sources
         code = site["code"]
         health = labs.get(code)
         urban = parameters.get(code, {})
+        setting = urban_setting(urban)
         raw_distance = urban.get("distanceToSewageStations")
         distance = raw_distance if valid_number(raw_distance) and code not in duplicates["urban"] else None
         distance_reason = (f"sewage works {distance:g} m" if distance is not None else
@@ -239,12 +249,13 @@ def city_plan(sites, labs, parameters, weather_plan, config, duplicates, sources
                "map_note": "" if valid_position(site) else "No coordinates; no map pin. Visits remain possible.",
                "source_health": dict(health) if health is not None else None,
                "sample_date": health_day, "source_sewage_distance_m": raw_distance,
-               "sewage_distance_m": distance, "dominant_value": dominant,
+               "sewage_distance_m": distance, "urban_setting": setting, "dominant_value": dominant,
                "categories": [], "action": "none", "rank": None,
                "allocation": "not eligible", "window": None, "draft_notice": None,
                "provenance": {"roster": source_ref("sites.json", sources),
                               "health": source_ref("health-risks.json", sources),
                               "urban": source_ref("urban-parameters.json", sources),
+                              "urban_setting": source_ref("urban-parameters.json", sources),
                               "rain": source_ref(f"weather/{code}.json" if mode == "replay" else
                                                  f"forecasts/{site['city']['id']}.json", sources)}}
         if invalid:

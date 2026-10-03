@@ -434,6 +434,31 @@ def test_fhir_slice_baseline_window_and_sandbox_reference_policy():
     assert any("no reference field" in name for name in reference_failures)
 
 
+def test_urban_setting_is_carried_but_never_reorders():
+    data, metadata = plan.load_cache(ROOT / "data" / "raw")
+    output = plan.build_plan(*data, CONFIG, sources=metadata)
+    setting = row(output["cities"]["CO"]["modes"]["replay"], "C5")["urban_setting"]
+    assert setting["distanceToHospitals"] == 854.59
+    assert setting["imperviousPct100m"] == 9.05
+    assert setting["vegCoverFrac100m"] == 47.77
+    assert setting["humanDensityProxy100m"] == 0.1
+    rankings = {(city_id, mode): mode_plan["ranking"]
+                for city_id, city in output["cities"].items()
+                for mode, mode_plan in city["modes"].items()}
+    stripped = deepcopy(data)
+    for record in stripped[2]:
+        for field in plan.URBAN_SETTING_FIELDS:
+            record.pop(field, None)
+    again = plan.build_plan(*stripped, CONFIG, sources=metadata)
+    for city_id, city in again["cities"].items():
+        for mode, mode_plan in city["modes"].items():
+            assert mode_plan["ranking"] == rankings[(city_id, mode)]
+    sites, health, urban, weather, forecasts = fixture(codes=("T1", "T9"))
+    urban = [record for record in urban if record["researchSiteCode"] != "T9"]
+    missing = row(plan.build_plan(sites, health, urban, weather, forecasts, CONFIG)["cities"]["TO"]["modes"]["live"], "T9")
+    assert missing["urban_setting"] == {field: None for field in plan.URBAN_SETTING_FIELDS}
+
+
 def test_post_gate_and_location_parser_do_not_call_the_sandbox():
     fhir_export.require_approved_post("CO", "replay", 5)
     for bad in (("OS", "live", 5), ("CO", "live", 5), ("CO", "replay", 1), ("CO", "replay", None), ("BE", "replay", 5)):
