@@ -89,7 +89,7 @@ Posted at 2026-10-03T20:05:07Z. Each response was `201 Created`. On 2026-10-04 a
 
 The posted copy also points at sandbox Location/892 for C5, because the search returned exactly one Location with that site identifier. The files kept in this repository do not store `subject.reference`. The identifier is what lets a receiver match the official site code. Whether a Location reference resolves depends on the server. Sandbox coordinates are not used for the plan.
 
-These ids are sandbox assignments. They are not certification. The HL7 validator jar was not run. Sandbox `$validate` was not called. The 22 checks that did run are listed in `readmeFHIR.md`: resource type, draft status, proposal intent, identifier system and site code, no reference in the saved file, category codes, dates, reason text, precautionary note, no Communication resource, no Good/Moderate/Poor wording, bundle shape, entry order, and the demonstration sentence limited to this Coimbra replay.
+These ids are sandbox assignments. They are not certification. The HL7 validator jar was not run. Sandbox `$validate` was not called. The 22 checks that did run are listed in `docs/changes/readmeFHIR.md`: resource type, draft status, proposal intent, identifier system and site code, no reference in the saved file, category codes, dates, reason text, precautionary note, no Communication resource, no Good/Moderate/Poor wording, bundle shape, entry order, and the demonstration sentence limited to this Coimbra replay.
 
 ## Limitations
 
@@ -114,6 +114,16 @@ These ids are sandbox assignments. They are not certification. The HL7 validator
 | `_manifest.json` | Written by `fetch.py` | URL, `fetched_at`, byte length, SHA-256 |
 
 `python plan.py` reads that cache and does not call the network. It writes `web/data/plan.json` and `web/data/fhir-bundle.json`.
+
+## Licences and data
+
+The code in this repository is under the MIT licence. See `LICENSE`. The copyright holder is AfterStorm contributors, 2026.
+
+The Geist fonts in `web/vendor/fonts/` are under the SIL Open Font License, Version 1.1. The licence text is `web/vendor/fonts/OFL.txt`.
+
+Leaflet in `web/vendor/` is under the BSD 2-Clause licence. The licence text is `web/vendor/LICENSE.txt`.
+
+The cached rows come from the OneAquaHealth public APIs in the table above. Forecast rows come from [Open-Meteo](https://open-meteo.com/) and are used under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Attribute them as weather data by Open-Meteo.com. Map tiles are © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors.
 
 ## Run
 

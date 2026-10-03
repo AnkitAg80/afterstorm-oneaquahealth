@@ -9,7 +9,7 @@ The export now puts one request type in `ServiceRequest.code` and one category i
 - `fhir_export.py`: `REQUEST_SYSTEM`, `request_code()`, `order_details()`, `build_service_request()`, and structural checks 7–9. `proposal_url()` is unchanged.
 - `test_plan.py`: `test_c5_replay_tie_and_fhir_requests` expects 24 structural checks and the C5 shape (post-storm reassessment; orderDetail faecal, then pathogen). `test_fhir_slice_baseline_window_and_sandbox_reference_policy` expects the baseline request type and three orderDetails.
 - `web/index.html`: `start()` defaults, `renderDecision()`, `renderWeather()`, `evidenceSig()`, `reviewOf()`, `setReview()`, `reviewTally()`, `filedLine()`, `filedSummary()`, the mode button, and the settings paragraph.
-- `readmeFHIR.md`: section "Resource shape v1 (filed) vs v2 (current)".
+- `docs/changes/readmeFHIR.md`: section "Resource shape v1 (filed) vs v2 (current)".
 - `plan.py` reason strings did not say "never". They already say "No lab result".
 
 ## HOW

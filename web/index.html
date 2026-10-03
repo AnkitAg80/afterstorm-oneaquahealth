@@ -871,7 +871,7 @@
       $('decision').addEventListener('click',event=>{const step=event.target.closest('[data-jump]');if(step)jumpTo(step.dataset.jump);});
       document.addEventListener('click',event=>{const button=event.target.closest('[data-locate]');if(!button)return;const marker=markers.get(button.dataset.locate);if(!marker)return;leafletMap.panTo(marker.getLatLng());marker.openPopup();$('map').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'center'});});
       render();$('loading').hidden=true;
-    }catch(error){$('app').hidden=true;$('loading').hidden=true;$('fatal').hidden=false;$('fatal').innerHTML=`<strong>Sampling plan unavailable</strong><p>${escapeHTML(error.message)}</p><p>Serve the web folder with the local Python web server, then reload this page. See readmeUI.md for the command.</p>`;}
+    }catch(error){$('app').hidden=true;$('loading').hidden=true;$('fatal').hidden=false;$('fatal').innerHTML=`<strong>Sampling plan unavailable</strong><p>${escapeHTML(error.message)}</p><p>Serve the web folder with the local Python web server, then reload this page. See docs/changes/readmeUI.md for the command.</p>`;}
   }
   document.addEventListener('DOMContentLoaded',start,{once:true});
   </script>
