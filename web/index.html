@@ -33,7 +33,7 @@
     .visit-card{transition:background-color .2s,box-shadow .2s}.visit-card.hl{background:#f1f6ef;box-shadow:inset 4px 0 0 var(--green)}
     .budget-range{width:100%;max-width:160px;margin:10px 0 0;accent-color:var(--green);height:22px}
     @media(max-width:760px){.map-panel{position:static}}
-    #print-area{display:none}body.print-card{background:#fff}body.print-card>*:not(#print-area){display:none!important}body.print-card #print-area{display:block!important}.task-sheet{break-after:page;padding:24px;color:#111;font:16px/1.5 var(--sans)}.task-card{margin:8px 0 4px 42px}.task-card summary{font-size:14px;font-weight:600;color:var(--green)}.task-body{padding:8px 0 2px;font-size:14px;line-height:1.5}.task-body h3{font-size:16px;margin-bottom:6px}.task-safety{font-weight:700}.task-body fieldset{border:1px solid var(--line);border-radius:6px;margin:0 0 8px;padding:8px 10px}.task-body legend{font-size:14px;padding:0 4px}.task-choice{margin-right:12px;font-weight:500}.task-body label.field{display:block;margin:8px 0;font-weight:600}.task-body input[type=text],.confirm-sample input[type=date],.confirm-strip input[type=date]{display:block;width:100%;max-width:420px;margin-top:4px;border:1px solid #cfd8cf;border-radius:6px;padding:6px 8px;font-weight:400}.confirm-strip{display:flex;flex-wrap:wrap;align-items:flex-end;gap:8px 16px;margin:8px 0 0}.confirm-strip .field{margin:0;font-size:14px}.confirm-strip .stale-chip,.confirm-status{margin:0 0 6px}.task-body .print-one{margin-top:8px}.task-links{margin:8px 0}
+    #print-area{display:none}body.print-card{background:#fff}body.print-card>*:not(#print-area){display:none!important}body.print-card #print-area{display:block!important}.task-sheet{break-after:page;padding:24px;color:#111;font:16px/1.5 var(--sans)}.task-card{margin:8px 0 4px 42px}.task-card summary{font-size:14px;font-weight:600;color:var(--green)}.task-body{padding:8px 0 2px;font-size:14px;line-height:1.5}.task-body h3{font-size:16px;margin-bottom:6px}.task-safety{font-weight:700}.task-body fieldset{border:1px solid var(--line);border-radius:6px;margin:0 0 8px;padding:8px 10px}.task-body legend{font-size:14px;padding:0 4px}.task-choice{margin-right:12px;font-weight:500}.task-body label.field{display:block;margin:8px 0;font-weight:600}.task-body input[type=text],.confirm-sample input[type=date],.confirm-strip input[type=date]{display:block;width:100%;max-width:420px;margin-top:4px;border:1px solid #cfd8cf;border-radius:6px;padding:6px 8px;font-weight:400}.confirm-strip{display:flex;flex-wrap:wrap;align-items:flex-end;gap:8px 16px;margin:8px 0 0}.confirm-strip .field{margin:0;font-size:14px}.confirm-strip .stale-chip,.confirm-status{margin:0 0 6px}.task-body .print-one{margin-top:8px}.task-links{margin:8px 0}.lang-switch{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.lang-switch button{border:1px solid #cfd8cf;background:#fff;border-radius:6px;padding:4px 8px;font-size:13px;font-weight:600}.lang-switch button[aria-pressed=true]{background:var(--green);border-color:var(--green);color:#fff}.translation-draft{font-size:13px;color:var(--muted)}
     .setting-line{margin:8px 0 0;font-size:13px;color:var(--muted);line-height:1.5}.setting-block{margin-top:12px}.setting-block ul{margin:8px 0;padding-left:18px;font-size:14px;line-height:1.55}.setting-note{font-size:13px;color:var(--muted)}
     .protection{border-left:4px solid var(--amber)}.protection-body{padding:0 22px 18px;font-size:15px;line-height:1.55}.protection-body p{margin:0 0 12px}.protection-body .cover-notices{display:inline-block;margin:0 0 14px;padding:8px 12px;border:1px solid #c2a064;border-radius:6px;background:#fff;color:var(--amber);font-size:14px;font-weight:600}.protection-foot{color:var(--muted);font-size:14px}
     .stale-chip{display:inline-block;margin:6px 0;padding:4px 8px;border-radius:6px;background:#fbf3e4;color:#7a5114;border:1px solid #e6d3a8;font-size:13px;font-weight:600}.visit-card .stale-chip{margin-left:42px}.review-history{margin:4px 0 8px 42px;font-size:13px;color:var(--muted)}.notice-row .review-history,.notice-row .stale-chip{margin-left:0}.review-history ul{margin:6px 0 0;padding-left:18px}
@@ -595,11 +595,117 @@
     card.classList.remove('flash');void card.offsetWidth;card.classList.add('flash');
   }
   const CITIZEN_KEY='afterstorm-citizen-v1';
-  const CITIZEN_QUESTIONS=[['pipe','A pipe or outfall is discharging into the stream'],['smell','Sewage smell'],['faeces','Animal faeces on the bank or path'],['sheen','Foam, scum or oily sheen on the water'],['contact','People or pets in the water']];
-  const CITIZEN_CHOICES=[['yes','Yes'],['no','No'],['unsure','Unsure']];
+  const CARD_I18N = {
+    "en": {
+      "titleStorm": "After-storm look — citizen task card",
+      "titleFirst": "First look — citizen task card",
+      "safety": "Stay on the bank or path. Do not enter or touch the water. Do not collect water samples — the lab team does that. Wash your hands afterwards.",
+      "q1": "A pipe or outfall is discharging into the stream",
+      "q2": "Sewage smell",
+      "q3": "Animal faeces on the bank or path",
+      "q4": "Foam, scum or oily sheen on the water",
+      "q5": "People or pets in the water",
+      "yes": "Yes",
+      "no": "No",
+      "unsure": "Unsure",
+      "observed": "Observed on (date and time)",
+      "photo": "Photo reference (e.g., your OneAquaHealth app record)"
+    },
+    "pt": {
+      "titleStorm": "Observação pós-tempestade — ficha de tarefa cidadã",
+      "titleFirst": "Primeira observação — ficha de tarefa cidadã",
+      "safety": "Fique na margem ou no caminho. Não entre na água nem lhe toque. Não recolha amostras de água — essa tarefa é da equipa do laboratório. Lave as mãos no fim.",
+      "q1": "Há um cano ou descarga a despejar no ribeiro",
+      "q2": "Cheiro a esgoto",
+      "q3": "Fezes de animais na margem ou no caminho",
+      "q4": "Espuma, escuma ou película oleosa na água",
+      "q5": "Pessoas ou animais de estimação na água",
+      "yes": "Sim",
+      "no": "Não",
+      "unsure": "Não tenho a certeza",
+      "observed": "Observado em (data e hora)",
+      "photo": "Referência da fotografia (p. ex., o seu registo na app OneAquaHealth)"
+    },
+    "fr": {
+      "titleStorm": "Observation après l'orage — fiche de mission citoyenne",
+      "titleFirst": "Premier regard — fiche de mission citoyenne",
+      "safety": "Restez sur la berge ou le chemin. N'entrez pas dans l'eau et ne la touchez pas. Ne prélevez pas d'échantillons d'eau — l'équipe du laboratoire s'en charge. Lavez-vous les mains ensuite.",
+      "q1": "Un tuyau ou une sortie d'eau se déverse dans le cours d'eau",
+      "q2": "Odeur d'égout",
+      "q3": "Excréments d'animaux sur la berge ou le chemin",
+      "q4": "Mousse, écume ou film huileux sur l'eau",
+      "q5": "Des personnes ou des animaux de compagnie dans l'eau",
+      "yes": "Oui",
+      "no": "Non",
+      "unsure": "Je ne sais pas",
+      "observed": "Observé le (date et heure)",
+      "photo": "Référence de la photo (p. ex. votre relevé dans l'appli OneAquaHealth)"
+    },
+    "nl": {
+      "titleStorm": "Kijk na de storm — burgertaakkaart",
+      "titleFirst": "Eerste kijk — burgertaakkaart",
+      "safety": "Blijf op de oever of het pad. Ga niet in het water en raak het niet aan. Neem geen waterstalen — dat doet het labteam. Was daarna je handen.",
+      "q1": "Een buis of uitlaat loost in de beek",
+      "q2": "Rioolgeur",
+      "q3": "Dierenuitwerpselen op de oever of het pad",
+      "q4": "Schuim of een olieachtige laag op het water",
+      "q5": "Mensen of huisdieren in het water",
+      "yes": "Ja",
+      "no": "Nee",
+      "unsure": "Weet niet",
+      "observed": "Waargenomen op (datum en tijd)",
+      "photo": "Fotoreferentie (bv. je registratie in de OneAquaHealth-app)"
+    },
+    "it": {
+      "titleStorm": "Osservazione dopo il temporale — scheda attività per cittadini",
+      "titleFirst": "Primo sguardo — scheda attività per cittadini",
+      "safety": "Resta sulla sponda o sul sentiero. Non entrare in acqua e non toccarla. Non prelevare campioni d'acqua: se ne occupa il laboratorio. Lavati le mani al termine.",
+      "q1": "Un tubo o uno scarico sta riversando nel corso d'acqua",
+      "q2": "Odore di fogna",
+      "q3": "Feci di animali sulla sponda o sul sentiero",
+      "q4": "Schiuma o pellicola oleosa sull'acqua",
+      "q5": "Persone o animali domestici in acqua",
+      "yes": "Sì",
+      "no": "No",
+      "unsure": "Non so",
+      "observed": "Osservato il (data e ora)",
+      "photo": "Riferimento foto (ad es. la tua registrazione nell'app OneAquaHealth)"
+    },
+    "nb": {
+      "titleStorm": "Etter uværet — oppgavekort for innbyggere",
+      "titleFirst": "Første titt — oppgavekort for innbyggere",
+      "safety": "Hold deg på bredden eller stien. Ikke gå uti eller ta på vannet. Ikke ta vannprøver – det gjør laboratorieteamet. Vask hendene etterpå.",
+      "q1": "Et rør eller utløp slipper ut i bekken",
+      "q2": "Kloakklukt",
+      "q3": "Dyremøkk på bredden eller stien",
+      "q4": "Skum eller oljeaktig hinne på vannet",
+      "q5": "Mennesker eller kjæledyr i vannet",
+      "yes": "Ja",
+      "no": "Nei",
+      "unsure": "Usikker",
+      "observed": "Observert (dato og klokkeslett)",
+      "photo": "Bildereferanse (f.eks. registreringen din i OneAquaHealth-appen)"
+    }
+  };
+  const CITY_LANG = {CO:'pt', TO:'fr', GH:'nl', BE:'it', OS:'nb'};
+  const cardLangChoice = {};
+  const CITIZEN_QUESTIONS = ['pipe', 'smell', 'faeces', 'sheen', 'contact'];
   let citizenAnswers={};try{citizenAnswers=JSON.parse(localStorage.getItem(CITIZEN_KEY))||{};}catch{citizenAnswers={};}
   function citizenStoreKey(code){return `${cityId}|${mode}|${code}|${evidenceSig('visit',code)}`;}
-  function citizenTitle(site){return site.action==='first baseline assessment'?'First look — citizen task card':'After-storm look — citizen task card';}
+  function cardPack(){
+    const lang=cardLangChoice[cityId]||CITY_LANG[cityId]||'en';
+    return {lang, text:CARD_I18N[lang]||CARD_I18N.en};
+  }
+  function citizenTitle(site, text){
+    text=text||cardPack().text;
+    return site.action==='first baseline assessment'?text.titleFirst:text.titleStorm;
+  }
+  function choiceLabel(text, value){
+    if(value==='yes') return text.yes;
+    if(value==='no') return text.no;
+    if(value==='unsure') return text.unsure;
+    return 'not answered';
+  }
   function citizenWhen(site){return site.window?`${dateRange(site.window)} (experimental window)`:'any day';}
   function citizenWhere(site){const pos=site.position;return pos&&numeric(pos.latitude)&&numeric(pos.longitude)?`${Number(pos.latitude).toFixed(5)}, ${Number(pos.longitude).toFixed(5)}`:'No coordinates';}
   function readCitizenCard(card){
@@ -618,12 +724,16 @@
   }
   function citizenCard(site){
     const saved=citizenAnswers[citizenStoreKey(site.code)]||{};
-    const fields=CITIZEN_QUESTIONS.map(([id,label])=>`<fieldset><legend>${escapeHTML(label)}</legend>${CITIZEN_CHOICES.map(([value,text])=>`<label class="task-choice"><input type="radio" name="task-${escapeHTML(site.code)}-${id}" data-q="${id}" value="${value}"${saved[id]===value?' checked':''}> ${text}</label>`).join('')}</fieldset>`).join('');
-    return `<details class="task-card" data-code="${escapeHTML(site.code)}"><summary>Citizen task card</summary><div class="task-body"><h3>${escapeHTML(citizenTitle(site))}</h3><p><strong>${escapeHTML(site.code)}</strong> ${escapeHTML(site.name)}</p><p>${escapeHTML(citizenWhere(site))}</p><p>${escapeHTML(citizenWhen(site))}</p><p class="task-safety">Stay on the bank or path. Do not enter or touch the water. Do not collect water samples — the lab team does that. Wash your hands afterwards.</p>${fields}<label class="field">Observed on (date and time)<input type="text" data-q-text="observed" value="${escapeHTML(saved.observed||'')}"></label><label class="field">Photo reference (e.g., your OneAquaHealth app record)<input type="text" data-q-text="photo" value="${escapeHTML(saved.photo||'')}"></label><p>Saved in this browser only. Nothing is sent.</p><p class="task-links"><a href="https://apps.oneaquahealth.eu/" target="_blank" rel="noopener">Open the OneAquaHealth Citizen Science App</a> · <a href="https://www.oneaquahealth.eu/citizen-science-project/" target="_blank" rel="noopener">How to install it</a></p><p>These observations give the coordinator context. They don't change the visit order, the tests, or any notice. Record the full stream assessment in the official OneAquaHealth Citizen Science App (a login is required); this card only adds the after-storm checks.</p><button type="button" class="print-one" data-print-card="${escapeHTML(site.code)}">Print this card</button></div></details>`;
+    const pack=cardPack(), text=pack.text, english=pack.lang==='en';
+    const fields=CITIZEN_QUESTIONS.map((id,index)=>`<fieldset><legend>${escapeHTML(text['q'+(index+1)])}</legend>${[['yes',text.yes],['no',text.no],['unsure',text.unsure]].map(([value,label])=>`<label class="task-choice"><input type="radio" name="task-${escapeHTML(site.code)}-${id}" data-q="${id}" value="${value}"${saved[id]===value?' checked':''}> ${escapeHTML(label)}</label>`).join('')}</fieldset>`).join('');
+    const draft=english?'':`<p class="translation-draft" lang="en">Translation draft — have a native speaker check it before field use.</p>`;
+    return `<details class="task-card" lang="${pack.lang}" data-code="${escapeHTML(site.code)}"><summary lang="en">Citizen task card</summary><div class="lang-switch" role="group" aria-label="Card language" lang="en"><button type="button" data-card-lang="city" aria-pressed="${!english}">City language</button><button type="button" data-card-lang="en" aria-pressed="${english}">English</button></div><div class="task-body"><h3>${escapeHTML(citizenTitle(site,text))}</h3><p><strong>${escapeHTML(site.code)}</strong> ${escapeHTML(site.name)}</p><p>${escapeHTML(citizenWhere(site))}</p><p>${escapeHTML(citizenWhen(site))}</p><p class="task-safety">${escapeHTML(text.safety)}</p>${fields}<label class="field">${escapeHTML(text.observed)}<input type="text" data-q-text="observed" value="${escapeHTML(saved.observed||'')}"></label><label class="field">${escapeHTML(text.photo)}<input type="text" data-q-text="photo" value="${escapeHTML(saved.photo||'')}"></label>${draft}<p lang="en">Saved in this browser only. Nothing is sent.</p><p class="task-links" lang="en"><a href="https://apps.oneaquahealth.eu/" target="_blank" rel="noopener">Open the OneAquaHealth Citizen Science App</a> · <a href="https://www.oneaquahealth.eu/citizen-science-project/" target="_blank" rel="noopener">How to install it</a></p><p lang="en">These observations give the coordinator context. They don't change the visit order, the tests, or any notice. Record the full stream assessment in the official OneAquaHealth Citizen Science App (a login is required); this card only adds the after-storm checks.</p><button type="button" class="print-one" lang="en" data-print-card="${escapeHTML(site.code)}">Print this card</button></div></details>`;
   }
   function citizenPrintArticle(site,answers){
-    const questions=CITIZEN_QUESTIONS.map(([id,label])=>`<p><strong>${escapeHTML(label)}:</strong> ${escapeHTML(answers[id]||'not answered')}</p>`).join('');
-    return `<article class="task-sheet"><h2>${escapeHTML(citizenTitle(site))}</h2><p><strong>${escapeHTML(site.code)}</strong> ${escapeHTML(site.name)}</p><p>${escapeHTML(citizenWhere(site))}</p><p>${escapeHTML(citizenWhen(site))}</p><p><strong>Stay on the bank or path. Do not enter or touch the water. Do not collect water samples — the lab team does that. Wash your hands afterwards.</strong></p>${questions}<p>Observed on (date and time): ${escapeHTML(answers.observed||'')}</p><p>Photo reference (e.g., your OneAquaHealth app record): ${escapeHTML(answers.photo||'')}</p><p class="task-links"><a href="https://apps.oneaquahealth.eu/" target="_blank" rel="noopener">Open the OneAquaHealth Citizen Science App</a> · <a href="https://www.oneaquahealth.eu/citizen-science-project/" target="_blank" rel="noopener">How to install it</a></p><p>These observations give the coordinator context. They don't change the visit order, the tests, or any notice. Record the full stream assessment in the official OneAquaHealth Citizen Science App (a login is required); this card only adds the after-storm checks.</p><p>Saved in this browser only. Nothing is sent.</p></article>`;
+    const pack=cardPack(), text=pack.text;
+    const questions=CITIZEN_QUESTIONS.map((id,index)=>`<p><strong>${escapeHTML(text['q'+(index+1)])}:</strong> ${escapeHTML(choiceLabel(text, answers[id]))}</p>`).join('');
+    const draft=pack.lang==='en'?'':`<p lang="en">Translation draft — have a native speaker check it before field use.</p>`;
+    return `<article class="task-sheet" lang="${pack.lang}"><h2>${escapeHTML(citizenTitle(site,text))}</h2><p><strong>${escapeHTML(site.code)}</strong> ${escapeHTML(site.name)}</p><p>${escapeHTML(citizenWhere(site))}</p><p>${escapeHTML(citizenWhen(site))}</p><p><strong>${escapeHTML(text.safety)}</strong></p>${questions}<p>${escapeHTML(text.observed)}: ${escapeHTML(answers.observed||'')}</p><p>${escapeHTML(text.photo)}: ${escapeHTML(answers.photo||'')}</p>${draft}<p lang="en" class="task-links"><a href="https://apps.oneaquahealth.eu/" target="_blank" rel="noopener">Open the OneAquaHealth Citizen Science App</a> · <a href="https://www.oneaquahealth.eu/citizen-science-project/" target="_blank" rel="noopener">How to install it</a></p><p lang="en">These observations give the coordinator context. They don't change the visit order, the tests, or any notice. Record the full stream assessment in the official OneAquaHealth Citizen Science App (a login is required); this card only adds the after-storm checks.</p><p lang="en">Saved in this browser only. Nothing is sent.</p></article>`;
   }
   function printTaskCards(codes){
     const sites=new Map(view().plan.sites.map(site=>[site.code,site]));
@@ -744,6 +854,15 @@
       $('visits').addEventListener('focusin',e=>{const c=e.target.closest('.visit-card');if(c)highlight(c.dataset.code);});$('budget-plus').addEventListener('click',()=>applyBudget(budget+1));
       $('download-fhir').addEventListener('click',downloadFhir);
       $('print-all-cards').addEventListener('click',()=>printTaskCards(view().plan.ranking.slice(0,budget)));
+      document.addEventListener('click',event=>{
+        const button=event.target.closest('[data-card-lang]');
+        if(!button) return;
+        document.querySelectorAll('.task-card').forEach(saveCitizenCard);
+        const open=[...document.querySelectorAll('.task-card[open]')].map(card=>card.dataset.code);
+        cardLangChoice[cityId]=button.dataset.cardLang==='en'?'en':(CITY_LANG[cityId]||'en');
+        render();
+        open.forEach(code=>{const card=document.querySelector(`.task-card[data-code="${CSS.escape(code)}"]`);if(card) card.open=true;});
+      });
       document.addEventListener('click',event=>{const button=event.target.closest('[data-print-card]');if(!button)return;printTaskCards([button.dataset.printCard]);});
       document.addEventListener('change',event=>{const card=event.target.closest('.task-card');if(card&&event.target.matches('input'))saveCitizenCard(card);const confirm=event.target.closest('[data-confirm-date]');if(confirm)saveConfirmDate(confirm);});
       document.addEventListener('input',event=>{const card=event.target.closest('.task-card');if(card&&event.target.matches('[data-q-text]'))saveCitizenCard(card);});
