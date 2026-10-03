@@ -1,0 +1,2 @@
+# Preserve original response bytes and provenance hashes across operating systems.
+data/raw/** -text

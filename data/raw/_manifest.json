@@ -1,0 +1,926 @@
+{
+  "sources": {
+    "sites.json": {
+      "url": "https://api.enora-oah.eu/api/sites/all",
+      "fetched_at": "2026-10-03T14:28:52Z",
+      "status": "offline",
+      "sha256": "c0272962378fbe64befae344acb410386fbb71b94777d03c9ad4fe795cf0c632",
+      "bytes": 128541,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "health-risks.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/health-risks",
+      "fetched_at": "2026-10-03T14:28:53Z",
+      "status": "offline",
+      "sha256": "3aee00272cc6ff02a3a5bcdf6975372875ef4056d37f2ebb0253bc12edbf5aa8",
+      "bytes": 16576,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "urban-parameters.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/urban-parameters",
+      "fetched_at": "2026-10-03T14:28:54Z",
+      "status": "offline",
+      "sha256": "b83169cee0d6a4be9ff88136ec4de9cedb45da7d07eb46673019c47fee89cf54",
+      "bytes": 149435,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/BN3.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=BN3&start=2023-06-06T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:55Z",
+      "status": "offline",
+      "sha256": "c3f76c9a7ff9dcef630656da2377b20f8c4941eab56c9f592e3712a9e2c934ea",
+      "bytes": 288479,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/BN5.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=BN5&start=2023-07-03T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:55Z",
+      "status": "offline",
+      "sha256": "2e0a24bea5b5caab27db0571de705e91c9aa08051af592ed03256ac2e5441d91",
+      "bytes": 281980,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/BN8.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=BN8&start=2023-07-07T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:55Z",
+      "status": "offline",
+      "sha256": "11cb1ca85524822df2ced13ab4daf07d000562dc10a6def705c952836318c268",
+      "bytes": 281039,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/BN7.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=BN7&start=2023-06-28T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:55Z",
+      "status": "offline",
+      "sha256": "789057ddd4a1cffbc36762d60bbcf061eb82189dab405dfbee76a0b5ebb92f13",
+      "bytes": 283200,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/BN1.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=BN1&start=2023-06-28T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:55Z",
+      "status": "offline",
+      "sha256": "f034d0f9a65984a8b5869a4cbebf4bc6e7d72890d2895adf2fc0868d247a39b7",
+      "bytes": 283200,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/BN4.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=BN4&start=2023-07-03T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:55Z",
+      "status": "offline",
+      "sha256": "f87c989bd09c4cb77dd81879c542ecc210e820665d18961c1f543f0ecf7e3e63",
+      "bytes": 281980,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/BN6.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=BN6&start=2023-06-28T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:55Z",
+      "status": "offline",
+      "sha256": "8303fa39a8e4e69336885540b68ef512b7c86c0caa6312f86166d1ab610b6188",
+      "bytes": 283200,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/BN2.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=BN2&start=2023-06-28T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:55Z",
+      "status": "offline",
+      "sha256": "d89e709463de4065edf1c160d8f0a27162a95e7abbc2ba7f156c92637492b8a9",
+      "bytes": 283200,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/BN10.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=BN10&start=2023-06-07T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:56Z",
+      "status": "offline",
+      "sha256": "ca903d689d54450a645b0414c0f6dc6d87e8a61adc155d3965038f9d71805855",
+      "bytes": 289444,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/BN11.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=BN11&start=2023-06-06T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:56Z",
+      "status": "offline",
+      "sha256": "64d257267b427df698d4a2b04e149bdeebc8b040a9a8cbbcd15e2d835a21d7cc",
+      "bytes": 289686,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/BN9.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=BN9&start=2023-06-06T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:56Z",
+      "status": "offline",
+      "sha256": "70c0a0f4bc9b8584746b7052c5de0be228c265ad99b259c42892acd7f799d67c",
+      "bytes": 288463,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/BN13.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=BN13&start=2023-07-03T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:56Z",
+      "status": "offline",
+      "sha256": "57fdac3b519bb5592f03259c5352d857a94775fbbd96fabf81f0f048a855eed4",
+      "bytes": 283160,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/BN16.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=BN16&start=2023-06-07T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:56Z",
+      "status": "offline",
+      "sha256": "e70998e0204123b60168856c4683289a2bd70cb3d45b10a585b2073c55c3d02b",
+      "bytes": 289428,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/BN14.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=BN14&start=2024-08-05T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:56Z",
+      "status": "offline",
+      "sha256": "6c9dcd3fb6e2025b6e2777402c5d10066e5ea53860166b61c22ea9ac139624a8",
+      "bytes": 187381,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/BN12.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=BN12&start=2023-06-06T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:56Z",
+      "status": "offline",
+      "sha256": "7585cad40301cb0eae0043c9caa060d39102e09cb9c1b1c68db0df835ab67aa3",
+      "bytes": 289686,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/BN15.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=BN15&start=2023-06-07T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:56Z",
+      "status": "offline",
+      "sha256": "4d984a56b564c5cd32e24763b289605db62ed7bc87848caa44fce6331cb1a027",
+      "bytes": 289428,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/BN17.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=BN17&start=2023-07-03T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:56Z",
+      "status": "offline",
+      "sha256": "c3d699591b16e227cc255f88396ab8cad4d5dbe23e736d1be3b379df083a20e0",
+      "bytes": 283176,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/BN18.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=BN18&start=2023-06-06T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:57Z",
+      "status": "offline",
+      "sha256": "01ab8edcae51ed6220e4dc0e16e358f3f4c9f73193a4d407a529fe843e13f46e",
+      "bytes": 289686,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/BN20.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=BN20&start=2023-07-07T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:57Z",
+      "status": "offline",
+      "sha256": "96e8930b4a087cef12dde52b5d747254a4b5beed6d1d52e804596f33748df713",
+      "bytes": 282130,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/BN19.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=BN19&start=2023-07-07T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:57Z",
+      "status": "offline",
+      "sha256": "30f582f450c034bcb47351c4182203a6ede720d3481c2725a6ae92fe019480bf",
+      "bytes": 282215,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/C1.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=C1&start=2023-06-28T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:57Z",
+      "status": "offline",
+      "sha256": "2cf46075216f2a27cf5fe7105f1f3246fad0a13139ae7c002cdbd75f91ea1418",
+      "bytes": 283306,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/C4.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=C4&start=2023-06-27T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:57Z",
+      "status": "offline",
+      "sha256": "c3dd874f4f54ae6a6d31ede0cee20f30a79356cda1be6bbe26c87449c2fe79f7",
+      "bytes": 283545,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/C2.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=C2&start=2023-06-27T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:57Z",
+      "status": "offline",
+      "sha256": "dc6ac0723d9d7faecde62e6c4f98d6145491d69f92a724d9a4f1a4584b796b1a",
+      "bytes": 283545,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/C3.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=C3&start=2023-06-27T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:57Z",
+      "status": "offline",
+      "sha256": "232184185db6d8c1739d571bf7f42699bc38a127a6a469def7477abec763e05f",
+      "bytes": 283545,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/C6.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=C6&start=2023-06-29T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:57Z",
+      "status": "offline",
+      "sha256": "f0ee9ed81b711394ce4344b510b27ef4961ed3807acd21de163d3b8afcd3c035",
+      "bytes": 283067,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/C5.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=C5&start=2023-06-29T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:58Z",
+      "status": "offline",
+      "sha256": "db09434609dfad5593e7c3471e280c5ee7b42b1760b1e85707ffaef8ad5833d5",
+      "bytes": 283067,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/C8.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=C8&start=2023-06-28T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:58Z",
+      "status": "offline",
+      "sha256": "0ed3c31358a7880691950add564272513faa259f96ee4a21cefccef3950b98e0",
+      "bytes": 283306,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/C7.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=C7&start=2023-06-29T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:58Z",
+      "status": "offline",
+      "sha256": "d312b158974a11598c7982760fa004e2f14c3e03a1fc8e5f507e80c2e5e1cabd",
+      "bytes": 282205,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/C9.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=C9&start=2023-06-27T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:58Z",
+      "status": "offline",
+      "sha256": "978f9e0702222e1ff49c15eec444fbacd1866e6f0f2ee36454d4d76104722582",
+      "bytes": 283545,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/C11.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=C11&start=2023-06-27T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:58Z",
+      "status": "offline",
+      "sha256": "5ae8b4a2d16ef4f693b72085649026ed1ef62b08b74ddf2fec780e7e294f1d83",
+      "bytes": 284731,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/C12.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=C12&start=2023-06-28T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:58Z",
+      "status": "offline",
+      "sha256": "5e487e9959541e40f3a15cb780b31a23ccc8c462301a6fa7f067e68575733412",
+      "bytes": 284491,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/C10.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=C10&start=2023-06-27T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:58Z",
+      "status": "offline",
+      "sha256": "fa22dc03a5a98fb1f3d6ecb8d6e3b4e5c8af47cfde9bbf3e4929b25e2ec6d50f",
+      "bytes": 284731,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/C13.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=C13&start=2023-06-28T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:58Z",
+      "status": "offline",
+      "sha256": "a891db6be58b02c666e51dc19d4d8c2e635db878a2c3970dac058e835f515466",
+      "bytes": 283730,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/C14.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=C14&start=2023-06-28T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:58Z",
+      "status": "offline",
+      "sha256": "fce54dde3bc9bbd31063cc5ccc00092e9ee669ff3e96421b9ba0c13b0ea55094",
+      "bytes": 283895,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/C15.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=C15&start=2023-06-28T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:58Z",
+      "status": "offline",
+      "sha256": "ec998603177b72bff81248fe22a833dc88ff8290d4444665d139a7e6c30016b0",
+      "bytes": 283895,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/C16.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=C16&start=2023-06-27T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:59Z",
+      "status": "offline",
+      "sha256": "c802d9ca4979b209af213ba9d06fe95d64e1b8c71130be2a8439714e23cba109",
+      "bytes": 284731,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/C17.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=C17&start=2023-01-01T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:59Z",
+      "status": "offline",
+      "sha256": "070fa1f97826ef735076d24202032e0f4749c9a28a293281e5dd81b003e51ab9",
+      "bytes": 325983,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/C18.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=C18&start=2023-01-01T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:59Z",
+      "status": "offline",
+      "sha256": "b40c9d3fe6aae9d088e068bcd0195057e8e4977026a539d5c6286161cef029b1",
+      "bytes": 327181,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/C20.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=C20&start=2023-06-06T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:59Z",
+      "status": "offline",
+      "sha256": "c9a646985e7f90009c28409e7d4b86c55fcbc81eec04600a7cf8dfd2aad314f6",
+      "bytes": 289778,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/C19.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=C19&start=2023-06-06T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:59Z",
+      "status": "offline",
+      "sha256": "a0d064d87db8310a347e4a8b1373c56b5151da9ad5e9f93c120bc644fe86476b",
+      "bytes": 288906,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/G1.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=G1&start=2023-01-01T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:59Z",
+      "status": "offline",
+      "sha256": "2f05c62948a9f3c11a4ac0202009438b62140cd56a39e502234318f2c77af088",
+      "bytes": 325129,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/G3.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=G3&start=2023-05-24T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:59Z",
+      "status": "offline",
+      "sha256": "b02d5098692c31891cc210b1295c2e3198659112c1af07321b7c349cfcccdc35",
+      "bytes": 291053,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/G2.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=G2&start=2023-05-24T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:28:59Z",
+      "status": "offline",
+      "sha256": "19ee38628d27ca9bb0e267c78358bb94202db4352300f50ac9d9c2a5fd5782a7",
+      "bytes": 291056,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/G4.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=G4&start=2023-05-24T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:00Z",
+      "status": "offline",
+      "sha256": "3b1f49d2b646a2f7e46efff590c052a8d5660425f82b5a846025f47842d0ac15",
+      "bytes": 291053,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/G5.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=G5&start=2023-05-24T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:00Z",
+      "status": "offline",
+      "sha256": "9fe9b28a7dbfa5e9f295cd121034d8596dcc0f8ad75b1079a6c01ee9d2983a44",
+      "bytes": 291053,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/G6.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=G6&start=2023-05-24T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:00Z",
+      "status": "offline",
+      "sha256": "d5ac2f1dc181cf9945424547eca357c4f8277d8e214b4da5bc0f99a9d7b2808f",
+      "bytes": 291053,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/G7.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=G7&start=2023-05-24T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:00Z",
+      "status": "offline",
+      "sha256": "201d7a477c22cca9e3d30ff2aec2c1b4eb1eaa6a8329c0f9c053922a01f81edf",
+      "bytes": 291056,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/G8.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=G8&start=2023-05-24T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:00Z",
+      "status": "offline",
+      "sha256": "c80b3cc6e34fed332beb379c0addfb9c4c526b4a367c92dffd01c46296e3ff4b",
+      "bytes": 291053,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/G9.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=G9&start=2023-05-24T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:00Z",
+      "status": "offline",
+      "sha256": "bcc4d0bd29d27dc8500e2b2c55d270220164e8777853e4b7d4338514a12c433f",
+      "bytes": 291056,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/G10.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=G10&start=2023-05-24T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:00Z",
+      "status": "offline",
+      "sha256": "47e2176a86522a96e806fe968a1557e7e0989b0588079c97149571ee821df519",
+      "bytes": 292273,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/G11.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=G11&start=2023-05-24T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:00Z",
+      "status": "offline",
+      "sha256": "66b01ab9c9c508f280e9363d7963914a0a120ce369cec38f90aceab6534277ec",
+      "bytes": 292273,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/G12.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=G12&start=2023-05-24T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:00Z",
+      "status": "offline",
+      "sha256": "6dd1d0cc5f5f6742a9ae33a1e5b9290e1502e06ebb7f5e11ba2ba1bce3b4bfc9",
+      "bytes": 292273,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/G15.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=G15&start=2023-05-25T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:01Z",
+      "status": "offline",
+      "sha256": "294c0af4c8d6abdf5b2dbe1fdcc83d3f5048ec363de7e83c1c009a76e2bcd787",
+      "bytes": 292109,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/G13.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=G13&start=2023-05-25T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:01Z",
+      "status": "offline",
+      "sha256": "61e7a82ac6ae8621bcb485203a2e5c67c59f8ef8e24a0e505f40cf3b8bda8f77",
+      "bytes": 292109,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/G14.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=G14&start=2023-05-25T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:01Z",
+      "status": "offline",
+      "sha256": "ef50df4df5fa0f22466bf7732118671518f1511f950eeb4d78dda7104f2e775f",
+      "bytes": 292109,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/G16.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=G16&start=2023-05-25T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:01Z",
+      "status": "offline",
+      "sha256": "20f4dd37e0435ae42a4ad874a6fd64951bd2dc50c40e05c5b01d3d6c0026dfb8",
+      "bytes": 292109,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/G17.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=G17&start=2023-01-01T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:01Z",
+      "status": "offline",
+      "sha256": "60658ed2059fd7ddfd8fa896bbefd8ad99e4a3ad0551c45af0cefd3008ce99d1",
+      "bytes": 326492,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/G18.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=G18&start=2023-01-01T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:01Z",
+      "status": "offline",
+      "sha256": "bd95aca6aa4d7b249980c57b7beba0842a7b8b8b30474675e5489217a219bcec",
+      "bytes": 326492,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/G19.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=G19&start=2023-01-01T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:01Z",
+      "status": "offline",
+      "sha256": "48da2ac72a6145926d9cfea9a76fd61376f9b329fdc512214c89e744a7c19c8e",
+      "bytes": 326492,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/O1.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=O1&start=2023-09-06T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:01Z",
+      "status": "offline",
+      "sha256": "57202b5365710a31bd7a3a8056a53516d19adeb2e1a8d6c19299cf05cdc8c070",
+      "bytes": 265032,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/G20.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=G20&start=2023-01-01T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:01Z",
+      "status": "offline",
+      "sha256": "e29c1bcf5f729acc475acf57fa274614d8d123436a6d333b77117ddf53545fe5",
+      "bytes": 326492,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/G21.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=G21&start=2023-05-24T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:01Z",
+      "status": "offline",
+      "sha256": "a33459f069ba934af203c0adabdcd4df77808aae7920f1c4b6f9f08f61bd7724",
+      "bytes": 292273,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/G22.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=G22&start=2023-05-24T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:01Z",
+      "status": "offline",
+      "sha256": "82ad4fadcf3e1428169bd1dfe85cdfd6082b135d11087bc09f64f31766004cfd",
+      "bytes": 292273,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/O2.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=O2&start=2023-09-06T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:02Z",
+      "status": "offline",
+      "sha256": "484a9409900757e455bcffc21493d6f18549446c9a26e0cc0ee8daa4f5d04eb5",
+      "bytes": 265032,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/O3.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=O3&start=2023-09-06T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:02Z",
+      "status": "offline",
+      "sha256": "4d21a92dd7a375b4fa4e56afefa7d5c9bb8d91fd8c6719a5122e60e0e359b596",
+      "bytes": 265032,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/O4.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=O4&start=2023-09-06T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:02Z",
+      "status": "offline",
+      "sha256": "7747276baaa3928af7b1c44734a10597624edec860be4b02541c9c8b096f29ba",
+      "bytes": 265168,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/O5.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=O5&start=2023-09-06T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:02Z",
+      "status": "offline",
+      "sha256": "0ac2f064d4c846bef0f8cfa85426767474a54af985a6143fa345f83c1819257d",
+      "bytes": 265168,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/O6.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=O6&start=2023-09-06T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:02Z",
+      "status": "offline",
+      "sha256": "d8e60a939810004e3ac9ef81820492c914ae3e908fd3e3f5ffae79c01f5c9441",
+      "bytes": 265245,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/O7.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=O7&start=2023-09-06T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:02Z",
+      "status": "offline",
+      "sha256": "6a4305b1b3ed981dd7b80cc604859950112321c55271087863d5d8f264ae643f",
+      "bytes": 265264,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/O9.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=O9&start=2023-09-06T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:02Z",
+      "status": "offline",
+      "sha256": "eb179f0ec68b37b44e40b2218c664ae40809ba73afacceb93b6a61455364b32a",
+      "bytes": 265032,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/O8.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=O8&start=2023-09-06T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:02Z",
+      "status": "offline",
+      "sha256": "b72dd43a4db2729b07a3eb043f9e03997ad7ab9a2dde4167352a64a56a43850b",
+      "bytes": 265264,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/O10.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=O10&start=2023-09-06T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:03Z",
+      "status": "offline",
+      "sha256": "6de5d2832e35e55f366334346236b7d0604cf82e2ad6dbb6ebe7b3450ad7a4ef",
+      "bytes": 266147,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/O11.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=O11&start=2023-09-06T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:03Z",
+      "status": "offline",
+      "sha256": "383921503a9b016bde49265c5292e593349f062e9d63ac50bf12d7bd39a9020b",
+      "bytes": 266283,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/O13.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=O13&start=2023-09-06T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:03Z",
+      "status": "offline",
+      "sha256": "a09887216bedc1679245c75cc5db347d4e6c6068cb78378ff9227220a41c522b",
+      "bytes": 266147,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/O14.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=O14&start=2023-09-06T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:03Z",
+      "status": "offline",
+      "sha256": "70e36c78f8145bf9ef1e1b5c3d706eea9ea6742251c991103782afdc283e38dc",
+      "bytes": 266147,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/O12.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=O12&start=2023-09-06T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:03Z",
+      "status": "offline",
+      "sha256": "3a559efa5661f2067a52de9191f998768d8c3bbff9305a315c4996f347346626",
+      "bytes": 266283,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/O15.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=O15&start=2023-09-06T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:03Z",
+      "status": "offline",
+      "sha256": "882ed578d701dbccd312d6c9d1dcf81b51d17e0715eb97426a85723a5a41f7a7",
+      "bytes": 266283,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/O17.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=O17&start=2023-09-06T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:03Z",
+      "status": "offline",
+      "sha256": "11863a57b232e04cf05f8c0e229933ee5a15bd0ff003f02535b4fef300f62781",
+      "bytes": 266283,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/O18.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=O18&start=2023-09-06T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:04Z",
+      "status": "offline",
+      "sha256": "ff12ee64076cf3e67d932188be8d7d1b2c90a507d024be6fb7b39e7e505471e6",
+      "bytes": 266264,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/O16.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=O16&start=2023-09-06T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:04Z",
+      "status": "offline",
+      "sha256": "ac2252f215d0bfc0aad5e057c45c26d3c920f363a7cb7950eb106f132106ba41",
+      "bytes": 266283,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/O19.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=O19&start=2023-09-06T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:04Z",
+      "status": "offline",
+      "sha256": "34b04790984580a794277d02a910920b7360caba08a6ed3a282f4da46828c3cd",
+      "bytes": 266070,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/T1.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=T1&start=2023-05-05T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:04Z",
+      "status": "offline",
+      "sha256": "4833ca59c55dc253b277f58a1c467d8d2996f8c8e76da0569619094a8dd35ea8",
+      "bytes": 295003,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/O20.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=O20&start=2023-09-06T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:04Z",
+      "status": "offline",
+      "sha256": "637429741b22534045e88e0d9f20df736baebf05eef706a6f0cc2ea945351860",
+      "bytes": 266147,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/T2.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=T2&start=2023-05-05T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:04Z",
+      "status": "offline",
+      "sha256": "414ccc7dc410522cc7f7ce0b328f26c3744b636d534078a14be9019300671d3c",
+      "bytes": 295003,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/T3.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=T3&start=2023-05-05T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:04Z",
+      "status": "offline",
+      "sha256": "94eabb483ff8e804d54a9aed367425974d378cec42c9473ea1ff0e6a5de830e4",
+      "bytes": 295003,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/T4.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=T4&start=2023-05-05T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:04Z",
+      "status": "offline",
+      "sha256": "70a3f7941298c1e5a9c50ed84f5f31cf9aaa64966817f260d96bc707c3270e7f",
+      "bytes": 295003,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/T6.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=T6&start=2023-05-05T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:04Z",
+      "status": "offline",
+      "sha256": "b17ff95b8654003551355ab89f992804a38ba1c8a355061eb28b915f8fd40615",
+      "bytes": 295003,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/T5.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=T5&start=2023-05-05T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:04Z",
+      "status": "offline",
+      "sha256": "b3a36897003efabf7853ef267c451493443a5d1d76d50de954b6de446b94844c",
+      "bytes": 295003,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/T7.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=T7&start=2023-05-05T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:05Z",
+      "status": "offline",
+      "sha256": "6b2a15b0965034ce1bdd436ef312531b2b8bc75221517c0508035eda7205d812",
+      "bytes": 295003,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/T8.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=T8&start=2023-05-05T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:05Z",
+      "status": "offline",
+      "sha256": "71b59a43f54180f10fed61b6b42bbba7776a407b89b07bf22f2241b67aa084b6",
+      "bytes": 295003,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/T9.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=T9&start=2023-05-06T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:05Z",
+      "status": "offline",
+      "sha256": "dbfed906522bef44acdfbaf23c1a2f6071c01a086f19d638fba22ae3b42f9e6c",
+      "bytes": 294786,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/T10.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=T10&start=2023-05-06T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:05Z",
+      "status": "offline",
+      "sha256": "aec04ecb4935973bea2107e3a8e86034fbfa6be032b7cd96384d7aab716d9057",
+      "bytes": 295972,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/T11.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=T11&start=2023-05-06T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:05Z",
+      "status": "offline",
+      "sha256": "d0dda6b61bc759a4e779dba922aa2ed032c55f565aaae11f49042fb78b967e1d",
+      "bytes": 295972,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/T12.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=T12&start=2023-05-06T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:05Z",
+      "status": "offline",
+      "sha256": "f8b718db937194998884fbe74b251574be41e9bacafbf4a869381e61730e86c6",
+      "bytes": 296024,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/T14.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=T14&start=2023-05-05T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:05Z",
+      "status": "offline",
+      "sha256": "7ad121a30f8ea3d015bb62b49e6fb3eee68cee17363ef3907e213bbb2d23c093",
+      "bytes": 296242,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/T13.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=T13&start=2023-05-05T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:05Z",
+      "status": "offline",
+      "sha256": "ad1e365d9d22f646779f6a838b1e1b6b7a303023683c39e404e6d004abd827d4",
+      "bytes": 296242,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/T15.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=T15&start=2023-01-01T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:05Z",
+      "status": "offline",
+      "sha256": "33423117d98891e8bb3b166556e38155455d98f4d0439e6016569514e1bc354a",
+      "bytes": 325796,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/T16.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=T16&start=2023-05-05T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:05Z",
+      "status": "offline",
+      "sha256": "a308184fe027d24dc2eb3c18241d7d635af65a4b58c1a9989a66a4a532c3340a",
+      "bytes": 296263,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/T17.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=T17&start=2023-05-05T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:06Z",
+      "status": "offline",
+      "sha256": "dc35f8609712fef09ae06c9cbf540f0502acc5d04f2dd6d1a8c51fa612c47cae",
+      "bytes": 296263,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/T18.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=T18&start=2023-05-05T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:06Z",
+      "status": "offline",
+      "sha256": "70f74d87593d8cca1ce83fa03491d68b1e574edc7142ac8cca391ec809f639bc",
+      "bytes": 296263,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/T20.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=T20&start=2023-05-05T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:06Z",
+      "status": "offline",
+      "sha256": "f8b6650347268b54762731e2f36238afe3f1e6b078d5ad78b725f03ecbfd44de",
+      "bytes": 296263,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/T22.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=T22&start=2023-05-05T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:06Z",
+      "status": "offline",
+      "sha256": "0b2c359c6e970bc34720b1f9acaa53038d4be085d4622024a50fd35699863ed7",
+      "bytes": 296263,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/T21.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=T21&start=2023-01-01T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:06Z",
+      "status": "offline",
+      "sha256": "371a95d9aad3f3cd07b8b8dd22ebb4043b7929169cf0dcc3be7598ba046367b6",
+      "bytes": 325817,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/T19.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=T19&start=2023-05-05T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:06Z",
+      "status": "offline",
+      "sha256": "2cdb110e5fbc08537985b4cc47b5739dc1526f65331395415539509eb5880b41",
+      "bytes": 296263,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/T24.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=T24&start=2023-01-01T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:06Z",
+      "status": "offline",
+      "sha256": "8d520a46c026a1cd92aa6567d4f9ff5586a597bc583baaf40a6ed600bcc1772c",
+      "bytes": 325817,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "weather/T25.json": {
+      "url": "https://api.enora-oah.eu/api/resilience-map/weather?siteCode=T25&start=2023-05-05T00%3A00%3A00Z&end=2026-10-04T00%3A00%3A00Z",
+      "fetched_at": "2026-10-03T14:29:07Z",
+      "status": "offline",
+      "sha256": "fd714c7bf60d91b120b159e0ecb922953411cc988986081c553d4f11409488d8",
+      "bytes": 296304,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "forecasts/BE.json": {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=41.1291&longitude=14.7868&daily=precipitation_sum&forecast_days=7&timezone=auto",
+      "fetched_at": "2026-10-03T14:29:07Z",
+      "status": "offline",
+      "sha256": "dbd7174639ad5b8e34134f3a6e45981cd94bdc141d4a7c19590e4504867d465e",
+      "bytes": 407,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "forecasts/CO.json": {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=40.2033&longitude=-8.4103&daily=precipitation_sum&forecast_days=7&timezone=auto",
+      "fetched_at": "2026-10-03T14:29:08Z",
+      "status": "offline",
+      "sha256": "62199fed4a6fa4b272ff40f5e801d242a720246744207425d60f55f3bdbf871d",
+      "bytes": 408,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "forecasts/GH.json": {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=51.0543&longitude=3.7174&daily=precipitation_sum&forecast_days=7&timezone=auto",
+      "fetched_at": "2026-10-03T14:29:09Z",
+      "status": "offline",
+      "sha256": "19aa7f53bf58b8af16b262d662695296f57d915d6c6019a5538c1bdb3e2b1dd7",
+      "bytes": 408,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "forecasts/OS.json": {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=59.9139&longitude=10.7522&daily=precipitation_sum&forecast_days=7&timezone=auto",
+      "fetched_at": "2026-10-03T14:29:10Z",
+      "status": "offline",
+      "sha256": "2f864016cd34cf952efd504a912ca15280c6ef0f494910fd69c0b59b08b098db",
+      "bytes": 410,
+      "read_at": "2026-10-03T15:49:45Z"
+    },
+    "forecasts/TO.json": {
+      "url": "https://api.open-meteo.com/v1/forecast?latitude=43.6047&longitude=1.4442&daily=precipitation_sum&forecast_days=7&timezone=auto",
+      "fetched_at": "2026-10-03T14:29:10Z",
+      "status": "offline",
+      "sha256": "e5aff09809b1601d56875ba83771a77b95946438cd64a3b2bdd3f29c7a14bb02",
+      "bytes": 401,
+      "read_at": "2026-10-03T15:49:45Z"
+    }
+  },
+  "last_run": {
+    "started_at": "2026-10-03T15:49:45Z",
+    "offline": true,
+    "workers": 8,
+    "finished_at": "2026-10-03T15:49:46Z",
+    "errors": {},
+    "retrieval_counts": {
+      "offline": 114
+    }
+  }
+}

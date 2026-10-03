@@ -1,0 +1,1646 @@
+{
+  "generated_at": "2026-10-03T15:49:46Z",
+  "counts": {
+    "roster_sites": 106,
+    "sites_with_lab_result": 96,
+    "sites_with_coordinates": 106,
+    "sites_with_weather": 106,
+    "sites_with_sewage_distance": 104,
+    "sites_with_all_joined_inputs": 96
+  },
+  "cities": {
+    "Benevento": {
+      "roster_sites": 20,
+      "sites_with_lab_result": 20,
+      "sites_with_coordinates": 20,
+      "sites_with_weather": 20,
+      "sites_with_sewage_distance": 20,
+      "sites_with_all_joined_inputs": 20
+    },
+    "Coimbra": {
+      "roster_sites": 20,
+      "sites_with_lab_result": 18,
+      "sites_with_coordinates": 20,
+      "sites_with_weather": 20,
+      "sites_with_sewage_distance": 20,
+      "sites_with_all_joined_inputs": 18
+    },
+    "Ghent": {
+      "roster_sites": 22,
+      "sites_with_lab_result": 17,
+      "sites_with_coordinates": 22,
+      "sites_with_weather": 22,
+      "sites_with_sewage_distance": 22,
+      "sites_with_all_joined_inputs": 17
+    },
+    "Oslo": {
+      "roster_sites": 20,
+      "sites_with_lab_result": 20,
+      "sites_with_coordinates": 20,
+      "sites_with_weather": 20,
+      "sites_with_sewage_distance": 20,
+      "sites_with_all_joined_inputs": 20
+    },
+    "Toulouse": {
+      "roster_sites": 24,
+      "sites_with_lab_result": 21,
+      "sites_with_coordinates": 24,
+      "sites_with_weather": 24,
+      "sites_with_sewage_distance": 22,
+      "sites_with_all_joined_inputs": 21
+    }
+  },
+  "no_lab_result_sites": [
+    "C17",
+    "C18",
+    "G1",
+    "G17",
+    "G18",
+    "G19",
+    "G20",
+    "T15",
+    "T21",
+    "T24"
+  ],
+  "missing": {
+    "lab_result": [
+      "C17",
+      "C18",
+      "G1",
+      "G17",
+      "G18",
+      "G19",
+      "G20",
+      "T15",
+      "T21",
+      "T24"
+    ],
+    "coordinates": [],
+    "weather": [],
+    "sewage_distance": [
+      "T21",
+      "T24"
+    ],
+    "forecast": []
+  },
+  "duplicate_codes": {
+    "roster": [],
+    "health": [],
+    "urban": []
+  },
+  "unmatched_codes": {
+    "health": [],
+    "urban": []
+  },
+  "invalid_health_records": {},
+  "weather_coverage": {
+    "BN1": {
+      "rows": 1185,
+      "start": "2023-06-28",
+      "end": "2026-09-26",
+      "usable_rain_days": 1185,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "BN2": {
+      "rows": 1185,
+      "start": "2023-06-28",
+      "end": "2026-09-26",
+      "usable_rain_days": 1185,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "BN3": {
+      "rows": 1207,
+      "start": "2023-06-06",
+      "end": "2026-09-26",
+      "usable_rain_days": 1207,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "BN4": {
+      "rows": 1180,
+      "start": "2023-07-03",
+      "end": "2026-09-26",
+      "usable_rain_days": 1180,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "BN5": {
+      "rows": 1180,
+      "start": "2023-07-03",
+      "end": "2026-09-26",
+      "usable_rain_days": 1180,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "BN6": {
+      "rows": 1185,
+      "start": "2023-06-28",
+      "end": "2026-09-26",
+      "usable_rain_days": 1185,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "BN7": {
+      "rows": 1185,
+      "start": "2023-06-28",
+      "end": "2026-09-26",
+      "usable_rain_days": 1185,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "BN8": {
+      "rows": 1176,
+      "start": "2023-07-07",
+      "end": "2026-09-26",
+      "usable_rain_days": 1176,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "BN9": {
+      "rows": 1207,
+      "start": "2023-06-06",
+      "end": "2026-09-26",
+      "usable_rain_days": 1207,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "BN10": {
+      "rows": 1206,
+      "start": "2023-06-07",
+      "end": "2026-09-26",
+      "usable_rain_days": 1206,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "BN11": {
+      "rows": 1207,
+      "start": "2023-06-06",
+      "end": "2026-09-26",
+      "usable_rain_days": 1207,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "BN12": {
+      "rows": 1207,
+      "start": "2023-06-06",
+      "end": "2026-09-26",
+      "usable_rain_days": 1207,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "BN13": {
+      "rows": 1180,
+      "start": "2023-07-03",
+      "end": "2026-09-26",
+      "usable_rain_days": 1180,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "BN14": {
+      "rows": 781,
+      "start": "2024-08-05",
+      "end": "2026-09-26",
+      "usable_rain_days": 781,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "BN15": {
+      "rows": 1206,
+      "start": "2023-06-07",
+      "end": "2026-09-26",
+      "usable_rain_days": 1206,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "BN16": {
+      "rows": 1206,
+      "start": "2023-06-07",
+      "end": "2026-09-26",
+      "usable_rain_days": 1206,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "BN17": {
+      "rows": 1180,
+      "start": "2023-07-03",
+      "end": "2026-09-26",
+      "usable_rain_days": 1180,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "BN18": {
+      "rows": 1207,
+      "start": "2023-06-06",
+      "end": "2026-09-26",
+      "usable_rain_days": 1207,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "BN19": {
+      "rows": 1176,
+      "start": "2023-07-07",
+      "end": "2026-09-26",
+      "usable_rain_days": 1176,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "BN20": {
+      "rows": 1176,
+      "start": "2023-07-07",
+      "end": "2026-09-26",
+      "usable_rain_days": 1176,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "C1": {
+      "rows": 1185,
+      "start": "2023-06-28",
+      "end": "2026-09-26",
+      "usable_rain_days": 1185,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "C2": {
+      "rows": 1186,
+      "start": "2023-06-27",
+      "end": "2026-09-26",
+      "usable_rain_days": 1186,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "C3": {
+      "rows": 1186,
+      "start": "2023-06-27",
+      "end": "2026-09-26",
+      "usable_rain_days": 1186,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "C4": {
+      "rows": 1186,
+      "start": "2023-06-27",
+      "end": "2026-09-26",
+      "usable_rain_days": 1186,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "C5": {
+      "rows": 1184,
+      "start": "2023-06-29",
+      "end": "2026-09-26",
+      "usable_rain_days": 1184,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "C6": {
+      "rows": 1184,
+      "start": "2023-06-29",
+      "end": "2026-09-26",
+      "usable_rain_days": 1184,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "C7": {
+      "rows": 1184,
+      "start": "2023-06-29",
+      "end": "2026-09-26",
+      "usable_rain_days": 1184,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "C8": {
+      "rows": 1185,
+      "start": "2023-06-28",
+      "end": "2026-09-26",
+      "usable_rain_days": 1185,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "C9": {
+      "rows": 1186,
+      "start": "2023-06-27",
+      "end": "2026-09-26",
+      "usable_rain_days": 1186,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "C10": {
+      "rows": 1186,
+      "start": "2023-06-27",
+      "end": "2026-09-26",
+      "usable_rain_days": 1186,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "C11": {
+      "rows": 1186,
+      "start": "2023-06-27",
+      "end": "2026-09-26",
+      "usable_rain_days": 1186,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "C12": {
+      "rows": 1185,
+      "start": "2023-06-28",
+      "end": "2026-09-26",
+      "usable_rain_days": 1185,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "C13": {
+      "rows": 1185,
+      "start": "2023-06-28",
+      "end": "2026-09-26",
+      "usable_rain_days": 1185,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "C14": {
+      "rows": 1185,
+      "start": "2023-06-28",
+      "end": "2026-09-26",
+      "usable_rain_days": 1185,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "C15": {
+      "rows": 1185,
+      "start": "2023-06-28",
+      "end": "2026-09-26",
+      "usable_rain_days": 1185,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "C16": {
+      "rows": 1186,
+      "start": "2023-06-27",
+      "end": "2026-09-26",
+      "usable_rain_days": 1186,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "C17": {
+      "rows": 1363,
+      "start": "2023-01-01",
+      "end": "2026-09-26",
+      "usable_rain_days": 1363,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "C18": {
+      "rows": 1363,
+      "start": "2023-01-01",
+      "end": "2026-09-26",
+      "usable_rain_days": 1363,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "C19": {
+      "rows": 1207,
+      "start": "2023-06-06",
+      "end": "2026-09-26",
+      "usable_rain_days": 1207,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "C20": {
+      "rows": 1207,
+      "start": "2023-06-06",
+      "end": "2026-09-26",
+      "usable_rain_days": 1207,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "G1": {
+      "rows": 1363,
+      "start": "2023-01-01",
+      "end": "2026-09-26",
+      "usable_rain_days": 1363,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "G2": {
+      "rows": 1220,
+      "start": "2023-05-24",
+      "end": "2026-09-26",
+      "usable_rain_days": 1220,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "G3": {
+      "rows": 1220,
+      "start": "2023-05-24",
+      "end": "2026-09-26",
+      "usable_rain_days": 1220,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "G4": {
+      "rows": 1220,
+      "start": "2023-05-24",
+      "end": "2026-09-26",
+      "usable_rain_days": 1220,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "G5": {
+      "rows": 1220,
+      "start": "2023-05-24",
+      "end": "2026-09-26",
+      "usable_rain_days": 1220,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "G6": {
+      "rows": 1220,
+      "start": "2023-05-24",
+      "end": "2026-09-26",
+      "usable_rain_days": 1220,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "G7": {
+      "rows": 1220,
+      "start": "2023-05-24",
+      "end": "2026-09-26",
+      "usable_rain_days": 1220,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "G8": {
+      "rows": 1220,
+      "start": "2023-05-24",
+      "end": "2026-09-26",
+      "usable_rain_days": 1220,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "G9": {
+      "rows": 1220,
+      "start": "2023-05-24",
+      "end": "2026-09-26",
+      "usable_rain_days": 1220,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "G10": {
+      "rows": 1220,
+      "start": "2023-05-24",
+      "end": "2026-09-26",
+      "usable_rain_days": 1220,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "G11": {
+      "rows": 1220,
+      "start": "2023-05-24",
+      "end": "2026-09-26",
+      "usable_rain_days": 1220,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "G12": {
+      "rows": 1220,
+      "start": "2023-05-24",
+      "end": "2026-09-26",
+      "usable_rain_days": 1220,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "G13": {
+      "rows": 1219,
+      "start": "2023-05-25",
+      "end": "2026-09-26",
+      "usable_rain_days": 1219,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "G14": {
+      "rows": 1219,
+      "start": "2023-05-25",
+      "end": "2026-09-26",
+      "usable_rain_days": 1219,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "G15": {
+      "rows": 1219,
+      "start": "2023-05-25",
+      "end": "2026-09-26",
+      "usable_rain_days": 1219,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "G16": {
+      "rows": 1219,
+      "start": "2023-05-25",
+      "end": "2026-09-26",
+      "usable_rain_days": 1219,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "G17": {
+      "rows": 1363,
+      "start": "2023-01-01",
+      "end": "2026-09-26",
+      "usable_rain_days": 1363,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "G18": {
+      "rows": 1363,
+      "start": "2023-01-01",
+      "end": "2026-09-26",
+      "usable_rain_days": 1363,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "G19": {
+      "rows": 1363,
+      "start": "2023-01-01",
+      "end": "2026-09-26",
+      "usable_rain_days": 1363,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "G20": {
+      "rows": 1363,
+      "start": "2023-01-01",
+      "end": "2026-09-26",
+      "usable_rain_days": 1363,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "G21": {
+      "rows": 1220,
+      "start": "2023-05-24",
+      "end": "2026-09-26",
+      "usable_rain_days": 1220,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "G22": {
+      "rows": 1220,
+      "start": "2023-05-24",
+      "end": "2026-09-26",
+      "usable_rain_days": 1220,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "O1": {
+      "rows": 1115,
+      "start": "2023-09-06",
+      "end": "2026-09-26",
+      "usable_rain_days": 1115,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "O2": {
+      "rows": 1115,
+      "start": "2023-09-06",
+      "end": "2026-09-26",
+      "usable_rain_days": 1115,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "O3": {
+      "rows": 1115,
+      "start": "2023-09-06",
+      "end": "2026-09-26",
+      "usable_rain_days": 1115,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "O4": {
+      "rows": 1115,
+      "start": "2023-09-06",
+      "end": "2026-09-26",
+      "usable_rain_days": 1115,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "O5": {
+      "rows": 1115,
+      "start": "2023-09-06",
+      "end": "2026-09-26",
+      "usable_rain_days": 1115,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "O6": {
+      "rows": 1115,
+      "start": "2023-09-06",
+      "end": "2026-09-26",
+      "usable_rain_days": 1115,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "O7": {
+      "rows": 1115,
+      "start": "2023-09-06",
+      "end": "2026-09-26",
+      "usable_rain_days": 1115,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "O8": {
+      "rows": 1115,
+      "start": "2023-09-06",
+      "end": "2026-09-26",
+      "usable_rain_days": 1115,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "O9": {
+      "rows": 1115,
+      "start": "2023-09-06",
+      "end": "2026-09-26",
+      "usable_rain_days": 1115,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "O10": {
+      "rows": 1115,
+      "start": "2023-09-06",
+      "end": "2026-09-26",
+      "usable_rain_days": 1115,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "O11": {
+      "rows": 1115,
+      "start": "2023-09-06",
+      "end": "2026-09-26",
+      "usable_rain_days": 1115,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "O12": {
+      "rows": 1115,
+      "start": "2023-09-06",
+      "end": "2026-09-26",
+      "usable_rain_days": 1115,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "O13": {
+      "rows": 1115,
+      "start": "2023-09-06",
+      "end": "2026-09-26",
+      "usable_rain_days": 1115,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "O14": {
+      "rows": 1115,
+      "start": "2023-09-06",
+      "end": "2026-09-26",
+      "usable_rain_days": 1115,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "O15": {
+      "rows": 1115,
+      "start": "2023-09-06",
+      "end": "2026-09-26",
+      "usable_rain_days": 1115,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "O16": {
+      "rows": 1115,
+      "start": "2023-09-06",
+      "end": "2026-09-26",
+      "usable_rain_days": 1115,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "O17": {
+      "rows": 1115,
+      "start": "2023-09-06",
+      "end": "2026-09-26",
+      "usable_rain_days": 1115,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "O18": {
+      "rows": 1115,
+      "start": "2023-09-06",
+      "end": "2026-09-26",
+      "usable_rain_days": 1115,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "O19": {
+      "rows": 1115,
+      "start": "2023-09-06",
+      "end": "2026-09-26",
+      "usable_rain_days": 1115,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "O20": {
+      "rows": 1115,
+      "start": "2023-09-06",
+      "end": "2026-09-26",
+      "usable_rain_days": 1115,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "T1": {
+      "rows": 1239,
+      "start": "2023-05-05",
+      "end": "2026-09-26",
+      "usable_rain_days": 1239,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "T2": {
+      "rows": 1239,
+      "start": "2023-05-05",
+      "end": "2026-09-26",
+      "usable_rain_days": 1239,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "T3": {
+      "rows": 1239,
+      "start": "2023-05-05",
+      "end": "2026-09-26",
+      "usable_rain_days": 1239,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "T4": {
+      "rows": 1239,
+      "start": "2023-05-05",
+      "end": "2026-09-26",
+      "usable_rain_days": 1239,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "T5": {
+      "rows": 1239,
+      "start": "2023-05-05",
+      "end": "2026-09-26",
+      "usable_rain_days": 1239,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "T6": {
+      "rows": 1239,
+      "start": "2023-05-05",
+      "end": "2026-09-26",
+      "usable_rain_days": 1239,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "T7": {
+      "rows": 1239,
+      "start": "2023-05-05",
+      "end": "2026-09-26",
+      "usable_rain_days": 1239,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "T8": {
+      "rows": 1239,
+      "start": "2023-05-05",
+      "end": "2026-09-26",
+      "usable_rain_days": 1239,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "T9": {
+      "rows": 1238,
+      "start": "2023-05-06",
+      "end": "2026-09-26",
+      "usable_rain_days": 1238,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "T10": {
+      "rows": 1238,
+      "start": "2023-05-06",
+      "end": "2026-09-26",
+      "usable_rain_days": 1238,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "T11": {
+      "rows": 1238,
+      "start": "2023-05-06",
+      "end": "2026-09-26",
+      "usable_rain_days": 1238,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "T12": {
+      "rows": 1238,
+      "start": "2023-05-06",
+      "end": "2026-09-26",
+      "usable_rain_days": 1238,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "T13": {
+      "rows": 1239,
+      "start": "2023-05-05",
+      "end": "2026-09-26",
+      "usable_rain_days": 1239,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "T14": {
+      "rows": 1239,
+      "start": "2023-05-05",
+      "end": "2026-09-26",
+      "usable_rain_days": 1239,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "T15": {
+      "rows": 1363,
+      "start": "2023-01-01",
+      "end": "2026-09-26",
+      "usable_rain_days": 1363,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "T16": {
+      "rows": 1239,
+      "start": "2023-05-05",
+      "end": "2026-09-26",
+      "usable_rain_days": 1239,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "T17": {
+      "rows": 1239,
+      "start": "2023-05-05",
+      "end": "2026-09-26",
+      "usable_rain_days": 1239,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "T18": {
+      "rows": 1239,
+      "start": "2023-05-05",
+      "end": "2026-09-26",
+      "usable_rain_days": 1239,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "T19": {
+      "rows": 1239,
+      "start": "2023-05-05",
+      "end": "2026-09-26",
+      "usable_rain_days": 1239,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "T20": {
+      "rows": 1239,
+      "start": "2023-05-05",
+      "end": "2026-09-26",
+      "usable_rain_days": 1239,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "T21": {
+      "rows": 1363,
+      "start": "2023-01-01",
+      "end": "2026-09-26",
+      "usable_rain_days": 1363,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "T22": {
+      "rows": 1239,
+      "start": "2023-05-05",
+      "end": "2026-09-26",
+      "usable_rain_days": 1239,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "T24": {
+      "rows": 1363,
+      "start": "2023-01-01",
+      "end": "2026-09-26",
+      "usable_rain_days": 1363,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "T25": {
+      "rows": 1239,
+      "start": "2023-05-05",
+      "end": "2026-09-26",
+      "usable_rain_days": 1239,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    }
+  },
+  "weather_gap_sites": [
+    "BN1",
+    "BN2",
+    "BN3",
+    "BN4",
+    "BN5",
+    "BN6",
+    "BN7",
+    "BN8",
+    "BN9",
+    "BN10",
+    "BN11",
+    "BN12",
+    "BN13",
+    "BN14",
+    "BN15",
+    "BN16",
+    "BN17",
+    "BN18",
+    "BN19",
+    "BN20",
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6",
+    "C7",
+    "C8",
+    "C9",
+    "C10",
+    "C11",
+    "C12",
+    "C13",
+    "C14",
+    "C15",
+    "C16",
+    "C17",
+    "C18",
+    "C19",
+    "C20",
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "G9",
+    "G10",
+    "G11",
+    "G12",
+    "G13",
+    "G14",
+    "G15",
+    "G16",
+    "G17",
+    "G18",
+    "G19",
+    "G20",
+    "G21",
+    "G22",
+    "O1",
+    "O2",
+    "O3",
+    "O4",
+    "O5",
+    "O6",
+    "O7",
+    "O8",
+    "O9",
+    "O10",
+    "O11",
+    "O12",
+    "O13",
+    "O14",
+    "O15",
+    "O16",
+    "O17",
+    "O18",
+    "O19",
+    "O20",
+    "T1",
+    "T2",
+    "T3",
+    "T4",
+    "T5",
+    "T6",
+    "T7",
+    "T8",
+    "T9",
+    "T10",
+    "T11",
+    "T12",
+    "T13",
+    "T14",
+    "T15",
+    "T16",
+    "T17",
+    "T18",
+    "T19",
+    "T20",
+    "T21",
+    "T22",
+    "T24",
+    "T25"
+  ],
+  "weather_gap_date_counts": {
+    "2026-08-04": 106,
+    "2026-08-27": 106
+  },
+  "forecast_coverage": {
+    "BE": {
+      "timezone": "Europe/Rome",
+      "start": "2026-10-03",
+      "end": "2026-10-09",
+      "days": 7,
+      "usable_rain_days": 7,
+      "missing_rain_dates": [],
+      "complete": true
+    },
+    "CO": {
+      "timezone": "Europe/Lisbon",
+      "start": "2026-10-03",
+      "end": "2026-10-09",
+      "days": 7,
+      "usable_rain_days": 7,
+      "missing_rain_dates": [],
+      "complete": true
+    },
+    "GH": {
+      "timezone": "Europe/Brussels",
+      "start": "2026-10-03",
+      "end": "2026-10-09",
+      "days": 7,
+      "usable_rain_days": 7,
+      "missing_rain_dates": [],
+      "complete": true
+    },
+    "OS": {
+      "timezone": "Europe/Oslo",
+      "start": "2026-10-03",
+      "end": "2026-10-09",
+      "days": 7,
+      "usable_rain_days": 7,
+      "missing_rain_dates": [],
+      "complete": true
+    },
+    "TO": {
+      "timezone": "Europe/Paris",
+      "start": "2026-10-03",
+      "end": "2026-10-09",
+      "days": 7,
+      "usable_rain_days": 7,
+      "missing_rain_dates": [],
+      "complete": true
+    }
+  },
+  "raw_record_counts": {
+    "sites": 106,
+    "health": 96,
+    "urban": 104,
+    "weather": 127481
+  },
+  "retrieval_counts": {
+    "offline": 114
+  },
+  "errors": {},
+  "cache_directory": "C:\\Users\\ankit\\Downloads\\oneaqua\\afterstorm\\data\\raw"
+}
