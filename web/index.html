@@ -33,6 +33,7 @@
     .visit-card{transition:background-color .2s,box-shadow .2s}.visit-card.hl{background:#f1f6ef;box-shadow:inset 4px 0 0 var(--green)}
     .budget-range{width:100%;max-width:160px;margin:10px 0 0;accent-color:var(--green);height:22px}
     @media(max-width:760px){.map-panel{position:static}}
+    #print-area{display:none}body.print-card{background:#fff}body.print-card>*:not(#print-area){display:none!important}body.print-card #print-area{display:block!important}.task-sheet{break-after:page;padding:24px;color:#111;font:16px/1.5 var(--sans)}.task-card{margin:8px 0 4px 42px}.task-card summary{font-size:14px;font-weight:600;color:var(--green)}.task-body{padding:8px 0 2px;font-size:14px;line-height:1.5}.task-body h3{font-size:16px;margin-bottom:6px}.task-safety{font-weight:700}.task-body fieldset{border:1px solid var(--line);border-radius:6px;margin:0 0 8px;padding:8px 10px}.task-body legend{font-size:14px;padding:0 4px}.task-choice{margin-right:12px;font-weight:500}.task-body label.field{display:block;margin:8px 0;font-weight:600}.task-body input[type=text]{display:block;width:100%;max-width:420px;margin-top:4px;border:1px solid #cfd8cf;border-radius:6px;padding:6px 8px;font-weight:400}.task-body .print-one{margin-top:8px}
     .setting-line{margin:8px 0 0;font-size:13px;color:var(--muted);line-height:1.5}.setting-block{margin-top:12px}.setting-block ul{margin:8px 0;padding-left:18px;font-size:14px;line-height:1.55}.setting-note{font-size:13px;color:var(--muted)}
     .protection{border-left:4px solid var(--amber)}.protection-body{padding:0 22px 18px;font-size:15px;line-height:1.55}.protection-body p{margin:0 0 12px}.protection-body .cover-notices{display:inline-block;margin:0 0 14px;padding:8px 12px;border:1px solid #c2a064;border-radius:6px;background:#fff;color:var(--amber);font-size:14px;font-weight:600}.protection-foot{color:var(--muted);font-size:14px}
     .stale-chip{display:inline-block;margin:6px 0;padding:4px 8px;border-radius:6px;background:#fbf3e4;color:#7a5114;border:1px solid #e6d3a8;font-size:13px;font-weight:600}.visit-card .stale-chip{margin-left:42px}.review-history{margin:4px 0 8px 42px;font-size:13px;color:var(--muted)}.notice-row .review-history,.notice-row .stale-chip{margin-left:0}.review-history ul{margin:6px 0 0;padding-left:18px}
@@ -130,7 +131,7 @@
         </div>
         <div class="right-column">
         <section class="surface protection" id="protection" hidden aria-labelledby="protection-heading"><div class="panel-header"><div><h2 id="protection-heading">Protection check</h2></div></div><div id="protection-body" class="protection-body"></div></section>
-        <section class="surface visit-panel" id="visit-panel" tabindex="-1" aria-labelledby="visit-heading"><div class="panel-header"><div><h2 id="visit-heading">Proposed site visits</h2><p id="visit-subtitle"></p></div><div class="visit-actions"><span id="visit-count" class="panel-count"></span><button type="button" id="download-fhir">Download FHIR bundle</button></div></div><p class="visit-help fhir-help">One trip per site covers every test listed. The lab team chooses the method.</p><div id="review-progress" class="review-progress" tabindex="-1" hidden></div><p id="fhir-status" role="status"></p><div class="visits-scroll" id="visits"></div><div id="capacity"></div></section>
+        <section class="surface visit-panel" id="visit-panel" tabindex="-1" aria-labelledby="visit-heading"><div class="panel-header"><div><h2 id="visit-heading">Proposed site visits</h2><p id="visit-subtitle"></p></div><div class="visit-actions"><span id="visit-count" class="panel-count"></span><button type="button" id="print-all-cards">Print all task cards</button><button type="button" id="download-fhir">Download FHIR bundle</button></div></div><p class="visit-help fhir-help">One trip per site covers every test listed. The lab team chooses the method.</p><div id="review-progress" class="review-progress" tabindex="-1" hidden></div><p id="fhir-status" role="status"></p><div class="visits-scroll" id="visits"></div><div id="capacity"></div></section>
         <section class="surface notice-panel" id="notice-panel" tabindex="-1" aria-labelledby="notice-heading"><div class="panel-header"><div><h2 id="notice-heading">Draft contact notices</h2><p>Human and animal health · coordinator review</p></div><span id="notice-count" class="panel-count"></span></div><div id="notices" class="notice-body"></div></section>
         </div>
       </div>
@@ -295,7 +296,7 @@
     $('visit-count').textContent=`${selected.length} planned`;
     $('visit-subtitle').textContent=plan.storm?'Within the experimental post-rain window':'Routine baseline visits where lab evidence is missing';
     if(selected.length){
-      $('visits').innerHTML=`<ol class="visit-list">${selected.map(site=>`<li class="visit-card rv-${reviewOf('visit',site.code)||'none'}" id="visit-${escapeHTML(site.code)}" data-code="${escapeHTML(site.code)}"><div class="visit-heading"><span class="rank-number">${site.rank}</span><div class="site-title"><h3><code>${escapeHTML(site.code)}</code>${escapeHTML(site.name)}</h3><p class="category-text">${site.action==='first baseline assessment'?'<span class="badge blue">First baseline</span> ':''}${escapeHTML(site.categories.join(' + '))}</p></div>${site.position?`<button type="button" class="locate" data-locate="${escapeHTML(site.code)}" aria-label="Show ${escapeHTML(site.code)} on map">Show on map</button>`:''}</div><p class="visit-time"><strong>${escapeHTML(dateRange(site.window))}</strong>${site.window?'<span class="small-window">Experimental window (heuristic, not validated)</span>':'<span class="small-window">No storm window</span>'}</p>${filedLine(site.code)}${reviewNote('visit',site.code)}${reviewButtons('visit',site.code,site.code+' '+site.name)}${site.action==='first baseline assessment'&&site.sewage_distance_m===null?'<p class="distance-note">Missing sewage distance · last among baseline sites</p>':''}${sourceDetails(site,plan)}${site.map_note?`<p class="reason muted small">${escapeHTML(site.map_note)}</p>`:''}</li>`).join('')}</ol>`;
+      $('visits').innerHTML=`<ol class="visit-list">${selected.map(site=>`<li class="visit-card rv-${reviewOf('visit',site.code)||'none'}" id="visit-${escapeHTML(site.code)}" data-code="${escapeHTML(site.code)}"><div class="visit-heading"><span class="rank-number">${site.rank}</span><div class="site-title"><h3><code>${escapeHTML(site.code)}</code>${escapeHTML(site.name)}</h3><p class="category-text">${site.action==='first baseline assessment'?'<span class="badge blue">First baseline</span> ':''}${escapeHTML(site.categories.join(' + '))}</p></div>${site.position?`<button type="button" class="locate" data-locate="${escapeHTML(site.code)}" aria-label="Show ${escapeHTML(site.code)} on map">Show on map</button>`:''}</div><p class="visit-time"><strong>${escapeHTML(dateRange(site.window))}</strong>${site.window?'<span class="small-window">Experimental window (heuristic, not validated)</span>':'<span class="small-window">No storm window</span>'}</p>${filedLine(site.code)}${reviewNote('visit',site.code)}${reviewButtons('visit',site.code,site.code+' '+site.name)}${citizenCard(site)}${site.action==='first baseline assessment'&&site.sewage_distance_m===null?'<p class="distance-note">Missing sewage distance · last among baseline sites</p>':''}${sourceDetails(site,plan)}${site.map_note?`<p class="reason muted small">${escapeHTML(site.map_note)}</p>`:''}</li>`).join('')}</ol>`;
     }else{
       let reason;
       if(budget===0) reason='The site-visit budget is zero. Increase it to allocate eligible visits; the full roster and evidence remain available.';
@@ -305,6 +306,7 @@
       else reason='No complete city-wide archived storm qualifies, and no baseline site is awaiting a first assessment. No visits are planned.';
       $('visits').innerHTML=`<p class="empty-visits" id="empty-visits"><strong>No visits planned</strong>${escapeHTML(reason)}</p>`;
     }
+    $('print-all-cards').disabled=!selected.length;
     const remaining=plan.ranking.slice(budget).map(code=>sites.get(code));
     $('capacity').innerHTML=remaining.length?`<details class="capacity-details"><summary>${remaining.length} more site${remaining.length===1?'':'s'} if capacity allows</summary>${remaining.map(s=>`<div class="capacity-row"><code>${escapeHTML(s.code)}</code><p>${escapeHTML(s.name)}<small>${s.action==='first baseline assessment'?'First baseline · ':''}${escapeHTML(s.categories.join(' + '))}${s.sewage_distance_m===null?' · missing sewage distance; last among baselines':''}</small></p>${s.position?`<button type="button" class="locate" data-locate="${escapeHTML(s.code)}" aria-label="Show ${escapeHTML(s.code)} on map">Show on map</button>`:''}</div>`).join('')}</details>`:'';
     updateFhirChrome(selected);
@@ -538,6 +540,45 @@
     if(r.top<0||r.bottom>innerHeight) card.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'center'});
     card.classList.remove('flash');void card.offsetWidth;card.classList.add('flash');
   }
+  const CITIZEN_KEY='afterstorm-citizen-v1';
+  const CITIZEN_QUESTIONS=[['pipe','A pipe or outfall is discharging into the stream'],['smell','Sewage smell'],['faeces','Animal faeces on the bank or path'],['sheen','Foam, scum or oily sheen on the water'],['contact','People or pets in the water']];
+  const CITIZEN_CHOICES=[['yes','Yes'],['no','No'],['unsure','Unsure']];
+  let citizenAnswers={};try{citizenAnswers=JSON.parse(localStorage.getItem(CITIZEN_KEY))||{};}catch{citizenAnswers={};}
+  function citizenStoreKey(code){return `${cityId}|${mode}|${code}|${evidenceSig('visit',code)}`;}
+  function citizenTitle(site){return site.action==='first baseline assessment'?'First look — citizen task card':'After-storm look — citizen task card';}
+  function citizenWhen(site){return site.window?dateRange(site.window):'any day';}
+  function citizenWhere(site){const pos=site.position;return pos&&numeric(pos.latitude)&&numeric(pos.longitude)?`${Number(pos.latitude).toFixed(5)}, ${Number(pos.longitude).toFixed(5)}`:'No coordinates';}
+  function readCitizenCard(card){
+    const answers={};
+    card.querySelectorAll('input[type=radio]:checked').forEach(input=>{answers[input.dataset.q]=input.value;});
+    card.querySelectorAll('[data-q-text]').forEach(input=>{answers[input.dataset.qText]=input.value;});
+    return answers;
+  }
+  function saveCitizenCard(card){
+    citizenAnswers[citizenStoreKey(card.dataset.code)]=readCitizenCard(card);
+    try{localStorage.setItem(CITIZEN_KEY,JSON.stringify(citizenAnswers));}catch{}
+  }
+  function answersFor(code){
+    const card=document.querySelector(`.task-card[data-code="${CSS.escape(code)}"]`);
+    return card?readCitizenCard(card):(citizenAnswers[citizenStoreKey(code)]||{});
+  }
+  function citizenCard(site){
+    const saved=citizenAnswers[citizenStoreKey(site.code)]||{};
+    const fields=CITIZEN_QUESTIONS.map(([id,label])=>`<fieldset><legend>${escapeHTML(label)}</legend>${CITIZEN_CHOICES.map(([value,text])=>`<label class="task-choice"><input type="radio" name="task-${escapeHTML(site.code)}-${id}" data-q="${id}" value="${value}"${saved[id]===value?' checked':''}> ${text}</label>`).join('')}</fieldset>`).join('');
+    return `<details class="task-card" data-code="${escapeHTML(site.code)}"><summary>Citizen task card</summary><div class="task-body"><h3>${escapeHTML(citizenTitle(site))}</h3><p><strong>${escapeHTML(site.code)}</strong> ${escapeHTML(site.name)}</p><p>${escapeHTML(citizenWhere(site))}</p><p>${escapeHTML(citizenWhen(site))}</p><p class="task-safety">Stay on the bank or path. Do not enter or touch the water. Do not collect water samples — the lab team does that. Wash your hands afterwards.</p>${fields}<label class="field">Observed on (date and time)<input type="text" data-q-text="observed" value="${escapeHTML(saved.observed||'')}"></label><label class="field">Photo reference (e.g., your OneAquaHealth app record)<input type="text" data-q-text="photo" value="${escapeHTML(saved.photo||'')}"></label><p>Saved in this browser only. Nothing is sent.</p><p>These observations give the coordinator context. They don't change the visit order, the tests, or any notice. If you use the OneAquaHealth Citizen Science App, record the visit there too.</p><button type="button" class="print-one" data-print-card="${escapeHTML(site.code)}">Print this card</button></div></details>`;
+  }
+  function citizenPrintArticle(site,answers){
+    const questions=CITIZEN_QUESTIONS.map(([id,label])=>`<p><strong>${escapeHTML(label)}:</strong> ${escapeHTML(answers[id]||'not answered')}</p>`).join('');
+    return `<article class="task-sheet"><h2>${escapeHTML(citizenTitle(site))}</h2><p><strong>${escapeHTML(site.code)}</strong> ${escapeHTML(site.name)}</p><p>${escapeHTML(citizenWhere(site))}</p><p>${escapeHTML(citizenWhen(site))}</p><p><strong>Stay on the bank or path. Do not enter or touch the water. Do not collect water samples — the lab team does that. Wash your hands afterwards.</strong></p>${questions}<p>Observed on (date and time): ${escapeHTML(answers.observed||'')}</p><p>Photo reference (e.g., your OneAquaHealth app record): ${escapeHTML(answers.photo||'')}</p><p>These observations give the coordinator context. They don't change the visit order, the tests, or any notice. If you use the OneAquaHealth Citizen Science App, record the visit there too.</p><p>Saved in this browser only. Nothing is sent.</p></article>`;
+  }
+  function printTaskCards(codes){
+    const sites=new Map(view().plan.sites.map(site=>[site.code,site]));
+    $('print-area').innerHTML=codes.filter(code=>sites.has(code)).map(code=>citizenPrintArticle(sites.get(code),answersFor(code))).join('');
+    document.body.classList.add('print-card');
+    const cleanup=()=>{document.body.classList.remove('print-card');$('print-area').innerHTML='';window.removeEventListener('afterprint',cleanup);};
+    window.addEventListener('afterprint',cleanup);
+    window.print();
+  }
   function categoryList(labels){
     if(labels.length<2) return labels[0]||'';
     if(labels.length===2) return `${labels[0]} and ${labels[1]}`;
@@ -648,6 +689,10 @@
       $('visits').addEventListener('mouseover',e=>{const c=e.target.closest('.visit-card');highlight(c?c.dataset.code:null);});$('visits').addEventListener('mouseleave',()=>highlight(null));
       $('visits').addEventListener('focusin',e=>{const c=e.target.closest('.visit-card');if(c)highlight(c.dataset.code);});$('budget-plus').addEventListener('click',()=>applyBudget(budget+1));
       $('download-fhir').addEventListener('click',downloadFhir);
+      $('print-all-cards').addEventListener('click',()=>printTaskCards(view().plan.ranking.slice(0,budget)));
+      document.addEventListener('click',event=>{const button=event.target.closest('[data-print-card]');if(!button)return;printTaskCards([button.dataset.printCard]);});
+      document.addEventListener('change',event=>{const card=event.target.closest('.task-card');if(card&&event.target.matches('input'))saveCitizenCard(card);});
+      document.addEventListener('input',event=>{const card=event.target.closest('.task-card');if(card&&event.target.matches('[data-q-text]'))saveCitizenCard(card);});
       document.addEventListener('click',event=>{const button=event.target.closest('[data-cover-notices]');if(!button)return;const visits=Number(button.dataset.coverNotices);applyBudget(visits);$('plan-status').textContent=`Visit budget is now ${visits}, which covers every notice site. The visit order is unchanged.`;});
       document.addEventListener('click',e=>{const b=e.target.closest('[data-review]');if(b){setReview(b.dataset.review,b.dataset.code,b.dataset.val);return;}if(e.target.closest('[data-clear-review]')){const pre=`${cityId}|${mode}|`;Object.keys(reviews).filter(k=>k.startsWith(pre)).forEach(k=>delete reviews[k]);try{localStorage.setItem(REVIEW_KEY,JSON.stringify(reviews));}catch{}render();$('plan-status').textContent='Review cleared for this city and mode.';}});
       $('decision').addEventListener('click',event=>{const step=event.target.closest('[data-jump]');if(step)jumpTo(step.dataset.jump);});
@@ -657,5 +702,6 @@
   }
   document.addEventListener('DOMContentLoaded',start,{once:true});
   </script>
+  <div id="print-area"></div>
 </body>
 </html>
