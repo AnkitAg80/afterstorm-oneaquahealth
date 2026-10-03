@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f7f2">
+  <title>AfterStorm — sampling proposals</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23264f43'/%3E%3Cpath d='M6 13q5-5 10 0t10 0M6 20q5-5 10 0t10 0' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="vendor/leaflet.css">
+  <style>
+    :root{--canvas:#f6f7f2;--paper:#fff;--ink:#253c33;--muted:#606e65;--line:#eaeaea;--green:#315b48;--pale:#edf3ec;--blue:#286486;--blue-pale:#eaf2f7;--amber:#855918;--amber-pale:#fbf3db;--red:#963e39;--red-pale:#fdebec;--mono:Consolas,"SF Mono",monospace;--sans:"Segoe UI","Helvetica Neue",Arial,sans-serif}
+    *{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--ink);font:15px/1.55 var(--sans)}button,input,select{font:inherit}button,select,input[type=checkbox],summary{cursor:pointer}button,a,input,select,summary{touch-action:manipulation}a{color:var(--green);text-underline-offset:3px}button{color:inherit}button:hover{background:#f1f4ee}button:active{transform:scale(.98)}:focus-visible{outline:3px solid #688cba;outline-offset:3px}button:disabled{opacity:.45;cursor:default}button:disabled:active{transform:none}h1,h2,h3,p{margin:0}h2{font-size:19px;font-weight:600;letter-spacing:-.025em}h3{font-size:16px;font-weight:600}small,.small{font-size:12px}code,.mono{font-family:var(--mono);font-size:.88em;font-variant-numeric:tabular-nums}.muted{color:var(--muted)}.eyebrow{font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}[hidden]{display:none!important}.skip{position:fixed;top:-80px;left:16px;background:white;padding:12px;z-index:3000}.skip:focus{top:10px}.shell{max-width:1376px;padding:0 40px;margin:auto}
+    .topbar{border-bottom:1px solid var(--line);background:var(--paper)}.topbar-inner{min-height:74px;display:flex;justify-content:space-between;align-items:center;gap:20px}.brand{display:flex;align-items:center;gap:11px;font-size:24px;font-weight:650;letter-spacing:-1px}.brand svg{width:34px;height:34px;flex:none}.brand-sub{font-size:10px;letter-spacing:.14em;font-weight:600;color:var(--muted);border-left:1px solid var(--line);padding-left:18px;margin-left:10px;text-transform:uppercase}.project-context{text-align:right;font-size:11px;line-height:1.6;color:var(--muted)}.project-context strong{font-weight:600;color:var(--ink)}
+    main{padding-top:30px;padding-bottom:32px}.intro{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:25px}.intro h1{font-family:Georgia,"Times New Roman",serif;font-size:39px;line-height:1.12;letter-spacing:-1.5px;font-weight:400;margin-top:7px}.intro p{color:var(--muted);font-size:13px;margin-top:10px}.prototype-note{font-size:11px;color:var(--muted);text-align:right;max-width:215px}.surface{background:var(--paper);border:1px solid var(--line);border-radius:8px}
+    .controls{display:grid;grid-template-columns:230px minmax(230px,1fr) 196px;gap:28px;padding:20px 24px;align-items:start}.control-label{display:block;font-size:11px;color:var(--muted);font-weight:600;margin-bottom:7px}.city-select{height:39px;width:100%;border:1px solid #d5ded6;border-radius:4px;background:#fff;color:var(--ink);padding:0 12px;font-weight:600}.mode-toggle{display:inline-flex;border:1px solid #d5ded6;border-radius:4px;padding:3px;gap:3px}.mode-toggle button{padding:5px 15px;border:0;border-radius:3px;font-size:12px;font-weight:600;background:white}.mode-toggle button[aria-pressed=true]{color:white;background:var(--green)}.stepper{display:flex;align-items:center;height:39px;border:1px solid #d5ded6;border-radius:4px;max-width:145px;overflow:hidden}.stepper button{border:0;background:transparent;flex:none;width:37px;height:100%;font-size:22px;line-height:1}.stepper input{min-width:0;width:64px;border:0;outline-offset:-3px;text-align:center;font-family:var(--mono);font-size:15px;appearance:textfield;background:#fff}.stepper input::-webkit-inner-spin-button{appearance:none}.budget-note{font-size:10px;color:var(--muted);margin-top:5px}.mode-meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:9px}.badge{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:650;letter-spacing:.04em;background:var(--pale);color:var(--green);padding:3px 8px;border-radius:3px;line-height:1.45}.badge.replay{background:var(--amber-pale);color:var(--amber)}.badge.blue{background:var(--blue-pale);color:var(--blue)}.badge.grey{background:#f0f2ee;color:var(--muted)}.timestamp{font-size:10px;color:var(--muted);overflow-wrap:anywhere}.budget-error{font-size:11px;color:var(--red);margin-top:5px}
+    .weather{margin-top:16px;padding:20px 24px 17px}.weather-top{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:15px}.weather-top h2{font-size:16px}.weather-top .badge{font-size:9px}.weather-grid{display:grid;grid-template-columns:1.2fr 1.1fr 1fr;gap:30px}.metric+.metric{border-left:1px solid var(--line);padding-left:30px}.metric-label{font-size:10px;color:var(--muted);letter-spacing:.055em;text-transform:uppercase;font-weight:600}.metric-value{font-size:29px;font-weight:600;line-height:1.3;letter-spacing:-.8px;margin:4px 0}.metric-value .unit{font-size:14px;color:var(--muted);font-weight:400;letter-spacing:0}.metric-value.dates{font-size:24px;padding-top:5px}.metric-note{font-size:11px;color:var(--muted);line-height:1.45}.metric .window-tag{display:inline-block;font-size:10px;color:var(--amber);background:var(--amber-pale);padding:2px 6px;margin-bottom:4px}.weather-bottom{display:grid;grid-template-columns:1.2fr 1.5fr;gap:30px;align-items:center;margin-top:15px;padding-top:12px;border-top:1px solid var(--line)}.weather-explain{font-size:11px;color:var(--muted);line-height:1.6}.weather-explain strong{font-weight:600;color:var(--ink)}.rain-chart{width:100%;height:68px;display:block}.weather-message{font-size:13px;color:var(--muted);margin:9px 0}.replay-banner{background:var(--amber-pale);border-left:3px solid #bb934e;padding:9px 14px;font-size:12px;margin:16px 0 0;color:#6c4b1c;display:flex;gap:12px;flex-wrap:wrap;align-items:center}.replay-banner strong{font-size:11px;letter-spacing:.03em}
+    .workspace{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.02fr);gap:20px;margin-top:20px;align-items:start}.panel-header{padding:19px 22px 15px;display:flex;justify-content:space-between;align-items:start;gap:12px}.panel-header p{font-size:11px;color:var(--muted);margin-top:4px}.panel-count{font-size:11px;font-family:var(--mono);background:#f1f4ee;padding:4px 8px;border-radius:4px;white-space:nowrap}.map-frame{position:relative;margin:0 12px;background:#edf0e8;border-radius:4px;overflow:hidden}#map{height:325px;background-color:#edf0e8;background-image:linear-gradient(#e2e7dd 1px,transparent 1px),linear-gradient(90deg,#e2e7dd 1px,transparent 1px);background-size:40px 40px}.map-tools{position:absolute;top:12px;right:12px;z-index:800;background:white;border:1px solid var(--line);border-radius:4px;padding:5px 9px;font-size:10px;display:flex;gap:6px;align-items:center}.map-tools input{accent-color:var(--green);margin:0}.map-footer{padding:13px 20px 16px}.legend{display:flex;gap:8px 14px;flex-wrap:wrap;font-size:10px;color:var(--muted);margin-bottom:8px}.legend span{display:inline-flex;align-items:center;gap:5px}.dot{width:9px;height:9px;border-radius:50%;border:1px solid currentColor;display:inline-block;flex:none}.dot.sample{color:var(--green);background:var(--green)}.dot.baseline{color:var(--blue);background:var(--blue)}.dot.capacity{color:var(--amber);background:#dfbc70}.dot.low{color:#8b968b;background:#a9b3a5}.dot.excluded{color:var(--red);background:#c87a73}.dot.notice{border:2px solid #976124;background:white}.map-note{font-size:10px;color:var(--muted);line-height:1.6}.leaflet-control-attribution{font-size:9px!important;background:#fff!important}.leaflet-control-zoom a{color:var(--ink)!important}.leaflet-popup-content{font-family:var(--sans);font-size:12px;line-height:1.5}.leaflet-tooltip.site-label{font-family:var(--mono);font-size:10px;padding:1px 4px;border:0;box-shadow:none;border-radius:3px;background:#fffffff0;color:var(--ink)}.leaflet-tooltip.site-label:before{display:none}.leaflet-popup-content button{margin-top:8px;padding:4px 8px;background:white;border:1px solid #d5ded6;border-radius:3px;font-size:11px}
+    .visit-panel{overflow:hidden}.visit-help{font-size:10px;color:var(--muted);padding:0 22px 11px;border-bottom:1px solid var(--line)}.visits-scroll{max-height:638px;overflow:auto;scrollbar-width:thin;scrollbar-color:#c1cbbf transparent}.visit-list{list-style:none;margin:0;padding:0}.visit-card{padding:18px 22px;border-bottom:1px solid var(--line)}.visit-card:last-child{border-bottom:0}.visit-heading{display:flex;align-items:start;gap:10px}.rank-number{font:12px var(--mono);width:25px;height:25px;display:grid;place-items:center;border:1px solid #d5ded6;border-radius:4px;flex:none;color:var(--green);margin-top:2px}.site-title{flex:1;min-width:0}.site-title h3{font-size:13px;line-height:1.4;overflow-wrap:anywhere}.site-title h3 code{font-size:12px;display:inline-block;margin-right:8px;font-weight:700;color:var(--green)}.category-text{font-size:12px;margin-top:5px;color:var(--ink)}.visit-time{font-size:11px;color:var(--muted);margin:10px 0 8px;padding-left:35px}.visit-time strong{font-weight:600;color:var(--ink)}.visit-time .small-window{font-size:10px;display:block;color:var(--amber);margin-top:3px}.why{margin-left:35px;font-size:11px}.why summary{font-size:11px;color:var(--green);font-weight:600;list-style:none;display:flex;align-items:center;gap:6px}.why summary:before{content:"+";font-family:var(--mono);font-size:14px;font-weight:400}.why[open]>summary:before{content:"−"}.why .reason{margin:11px 0;color:var(--muted);line-height:1.65}.source-fields{display:grid;grid-template-columns:1.45fr 1fr;gap:6px 12px;margin:12px 0;padding-top:10px;border-top:1px solid var(--line);font-size:10px}.source-fields dt{color:var(--muted);overflow-wrap:anywhere}.source-fields dd{margin:0;text-align:right;font-family:var(--mono);overflow-wrap:anywhere}.provenance{margin-top:10px}.provenance summary{font-weight:400;font-size:10px}.provenance p{margin:8px 0;overflow-wrap:anywhere;font-size:10px}.locate{font-size:10px;border:1px solid #d5ded6;border-radius:3px;background:white;padding:4px 7px;white-space:nowrap}.empty-visits{padding:28px 24px;color:var(--muted);font-size:13px;line-height:1.75}.empty-visits strong{display:block;font-size:16px;color:var(--ink);margin-bottom:7px}.capacity-details{padding:13px 22px;border-top:1px solid var(--line);font-size:11px}.capacity-details summary{color:var(--muted);font-weight:600}.capacity-row{display:flex;align-items:start;gap:10px;padding:11px 0;border-bottom:1px solid var(--line)}.capacity-row:last-child{border-bottom:0}.capacity-row p{flex:1;min-width:0;font-size:11px}.capacity-row small{display:block;color:var(--muted);margin-top:3px}.capacity-row code{font-size:11px;font-weight:600;white-space:nowrap}
+    .notice-panel{margin-top:18px}.notice-panel .panel-header{padding-bottom:11px}.notice-body{padding:0 22px 18px}.notice-description{font-size:11px;color:var(--muted);line-height:1.65;margin-bottom:10px}.notice-row{border-top:1px solid var(--line);font-size:11px;padding:10px 0}.notice-row summary{display:flex;align-items:center;gap:9px;list-style:none}.notice-row summary:after{content:"+";margin-left:auto;color:var(--muted);font-size:16px}.notice-row[open] summary:after{content:"−"}.notice-row summary code{font-size:11px;font-weight:600;color:var(--amber)}.notice-text{background:#fcf9ef;border-left:2px solid #c2a064;padding:11px 13px;margin:11px 0;line-height:1.7;font-size:12px}.notice-basis{color:var(--muted);font-size:10px;margin-top:7px;line-height:1.65}.notice-tag{color:var(--amber);font-size:9px;letter-spacing:.025em;font-weight:600}.coverage{padding:15px 20px;margin-top:18px;font-size:11px;color:var(--muted)}.coverage summary{font-weight:600;color:var(--ink)}.coverage p{margin-top:9px;line-height:1.7}.coverage .mono{font-size:11px}.roster{margin-top:20px;overflow:hidden}.roster>summary{padding:19px 22px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:10px;list-style:none}.roster>summary:after{content:"+";margin-left:auto;font-size:21px;font-weight:400;color:var(--muted)}.roster[open]>summary:after{content:"−"}.roster-note{padding:0 22px 13px;font-size:11px;color:var(--muted)}.table-wrap{overflow:auto}.roster table{width:100%;border-collapse:collapse;text-align:left;font-size:12px}.roster th{font-size:10px;color:var(--muted);font-weight:600;white-space:nowrap;background:#f9faf6}.roster td,.roster th{padding:11px 22px;border-top:1px solid var(--line)}.roster td small{display:block;font-size:10px;color:var(--muted);margin-top:3px}.roster td:nth-child(3){white-space:nowrap}.table-reason{max-width:340px;min-width:220px;color:var(--muted);font-size:11px}.excluded-panel{margin-top:16px;padding:14px 20px;font-size:11px;color:var(--muted)}.excluded-panel summary{font-weight:600;color:var(--ink)}.excluded-panel p{margin-top:9px}.sources-summary{margin-top:16px;padding:14px 20px;font-size:11px;color:var(--muted)}.sources-summary summary{font-weight:600;color:var(--ink)}.sources-summary p{margin-top:8px;overflow-wrap:anywhere}
+    .footer{margin-top:24px;padding-top:18px;border-top:1px solid #dce3d8;display:grid;grid-template-columns:1fr 1fr 1fr;gap:25px;font-size:10px;color:var(--muted)}.footer strong{display:block;font-size:10px;color:var(--ink);font-weight:600;margin-bottom:4px}.footer-brand{display:flex;justify-content:space-between;gap:20px;font-size:10px;color:var(--muted);margin-top:22px}.loading{padding:35px 0;color:var(--muted)}.fatal{border-left:3px solid var(--red);background:white;padding:20px;line-height:1.7}.fatal p{margin-top:8px;font-size:13px}.inline-status{font-size:10px;color:var(--muted)}
+    @media(min-width:1200px){.intro h1{font-size:42px}.map-frame #map{height:345px}}
+    @media(max-width:1000px){.shell{padding:0 24px}.controls{grid-template-columns:190px minmax(180px,1fr) 145px;gap:20px}.brand-sub{display:none}.weather-grid{gap:20px}.metric+.metric{padding-left:20px}.metric-value{font-size:25px}.metric-value.dates{font-size:21px}.visit-card{padding:16px}.panel-header{padding:17px 18px 13px}.visits-scroll{max-height:625px}.locate{font-size:9px}.workspace{gap:16px}}
+    @media(max-width:760px){.shell{padding:0 18px}.topbar-inner{min-height:64px}.brand{font-size:22px}.project-context{font-size:9px}.intro{margin-bottom:20px}.intro h1{font-size:34px}.prototype-note{display:none}main{padding-top:24px}.controls{grid-template-columns:1fr 1fr;padding:17px 18px;gap:17px}.city-control{grid-column:1/-1}.city-select{max-width:none}.mode-control{min-width:0}.budget-control{justify-self:end}.mode-toggle button{padding:5px 11px}.mode-meta{gap:5px}.timestamp{font-size:9px}.weather{padding:17px 18px}.weather-grid{grid-template-columns:1fr 1fr;gap:18px}.metric:last-child{border:0;padding:0;grid-column:1/-1;display:flex;align-items:center;gap:12px;border-top:1px solid var(--line);padding-top:12px}.metric:last-child .metric-value{margin:0;font-size:24px}.metric:last-child .metric-note{margin-left:auto;max-width:170px}.weather-bottom{grid-template-columns:1fr;gap:10px}.weather-top{align-items:start;gap:8px}.weather-top h2{font-size:14px}.weather-top .badge{max-width:132px;text-align:left}.metric-value{font-size:27px}.metric-value.dates{font-size:22px}.workspace{grid-template-columns:1fr}.map-frame #map{height:300px}.left-column{display:contents}.map-panel{grid-row:1}.visit-panel{grid-row:2}.notice-panel{grid-row:3;margin-top:0}.coverage{grid-row:4;margin-top:0}.visits-scroll{max-height:none;overflow:visible}.visit-card{padding:18px}.panel-header{padding:18px}.footer{grid-template-columns:1fr;gap:12px}.roster td,.roster th{padding:10px 14px}.footer-brand{flex-direction:column;gap:4px}.replay-banner{font-size:11px}.source-fields{grid-template-columns:1.4fr 1fr}}
+    .distance-note{font-size:10px;color:var(--amber);margin:0 0 8px 35px}
+    @media(max-width:520px){.mode-control{grid-column:1/-1}.budget-control{justify-self:stretch;grid-column:1/-1;display:grid;grid-template-columns:1fr auto;align-items:center}.budget-control .control-label{margin:0}.budget-control .budget-note,.budget-control .budget-error{grid-column:1/-1}.mode-toggle button{white-space:nowrap}.mode-meta{margin-top:8px}}
+    @media(prefers-reduced-motion:no-preference){.intro,.controls,.weather,.workspace{animation:appear .4s ease both}.controls{animation-delay:.04s}.weather{animation-delay:.08s}.workspace{animation-delay:.12s}@keyframes appear{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}} @media print{.controls,.map-tools,.locate,.topbar .project-context{display:none}.shell{padding:0}.workspace{display:block}.map-panel{break-inside:avoid}.visits-scroll{max-height:none;overflow:visible}.visit-card{break-inside:avoid}.notice-panel{margin-top:12px}}
+  </style>
+  <script src="vendor/leaflet.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to sampling plan</a>
+  <header class="topbar"><div class="shell topbar-inner">
+    <div class="brand"><svg viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="7" fill="#315b48"/><path d="M6 13q5-5 11 0t11 0M6 21q5-5 11 0t11 0" fill="none" stroke="#f4f7ee" stroke-width="1.8"/></svg><span>AfterStorm</span><span class="brand-sub">Evidence, refreshed.</span></div>
+    <div class="project-context"><strong>OneAquaHealth · Track 6</strong><br>Urban freshwater · One Health</div>
+  </div></header>
+  <main id="main" class="shell">
+    <div class="intro"><div><span class="eyebrow">A workspace for stream coordinators</span><h1>Your next sampling plan</h1><p>Use rain forecasts to decide where to refresh the evidence.</p></div><p class="prototype-note">Sampling proposals for coordinator review<br><span id="evidence-age"></span></p></div>
+    <p id="loading" class="loading" role="status">Loading the saved sampling plan…</p>
+    <div id="fatal" class="fatal" role="alert" hidden></div>
+    <div id="app" hidden>
+      <section class="surface controls" aria-label="Plan controls">
+        <div class="city-control"><label class="control-label" for="city-select">City</label><select id="city-select" class="city-select"></select></div>
+        <div class="mode-control"><span class="control-label" id="mode-label">Evidence mode</span><div class="mode-toggle" role="group" aria-labelledby="mode-label"><button id="mode-live" type="button" aria-pressed="true">Live forecast</button><button id="mode-replay" type="button" aria-pressed="false">Archive replay</button></div><div class="mode-meta"><span id="mode-badge" class="badge">LIVE</span><span id="fetched-at" class="timestamp"></span></div></div>
+        <div class="budget-control"><label class="control-label" for="budget">Site-visit budget</label><div class="stepper"><button id="budget-minus" type="button" aria-label="Decrease visit budget">−</button><input id="budget" type="number" min="0" step="1" value="5" aria-describedby="budget-note budget-error"><button id="budget-plus" type="button" aria-label="Increase visit budget">+</button></div><p class="budget-note" id="budget-note">1 visit collects all proposed categories</p><p id="budget-error" class="budget-error" role="status" hidden></p></div>
+      </section>
+      <div id="replay-banner" class="replay-banner" hidden></div>
+      <section class="surface weather" id="weather" aria-label="Rain evidence and proposed timing"></section>
+      <p id="plan-status" class="inline-status" role="status" aria-live="polite" style="margin:10px 3px 0"></p>
+      <div class="workspace">
+        <div class="left-column">
+          <section class="surface map-panel" aria-label="Stream map">
+            <div class="panel-header"><div><h2 id="map-heading">Stream locations</h2><p id="map-count"></p></div><span class="eyebrow">Official site roster</span></div>
+            <div class="map-frame"><div id="map" aria-label="Stream locations and visit status"></div><label class="map-tools"><input id="basemap" type="checkbox" checked> Street map</label></div>
+            <div class="map-footer"><div class="legend"><span><i class="dot sample" aria-hidden="true"></i>Storm visit</span><span><i class="dot baseline" aria-hidden="true"></i>Baseline visit</span><span><i class="dot capacity" aria-hidden="true"></i>If capacity allows</span><span><i class="dot low" aria-hidden="true"></i>No visit</span><span><i class="dot excluded" aria-hidden="true"></i>Excluded</span><span><i class="dot notice" aria-hidden="true"></i>Draft notice</span></div><p id="map-status" class="map-note">Map tiles need internet. Pins and the plan use saved data.</p><p class="map-note">Coordinates: OneAquaHealth's official site roster. Use “Show on map” in the list to locate a site.</p></div>
+          </section>
+          <section class="surface notice-panel" aria-labelledby="notice-heading"><div class="panel-header"><div><h2 id="notice-heading">Draft contact notices</h2><p>Human and animal health · coordinator review</p></div><span id="notice-count" class="panel-count"></span></div><div id="notices" class="notice-body"></div></section>
+          <details id="coverage" class="surface coverage"></details>
+        </div>
+        <section class="surface visit-panel" aria-labelledby="visit-heading"><div class="panel-header"><div><h2 id="visit-heading">Proposed site visits</h2><p id="visit-subtitle"></p></div><span id="visit-count" class="panel-count"></span></div><p class="visit-help">One trip per site. The lab team chooses the assessment method.</p><div class="visits-scroll" id="visits"></div><div id="capacity"></div></section>
+      </div>
+      <details class="surface roster" id="roster"><summary><span id="roster-heading">All sites and planning status</span><span class="badge grey">Full roster</span></summary><p class="roster-note">Every official site is retained, including baselines, sites outside the budget and invalid records. Status describes the sampling proposal, not water safety.</p><div class="table-wrap"><table><thead><tr><th scope="col">Site</th><th scope="col">Location</th><th scope="col">Planning status</th><th scope="col">Reason / evidence</th><th scope="col">Locate</th></tr></thead><tbody id="all-sites"></tbody></table></div></details>
+      <details class="surface excluded-panel" id="excluded"><summary id="excluded-heading">Excluded and why</summary><div id="excluded-body"></div></details>
+      <details class="surface sources-summary" id="sources"><summary>Data sources and policy settings</summary><div id="source-summary"></div></details>
+      <footer class="footer"><p><strong>Historical evidence</strong>2023–24 relative categories, not concentrations or current health ratings. Visits use greedy ranking; no field validation yet.</p><p><strong>Experimental timing</strong>The post-rain window is an adjustable heuristic, not a validated sampling protocol or safety clearance.</p><p><strong>Coordinator review</strong>Assessment methods and contact notices require human judgment. Forecast rain triggers sampling proposals, not contamination predictions.</p></footer>
+      <div class="footer-brand"><span>AfterStorm · From streams to systems.</span><span id="data-stamp"></span></div>
+    </div>
+  </main>
+  <script>
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const shortDate = day => day ? `${Number(day.slice(8,10))} ${months[Number(day.slice(5,7))-1]}` : 'Unknown date';
+  const fullDate = day => day ? `${shortDate(day)} ${day.slice(0,4)}` : 'Unknown date';
+  const dateRange = window => window ? `${fullDate(window.start_date)} – ${fullDate(window.end_date)}` : 'Routine baseline visit';
+  const timestamp = value => value ? value.replace('T',' ').replace(/Z$/, ' UTC') : 'retrieval time unavailable';
+  const numeric = value => typeof value === 'number' && Number.isFinite(value);
+  const displayedNumber = value => numeric(value) ? String(value) : 'Unknown';
+  const link = (url,label) => {
+    try { if (!['https:','http:'].includes(new URL(url).protocol)) throw new Error(); }
+    catch { return escapeHTML(label); }
+    return `<a href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(label)}</a>`;
+  };
+  let data, cityId = 'OS', mode = 'live', budget = 5, leafletMap, tileLayer, markers = new Map();
+  let markerGroup, previousMapCity, tileFailed = false;
+
+  function view(){const city=data.cities[cityId], plan=city.modes[mode];return {city,plan,allocated:new Set(plan.ranking.slice(0,budget))};}
+  function planningStatus(site,allocated){
+    if(site.status==='invalid source data') return {label:'Invalid source data',color:'#963e39',kind:'excluded'};
+    if(site.action==='first baseline assessment') return allocated.has(site.code) ? {label:'Baseline visit planned',color:'#286486',kind:'baseline'} : {label:'Baseline · if capacity allows',color:'#b18334',kind:'capacity'};
+    if(site.action==='new category assessment') return allocated.has(site.code) ? {label:'Sample this storm',color:'#315b48',kind:'sample'} : {label:'If capacity allows',color:'#b18334',kind:'capacity'};
+    return {label:site.status,color:'#899486',kind:'low'};
+  }
+  function rainChart(period){
+    if(!period?.rain_mm_by_date) return '';
+    const entries=Object.entries(period.rain_mm_by_date), max=Math.max(data.config.RAIN_MM,...entries.map(([,v])=>numeric(v)?v:0));
+    const width=455,height=68,base=47,scale=34/max,step=width/entries.length;
+    const threshold=base-data.config.RAIN_MM*scale;
+    return `<svg class="rain-chart" viewBox="0 0 ${width} ${height}" role="img" aria-label="Cached seven-day rainfall forecast in millimetres. Dashed line: ${escapeHTML(data.config.RAIN_MM)} mm storm threshold."><title>${escapeHTML(entries.map(([d,v])=>`${d}: ${displayedNumber(v)} mm`).join('; '))}</title><line x1="0" x2="${width}" y1="${threshold}" y2="${threshold}" stroke="#a7b8a4" stroke-dasharray="3 3"/>${entries.map(([day,rain],i)=>{const wet=numeric(rain)&&rain>=data.config.RAIN_MM, h=numeric(rain)?Math.max(2,rain*scale):0;return `<rect x="${i*step+16}" y="${base-h}" width="${step-32}" height="${h}" rx="2" fill="${wet?'#315b48':'#cbd7c8'}"/><text x="${i*step+step/2}" y="${base-h-4}" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="9" fill="${wet?'#315b48':'#687567'}">${numeric(rain)&&rain>0?escapeHTML(rain):numeric(rain)?'':'?'}</text><text x="${i*step+step/2}" y="62" text-anchor="middle" font-family="Segoe UI,Arial,sans-serif" font-size="9" fill="#687567">${escapeHTML(shortDate(day))}</text>`;}).join('')}</svg>`;
+  }
+  function renderWeather(city,plan,allocated){
+    const storm=plan.storm;
+    let rainValue='No storm',rainLabel='Cached forecast',rainNote=plan.forecast_period?`${fullDate(plan.forecast_period.start_date)} – ${fullDate(plan.forecast_period.end_date)}`:'Rain data unavailable';
+    if(storm){
+      if(mode==='live'){rainValue=displayedNumber(storm.rain_mm_by_date[storm.anchor_date]);rainLabel='Forecast rain';rainNote=fullDate(storm.anchor_date)+' · one city-centre forecast';}
+      else{const range=storm.rain_range_mm_by_date[storm.anchor_date];rainValue=range.min===range.max?displayedNumber(range.min):`${range.min}–${range.max}`;rainLabel='Archived rain across sites';rainNote=fullDate(storm.anchor_date)+' · every site meets the threshold';}
+    }else if(plan.weather_status==='unknown'){rainValue='Unknown';rainLabel='Rain evidence';rainNote='Unknown values are never treated as dry.';}
+    else if(mode==='replay'){rainValue='No replay';rainLabel='Archived rain';rainNote='No complete city-wide event qualifies.';}
+    const tag=storm?(mode==='live'?'Forecast threshold reached':'Archived storm · past scenario'):plan.weather_status==='unknown'?'Incomplete rain evidence':'No storm sampling';
+    const eligible=plan.ranking.length,baseline=plan.sites.filter(s=>s.action==='first baseline assessment').length;
+    $('weather').innerHTML=`<div class="weather-top"><h2>${escapeHTML(city.name)} · ${storm?'storm assessment':'routine monitoring'}</h2><span class="badge ${mode==='replay'?'replay':''}">${escapeHTML(tag)}</span></div><div class="weather-grid"><div class="metric"><p class="metric-label">${escapeHTML(rainLabel)}</p><div class="metric-value">${escapeHTML(rainValue)}${storm?' <span class="unit">mm</span>':''}</div><p class="metric-note">${escapeHTML(rainNote)}</p></div><div class="metric"><p class="metric-label">${storm?'Proposed sampling dates':'Next monitoring action'}</p><div class="metric-value dates">${storm?escapeHTML(shortDate(storm.window.start_date)+' – '+shortDate(storm.window.end_date)):baseline?'First baseline':'No visit needed'}</div>${storm?`<span class="window-tag">Experimental window (heuristic, not validated)</span><p class="metric-note">${escapeHTML(storm.window.start_date)} to ${escapeHTML(storm.window.end_date)} inclusive</p>`:`<p class="metric-note">${baseline?`${baseline} site${baseline===1?'':'s'} without a lab result`:'Every site has a lab record; see the roster for validity.'}</p>`}</div><div class="metric"><p class="metric-label">Site visits planned</p><div class="metric-value">${allocated.size}<span class="unit"> / ${budget} budget</span></div><p class="metric-note">${eligible} eligible site${eligible===1?'':'s'} · ${baseline} baseline${baseline===1?'':'s'}<br>All categories collected in one trip</p></div></div><div class="weather-bottom"><p class="weather-explain">${storm?`<strong>${escapeHTML(storm.boundary_note)}</strong><br>Rain ≥ ${data.config.RAIN_MM} mm triggers a proposal. Current contamination is unknown.`:escapeHTML(plan.message)}</p>${mode==='live'?rainChart(plan.forecast_period):`<p class="weather-explain">${escapeHTML(plan.archive?.policy||'Archive coverage is unavailable.')}<br>Missing days break wet-day runs. This replay is historical.</p>`}</div>`;
+    $('replay-banner').hidden=mode!=='replay';
+    $('replay-banner').innerHTML=`<strong>${escapeHTML(plan.label)}</strong><span>Historical scenario; this is not an upcoming event.</span>`;
+  }
+  function sourceDetails(site,plan){
+    const health=site.source_health;
+    const rain=plan.storm?(mode==='live'?plan.storm.rain_mm_by_date[plan.storm.anchor_date]:plan.storm.rain_mm_by_site_by_date[site.code][plan.storm.anchor_date]):null;
+    const fields=health?`<dt>Lab sample date (samplingDate)</dt><dd>${escapeHTML(site.sample_date)}</dd><dt>Faecal (scaledFecalRisk)</dt><dd>${escapeHTML(displayedNumber(health.scaledFecalRisk))}</dd><dt>Pathogen (scaledPathogenRisk)</dt><dd>${escapeHTML(displayedNumber(health.scaledPathogenRisk))}</dd><dt>Antibiotic resistance (scaledArgRisk)</dt><dd>${escapeHTML(displayedNumber(health.scaledArgRisk))}</dd>`:'<dt>Lab evidence</dt><dd>No lab result</dd>';
+    return `<details class="why"><summary>Why this site?</summary><p class="reason">${escapeHTML(site.reason)}</p><dl class="source-fields">${fields}<dt>Sewage distance (distanceToSewageStations)</dt><dd>${numeric(site.sewage_distance_m)?escapeHTML(site.sewage_distance_m)+' m':'Missing; last among baselines'}</dd>${plan.storm?`<dt>${mode==='live'?'City forecast rain':'Archived site rain'} on ${escapeHTML(plan.storm.anchor_date)}</dt><dd>${escapeHTML(displayedNumber(rain))} mm</dd>`:''}</dl>${site.window?`<p class="reason">${escapeHTML(site.window.why)} ${link(site.window.source,'Directive context')}</p>`:''}<details class="provenance"><summary>Source URLs and retrieval times</summary>${Object.entries(site.provenance).map(([name,ref])=>`<p>${link(ref.url,name==='rain'?(mode==='live'?'City forecast':'Site rainfall archive'):name==='health'?'Lab category results':name==='urban'?'Urban parameters':'Official roster')}<br>Fetched <span class="mono">${escapeHTML(timestamp(ref.fetched_at))}</span></p>`).join('')}</details></details>`;
+  }
+  function renderVisits(plan,allocated){
+    const sites=new Map(plan.sites.map(s=>[s.code,s]));
+    const selected=plan.ranking.slice(0,budget).map(code=>sites.get(code));
+    $('visit-count').textContent=`${selected.length} planned`;
+    $('visit-subtitle').textContent=plan.storm?'Within the experimental post-rain window':'Routine baseline visits where lab evidence is missing';
+    if(selected.length){
+      $('visits').innerHTML=`<ol class="visit-list">${selected.map(site=>`<li class="visit-card" id="visit-${escapeHTML(site.code)}" data-code="${escapeHTML(site.code)}"><div class="visit-heading"><span class="rank-number">${site.rank}</span><div class="site-title"><h3><code>${escapeHTML(site.code)}</code>${escapeHTML(site.name)}</h3><p class="category-text">${site.action==='first baseline assessment'?'<span class="badge blue">First baseline</span> ':''}${escapeHTML(site.categories.join(' + '))}</p></div>${site.position?`<button type="button" class="locate" data-locate="${escapeHTML(site.code)}" aria-label="Show ${escapeHTML(site.code)} on map">Show on map</button>`:''}</div><p class="visit-time"><strong>${escapeHTML(dateRange(site.window))}</strong>${site.window?'<span class="small-window">Experimental window (heuristic, not validated)</span>':'<span class="small-window">No storm window</span>'}</p>${site.action==='first baseline assessment'&&site.sewage_distance_m===null?'<p class="distance-note">Missing sewage distance · last among baseline sites</p>':''}${sourceDetails(site,plan)}${site.map_note?`<p class="reason muted small">${escapeHTML(site.map_note)}</p>`:''}</li>`).join('')}</ol>`;
+    }else{
+      let reason;
+      if(budget===0) reason='The site-visit budget is zero. Increase it to allocate eligible visits; the full roster and evidence remain available.';
+      else if(plan.weather_status==='no_storm'&&!plan.sites.some(s=>s.action==='first baseline assessment')) reason='No storm is forecast in the cached seven-day period, and every site already has a lab result. No visits are planned.';
+      else if(plan.weather_status==='unknown') reason='Rain evidence is incomplete, so storm visits are not scheduled. No valid baseline site is available for a routine visit; review the roster and source-data exclusions.';
+      else if(plan.storm) reason='No valid site meets the configured assessment threshold, and there are no baseline sites awaiting a first assessment. No visits are planned; review the full roster below.';
+      else reason='No complete city-wide archived storm qualifies, and no baseline site is awaiting a first assessment. No visits are planned.';
+      $('visits').innerHTML=`<p class="empty-visits" id="empty-visits"><strong>No visits planned</strong>${escapeHTML(reason)}</p>`;
+    }
+    const remaining=plan.ranking.slice(budget).map(code=>sites.get(code));
+    $('capacity').innerHTML=remaining.length?`<details class="capacity-details"><summary>${remaining.length} more site${remaining.length===1?'':'s'} if capacity allows</summary>${remaining.map(s=>`<div class="capacity-row"><code>${escapeHTML(s.code)}</code><p>${escapeHTML(s.name)}<small>${s.action==='first baseline assessment'?'First baseline · ':''}${escapeHTML(s.categories.join(' + '))}${s.sewage_distance_m===null?' · missing sewage distance; last among baselines':''}</small></p>${s.position?`<button type="button" class="locate" data-locate="${escapeHTML(s.code)}" aria-label="Show ${escapeHTML(s.code)} on map">Show on map</button>`:''}</div>`).join('')}</details>`:'';
+  }
+  function renderNotices(plan){
+    $('notice-count').textContent=String(plan.notices.length);
+    if(!plan.notices.length){
+      const explanation=plan.storm?'No valid faecal or pathogen category reaches the notice threshold in this city. An antibiotic-resistance assessment alone does not trigger a contact notice.':'No storm scenario is selected, so no contact notices are drafted.';
+      $('notices').innerHTML=`<p class="notice-description">${escapeHTML(explanation)}</p>`;
+      return;
+    }
+    const noticeRows=plan.notices.map(notice=>{
+      const site=plan.sites.find(s=>s.code===notice.code);
+      return `<details class="notice-row" data-code="${escapeHTML(notice.code)}"><summary><code>${escapeHTML(notice.code)}</code><span>${escapeHTML(site?.name||notice.code)}</span></summary><p class="notice-tag" style="margin-top:10px">${escapeHTML(notice.label)}</p><p class="notice-text">${escapeHTML(notice.text)}</p><p class="notice-basis">${escapeHTML(notice.basis)}</p><p class="notice-basis">${escapeHTML(notice.review)}</p></details>`;
+    }).join('');
+    $('notices').innerHTML='<p class="notice-description">Draft — requires coordinator review. The coordinator decides whether to issue each notice and when to lift it.</p>'+noticeRows;
+  }
+  function renderRoster(plan,allocated){
+    $('roster-heading').textContent=`All ${plan.sites.length} sites and planning status`;
+    $('all-sites').innerHTML=plan.sites.map(site=>{const status=planningStatus(site,allocated);return `<tr data-code="${escapeHTML(site.code)}"><td><code>${escapeHTML(site.code)}</code></td><td>${escapeHTML(site.name)}${site.map_note?`<small>${escapeHTML(site.map_note)}</small>`:''}</td><td><span class="badge ${status.kind==='baseline'?'blue':status.kind==='capacity'?'replay':status.kind==='sample'?'':'grey'}">${escapeHTML(status.label)}</span></td><td class="table-reason">${escapeHTML(site.reason)}</td><td>${site.position?`<button type="button" class="locate" data-locate="${escapeHTML(site.code)}" aria-label="Show ${escapeHTML(site.code)} on map">Show on map</button>`:'No coordinates'}</td></tr>`;}).join('');
+    $('excluded-heading').textContent=`Excluded and why · ${plan.excluded.length}`;
+    $('excluded-body').innerHTML=plan.excluded.length?plan.excluded.map(s=>`<p><code>${escapeHTML(s.code)}</code> ${escapeHTML(s.reason)}</p>`).join(''):'<p>No sites are excluded for invalid lab source data in this city/mode. Sites without lab results remain baseline candidates.</p>';
+  }
+  function renderCoverage(plan){
+    const archive=data.cities[cityId].modes.replay.archive;
+    if(!archive){$('coverage').hidden=true;return;}
+    $('coverage').hidden=false;
+    const observed=archive.valid_dates.length,heavy=archive.heavy_rain_days,rate=observed?((heavy/observed)*365.25).toFixed(1):null;
+    $('coverage').innerHTML=`<summary>Rain archive coverage</summary><p><span class="mono">${archive.unknown_dates.length}</span> days without data at every site (includes days before some site histories begin)</p><p><span class="mono">${observed}</span> days with valid rainfall at every site; <span class="mono">${heavy}</span> reach ${data.config.RAIN_MM} mm at every site.${rate?` Approximately <span class="mono">${rate}</span> threshold-reaching days per observed year.`:''}</p><p>Frequency uses fully covered city days only: heavy days ÷ covered days × 365.25. It describes the archive, not future rainfall or contamination. Missing dates break wet-day runs.</p>`;
+  }
+  function mapStatus(){
+    $('map-status').textContent=!$('basemap').checked?'Street map off. Pins use saved coordinates; map tiles need internet.':tileFailed?'Street map unavailable. Pins remain on a plain background. Map tiles need internet.':'Map tiles need internet. Pins and the plan use saved data.';
+  }
+  function initializeMap(){
+    if(!window.L) throw new Error('The local map library is unavailable. Check that web/vendor/leaflet.js is present.');
+    leafletMap=L.map('map',{scrollWheelZoom:false,zoomControl:true});
+    markerGroup=L.layerGroup().addTo(leafletMap);
+    tileLayer=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors'});
+    tileLayer.on('tileerror',()=>{tileFailed=true;mapStatus();});
+    tileLayer.addTo(leafletMap);
+    $('basemap').addEventListener('change',()=>{if($('basemap').checked){tileFailed=false;tileLayer.addTo(leafletMap);}else leafletMap.removeLayer(tileLayer);mapStatus();});
+  }
+  function renderMap(city,plan,allocated){
+    markerGroup.clearLayers();markers.clear();
+    const positioned=plan.sites.filter(s=>s.position&&numeric(s.position.latitude)&&numeric(s.position.longitude));
+    $('map-heading').textContent=`Streams in ${city.name}`;
+    $('map-count').textContent=`${plan.sites.length} sites · ${positioned.length} with coordinates`;
+    for(const site of positioned){
+      const status=planningStatus(site,allocated),active=allocated.has(site.code);
+      const marker=L.circleMarker([site.position.latitude,site.position.longitude],{radius:active?8:5.5,color:site.draft_notice?'#976124':status.color,weight:site.draft_notice?3:1.5,fillColor:status.color,fillOpacity:active?.95:.65});
+      const popup=document.createElement('div');
+      popup.innerHTML=`<strong><code>${escapeHTML(site.code)}</code> · ${escapeHTML(site.name)}</strong><br>${escapeHTML(status.label)}${site.categories.length?'<br>'+escapeHTML(site.categories.join(' + ')):''}${site.draft_notice?'<br><span class="notice-tag">Draft — requires coordinator review</span>':''}`;
+      marker.bindPopup(popup);marker.addTo(markerGroup);markers.set(site.code,marker);
+      if(active) marker.bindTooltip(escapeHTML(site.code),{permanent:true,direction:'top',offset:[0,-7],className:'site-label'});
+    }
+    if(previousMapCity!==cityId){
+      if(positioned.length) leafletMap.fitBounds(L.latLngBounds(positioned.map(s=>[s.position.latitude,s.position.longitude])),{padding:[35,35],maxZoom:14});
+      else leafletMap.setView([city.latitude,city.longitude],12);
+      previousMapCity=cityId;
+    }
+    mapStatus();
+  }
+  function renderSources(){
+    const refs=[['sites.json','Official site roster'],['health-risks.json','Lab category results'],['urban-parameters.json','Urban parameters'],[`forecasts/${cityId}.json`,'City forecast']];
+    $('source-summary').innerHTML=refs.map(([name,label])=>{const s=data.sources[name]||{};return `<p>${link(s.url,label)} · fetched <span class="mono">${escapeHTML(timestamp(s.fetched_at))}</span></p>`;}).join('')+`<p>Policy: rain ≥ ${data.config.RAIN_MM} mm/day; assessment category ≥ ${data.config.TEST_MIN}; faecal/pathogen notice ≥ ${data.config.ADVISORY_MIN}; window ${data.config.WINDOW_DAYS} calendar days; current budget ${budget} site visits. Source values and Python rankings stay unchanged when the budget changes.</p>`;
+  }
+  function render(){
+    const {city,plan,allocated}=view();
+    $('budget-error').hidden=true;$('budget').removeAttribute('aria-invalid');
+    $('mode-live').setAttribute('aria-pressed',String(mode==='live'));
+    $('mode-replay').setAttribute('aria-pressed',String(mode==='replay'));
+    $('mode-badge').textContent=mode==='live'?'LIVE':'REPLAY';$('mode-badge').className='badge'+(mode==='replay'?' replay':'');
+    const ref=data.sources[`forecasts/${cityId}.json`];
+    $('fetched-at').textContent=mode==='live'?`Forecast fetched ${timestamp(ref?.fetched_at)}`:'Historical rainfall · saved archive';
+    $('budget').max=String(plan.sites.length);$('budget').value=String(budget);
+    $('budget-minus').disabled=budget===0;$('budget-plus').disabled=budget===plan.sites.length;
+    renderWeather(city,plan,allocated);renderVisits(plan,allocated);renderNotices(plan);renderRoster(plan,allocated);renderCoverage(plan);renderMap(city,plan,allocated);renderSources();
+    $('plan-status').textContent=`${city.name} · ${mode==='live'?'LIVE forecast':plan.label} · ${allocated.size} visits proposed · ${plan.notices.length} draft notices requiring coordinator review`;
+    history.replaceState(null,'',`?city=${encodeURIComponent(cityId)}&mode=${mode}&visits=${budget}`);
+  }
+  function applyBudget(value){
+    const maximum=data.cities[cityId].modes[mode].sites.length;
+    if(!Number.isInteger(value)||value<0||value>maximum){$('budget-error').textContent=`Enter a whole number from 0 to ${maximum}.`;$('budget-error').hidden=false;$('budget').setAttribute('aria-invalid','true');return;}
+    budget=value;$('budget-error').hidden=true;$('budget').removeAttribute('aria-invalid');render();
+  }
+  function changeMode(value){mode=value;render();}
+  async function start(){
+    try{
+      const response=await fetch('data/plan.json',{cache:'no-store'});
+      if(!response.ok) throw new Error('The saved plan could not be loaded.');
+      data=await response.json();
+      if(data.schema_version!==1||!data.cities||!data.config) throw new Error('The saved plan has an unsupported format.');
+      const params=new URLSearchParams(location.search);
+      cityId=Object.hasOwn(data.cities,params.get('city'))?params.get('city'):Object.hasOwn(data.cities,'OS')?'OS':Object.keys(data.cities)[0];
+      mode=params.get('mode')==='replay'?'replay':'live';
+      const proposed=params.has('visits')?Number(params.get('visits')):data.config.VISITS_PER_CITY;
+      const maximum=data.cities[cityId].modes[mode].sites.length;
+      budget=Number.isInteger(proposed)&&proposed>=0?Math.min(proposed,maximum):Math.min(data.config.VISITS_PER_CITY,maximum);
+      $('city-select').innerHTML=Object.entries(data.cities).map(([id,city])=>`<option value="${escapeHTML(id)}">${escapeHTML(city.name)}</option>`).join('');$('city-select').value=cityId;
+      const allSites=Object.values(data.cities).flatMap(c=>c.modes.live.sites), labSites=allSites.filter(s=>s.source_health);
+      $('evidence-age').textContent=`${labSites.length} lab records · 2023–24`;
+      $('data-stamp').textContent=`Roster fetched ${timestamp(data.sources['sites.json']?.fetched_at)}`;
+      $('app').hidden=false;initializeMap();
+      $('city-select').addEventListener('change',()=>{cityId=$('city-select').value;budget=Math.min(budget,data.cities[cityId].modes[mode].sites.length);render();});
+      $('mode-live').addEventListener('click',()=>changeMode('live'));$('mode-replay').addEventListener('click',()=>changeMode('replay'));
+      $('budget').addEventListener('input',()=>applyBudget($('budget').value===''?NaN:Number($('budget').value)));
+      $('budget').addEventListener('blur',()=>{if($('budget').hasAttribute('aria-invalid')){$('budget').value=String(budget);$('budget').removeAttribute('aria-invalid');$('budget-error').hidden=true;}});
+      $('budget-minus').addEventListener('click',()=>applyBudget(budget-1));$('budget-plus').addEventListener('click',()=>applyBudget(budget+1));
+      document.addEventListener('click',event=>{const button=event.target.closest('[data-locate]');if(!button)return;const marker=markers.get(button.dataset.locate);if(!marker)return;leafletMap.panTo(marker.getLatLng());marker.openPopup();$('map').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'center'});});
+      render();$('loading').hidden=true;
+    }catch(error){$('app').hidden=true;$('loading').hidden=true;$('fatal').hidden=false;$('fatal').innerHTML=`<strong>Sampling plan unavailable</strong><p>${escapeHTML(error.message)}</p><p>Serve the web folder with the local Python web server, then reload this page. See readmeUI.md for the command.</p>`;}
+  }
+  document.addEventListener('DOMContentLoaded',start,{once:true});
+  </script>
+</body>
+</html>
