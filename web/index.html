@@ -24,6 +24,7 @@
     .distance-note{font-size:10px;color:var(--amber);margin:0 0 8px 35px}
     @media(max-width:520px){.mode-control{grid-column:1/-1}.budget-control{justify-self:stretch;grid-column:1/-1;display:grid;grid-template-columns:1fr auto;align-items:center}.budget-control .control-label{margin:0}.budget-control .budget-note,.budget-control .budget-error{grid-column:1/-1}.mode-toggle button{white-space:nowrap}.mode-meta{margin-top:8px}}
     @media(prefers-reduced-motion:no-preference){.intro,.controls,.weather,.workspace{animation:appear .4s ease both}.controls{animation-delay:.04s}.weather{animation-delay:.08s}.workspace{animation-delay:.12s}@keyframes appear{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}} @media print{.controls,.map-tools,.locate,.topbar .project-context{display:none}.shell{padding:0}.workspace{display:block}.map-panel{break-inside:avoid}.visits-scroll{max-height:none;overflow:visible}.visit-card{break-inside:avoid}.notice-panel{margin-top:12px}}
+    .visit-actions{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex:none}.visit-actions button{border:1px solid #d5ded6;background:#fff;border-radius:4px;padding:7px 10px;font-size:11px;font-weight:600;color:var(--green)}#fhir-status{margin:0;padding:0 22px 10px;font-size:11px;color:var(--muted);line-height:1.5}.fhir-help a{white-space:nowrap}@media(max-width:760px){.visit-actions{align-items:flex-start}}@media print{#download-fhir,#default-fhir,#fhir-status{display:none!important}}
   </style>
   <script src="vendor/leaflet.js" defer></script>
 </head>
@@ -56,7 +57,7 @@
           <section class="surface notice-panel" aria-labelledby="notice-heading"><div class="panel-header"><div><h2 id="notice-heading">Draft contact notices</h2><p>Human and animal health · coordinator review</p></div><span id="notice-count" class="panel-count"></span></div><div id="notices" class="notice-body"></div></section>
           <details id="coverage" class="surface coverage"></details>
         </div>
-        <section class="surface visit-panel" aria-labelledby="visit-heading"><div class="panel-header"><div><h2 id="visit-heading">Proposed site visits</h2><p id="visit-subtitle"></p></div><span id="visit-count" class="panel-count"></span></div><p class="visit-help">One trip per site. The lab team chooses the assessment method.</p><div class="visits-scroll" id="visits"></div><div id="capacity"></div></section>
+        <section class="surface visit-panel" aria-labelledby="visit-heading"><div class="panel-header"><div><h2 id="visit-heading">Proposed site visits</h2><p id="visit-subtitle"></p></div><div class="visit-actions"><span id="visit-count" class="panel-count"></span><button type="button" id="download-fhir">Download FHIR bundle</button></div></div><p class="visit-help fhir-help">One trip per site. The lab team chooses the assessment method. <a id="default-fhir" href="data/fhir-bundle.json">Saved default bundle</a></p><p id="fhir-status" role="status"></p><div class="visits-scroll" id="visits"></div><div id="capacity"></div></section>
       </div>
       <details class="surface roster" id="roster"><summary><span id="roster-heading">All sites and planning status</span><span class="badge grey">Full roster</span></summary><p class="roster-note">Every official site is retained, including baselines, sites outside the budget and invalid records. Status describes the sampling proposal, not water safety.</p><div class="table-wrap"><table><thead><tr><th scope="col">Site</th><th scope="col">Location</th><th scope="col">Planning status</th><th scope="col">Reason / evidence</th><th scope="col">Locate</th></tr></thead><tbody id="all-sites"></tbody></table></div></details>
       <details class="surface excluded-panel" id="excluded"><summary id="excluded-heading">Excluded and why</summary><div id="excluded-body"></div></details>
@@ -76,6 +77,11 @@
   const timestamp = value => value ? value.replace('T',' ').replace(/Z$/, ' UTC') : 'retrieval time unavailable';
   const numeric = value => typeof value === 'number' && Number.isFinite(value);
   const displayedNumber = value => numeric(value) ? String(value) : 'Unknown';
+  const scoreText = value => {
+    if(!numeric(value)) return 'Unknown';
+    const shown = value.toFixed(2);
+    return Number(shown) === value ? shown : `${shown} (source ${value})`;
+  };
   const link = (url,label) => {
     try { if (!['https:','http:'].includes(new URL(url).protocol)) throw new Error(); }
     catch { return escapeHTML(label); }
@@ -115,7 +121,7 @@
   function sourceDetails(site,plan){
     const health=site.source_health;
     const rain=plan.storm?(mode==='live'?plan.storm.rain_mm_by_date[plan.storm.anchor_date]:plan.storm.rain_mm_by_site_by_date[site.code][plan.storm.anchor_date]):null;
-    const fields=health?`<dt>Lab sample date (samplingDate)</dt><dd>${escapeHTML(site.sample_date)}</dd><dt>Faecal (scaledFecalRisk)</dt><dd>${escapeHTML(displayedNumber(health.scaledFecalRisk))}</dd><dt>Pathogen (scaledPathogenRisk)</dt><dd>${escapeHTML(displayedNumber(health.scaledPathogenRisk))}</dd><dt>Antibiotic resistance (scaledArgRisk)</dt><dd>${escapeHTML(displayedNumber(health.scaledArgRisk))}</dd>`:'<dt>Lab evidence</dt><dd>No lab result</dd>';
+    const fields=health?`<dt>Lab sample date (samplingDate)</dt><dd>${escapeHTML(site.sample_date)}</dd><dt>Faecal (scaledFecalRisk)</dt><dd>${escapeHTML(scoreText(health.scaledFecalRisk))}</dd><dt>Pathogen (scaledPathogenRisk)</dt><dd>${escapeHTML(scoreText(health.scaledPathogenRisk))}</dd><dt>Antibiotic resistance (scaledArgRisk)</dt><dd>${escapeHTML(scoreText(health.scaledArgRisk))}</dd>`:'<dt>Lab evidence</dt><dd>No lab result</dd>';
     return `<details class="why"><summary>Why this site?</summary><p class="reason">${escapeHTML(site.reason)}</p><dl class="source-fields">${fields}<dt>Sewage distance (distanceToSewageStations)</dt><dd>${numeric(site.sewage_distance_m)?escapeHTML(site.sewage_distance_m)+' m':'Missing; last among baselines'}</dd>${plan.storm?`<dt>${mode==='live'?'City forecast rain':'Archived site rain'} on ${escapeHTML(plan.storm.anchor_date)}</dt><dd>${escapeHTML(displayedNumber(rain))} mm</dd>`:''}</dl>${site.window?`<p class="reason">${escapeHTML(site.window.why)} ${link(site.window.source,'Directive context')}</p>`:''}<details class="provenance"><summary>Source URLs and retrieval times</summary>${Object.entries(site.provenance).map(([name,ref])=>`<p>${link(ref.url,name==='rain'?(mode==='live'?'City forecast':'Site rainfall archive'):name==='health'?'Lab category results':name==='urban'?'Urban parameters':'Official roster')}<br>Fetched <span class="mono">${escapeHTML(timestamp(ref.fetched_at))}</span></p>`).join('')}</details></details>`;
   }
   function renderVisits(plan,allocated){
@@ -136,6 +142,33 @@
     }
     const remaining=plan.ranking.slice(budget).map(code=>sites.get(code));
     $('capacity').innerHTML=remaining.length?`<details class="capacity-details"><summary>${remaining.length} more site${remaining.length===1?'':'s'} if capacity allows</summary>${remaining.map(s=>`<div class="capacity-row"><code>${escapeHTML(s.code)}</code><p>${escapeHTML(s.name)}<small>${s.action==='first baseline assessment'?'First baseline · ':''}${escapeHTML(s.categories.join(' + '))}${s.sewage_distance_m===null?' · missing sewage distance; last among baselines':''}</small></p>${s.position?`<button type="button" class="locate" data-locate="${escapeHTML(s.code)}" aria-label="Show ${escapeHTML(s.code)} on map">Show on map</button>`:''}</div>`).join('')}</details>`:'';
+    updateFhirChrome(selected);
+  }
+  function updateFhirChrome(selected){
+    const saved=data.fhir?.default_bundle, savedCity=saved&&data.cities[saved.city];
+    if(savedCity){
+      $('default-fhir').textContent=`Saved file: ${savedCity.name} ${saved.mode==='live'?'LIVE':'REPLAY'}, budget ${saved.budget}`;
+      $('default-fhir').download=`afterstorm-${saved.city}-${saved.mode}-budget-${saved.budget}.json`;
+    }
+    const ready=selected.length>0&&selected.every(site=>site.service_request&&site.service_request_full_url);
+    $('download-fhir').disabled=!ready;
+    if(!selected.length) $('fhir-status').textContent='No visits are in this list, so there is nothing to download.';
+    else if(!ready) $('fhir-status').textContent='Run python fhir_export.py, then reload. This page does not build FHIR resources.';
+    else $('fhir-status').textContent=`The button downloads ${selected.length} draft proposal${selected.length===1?'':'s'} from this list. It does not send them. Python built each ServiceRequest; this page only slices and wraps.`;
+  }
+  function downloadFhir(){
+    const {city,plan}=view();
+    const sites=new Map(plan.sites.map(site=>[site.code,site]));
+    const selected=plan.ranking.slice(0,budget).map(code=>sites.get(code));
+    if(!selected.length||selected.some(site=>!site?.service_request||!site.service_request_full_url)) return;
+    const tags=[{system:'urn:afterstorm:export',code:'screen-slice',display:`mode=${mode}; budget=${budget}; city=${cityId}`}];
+    if(data.fhir?.profile_tag) tags.push(data.fhir.profile_tag);
+    const bundle={resourceType:'Bundle',type:'transaction',meta:{tag:tags},entry:selected.map(site=>({fullUrl:site.service_request_full_url,resource:site.service_request,request:{method:'POST',url:'ServiceRequest'}}))};
+    const url=URL.createObjectURL(new Blob([JSON.stringify(bundle,null,2)+'\n'],{type:'application/fhir+json'}));
+    const link=document.createElement('a');
+    link.href=url;link.download=`afterstorm-${cityId}-${mode}-budget-${budget}.json`;
+    document.body.appendChild(link);link.click();link.remove();URL.revokeObjectURL(url);
+    $('fhir-status').textContent=`Downloaded ${selected.length} draft ServiceRequest${selected.length===1?'':'s'} for ${city.name}, ${mode}, budget ${budget}. Nothing was sent.`;
   }
   function renderNotices(plan){
     $('notice-count').textContent=String(plan.notices.length);
@@ -241,6 +274,7 @@
       $('budget').addEventListener('input',()=>applyBudget($('budget').value===''?NaN:Number($('budget').value)));
       $('budget').addEventListener('blur',()=>{if($('budget').hasAttribute('aria-invalid')){$('budget').value=String(budget);$('budget').removeAttribute('aria-invalid');$('budget-error').hidden=true;}});
       $('budget-minus').addEventListener('click',()=>applyBudget(budget-1));$('budget-plus').addEventListener('click',()=>applyBudget(budget+1));
+      $('download-fhir').addEventListener('click',downloadFhir);
       document.addEventListener('click',event=>{const button=event.target.closest('[data-locate]');if(!button)return;const marker=markers.get(button.dataset.locate);if(!marker)return;leafletMap.panTo(marker.getLatLng());marker.openPopup();$('map').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'center'});});
       render();$('loading').hidden=true;
     }catch(error){$('app').hidden=true;$('loading').hidden=true;$('fatal').hidden=false;$('fatal').innerHTML=`<strong>Sampling plan unavailable</strong><p>${escapeHTML(error.message)}</p><p>Serve the web folder with the local Python web server, then reload this page. See readmeUI.md for the command.</p>`;}

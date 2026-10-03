@@ -20,6 +20,23 @@ WINDOW_REASON = ("Daily totals do not identify when rain stops. The window uses 
                  "not a sampling protocol or safety clearance.")
 
 
+def join_labels(labels):
+    if len(labels) == 1:
+        return labels[0]
+    if len(labels) == 2:
+        return f"{labels[0]} and {labels[1]}"
+    return ", ".join(labels[:-1]) + " and " + labels[-1]
+
+
+def highest_category_phrase(health):
+    """Two-decimal scores. A tie is exact equality of the stored values, in CATEGORIES order."""
+    top = max(health[field] for field, _label in CATEGORIES)
+    labels = [label for field, label in CATEGORIES if health[field] == top]
+    kind = "categories" if len(labels) > 1 else "category"
+    relation = "tied highest" if len(labels) > 1 else "highest"
+    return f"{join_labels(labels)} {kind} {top:.2f} ({relation} of 3, relative score)"
+
+
 def validate_config(config):
     expected = {"RAIN_MM", "TEST_MIN", "ADVISORY_MIN", "VISITS_PER_CITY", "WINDOW_DAYS"}
     if not isinstance(config, dict) or set(config) != expected:
@@ -256,7 +273,7 @@ def city_plan(sites, labs, parameters, weather_plan, config, duplicates, sources
                 rain_text = f"{rain:g} mm forecast on {storm['anchor_date']}; one city-centre forecast shared by every site"
             row.update(status="sample this storm", action="new category assessment", categories=categories,
                        window=storm["window"],
-                       reason=f"{health_day[:4]} result: {profile[0][1]} category {dominant:g} (highest of 3, relative score); {distance_reason}; {rain_text}. New assessment in {', '.join(categories)}; {WINDOW_LABEL}: {storm['window']['start_date']} to {storm['window']['end_date']} inclusive. {storm['boundary_note']}")
+                       reason=f"{health_day[:4]} result: {highest_category_phrase(health)}; {distance_reason}; {rain_text}. New assessment in {', '.join(categories)}; {WINDOW_LABEL}: {storm['window']['start_date']} to {storm['window']['end_date']} inclusive. {storm['boundary_note']}")
         # Notice eligibility is independent of visit budget and TEST_MIN, but requires a storm and valid lab evidence.
         if storm and health is not None and not invalid and max(health["scaledFecalRisk"], health["scaledPathogenRisk"]) >= config["ADVISORY_MIN"]:
             row["draft_notice"] = {"code": code, "status": "draft",

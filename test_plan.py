@@ -15,6 +15,8 @@ except ModuleNotFoundError as exc:
         raise
     plan = None
 
+import fhir_export
+
 ROOT = Path(__file__).resolve().parent
 CONFIG = {"RAIN_MM": 20, "TEST_MIN": 0.5, "ADVISORY_MIN": 0.5,
           "VISITS_PER_CITY": 5, "WINDOW_DAYS": 2}
@@ -75,6 +77,26 @@ def test_dominant_and_second_category_are_not_assays():
     assert site["dominant_value"] == 0.9
     assert site["action"] == "new category assessment"
     assert "scaledArgRisk" in site["source_health"]
+    assert "antibiotic resistance category 0.90 (highest of 3, relative score)" in site["reason"]
+    assert "tied highest" not in site["reason"]
+
+
+def test_tied_highest_uses_two_decimals_and_keeps_source_precision():
+    data = fixture(scores={"T1": (1, 1, 0.3465)}, distances={"T1": 600.125}, rain=24.437)
+    site = row(result(data), "T1")
+    assert "faecal and pathogen categories 1.00 (tied highest of 3, relative score)" in site["reason"]
+    assert "tied highest" in site["reason"]
+    assert "faecal category 1 " not in site["reason"]
+    assert site["source_health"]["scaledFecalRisk"] == 1
+    assert site["source_health"]["scaledPathogenRisk"] == 1
+    assert site["source_health"]["scaledArgRisk"] == 0.3465
+    assert "sewage works 600.125 m" in site["reason"]
+    assert "24.437 mm" in site["reason"]
+    paired = row(result(fixture(scores={"T1": (0.2, 0.9, 0.9)})), "T1")
+    assert "pathogen and antibiotic resistance categories 0.90 (tied highest of 3, relative score)" in paired["reason"]
+    three = row(result(fixture(scores={"T1": (0.8, 0.8, 0.8)})), "T1")
+    assert "faecal, pathogen and antibiotic resistance categories 0.80 (tied highest of 3, relative score)" in three["reason"]
+    assert three["categories"] == ["faecal", "pathogen"]
 
 
 def test_below_threshold_has_no_storm_visit():
@@ -266,6 +288,90 @@ def test_real_cache_modes_anchors_provenance_and_raw_integrity():
     assert live["storm"]["rain_mm_by_date"]["2026-10-08"] == 42.9
     assert output["cities"]["TO"]["modes"]["live"]["ranking"] == ["T15", "T21", "T24"]
     assert before == {name: hashlib.sha256((root / name).read_bytes()).hexdigest() for name in sources}
+
+
+def test_c5_replay_tie_and_fhir_requests():
+    data, metadata = plan.load_cache(ROOT / "data" / "raw")
+    output = plan.build_plan(*data, CONFIG, sources=metadata)
+    replay = output["cities"]["CO"]["modes"]["replay"]
+    site = row(replay, "C5")
+    raw = next(item for item in data[1] if item["researchSiteCode"] == "C5")
+    assert site["source_health"]["scaledFecalRisk"] == raw["scaledFecalRisk"] == 1
+    assert site["source_health"]["scaledPathogenRisk"] == raw["scaledPathogenRisk"] == 1
+    assert site["source_health"]["scaledArgRisk"] == raw["scaledArgRisk"]
+    assert "faecal and pathogen categories 1.00 (tied highest of 3, relative score)" in site["reason"]
+    assert f"sewage works {site['sewage_distance_m']:g} m" in site["reason"]
+    rain = replay["storm"]["rain_mm_by_site_by_date"]["C5"][replay["storm"]["anchor_date"]]
+    assert f"{rain:g} mm" in site["reason"]
+    assert replay["ranking"][0] == "C5"
+    fhir_export.attach_requests(output)
+    checks, failures, bundle = fhir_export.structural_report(output, "OS", "live", CONFIG["VISITS_PER_CITY"])
+    assert not failures, failures
+    assert len(checks) == 21 and all(check["passed"] for check in checks)
+    assert len(bundle["entry"]) == CONFIG["VISITS_PER_CITY"]
+    assert [entry["resource"]["subject"]["identifier"]["value"] for entry in bundle["entry"]] == (
+        output["cities"]["OS"]["modes"]["live"]["ranking"][:CONFIG["VISITS_PER_CITY"]])
+    request = site["service_request"]
+    assert request["reasonCode"][0]["text"] == site["reason"]
+    assert "1.00" in request["reasonCode"][0]["text"]
+    assert "reference" not in request["subject"]
+    coimbra, _, coimbra_bundle = fhir_export.structural_report(output, "CO", "replay", 1)
+    assert all(check["passed"] for check in coimbra)
+    assert coimbra_bundle["entry"][0]["resource"]["subject"]["identifier"]["value"] == "C5"
+    assert "mode=replay; budget=1; city=CO" in coimbra_bundle["meta"]["tag"][0]["display"]
+
+
+def test_fhir_slice_baseline_window_and_sandbox_reference_policy():
+    data = fixture(codes=("T1", "T2", "T3"),
+                   scores={"T1": (1, 1, 0.2), "T2": (0.9, 0.1, 0.1)},
+                   distances={"T1": 50, "T2": 10, "T3": 5})
+    data[1][0]["samplingDate"] = "2024-08-05T00:00:00"
+    output = plan.build_plan(*data, {**CONFIG, "VISITS_PER_CITY": 2})
+    fhir_export.attach_requests(output)
+    checks, failures, bundle = fhir_export.structural_report(output, "TO", "live", 1)
+    assert not failures, failures
+    assert [entry["resource"]["subject"]["identifier"]["value"] for entry in bundle["entry"]] == ["T1"]
+    ranked = output["cities"]["TO"]["modes"]["live"]["ranking"]
+    assert ranked[0] == "T1"
+    t1 = row(output["cities"]["TO"]["modes"]["live"], "T1")
+    assert "based on 2024 results; live" in t1["service_request"]["note"][0]["text"]
+    assert "Precautionary: avoid water contact" in t1["service_request"]["note"][0]["text"]
+    assert t1["service_request"]["occurrencePeriod"] == {"start": "2026-10-04", "end": "2026-10-05"}
+    t3 = row(output["cities"]["TO"]["modes"]["live"], "T3")
+    assert "service_request" in t3
+    assert t3["code"] not in [entry["resource"]["subject"]["identifier"]["value"] for entry in bundle["entry"]]
+    dry = plan.build_plan(*fixture(codes=("T1", "T2"), rain=0), CONFIG)
+    fhir_export.attach_requests(dry)
+    baseline = row(dry["cities"]["TO"]["modes"]["live"], "T2")
+    assert "occurrencePeriod" not in baseline["service_request"]
+    assert "no lab result on file; live" in baseline["service_request"]["note"][0]["text"]
+    assert "service_request" not in row(dry["cities"]["TO"]["modes"]["live"], "T1")
+    empty_checks, empty_failures, empty = fhir_export.structural_report(dry, "TO", "live", 0)
+    assert not empty_failures, empty_failures
+    assert empty["entry"] == []
+    saved = fhir_export.bundle_for(output, "TO", "live", 2)
+    posted, notes = fhir_export.apply_location_references(saved, {"T1": ["590", "892"], "T2": ["10"]})
+    assert "reference" not in saved["entry"][0]["resource"]["subject"]
+    assert "reference" not in posted["entry"][0]["resource"]["subject"]
+    assert posted["entry"][1]["resource"]["subject"]["reference"] == "Location/10"
+    assert any("Duplicate sandbox Locations for T1: 590, 892" in line for line in notes)
+    assert fhir_export.location_ids_from_search({
+        "entry": [
+            {"resource": {"resourceType": "Location", "id": "590",
+                          "identifier": [{"system": fhir_export.SITE_SYSTEM, "value": "C5"}]}},
+            {"resource": {"resourceType": "Location", "id": "892",
+                          "identifier": [{"system": fhir_export.SITE_SYSTEM, "value": "C5"}]}},
+            {"resource": {"resourceType": "Location", "id": "1",
+                          "identifier": [{"system": "https://example.invalid", "value": "C5"}]}},
+        ]}, "C5") == ["590", "892"]
+    broken = deepcopy(output)
+    row(broken["cities"]["TO"]["modes"]["live"], "T1")["service_request"]["status"] = "completed"
+    _, broken_failures, _ = fhir_export.structural_report(broken, "TO", "live", 1)
+    assert any("status is draft" in name for name in broken_failures)
+    referenced = deepcopy(output)
+    row(referenced["cities"]["TO"]["modes"]["live"], "T1")["service_request"]["subject"]["reference"] = "Location/1"
+    _, reference_failures, _ = fhir_export.structural_report(referenced, "TO", "live", 1)
+    assert any("no reference field" in name for name in reference_failures)
 
 
 if __name__ == "__main__":
