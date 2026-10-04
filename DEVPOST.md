@@ -4,9 +4,9 @@
 
 **Primary track:** Track 6 — Resilience Informatics
 
-**Demo URL:** Add after deployment approval.
+**Demo URL:** https://ankitag80.github.io/afterstorm-oneaquahealth/
 
-**Code repository:** Add after public push approval.
+**Code repository:** https://github.com/AnkitAg80/afterstorm-oneaquahealth
 
 **Built with:** Python standard library, static HTML/CSS/JavaScript, Leaflet, OpenStreetMap tiles, Open-Meteo, OneAquaHealth Resilience Map API, HL7 FHIR R4, HL7 Europe OneAquaHealth sandbox, and Geist fonts.
 

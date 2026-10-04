@@ -2,9 +2,11 @@
 
 AfterStorm plans the sampling that refreshes the evidence. It is a Track 6 entry for the [OneAquaHealth IEEE Global Hackathon 2026](https://oneaquahealth-ieee-hackathon.devpost.com/).
 
+[![Tests](https://github.com/AnkitAg80/afterstorm-oneaquahealth/actions/workflows/tests.yml/badge.svg)](https://github.com/AnkitAg80/afterstorm-oneaquahealth/actions/workflows/tests.yml)
+
 ## Try it in 60 seconds
 
-The public demo URL will be added after GitHub Pages is approved and deployed. Locally, [open the Coimbra replay](http://127.0.0.1:8765/?city=CO&mode=replay&visits=5&guide=0) after starting the server below. It opens on the real archived storm of **10 May 2026**. Try three actions: open the **Protection check** and raise the budget to cover every notice site; open C5's **Task card** in Portuguese; download the **Lab sheet (CSV)**. Use **How it works** for a three-step orientation.
+[Open the public Coimbra replay](https://ankitag80.github.io/afterstorm-oneaquahealth/?city=CO&mode=replay&visits=5&guide=0) or [the latest saved Oslo forecast](https://ankitag80.github.io/afterstorm-oneaquahealth/?city=OS&mode=live&visits=5&guide=0). The replay opens on the real archived storm of **10 May 2026**. Try three actions: open the **Protection check** and raise the budget to cover every notice site; open C5's **Task card** in Portuguese; download the **Lab sheet (CSV)**. Use **How it works** for a three-step orientation.
 
 A coordinator opens one city, sees a real heavy-rain day, and gets a short visit list: which official stream, which 2023 lab category to assess again (faecal, pathogen, or antibiotic resistance), and an experimental window of calendar dates. The same list can be filed as draft FHIR `ServiceRequest` proposals. The tool does not predict contamination and it does not publish a water-contact notice.
 
@@ -183,7 +185,7 @@ Open [http://127.0.0.1:8765/](http://127.0.0.1:8765/) for Coimbra replay by defa
 
 `python fetch.py` refreshes the public sources and needs network. After it, run `python plan.py` again. Do not post another bundle. `python fhir_export.py --city CO --mode replay --budget 5 --post` now refuses, because `web/data/filed.json` already records ServiceRequests 1046–1050.
 
-The download button on the page only slices the Python-built requests to the current budget and wraps them in a transaction Bundle. It does not create resource content and it does not send them. Current checks: **14 fetch tests, 24 assert-based planning checks, and the browser-generated CSV check**. The planned GitHub Actions badge will be added once a public repository exists.
+The download button on the page only slices the Python-built requests to the current budget and wraps them in a transaction Bundle. It does not create resource content and it does not send them. Current checks: **14 fetch tests, 24 assert-based planning checks, and the browser-generated CSV check**. GitHub Actions runs the tests on each push to `main`.
 
 ## Screenshots
 
@@ -201,6 +203,6 @@ These captures use the final saved cache and `?guide=0` for an unobstructed demo
 
 The phone layout was checked in a browser at 390 CSS pixels: the page has no document-level horizontal overflow, and the guide becomes a bottom sheet. The headless Chrome narrow-screen capture is cropped by its minimum window width, so it is not used as layout evidence here.
 
-## What is not in this repository
+## Submission status
 
-No public GitHub remote, no deployment, and no Devpost submission. `DEVPOST.md` and `VIDEO-SCRIPT.md` are the texts for those steps. Publishing waits for a separate approval.
+The [source repository](https://github.com/AnkitAg80/afterstorm-oneaquahealth) and [GitHub Pages demo](https://ankitag80.github.io/afterstorm-oneaquahealth/) are public. `DEVPOST.md` and `VIDEO-SCRIPT.md` are the prepared submission text and video outline. A Devpost submission and demo video are not included in this repository.
