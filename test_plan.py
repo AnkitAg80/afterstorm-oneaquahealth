@@ -459,6 +459,26 @@ def test_urban_setting_is_carried_but_never_reorders():
     assert missing["urban_setting"] == {field: None for field in plan.URBAN_SETTING_FIELDS}
 
 
+def test_v2_validation_bundle_is_the_coimbra_replay_five():
+    output = json.loads((ROOT / "web" / "data" / "plan.json").read_text(encoding="utf-8"))
+    bundle = fhir_export.bundle_for(output, "CO", "replay", 5)
+    mode_plan = output["cities"]["CO"]["modes"]["replay"]
+    by_code = {site["code"]: site for site in mode_plan["sites"]}
+    assert [entry["resource"]["subject"]["identifier"]["value"] for entry in bundle["entry"]] == mode_plan["ranking"][:5]
+    assert len(bundle["entry"]) == 5
+    for entry in bundle["entry"]:
+        assert entry["request"]["method"] == "POST"
+        assert entry["request"]["url"] == "ServiceRequest"
+        resource = entry["resource"]
+        assert resource["status"] == "draft"
+        assert resource["intent"] == "proposal"
+        coding = resource["code"]["coding"]
+        assert len(coding) == 1 and coding[0]["system"] == fhir_export.REQUEST_SYSTEM
+        site = by_code[resource["subject"]["identifier"]["value"]]
+        assert len(resource["orderDetail"]) == len(site["categories"])
+        assert [item["text"] for item in resource["orderDetail"]] == site["categories"]
+
+
 def test_post_gate_and_location_parser_do_not_call_the_sandbox():
     fhir_export.require_approved_post("CO", "replay", 5)
     for bad in (("OS", "live", 5), ("CO", "live", 5), ("CO", "replay", 1), ("CO", "replay", None), ("BE", "replay", 5)):

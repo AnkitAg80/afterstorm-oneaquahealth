@@ -32,7 +32,7 @@ All motion stops when the user asks for reduced motion. Everything is CSS and in
 |---|---|
 | **Rain** | A large number that counts up (forecast mm, the replay min–max across sites, or "wettest day this week"), a mini bar chart (7-day forecast or every site's rain, highest first) with the 20 mm line dashed in amber, and a one-line meaning |
 | **Sample on** | Calendar-style date tiles (MAY 11 → MAY 12) with the unchanged label "Experimental window (heuristic, not validated)". With no storm: "Any day" for unsampled streams, or "—" |
-| **Site visits** | A progress ring (visits used out of budget) that animates on change, the count, how many qualify, how many were never sampled, and "One trip covers every test at a site" |
+| **Site visits** | A progress ring (visits used out of budget) that animates on change, the count, how many qualify, how many have no lab result in the public feed, and "One trip covers every test at a site" |
 
 The tiles lift slightly on hover. The numbers count up only when city or mode changes, not while dragging the budget slider.
 

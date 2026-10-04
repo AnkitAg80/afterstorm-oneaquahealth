@@ -2,6 +2,10 @@
 
 AfterStorm plans the sampling that refreshes the evidence. It is a Track 6 entry for the [OneAquaHealth IEEE Global Hackathon 2026](https://oneaquahealth-ieee-hackathon.devpost.com/).
 
+## Try it in 60 seconds
+
+The public demo URL will be added after GitHub Pages is approved and deployed. Locally, [open the Coimbra replay](http://127.0.0.1:8765/?city=CO&mode=replay&visits=5&guide=0) after starting the server below. It opens on the real archived storm of **10 May 2026**. Try three actions: open the **Protection check** and raise the budget to cover every notice site; open C5's **Task card** in Portuguese; download the **Lab sheet (CSV)**. Use **How it works** for a three-step orientation.
+
 A coordinator opens one city, sees a real heavy-rain day, and gets a short visit list: which official stream, which 2023 lab category to assess again (faecal, pathogen, or antibiotic resistance), and an experimental window of calendar dates. The same list can be filed as draft FHIR `ServiceRequest` proposals. The tool does not predict contamination and it does not publish a water-contact notice.
 
 ## Problem
@@ -35,6 +39,24 @@ The useful action is a new sample while the 2023 and 2024 records are still the 
 
 No health outcome has been measured. There has been no field trial.
 
+## Context
+
+WHO's 2021 recreational water guidelines recommend warning water users when rain may raise faecal indicators, before a new lab result exists; AfterStorm drafts such a notice for a coordinator to review. [WHO guidelines](https://www.who.int/publications/i/item/9789240031302)
+
+Berlin's FLUSSHYGIENE work samples rivers after rain and then runs a forecast model; storm samples like the ones AfterStorm plans are what such a model would need. AfterStorm does not run that forecast. [FLUSSHYGIENE project](https://bmbf.nawam-rewam.de/en/projekt/flusshygiene/)
+
+Under the EU Bathing Water Directive, one extra sample confirms that a short-term pollution incident has ended; AfterStorm lets the coordinator plan that confirmation sample. [Directive 2006/7/EC, Annex IV.4](https://eur-lex.europa.eu/eli/dir/2006/7/oj)
+
+These are examples of a human review workflow. The prototype does not determine bathing-water status or issue an advisory.
+
+## What's new in AfterStorm
+
+- A forecast or archived storm becomes a **post-storm reassessment plan** under a fixed site-visit budget.
+- The **Protection check** names draft-notice sites outside the budget and offers the budget needed to include them, without changing the ranking.
+- **Evidence-bound review** marks an approval stale when its site, category, timing or notice evidence changes; colleagues can exchange review files without a server.
+- Each draft notice can record a **confirmation-sample date**, following the lifecycle in the EU Bathing Water Directive. This date is a proposal for a coordinator, not a clearance.
+- **Citizen task cards** in the city's language ask safe bank-side questions about human contact, animal mortality and ecosystem signs, and link to the official OneAquaHealth Citizen Science App. The translations are drafts.
+
 ## Track
 
 **Primary track: Track 6, Resilience Informatics.** The product is an early plan for the days after heavy rain: where to sample, which category, and a draft notice for human and animal contact.
@@ -43,13 +65,32 @@ The FHIR export is the interoperability piece. Each ranked visit is a base FHIR 
 
 ## How this differs
 
-Existing tools forecast risk or rank overdue sites from past data. AfterStorm plans the sampling that refreshes the evidence.
+Other tools forecast risk or rank overdue sites from past data. AfterStorm turns a storm into a reviewable post-storm reassessment plan with a fixed visit budget, shows what that budget leaves out for protection, gives citizens a safe bank-side task, and ends each notice with a planned confirmation sample.
 
 | Approach | What a coordinator gets |
 | --- | --- |
 | Forecast risk from weather or past labs | A prediction about contamination |
 | Rank sites that look overdue in past data | A backward priority list |
 | AfterStorm | A visit: site, category, experimental dates, inside a budget, filed as a draft request a person can approve |
+
+## How a city adopts this
+
+The prototype uses OneAquaHealth's public site, health-risk, urban-setting and weather-archive feeds plus Open-Meteo. The official roster supplies all **106 sites across five OneAquaHealth case-study cities** without per-city setup. The site is static, so it needs no application server or database. It hands off to existing work through a lab-sheet CSV, draft FHIR R4 ServiceRequests, downloadable review files, and a link to the official Citizen Science App; no data is sent to that app by this page.
+
+A practical pilot would start with one city's coordinator and an ecologist calibrating the **20 mm** and **0.5** prototype settings. Volunteers could record their observations in the official app while the lab team collects samples. A city that publishes sewer-overflow alerts could add those as a second trigger. Later, measured storm samples could support a forecast model such as FLUSSHYGIENE's; AfterStorm itself does not run one.
+
+```mermaid
+flowchart LR
+  A[OneAquaHealth roster, health risks, urban setting, rain archive] --> F[fetch.py cache + SHA-256 manifest]
+  W[Open-Meteo forecast] --> F
+  F --> P[plan.py rules and ranking]
+  P --> J[plan.json]
+  P --> R[Draft FHIR R4 ServiceRequests]
+  J --> U[Static web pages: review, protection, citizen card]
+  R --> U
+  U --> C[Lab sheet CSV and review file]
+  R -. Separate, approval-gated POST .-> H[HL7 Europe sandbox]
+```
 
 ## Replay storms in this cache
 
@@ -65,13 +106,11 @@ Each date is the latest archived day in that city when every site had rain of at
 
 Coimbra replay, budget 5, proposes C5, C12, C6, C7, then C20. C5 (Mina Hospital) has faecal and pathogen both at 1, so the reason says those two categories are **tied highest**. Archived rain at C5 on 2026-05-10 was 24.43 mm. Sewage distance is 2398.28 m. The sample date is 2023-06-29.
 
-## The committed forecast
+## Latest saved forecast
 
-Forecasts in this repository were fetched **2026-10-03T20:04:20Z** (Oslo file; the other four cities were fetched in the same run). The seven days are 3–9 October 2026. No city day in that cache reaches 20 mm. The highest days were Benevento 17.1 mm and Oslo 17.4 mm on 8 Oct, Ghent 18.0 mm on 8 Oct, Toulouse 9.3 mm on 7 Oct, and Coimbra 4.3 mm on 6 Oct.
+LIVE uses the most recent successful forecast saved in this repository. The page displays the **fetched-at time** beside the mode and answer. Forecasts change, so a video must read the live card rather than use a memorised weather sentence. When no storm is forecast, only streams with no lab result in the public feed can receive first-baseline visits. The replay remains a separate real archived storm, not a forecast.
 
-LIVE therefore shows no storm sampling for that cache. Oslo and Benevento, where every site already has a lab record, plan no visits. Coimbra, Ghent, and Toulouse still list first-baseline visits for the sites with no lab result. Those visits are routine samples, not storm samples.
-
-Run `python fetch.py` before a recording if you want a newer forecast. The page shows whatever forecast is in the cache. It does not keep a fixed weather sentence.
+The final refresh on **2026-10-04** fetched Oslo at **15:35:54 UTC**. Its saved 4–10 October forecast peaks at **10.8 mm on 8 October**, below the 20 mm trigger, so Oslo LIVE proposes zero visits. None of the five saved city forecasts currently has a qualifying storm. A previously observed Oslo forecast of 42.9 mm for 8 October is no longer the latest saved forecast; the demo must use the current card.
 
 ## Filed proposals
 
@@ -89,7 +128,7 @@ Posted at 2026-10-03T20:05:07Z. Each response was `201 Created`. On 2026-10-04 a
 
 The posted copy also points at sandbox Location/892 for C5, because the search returned exactly one Location with that site identifier. The files kept in this repository do not store `subject.reference`. The identifier is what lets a receiver match the official site code. Whether a Location reference resolves depends on the server. Sandbox coordinates are not used for the plan.
 
-These ids are sandbox assignments. They are not certification. The HL7 validator jar was not run. Sandbox `$validate` was not called. The 22 checks that did run are listed in `docs/changes/readmeFHIR.md`: resource type, draft status, proposal intent, identifier system and site code, no reference in the saved file, category codes, dates, reason text, precautionary note, no Communication resource, no Good/Moderate/Poor wording, bundle shape, entry order, and the demonstration sentence limited to this Coimbra replay.
+These ids are sandbox assignments, not certification. They were **filed with resource shape v1**. The current export uses **resource shape v2**: one request-type `code`, with assessment categories in `orderDetail`. A separate five-entry Coimbra replay v2 bundle was validated with the official HL7 FHIR validator against **core R4 4.0.1** on **2026-10-04**: **0 errors, 17 warnings, 8 information**. All warnings and information concern undefined local `urn:afterstorm:*` CodeSystems. See [the console report](docs/validation/fhir-r4-core.txt) and [the generated OperationOutcome](docs/validation/fhir-r4-core.html). The OneAquaHealth IG package URL returned 404, so profile conformance was **not** checked; the IG also defines no ServiceRequest profile. No v2 bundle was posted to the sandbox.
 
 ## Limitations
 
@@ -98,8 +137,11 @@ These ids are sandbox assignments. They are not certification. The HL7 validator
 - Recommended categories are not laboratory assays. The lab team chooses the method.
 - Contact notices are drafts. They have no expiry timer. A person reviews them.
 - Replay is a past archive day. Live is the cached forecast, and that forecast changes when it is fetched again.
+- The 20 mm rain trigger and 0.5 notice setting are prototype settings. The experimental window may miss peaks during the storm itself.
 - Visit order is greedy: higher stored category, then shorter sewage distance, then site code. Sites T21 and T24 have no sewage distance; they stay last among baselines and are not treated as zero metres.
-- There has been no field validation.
+- Reviews, confirmation dates, and citizen answers are saved in the browser and shared **by file only**. No server synchronizes them.
+- The urban density field is a source proxy, **not a head count**. Citizen-card translations are drafts.
+- There has been no field validation or user test yet.
 - Map tiles need internet. If the tiles fail, the pins still use the official coordinates on a plain background. The plan itself is in the saved files.
 
 ## Data sources
@@ -123,7 +165,7 @@ The Geist fonts in `web/vendor/fonts/` are under the SIL Open Font License, Vers
 
 Leaflet in `web/vendor/` is under the BSD 2-Clause licence. The licence text is `web/vendor/LICENSE.txt`.
 
-The cached rows come from the OneAquaHealth public APIs in the table above. Forecast rows come from [Open-Meteo](https://open-meteo.com/) and are used under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Attribute them as weather data by Open-Meteo.com. Map tiles are © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors.
+The cached rows come from the OneAquaHealth public APIs in the table above. Forecast rows come from [Open-Meteo](https://open-meteo.com/) and are used under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Attribute them as weather data by Open-Meteo.com. Map tiles are © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright). CARTO's dark layer was tested but its [new key requirement](https://www.carto.com/basemaps/apikey/) made it unsuitable for this keyless static demo.
 
 ## Run
 
@@ -131,6 +173,8 @@ Python 3.11 or newer. This copy was run with Python 3.14. Standard library only.
 
 ```text
 python test_plan.py
+python test_fetch.py
+python test_labsheet.py
 python plan.py
 python -m http.server 8765 --bind 127.0.0.1 --directory web
 ```
@@ -139,25 +183,23 @@ Open [http://127.0.0.1:8765/?city=CO&mode=replay&visits=5](http://127.0.0.1:8765
 
 `python fetch.py` refreshes the public sources and needs network. After it, run `python plan.py` again. Do not post another bundle. `python fhir_export.py --city CO --mode replay --budget 5 --post` now refuses, because `web/data/filed.json` already records ServiceRequests 1046–1050.
 
-The download button on the page only slices the Python-built requests to the current budget and wraps them in a transaction Bundle. It does not create resource content and it does not send them.
+The download button on the page only slices the Python-built requests to the current budget and wraps them in a transaction Bundle. It does not create resource content and it does not send them. Current checks: **14 fetch tests, 24 assert-based planning checks, and the browser-generated CSV check**. The planned GitHub Actions badge will be added once a public repository exists.
 
 ## Screenshots
 
-Coimbra replay of the real 2026-05-10 storm. The banner states that this is a demonstration. C5 is filed as ServiceRequest/1046.
+These captures use the final saved cache and `?guide=0` for an unobstructed demo:
 
-![Coimbra replay, budget 5, with C5 filed as ServiceRequest 1046](docs/screenshots/coimbra-replay.png)
+![Coimbra replay overview and answer](docs/screenshots/coimbra-replay-hero.png)
 
-The Why card for C5. Faecal and pathogen are both 1.00. Antibiotic resistance is shown as 0.35 with source 0.3465. Six draft notices sit beside the map, still unsent.
+![Coimbra protection check and visit budget](docs/screenshots/coimbra-protection.png)
 
-![C5 Why card and the draft notice list](docs/screenshots/coimbra-replay-why.png)
+![C16 draft notice and confirmation sample](docs/screenshots/coimbra-notice-c16.png)
 
-Oslo LIVE from the forecast fetched 2026-10-03T20:04:20Z. The chart's highest bar is 17.4 mm on 8 Oct, under the 20 mm line, so that cache schedules no storm visit. A newer fetch replaces this card. Read the card on the day you record.
+![C5 citizen card in Portuguese with animal and ecosystem questions](docs/screenshots/citizen-card.png)
 
-![Oslo LIVE from the 2026-10-03 forecast cache](docs/screenshots/oslo-live.png)
+![Oslo latest saved forecast](docs/screenshots/oslo-latest.png)
 
-The same Oslo cache on a 390-pixel-wide viewport.
-
-![Oslo LIVE on a phone-width viewport](docs/screenshots/oslo-live-mobile.png)
+![Narrow-screen overview capture](docs/screenshots/mobile.png)
 
 ## What is not in this repository
 

@@ -1,0 +1,13 @@
+# R7 — First-visit guide
+
+## What and where
+
+`web/index.html`, `web/app.css`, and `web/app.js` add a three-step guide attached to the controls, answer, and page tabs. The header's How it works button reopens it.
+
+## Why
+
+A new judge can learn the core flow before reading the detailed evidence. The guide only appears once, can be suppressed with `?guide=0`, and does not cover card or notice deep links.
+
+## Checks
+
+Next, Back, and Skip work; focus enters the guide and returns to the opener. Escape and Tab are handled. The phone layout uses a bottom sheet. The guide adds no page layout shift.

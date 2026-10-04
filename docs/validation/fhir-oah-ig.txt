@@ -1,0 +1,43 @@
+FHIR Validation tool Version 6.10.4 (Git# 1b90fb13f77b). Built 2026-09-04T05:45:41.468Z (30 days old)
+  Java:   24.0.2 from C:\Program Files\Java\jdk-24 on amd64 (64bit). 4002MB available
+  Paths:  Current = C:\Users\ankit\Downloads\oneaqua\afterstorm, Package Cache = C:\Users\ankit\.fhir\packages
+  Params: web\data\fhir-bundle-v2-coimbra-replay.json -version 4.0.1 -ig https://build.fhir.org/ig/hl7-eu/oah/package.tgz
+  Locale: India/IN
+  Jurisdiction: India
+Loading
+  Loading FHIR v4.0.1 from hl7.fhir.r4.core#4.0.1
+  Load hl7.terminology.r4#6.2.0 - 4288 resources (00:17.962)
+  Load hl7.fhir.uv.extensions.r4#5.2.0 - 759 resources (00:03.713)
+  Loaded FHIR - 8265 resources (00:00.000)
+  Terminology server https://tx.fhir.org - Version Connected to Terminology Server at https://tx.fhir.org (00:03.372)
+  Load hl7.terminology#7.4.0 - 4181 resources (00:03.740)
+  Load hl7.fhir.uv.extensions.r5#5.2.0 - 759 resources (00:01.118)
+  Load hl7.terminology.r5#7.1.0 - 4072 resources (00:02.608)
+  Load hl7.fhir.uv.extensions#5.3.0 - 856 resources (00:00.032)
+Unable to load validationEngine.
+java.io.IOException: 404 Not Found
+	at org.hl7.fhir.utilities.http.HTTPResult.checkThrowException(HTTPResult.java:45)
+	at org.hl7.fhir.validation.IgLoader.fetchFromUrlSpecific(IgLoader.java:444)
+	at org.hl7.fhir.validation.IgLoader.fetchFromUrl(IgLoader.java:698)
+	at org.hl7.fhir.validation.IgLoader.loadIgSource(IgLoader.java:264)
+	at org.hl7.fhir.validation.IgLoader.loadIg(IgLoader.java:156)
+	at org.hl7.fhir.validation.service.ValidationService.loadIgsAndExtensions(ValidationService.java:742)
+	at org.hl7.fhir.validation.service.ValidationService.buildValidationEngine(ValidationService.java:671)
+	at org.hl7.fhir.validation.service.ValidationService.getValidationEngineFromParameters(ValidationService.java:642)
+	at org.hl7.fhir.validation.service.ValidationService.initializeValidator(ValidationService.java:624)
+	at org.hl7.fhir.validation.service.ValidationService.initializeValidator(ValidationService.java:603)
+	at org.hl7.fhir.validation.cli.picocli.commands.ValidationEngineCommand.getValidationEngine(ValidationEngineCommand.java:102)
+	at org.hl7.fhir.validation.cli.picocli.commands.ValidationEngineCommand.call(ValidationEngineCommand.java:54)
+	at org.hl7.fhir.validation.cli.picocli.commands.ValidationEngineCommand.call(ValidationEngineCommand.java:20)
+	at picocli.CommandLine.executeUserObject(CommandLine.java:2031)
+	at picocli.CommandLine.access$1500(CommandLine.java:148)
+	at picocli.CommandLine$RunLast.executeUserObjectOfLastSubcommandWithSameParent(CommandLine.java:2469)
+	at picocli.CommandLine$RunLast.handle(CommandLine.java:2461)
+	at picocli.CommandLine$RunLast.handle(CommandLine.java:2423)
+	at picocli.CommandLine$AbstractParseResultHandler.execute(CommandLine.java:2277)
+	at picocli.CommandLine$RunLast.execute(CommandLine.java:2425)
+	at org.hl7.fhir.validation.cli.picocli.CLI.parseArgsAndExecuteCommand(CLI.java:68)
+	at org.hl7.fhir.validation.cli.ValidatorCli.main(ValidatorCli.java:98)
+Caused by: org.hl7.fhir.utilities.http.HTTPResultException: Invalid HTTP response 404 from https://build.fhir.org/ig/hl7-eu/oah/package.tgz?nocache=1791111967293 (404 Not Found) (No response content)
+	at org.hl7.fhir.utilities.http.HTTPResult.checkThrowException(HTTPResult.java:44)
+	... 21 common frames omitted

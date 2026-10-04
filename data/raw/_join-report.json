@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-03T20:04:22Z",
+  "generated_at": "2026-10-04T15:35:55Z",
   "counts": {
     "roster_sites": 106,
     "sites_with_lab_result": 96,
@@ -95,10 +95,10 @@
   "invalid_health_records": {},
   "weather_coverage": {
     "BN1": {
-      "rows": 1185,
+      "rows": 1186,
       "start": "2023-06-28",
-      "end": "2026-09-26",
-      "usable_rain_days": 1185,
+      "end": "2026-09-27",
+      "usable_rain_days": 1186,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -108,10 +108,10 @@
       "duplicate_dates": []
     },
     "BN2": {
-      "rows": 1185,
+      "rows": 1186,
       "start": "2023-06-28",
-      "end": "2026-09-26",
-      "usable_rain_days": 1185,
+      "end": "2026-09-27",
+      "usable_rain_days": 1186,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -121,10 +121,10 @@
       "duplicate_dates": []
     },
     "BN3": {
-      "rows": 1207,
+      "rows": 1208,
       "start": "2023-06-06",
-      "end": "2026-09-26",
-      "usable_rain_days": 1207,
+      "end": "2026-09-27",
+      "usable_rain_days": 1208,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -134,10 +134,10 @@
       "duplicate_dates": []
     },
     "BN4": {
-      "rows": 1180,
+      "rows": 1181,
       "start": "2023-07-03",
-      "end": "2026-09-26",
-      "usable_rain_days": 1180,
+      "end": "2026-09-27",
+      "usable_rain_days": 1181,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -147,10 +147,10 @@
       "duplicate_dates": []
     },
     "BN5": {
-      "rows": 1180,
+      "rows": 1181,
       "start": "2023-07-03",
-      "end": "2026-09-26",
-      "usable_rain_days": 1180,
+      "end": "2026-09-27",
+      "usable_rain_days": 1181,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -160,10 +160,10 @@
       "duplicate_dates": []
     },
     "BN6": {
-      "rows": 1185,
+      "rows": 1186,
       "start": "2023-06-28",
-      "end": "2026-09-26",
-      "usable_rain_days": 1185,
+      "end": "2026-09-27",
+      "usable_rain_days": 1186,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -173,10 +173,10 @@
       "duplicate_dates": []
     },
     "BN7": {
-      "rows": 1185,
+      "rows": 1186,
       "start": "2023-06-28",
-      "end": "2026-09-26",
-      "usable_rain_days": 1185,
+      "end": "2026-09-27",
+      "usable_rain_days": 1186,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -186,10 +186,10 @@
       "duplicate_dates": []
     },
     "BN8": {
-      "rows": 1176,
+      "rows": 1177,
       "start": "2023-07-07",
-      "end": "2026-09-26",
-      "usable_rain_days": 1176,
+      "end": "2026-09-27",
+      "usable_rain_days": 1177,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -199,10 +199,10 @@
       "duplicate_dates": []
     },
     "BN9": {
-      "rows": 1207,
+      "rows": 1208,
       "start": "2023-06-06",
-      "end": "2026-09-26",
-      "usable_rain_days": 1207,
+      "end": "2026-09-27",
+      "usable_rain_days": 1208,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -212,10 +212,10 @@
       "duplicate_dates": []
     },
     "BN10": {
-      "rows": 1206,
+      "rows": 1207,
       "start": "2023-06-07",
-      "end": "2026-09-26",
-      "usable_rain_days": 1206,
+      "end": "2026-09-27",
+      "usable_rain_days": 1207,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -225,10 +225,10 @@
       "duplicate_dates": []
     },
     "BN11": {
-      "rows": 1207,
+      "rows": 1208,
       "start": "2023-06-06",
-      "end": "2026-09-26",
-      "usable_rain_days": 1207,
+      "end": "2026-09-27",
+      "usable_rain_days": 1208,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -238,10 +238,10 @@
       "duplicate_dates": []
     },
     "BN12": {
-      "rows": 1207,
+      "rows": 1208,
       "start": "2023-06-06",
-      "end": "2026-09-26",
-      "usable_rain_days": 1207,
+      "end": "2026-09-27",
+      "usable_rain_days": 1208,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -251,10 +251,10 @@
       "duplicate_dates": []
     },
     "BN13": {
-      "rows": 1180,
+      "rows": 1181,
       "start": "2023-07-03",
-      "end": "2026-09-26",
-      "usable_rain_days": 1180,
+      "end": "2026-09-27",
+      "usable_rain_days": 1181,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -264,10 +264,10 @@
       "duplicate_dates": []
     },
     "BN14": {
-      "rows": 781,
+      "rows": 782,
       "start": "2024-08-05",
-      "end": "2026-09-26",
-      "usable_rain_days": 781,
+      "end": "2026-09-27",
+      "usable_rain_days": 782,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -277,10 +277,10 @@
       "duplicate_dates": []
     },
     "BN15": {
-      "rows": 1206,
+      "rows": 1207,
       "start": "2023-06-07",
-      "end": "2026-09-26",
-      "usable_rain_days": 1206,
+      "end": "2026-09-27",
+      "usable_rain_days": 1207,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -290,10 +290,10 @@
       "duplicate_dates": []
     },
     "BN16": {
-      "rows": 1206,
+      "rows": 1207,
       "start": "2023-06-07",
-      "end": "2026-09-26",
-      "usable_rain_days": 1206,
+      "end": "2026-09-27",
+      "usable_rain_days": 1207,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -303,10 +303,10 @@
       "duplicate_dates": []
     },
     "BN17": {
-      "rows": 1180,
+      "rows": 1181,
       "start": "2023-07-03",
-      "end": "2026-09-26",
-      "usable_rain_days": 1180,
+      "end": "2026-09-27",
+      "usable_rain_days": 1181,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -316,10 +316,10 @@
       "duplicate_dates": []
     },
     "BN18": {
-      "rows": 1207,
+      "rows": 1208,
       "start": "2023-06-06",
-      "end": "2026-09-26",
-      "usable_rain_days": 1207,
+      "end": "2026-09-27",
+      "usable_rain_days": 1208,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -329,10 +329,10 @@
       "duplicate_dates": []
     },
     "BN19": {
-      "rows": 1176,
+      "rows": 1177,
       "start": "2023-07-07",
-      "end": "2026-09-26",
-      "usable_rain_days": 1176,
+      "end": "2026-09-27",
+      "usable_rain_days": 1177,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -342,10 +342,10 @@
       "duplicate_dates": []
     },
     "BN20": {
-      "rows": 1176,
+      "rows": 1177,
       "start": "2023-07-07",
-      "end": "2026-09-26",
-      "usable_rain_days": 1176,
+      "end": "2026-09-27",
+      "usable_rain_days": 1177,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -355,10 +355,10 @@
       "duplicate_dates": []
     },
     "C1": {
-      "rows": 1185,
+      "rows": 1186,
       "start": "2023-06-28",
-      "end": "2026-09-26",
-      "usable_rain_days": 1185,
+      "end": "2026-09-27",
+      "usable_rain_days": 1186,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -368,10 +368,10 @@
       "duplicate_dates": []
     },
     "C2": {
-      "rows": 1186,
+      "rows": 1187,
       "start": "2023-06-27",
-      "end": "2026-09-26",
-      "usable_rain_days": 1186,
+      "end": "2026-09-27",
+      "usable_rain_days": 1187,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -381,10 +381,10 @@
       "duplicate_dates": []
     },
     "C3": {
-      "rows": 1186,
+      "rows": 1187,
       "start": "2023-06-27",
-      "end": "2026-09-26",
-      "usable_rain_days": 1186,
+      "end": "2026-09-27",
+      "usable_rain_days": 1187,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -394,10 +394,10 @@
       "duplicate_dates": []
     },
     "C4": {
-      "rows": 1186,
+      "rows": 1187,
       "start": "2023-06-27",
-      "end": "2026-09-26",
-      "usable_rain_days": 1186,
+      "end": "2026-09-27",
+      "usable_rain_days": 1187,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -407,10 +407,10 @@
       "duplicate_dates": []
     },
     "C5": {
-      "rows": 1184,
+      "rows": 1185,
       "start": "2023-06-29",
-      "end": "2026-09-26",
-      "usable_rain_days": 1184,
+      "end": "2026-09-27",
+      "usable_rain_days": 1185,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -420,10 +420,10 @@
       "duplicate_dates": []
     },
     "C6": {
-      "rows": 1184,
+      "rows": 1185,
       "start": "2023-06-29",
-      "end": "2026-09-26",
-      "usable_rain_days": 1184,
+      "end": "2026-09-27",
+      "usable_rain_days": 1185,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -433,10 +433,10 @@
       "duplicate_dates": []
     },
     "C7": {
-      "rows": 1184,
+      "rows": 1185,
       "start": "2023-06-29",
-      "end": "2026-09-26",
-      "usable_rain_days": 1184,
+      "end": "2026-09-27",
+      "usable_rain_days": 1185,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -446,10 +446,10 @@
       "duplicate_dates": []
     },
     "C8": {
-      "rows": 1185,
+      "rows": 1186,
       "start": "2023-06-28",
-      "end": "2026-09-26",
-      "usable_rain_days": 1185,
+      "end": "2026-09-27",
+      "usable_rain_days": 1186,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -459,10 +459,10 @@
       "duplicate_dates": []
     },
     "C9": {
-      "rows": 1186,
+      "rows": 1187,
       "start": "2023-06-27",
-      "end": "2026-09-26",
-      "usable_rain_days": 1186,
+      "end": "2026-09-27",
+      "usable_rain_days": 1187,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -472,10 +472,10 @@
       "duplicate_dates": []
     },
     "C10": {
-      "rows": 1186,
+      "rows": 1187,
       "start": "2023-06-27",
-      "end": "2026-09-26",
-      "usable_rain_days": 1186,
+      "end": "2026-09-27",
+      "usable_rain_days": 1187,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -485,10 +485,10 @@
       "duplicate_dates": []
     },
     "C11": {
-      "rows": 1186,
+      "rows": 1187,
       "start": "2023-06-27",
-      "end": "2026-09-26",
-      "usable_rain_days": 1186,
+      "end": "2026-09-27",
+      "usable_rain_days": 1187,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -498,61 +498,9 @@
       "duplicate_dates": []
     },
     "C12": {
-      "rows": 1185,
-      "start": "2023-06-28",
-      "end": "2026-09-26",
-      "usable_rain_days": 1185,
-      "missing_rain_days": 0,
-      "missing_calendar_dates": [
-        "2026-08-04",
-        "2026-08-27"
-      ],
-      "invalid_rows": 0,
-      "duplicate_dates": []
-    },
-    "C13": {
-      "rows": 1185,
-      "start": "2023-06-28",
-      "end": "2026-09-26",
-      "usable_rain_days": 1185,
-      "missing_rain_days": 0,
-      "missing_calendar_dates": [
-        "2026-08-04",
-        "2026-08-27"
-      ],
-      "invalid_rows": 0,
-      "duplicate_dates": []
-    },
-    "C14": {
-      "rows": 1185,
-      "start": "2023-06-28",
-      "end": "2026-09-26",
-      "usable_rain_days": 1185,
-      "missing_rain_days": 0,
-      "missing_calendar_dates": [
-        "2026-08-04",
-        "2026-08-27"
-      ],
-      "invalid_rows": 0,
-      "duplicate_dates": []
-    },
-    "C15": {
-      "rows": 1185,
-      "start": "2023-06-28",
-      "end": "2026-09-26",
-      "usable_rain_days": 1185,
-      "missing_rain_days": 0,
-      "missing_calendar_dates": [
-        "2026-08-04",
-        "2026-08-27"
-      ],
-      "invalid_rows": 0,
-      "duplicate_dates": []
-    },
-    "C16": {
       "rows": 1186,
-      "start": "2023-06-27",
-      "end": "2026-09-26",
+      "start": "2023-06-28",
+      "end": "2026-09-27",
       "usable_rain_days": 1186,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
@@ -562,11 +510,63 @@
       "invalid_rows": 0,
       "duplicate_dates": []
     },
+    "C13": {
+      "rows": 1186,
+      "start": "2023-06-28",
+      "end": "2026-09-27",
+      "usable_rain_days": 1186,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "C14": {
+      "rows": 1186,
+      "start": "2023-06-28",
+      "end": "2026-09-27",
+      "usable_rain_days": 1186,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "C15": {
+      "rows": 1186,
+      "start": "2023-06-28",
+      "end": "2026-09-27",
+      "usable_rain_days": 1186,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
+    "C16": {
+      "rows": 1187,
+      "start": "2023-06-27",
+      "end": "2026-09-27",
+      "usable_rain_days": 1187,
+      "missing_rain_days": 0,
+      "missing_calendar_dates": [
+        "2026-08-04",
+        "2026-08-27"
+      ],
+      "invalid_rows": 0,
+      "duplicate_dates": []
+    },
     "C17": {
-      "rows": 1363,
+      "rows": 1364,
       "start": "2023-01-01",
-      "end": "2026-09-26",
-      "usable_rain_days": 1363,
+      "end": "2026-09-27",
+      "usable_rain_days": 1364,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -576,10 +576,10 @@
       "duplicate_dates": []
     },
     "C18": {
-      "rows": 1363,
+      "rows": 1364,
       "start": "2023-01-01",
-      "end": "2026-09-26",
-      "usable_rain_days": 1363,
+      "end": "2026-09-27",
+      "usable_rain_days": 1364,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -589,10 +589,10 @@
       "duplicate_dates": []
     },
     "C19": {
-      "rows": 1207,
+      "rows": 1208,
       "start": "2023-06-06",
-      "end": "2026-09-26",
-      "usable_rain_days": 1207,
+      "end": "2026-09-27",
+      "usable_rain_days": 1208,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -602,10 +602,10 @@
       "duplicate_dates": []
     },
     "C20": {
-      "rows": 1207,
+      "rows": 1208,
       "start": "2023-06-06",
-      "end": "2026-09-26",
-      "usable_rain_days": 1207,
+      "end": "2026-09-27",
+      "usable_rain_days": 1208,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -615,10 +615,10 @@
       "duplicate_dates": []
     },
     "G1": {
-      "rows": 1363,
+      "rows": 1364,
       "start": "2023-01-01",
-      "end": "2026-09-26",
-      "usable_rain_days": 1363,
+      "end": "2026-09-27",
+      "usable_rain_days": 1364,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -628,10 +628,10 @@
       "duplicate_dates": []
     },
     "G2": {
-      "rows": 1220,
+      "rows": 1221,
       "start": "2023-05-24",
-      "end": "2026-09-26",
-      "usable_rain_days": 1220,
+      "end": "2026-09-27",
+      "usable_rain_days": 1221,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -641,10 +641,10 @@
       "duplicate_dates": []
     },
     "G3": {
-      "rows": 1220,
+      "rows": 1221,
       "start": "2023-05-24",
-      "end": "2026-09-26",
-      "usable_rain_days": 1220,
+      "end": "2026-09-27",
+      "usable_rain_days": 1221,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -654,10 +654,10 @@
       "duplicate_dates": []
     },
     "G4": {
-      "rows": 1220,
+      "rows": 1221,
       "start": "2023-05-24",
-      "end": "2026-09-26",
-      "usable_rain_days": 1220,
+      "end": "2026-09-27",
+      "usable_rain_days": 1221,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -667,10 +667,10 @@
       "duplicate_dates": []
     },
     "G5": {
-      "rows": 1220,
+      "rows": 1221,
       "start": "2023-05-24",
-      "end": "2026-09-26",
-      "usable_rain_days": 1220,
+      "end": "2026-09-27",
+      "usable_rain_days": 1221,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -680,10 +680,10 @@
       "duplicate_dates": []
     },
     "G6": {
-      "rows": 1220,
+      "rows": 1221,
       "start": "2023-05-24",
-      "end": "2026-09-26",
-      "usable_rain_days": 1220,
+      "end": "2026-09-27",
+      "usable_rain_days": 1221,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -693,10 +693,10 @@
       "duplicate_dates": []
     },
     "G7": {
-      "rows": 1220,
+      "rows": 1221,
       "start": "2023-05-24",
-      "end": "2026-09-26",
-      "usable_rain_days": 1220,
+      "end": "2026-09-27",
+      "usable_rain_days": 1221,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -706,10 +706,10 @@
       "duplicate_dates": []
     },
     "G8": {
-      "rows": 1220,
+      "rows": 1221,
       "start": "2023-05-24",
-      "end": "2026-09-26",
-      "usable_rain_days": 1220,
+      "end": "2026-09-27",
+      "usable_rain_days": 1221,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -719,10 +719,10 @@
       "duplicate_dates": []
     },
     "G9": {
-      "rows": 1220,
+      "rows": 1221,
       "start": "2023-05-24",
-      "end": "2026-09-26",
-      "usable_rain_days": 1220,
+      "end": "2026-09-27",
+      "usable_rain_days": 1221,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -732,10 +732,10 @@
       "duplicate_dates": []
     },
     "G10": {
-      "rows": 1220,
+      "rows": 1221,
       "start": "2023-05-24",
-      "end": "2026-09-26",
-      "usable_rain_days": 1220,
+      "end": "2026-09-27",
+      "usable_rain_days": 1221,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -745,10 +745,10 @@
       "duplicate_dates": []
     },
     "G11": {
-      "rows": 1220,
+      "rows": 1221,
       "start": "2023-05-24",
-      "end": "2026-09-26",
-      "usable_rain_days": 1220,
+      "end": "2026-09-27",
+      "usable_rain_days": 1221,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -758,10 +758,10 @@
       "duplicate_dates": []
     },
     "G12": {
-      "rows": 1220,
+      "rows": 1221,
       "start": "2023-05-24",
-      "end": "2026-09-26",
-      "usable_rain_days": 1220,
+      "end": "2026-09-27",
+      "usable_rain_days": 1221,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -771,10 +771,10 @@
       "duplicate_dates": []
     },
     "G13": {
-      "rows": 1219,
+      "rows": 1220,
       "start": "2023-05-25",
-      "end": "2026-09-26",
-      "usable_rain_days": 1219,
+      "end": "2026-09-27",
+      "usable_rain_days": 1220,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -784,10 +784,10 @@
       "duplicate_dates": []
     },
     "G14": {
-      "rows": 1219,
+      "rows": 1220,
       "start": "2023-05-25",
-      "end": "2026-09-26",
-      "usable_rain_days": 1219,
+      "end": "2026-09-27",
+      "usable_rain_days": 1220,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -797,10 +797,10 @@
       "duplicate_dates": []
     },
     "G15": {
-      "rows": 1219,
+      "rows": 1220,
       "start": "2023-05-25",
-      "end": "2026-09-26",
-      "usable_rain_days": 1219,
+      "end": "2026-09-27",
+      "usable_rain_days": 1220,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -810,10 +810,10 @@
       "duplicate_dates": []
     },
     "G16": {
-      "rows": 1219,
+      "rows": 1220,
       "start": "2023-05-25",
-      "end": "2026-09-26",
-      "usable_rain_days": 1219,
+      "end": "2026-09-27",
+      "usable_rain_days": 1220,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -823,10 +823,10 @@
       "duplicate_dates": []
     },
     "G17": {
-      "rows": 1363,
+      "rows": 1364,
       "start": "2023-01-01",
-      "end": "2026-09-26",
-      "usable_rain_days": 1363,
+      "end": "2026-09-27",
+      "usable_rain_days": 1364,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -836,10 +836,10 @@
       "duplicate_dates": []
     },
     "G18": {
-      "rows": 1363,
+      "rows": 1364,
       "start": "2023-01-01",
-      "end": "2026-09-26",
-      "usable_rain_days": 1363,
+      "end": "2026-09-27",
+      "usable_rain_days": 1364,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -849,10 +849,10 @@
       "duplicate_dates": []
     },
     "G19": {
-      "rows": 1363,
+      "rows": 1364,
       "start": "2023-01-01",
-      "end": "2026-09-26",
-      "usable_rain_days": 1363,
+      "end": "2026-09-27",
+      "usable_rain_days": 1364,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -862,10 +862,10 @@
       "duplicate_dates": []
     },
     "G20": {
-      "rows": 1363,
+      "rows": 1364,
       "start": "2023-01-01",
-      "end": "2026-09-26",
-      "usable_rain_days": 1363,
+      "end": "2026-09-27",
+      "usable_rain_days": 1364,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -875,10 +875,10 @@
       "duplicate_dates": []
     },
     "G21": {
-      "rows": 1220,
+      "rows": 1221,
       "start": "2023-05-24",
-      "end": "2026-09-26",
-      "usable_rain_days": 1220,
+      "end": "2026-09-27",
+      "usable_rain_days": 1221,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -888,10 +888,10 @@
       "duplicate_dates": []
     },
     "G22": {
-      "rows": 1220,
+      "rows": 1221,
       "start": "2023-05-24",
-      "end": "2026-09-26",
-      "usable_rain_days": 1220,
+      "end": "2026-09-27",
+      "usable_rain_days": 1221,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -901,10 +901,10 @@
       "duplicate_dates": []
     },
     "O1": {
-      "rows": 1115,
+      "rows": 1116,
       "start": "2023-09-06",
-      "end": "2026-09-26",
-      "usable_rain_days": 1115,
+      "end": "2026-09-27",
+      "usable_rain_days": 1116,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -914,10 +914,10 @@
       "duplicate_dates": []
     },
     "O2": {
-      "rows": 1115,
+      "rows": 1116,
       "start": "2023-09-06",
-      "end": "2026-09-26",
-      "usable_rain_days": 1115,
+      "end": "2026-09-27",
+      "usable_rain_days": 1116,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -927,10 +927,10 @@
       "duplicate_dates": []
     },
     "O3": {
-      "rows": 1115,
+      "rows": 1116,
       "start": "2023-09-06",
-      "end": "2026-09-26",
-      "usable_rain_days": 1115,
+      "end": "2026-09-27",
+      "usable_rain_days": 1116,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -940,10 +940,10 @@
       "duplicate_dates": []
     },
     "O4": {
-      "rows": 1115,
+      "rows": 1116,
       "start": "2023-09-06",
-      "end": "2026-09-26",
-      "usable_rain_days": 1115,
+      "end": "2026-09-27",
+      "usable_rain_days": 1116,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -953,10 +953,10 @@
       "duplicate_dates": []
     },
     "O5": {
-      "rows": 1115,
+      "rows": 1116,
       "start": "2023-09-06",
-      "end": "2026-09-26",
-      "usable_rain_days": 1115,
+      "end": "2026-09-27",
+      "usable_rain_days": 1116,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -966,10 +966,10 @@
       "duplicate_dates": []
     },
     "O6": {
-      "rows": 1115,
+      "rows": 1116,
       "start": "2023-09-06",
-      "end": "2026-09-26",
-      "usable_rain_days": 1115,
+      "end": "2026-09-27",
+      "usable_rain_days": 1116,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -979,10 +979,10 @@
       "duplicate_dates": []
     },
     "O7": {
-      "rows": 1115,
+      "rows": 1116,
       "start": "2023-09-06",
-      "end": "2026-09-26",
-      "usable_rain_days": 1115,
+      "end": "2026-09-27",
+      "usable_rain_days": 1116,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -992,10 +992,10 @@
       "duplicate_dates": []
     },
     "O8": {
-      "rows": 1115,
+      "rows": 1116,
       "start": "2023-09-06",
-      "end": "2026-09-26",
-      "usable_rain_days": 1115,
+      "end": "2026-09-27",
+      "usable_rain_days": 1116,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1005,10 +1005,10 @@
       "duplicate_dates": []
     },
     "O9": {
-      "rows": 1115,
+      "rows": 1116,
       "start": "2023-09-06",
-      "end": "2026-09-26",
-      "usable_rain_days": 1115,
+      "end": "2026-09-27",
+      "usable_rain_days": 1116,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1018,10 +1018,10 @@
       "duplicate_dates": []
     },
     "O10": {
-      "rows": 1115,
+      "rows": 1116,
       "start": "2023-09-06",
-      "end": "2026-09-26",
-      "usable_rain_days": 1115,
+      "end": "2026-09-27",
+      "usable_rain_days": 1116,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1031,10 +1031,10 @@
       "duplicate_dates": []
     },
     "O11": {
-      "rows": 1115,
+      "rows": 1116,
       "start": "2023-09-06",
-      "end": "2026-09-26",
-      "usable_rain_days": 1115,
+      "end": "2026-09-27",
+      "usable_rain_days": 1116,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1044,10 +1044,10 @@
       "duplicate_dates": []
     },
     "O12": {
-      "rows": 1115,
+      "rows": 1116,
       "start": "2023-09-06",
-      "end": "2026-09-26",
-      "usable_rain_days": 1115,
+      "end": "2026-09-27",
+      "usable_rain_days": 1116,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1057,10 +1057,10 @@
       "duplicate_dates": []
     },
     "O13": {
-      "rows": 1115,
+      "rows": 1116,
       "start": "2023-09-06",
-      "end": "2026-09-26",
-      "usable_rain_days": 1115,
+      "end": "2026-09-27",
+      "usable_rain_days": 1116,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1070,10 +1070,10 @@
       "duplicate_dates": []
     },
     "O14": {
-      "rows": 1115,
+      "rows": 1116,
       "start": "2023-09-06",
-      "end": "2026-09-26",
-      "usable_rain_days": 1115,
+      "end": "2026-09-27",
+      "usable_rain_days": 1116,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1083,10 +1083,10 @@
       "duplicate_dates": []
     },
     "O15": {
-      "rows": 1115,
+      "rows": 1116,
       "start": "2023-09-06",
-      "end": "2026-09-26",
-      "usable_rain_days": 1115,
+      "end": "2026-09-27",
+      "usable_rain_days": 1116,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1096,10 +1096,10 @@
       "duplicate_dates": []
     },
     "O16": {
-      "rows": 1115,
+      "rows": 1116,
       "start": "2023-09-06",
-      "end": "2026-09-26",
-      "usable_rain_days": 1115,
+      "end": "2026-09-27",
+      "usable_rain_days": 1116,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1109,10 +1109,10 @@
       "duplicate_dates": []
     },
     "O17": {
-      "rows": 1115,
+      "rows": 1116,
       "start": "2023-09-06",
-      "end": "2026-09-26",
-      "usable_rain_days": 1115,
+      "end": "2026-09-27",
+      "usable_rain_days": 1116,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1122,10 +1122,10 @@
       "duplicate_dates": []
     },
     "O18": {
-      "rows": 1115,
+      "rows": 1116,
       "start": "2023-09-06",
-      "end": "2026-09-26",
-      "usable_rain_days": 1115,
+      "end": "2026-09-27",
+      "usable_rain_days": 1116,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1135,10 +1135,10 @@
       "duplicate_dates": []
     },
     "O19": {
-      "rows": 1115,
+      "rows": 1116,
       "start": "2023-09-06",
-      "end": "2026-09-26",
-      "usable_rain_days": 1115,
+      "end": "2026-09-27",
+      "usable_rain_days": 1116,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1148,10 +1148,10 @@
       "duplicate_dates": []
     },
     "O20": {
-      "rows": 1115,
+      "rows": 1116,
       "start": "2023-09-06",
-      "end": "2026-09-26",
-      "usable_rain_days": 1115,
+      "end": "2026-09-27",
+      "usable_rain_days": 1116,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1161,10 +1161,10 @@
       "duplicate_dates": []
     },
     "T1": {
-      "rows": 1239,
+      "rows": 1240,
       "start": "2023-05-05",
-      "end": "2026-09-26",
-      "usable_rain_days": 1239,
+      "end": "2026-09-27",
+      "usable_rain_days": 1240,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1174,10 +1174,10 @@
       "duplicate_dates": []
     },
     "T2": {
-      "rows": 1239,
+      "rows": 1240,
       "start": "2023-05-05",
-      "end": "2026-09-26",
-      "usable_rain_days": 1239,
+      "end": "2026-09-27",
+      "usable_rain_days": 1240,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1187,10 +1187,10 @@
       "duplicate_dates": []
     },
     "T3": {
-      "rows": 1239,
+      "rows": 1240,
       "start": "2023-05-05",
-      "end": "2026-09-26",
-      "usable_rain_days": 1239,
+      "end": "2026-09-27",
+      "usable_rain_days": 1240,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1200,10 +1200,10 @@
       "duplicate_dates": []
     },
     "T4": {
-      "rows": 1239,
+      "rows": 1240,
       "start": "2023-05-05",
-      "end": "2026-09-26",
-      "usable_rain_days": 1239,
+      "end": "2026-09-27",
+      "usable_rain_days": 1240,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1213,10 +1213,10 @@
       "duplicate_dates": []
     },
     "T5": {
-      "rows": 1239,
+      "rows": 1240,
       "start": "2023-05-05",
-      "end": "2026-09-26",
-      "usable_rain_days": 1239,
+      "end": "2026-09-27",
+      "usable_rain_days": 1240,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1226,10 +1226,10 @@
       "duplicate_dates": []
     },
     "T6": {
-      "rows": 1239,
+      "rows": 1240,
       "start": "2023-05-05",
-      "end": "2026-09-26",
-      "usable_rain_days": 1239,
+      "end": "2026-09-27",
+      "usable_rain_days": 1240,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1239,10 +1239,10 @@
       "duplicate_dates": []
     },
     "T7": {
-      "rows": 1239,
+      "rows": 1240,
       "start": "2023-05-05",
-      "end": "2026-09-26",
-      "usable_rain_days": 1239,
+      "end": "2026-09-27",
+      "usable_rain_days": 1240,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1252,10 +1252,10 @@
       "duplicate_dates": []
     },
     "T8": {
-      "rows": 1239,
+      "rows": 1240,
       "start": "2023-05-05",
-      "end": "2026-09-26",
-      "usable_rain_days": 1239,
+      "end": "2026-09-27",
+      "usable_rain_days": 1240,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1265,10 +1265,10 @@
       "duplicate_dates": []
     },
     "T9": {
-      "rows": 1238,
+      "rows": 1239,
       "start": "2023-05-06",
-      "end": "2026-09-26",
-      "usable_rain_days": 1238,
+      "end": "2026-09-27",
+      "usable_rain_days": 1239,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1278,10 +1278,10 @@
       "duplicate_dates": []
     },
     "T10": {
-      "rows": 1238,
+      "rows": 1239,
       "start": "2023-05-06",
-      "end": "2026-09-26",
-      "usable_rain_days": 1238,
+      "end": "2026-09-27",
+      "usable_rain_days": 1239,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1291,10 +1291,10 @@
       "duplicate_dates": []
     },
     "T11": {
-      "rows": 1238,
+      "rows": 1239,
       "start": "2023-05-06",
-      "end": "2026-09-26",
-      "usable_rain_days": 1238,
+      "end": "2026-09-27",
+      "usable_rain_days": 1239,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1304,10 +1304,10 @@
       "duplicate_dates": []
     },
     "T12": {
-      "rows": 1238,
+      "rows": 1239,
       "start": "2023-05-06",
-      "end": "2026-09-26",
-      "usable_rain_days": 1238,
+      "end": "2026-09-27",
+      "usable_rain_days": 1239,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1317,10 +1317,10 @@
       "duplicate_dates": []
     },
     "T13": {
-      "rows": 1239,
+      "rows": 1240,
       "start": "2023-05-05",
-      "end": "2026-09-26",
-      "usable_rain_days": 1239,
+      "end": "2026-09-27",
+      "usable_rain_days": 1240,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1330,10 +1330,10 @@
       "duplicate_dates": []
     },
     "T14": {
-      "rows": 1239,
+      "rows": 1240,
       "start": "2023-05-05",
-      "end": "2026-09-26",
-      "usable_rain_days": 1239,
+      "end": "2026-09-27",
+      "usable_rain_days": 1240,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1343,10 +1343,10 @@
       "duplicate_dates": []
     },
     "T15": {
-      "rows": 1363,
+      "rows": 1364,
       "start": "2023-01-01",
-      "end": "2026-09-26",
-      "usable_rain_days": 1363,
+      "end": "2026-09-27",
+      "usable_rain_days": 1364,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1356,10 +1356,10 @@
       "duplicate_dates": []
     },
     "T16": {
-      "rows": 1239,
+      "rows": 1240,
       "start": "2023-05-05",
-      "end": "2026-09-26",
-      "usable_rain_days": 1239,
+      "end": "2026-09-27",
+      "usable_rain_days": 1240,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1369,10 +1369,10 @@
       "duplicate_dates": []
     },
     "T17": {
-      "rows": 1239,
+      "rows": 1240,
       "start": "2023-05-05",
-      "end": "2026-09-26",
-      "usable_rain_days": 1239,
+      "end": "2026-09-27",
+      "usable_rain_days": 1240,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1382,10 +1382,10 @@
       "duplicate_dates": []
     },
     "T18": {
-      "rows": 1239,
+      "rows": 1240,
       "start": "2023-05-05",
-      "end": "2026-09-26",
-      "usable_rain_days": 1239,
+      "end": "2026-09-27",
+      "usable_rain_days": 1240,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1395,10 +1395,10 @@
       "duplicate_dates": []
     },
     "T19": {
-      "rows": 1239,
+      "rows": 1240,
       "start": "2023-05-05",
-      "end": "2026-09-26",
-      "usable_rain_days": 1239,
+      "end": "2026-09-27",
+      "usable_rain_days": 1240,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1408,10 +1408,10 @@
       "duplicate_dates": []
     },
     "T20": {
-      "rows": 1239,
+      "rows": 1240,
       "start": "2023-05-05",
-      "end": "2026-09-26",
-      "usable_rain_days": 1239,
+      "end": "2026-09-27",
+      "usable_rain_days": 1240,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1421,10 +1421,10 @@
       "duplicate_dates": []
     },
     "T21": {
-      "rows": 1363,
+      "rows": 1364,
       "start": "2023-01-01",
-      "end": "2026-09-26",
-      "usable_rain_days": 1363,
+      "end": "2026-09-27",
+      "usable_rain_days": 1364,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1434,10 +1434,10 @@
       "duplicate_dates": []
     },
     "T22": {
-      "rows": 1239,
+      "rows": 1240,
       "start": "2023-05-05",
-      "end": "2026-09-26",
-      "usable_rain_days": 1239,
+      "end": "2026-09-27",
+      "usable_rain_days": 1240,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1447,10 +1447,10 @@
       "duplicate_dates": []
     },
     "T24": {
-      "rows": 1363,
+      "rows": 1364,
       "start": "2023-01-01",
-      "end": "2026-09-26",
-      "usable_rain_days": 1363,
+      "end": "2026-09-27",
+      "usable_rain_days": 1364,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1460,10 +1460,10 @@
       "duplicate_dates": []
     },
     "T25": {
-      "rows": 1239,
+      "rows": 1240,
       "start": "2023-05-05",
-      "end": "2026-09-26",
-      "usable_rain_days": 1239,
+      "end": "2026-09-27",
+      "usable_rain_days": 1240,
       "missing_rain_days": 0,
       "missing_calendar_dates": [
         "2026-08-04",
@@ -1588,8 +1588,8 @@
   "forecast_coverage": {
     "BE": {
       "timezone": "Europe/Rome",
-      "start": "2026-10-03",
-      "end": "2026-10-09",
+      "start": "2026-10-04",
+      "end": "2026-10-10",
       "days": 7,
       "usable_rain_days": 7,
       "missing_rain_dates": [],
@@ -1597,8 +1597,8 @@
     },
     "CO": {
       "timezone": "Europe/Lisbon",
-      "start": "2026-10-03",
-      "end": "2026-10-09",
+      "start": "2026-10-04",
+      "end": "2026-10-10",
       "days": 7,
       "usable_rain_days": 7,
       "missing_rain_dates": [],
@@ -1606,8 +1606,8 @@
     },
     "GH": {
       "timezone": "Europe/Brussels",
-      "start": "2026-10-03",
-      "end": "2026-10-09",
+      "start": "2026-10-04",
+      "end": "2026-10-10",
       "days": 7,
       "usable_rain_days": 7,
       "missing_rain_dates": [],
@@ -1615,8 +1615,8 @@
     },
     "OS": {
       "timezone": "Europe/Oslo",
-      "start": "2026-10-03",
-      "end": "2026-10-09",
+      "start": "2026-10-04",
+      "end": "2026-10-10",
       "days": 7,
       "usable_rain_days": 7,
       "missing_rain_dates": [],
@@ -1624,8 +1624,8 @@
     },
     "TO": {
       "timezone": "Europe/Paris",
-      "start": "2026-10-03",
-      "end": "2026-10-09",
+      "start": "2026-10-04",
+      "end": "2026-10-10",
       "days": 7,
       "usable_rain_days": 7,
       "missing_rain_dates": [],
@@ -1636,7 +1636,7 @@
     "sites": 106,
     "health": 96,
     "urban": 104,
-    "weather": 127481
+    "weather": 127587
   },
   "retrieval_counts": {
     "live": 114

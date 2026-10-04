@@ -197,3 +197,9 @@ site's category order. Every new resource carries
 rewritten and were not posted again. The page labels 1046–1050 as filed with
 resource shape v1. A download from the current page uses the v2 resources
 built by `plan.py`. The `urn:uuid` fullUrls are unchanged.
+
+## Validation of the current export
+
+On 2026-10-04, the official HL7 validator checked `web/data/fhir-bundle-v2-coimbra-replay.json` against core FHIR R4 4.0.1. It reported **0 errors, 17 warnings and 8 information**. Every warning/information item concerns an undefined local `urn:afterstorm:*` CodeSystem; the local codes have not been published as formal terminology resources. The report is in `docs/validation/fhir-r4-core.html` and the console summary in `docs/validation/fhir-r4-core.txt`. The OneAquaHealth IG package URL returned 404, so this is **not** an IG conformance result. The IG has no ServiceRequest profile. The v2 bundle was never posted to the sandbox.
+
+The current page also downloads a UTF-8 BOM lab sheet CSV and local review JSON. These files are hand-offs, not FHIR transmissions. The five filed IDs remain the earlier shape v1 examples.

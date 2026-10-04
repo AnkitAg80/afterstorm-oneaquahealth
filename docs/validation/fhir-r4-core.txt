@@ -1,0 +1,59 @@
+FHIR Validation tool Version 6.10.4 (Git# 1b90fb13f77b). Built 2026-09-04T05:45:41.468Z (30 days old)
+
+  Java:   24.0.2 from C:\Program Files\Java\jdk-24 on amd64 (64bit). 4002MB available
+
+  Paths:  Current = C:\Users\ankit\Downloads\oneaqua\afterstorm, Package Cache = C:\Users\ankit\.fhir\packages
+
+  Params: web\data\fhir-bundle-v2-coimbra-replay.json -version 4.0.1 -output docs\validation\fhir-r4-core.html
+
+  Locale: India/IN
+
+  Jurisdiction: India
+
+Loading
+
+  Loading FHIR v4.0.1 from hl7.fhir.r4.core#4.0.1
+
+  Load hl7.terminology.r4#6.2.0 - 4288 resources (00:30.932)
+
+  Load hl7.fhir.uv.extensions.r4#5.2.0 - 759 resources (00:05.691)
+
+  Loaded FHIR - 8265 resources (00:00.001)
+
+  Terminology server https://tx.fhir.org - Version Connected to Terminology Server at https://tx.fhir.org (00:04.926)
+
+  Load hl7.terminology#7.4.0 - 4181 resources (00:11.077)
+
+  Load hl7.fhir.uv.extensions.r5#5.2.0 - 759 resources (00:02.770)
+
+  Load hl7.terminology.r5#7.1.0 - 4072 resources (00:07.716)
+
+  Load hl7.fhir.uv.extensions#5.3.0 - 856 resources (00:00.046)
+
+  Package Summary: [hl7.fhir.r4.core#4.0.1, hl7.fhir.xver-extensions#0.1.0, hl7.terminology.r4#6.2.0, hl7.fhir.uv.extensions.r4#5.2.0, hl7.terminology#7.4.0, hl7.fhir.uv.extensions.r5#5.2.0, hl7.terminology.r5#7.1.0, hl7.fhir.uv.extensions#5.3.0]
+
+  Terminology Cache at C:\Users\ankit\AppData\Local\Temp\default-tx-cache
+
+  Get set...
+
+  ...go! (00:09.668)
+
+Cached new session. Cache size = 1
+
+Sources to validate: web\data\fhir-bundle-v2-coimbra-replay.json
+
+Validating
+
+  Validate web\data\fhir-bundle-v2-coimbra-replay.json
+
+ 00:09.594
+
+Done. Times: Loading: 01:12.938, validation: 00:09.595. Memory = 530Mb
+
+
+
+Done. Times: Loading: 01:12.938, validation: 00:09.595. Max Memory = 3Gb
+
+
+Parsed from the generated OperationOutcome on 2026-10-04: 0 errors, 17 warnings, 8 information.
+All 25 issues concern undefined local urn:afterstorm:* CodeSystems. Core R4 validation only; no OneAquaHealth IG conformance.

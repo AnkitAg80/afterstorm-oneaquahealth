@@ -62,7 +62,8 @@ COIMBRA_BUNDLE_PATH = DATA_DIR / "fhir-bundle-coimbra-replay.json"
 FILED_PATH = DATA_DIR / "filed.json"
 SERVICE_REQUEST_ID = re.compile(r"ServiceRequest/([^/?#\s]+)")
 NOT_CHECKED = (
-    "HL7 validator jar was not downloaded and was not run.",
+    "This Python structural check does not run the HL7 validator; the separate "
+    "core R4 result for the v2 Coimbra replay bundle is in docs/validation/fhir-r4-core.txt.",
     "OneAquaHealth profile conformance was not claimed; the IG has no ServiceRequest or Task profile.",
     "sandbox $validate was not called and is not certification.",
 )
@@ -685,8 +686,21 @@ def main(argv=None):
     parser.add_argument("--budget", type=int, default=None)
     parser.add_argument("--post", action="store_true",
                         help="POST only the approved Coimbra replay budget-5 bundle.")
+    parser.add_argument("--write-validation-bundle", action="store_true",
+                        help="Write the current v2 Coimbra replay budget-5 bundle. Does not post.")
     args = parser.parse_args(argv)
     try:
+        if args.write_validation_bundle and args.post:
+            print("Refusing to post while writing the validation bundle.", file=sys.stderr)
+            return 2
+        if args.write_validation_bundle:
+            plan = json.loads(args.plan.read_text(encoding="utf-8"))
+            bundle = bundle_for(plan, "CO", "replay", 5)
+            path = DATA_DIR / "fhir-bundle-v2-coimbra-replay.json"
+            write_json(path, bundle)
+            print(f"Saved {path} ({len(bundle['entry'])} ServiceRequests; v2; mode=replay; budget=5; city=CO)")
+            print("Did not post. filed.json and fhir-bundle-coimbra-replay.json were not changed.")
+            return 0
         if args.post:
             require_approved_post(args.city, args.mode, args.budget)
             if filed_has_resources(FILED_PATH):

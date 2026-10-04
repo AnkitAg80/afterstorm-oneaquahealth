@@ -1,0 +1,365 @@
+{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "meta": {
+    "tag": [
+      {
+        "system": "urn:afterstorm:export",
+        "code": "replay-budget-5",
+        "display": "mode=replay; budget=5; city=CO"
+      },
+      {
+        "system": "urn:afterstorm:profile-choice",
+        "code": "base-r4-servicerequest",
+        "display": "No OneAquaHealth ServiceRequest or Task profile in hl7-eu/oah; base FHIR R4 ServiceRequest"
+      },
+      {
+        "system": "urn:afterstorm:export",
+        "code": "demonstration",
+        "display": "replay scenario of the real 2026-05-10 storm — demonstration"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:2c59d1cc-9d21-5273-8cc9-222be6474bb0",
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "status": "draft",
+        "intent": "proposal",
+        "subject": {
+          "identifier": {
+            "system": "https://api.enora-oah.eu/api/sites",
+            "value": "C5"
+          },
+          "display": "Mina Hospital"
+        },
+        "meta": {
+          "tag": [
+            {
+              "system": "urn:afterstorm:export",
+              "code": "resource-shape-v2",
+              "display": "One request-type code; categories in orderDetail"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "urn:afterstorm:request-type",
+              "code": "post-storm-reassessment",
+              "display": "Post-storm reassessment (experimental)"
+            }
+          ],
+          "text": "Post-storm reassessment (experimental)"
+        },
+        "orderDetail": [
+          {
+            "coding": [
+              {
+                "system": "urn:afterstorm:assessment-category",
+                "code": "faecal",
+                "display": "faecal"
+              }
+            ],
+            "text": "faecal"
+          },
+          {
+            "coding": [
+              {
+                "system": "urn:afterstorm:assessment-category",
+                "code": "pathogen",
+                "display": "pathogen"
+              }
+            ],
+            "text": "pathogen"
+          }
+        ],
+        "reasonCode": [
+          {
+            "text": "2023 result: faecal and pathogen categories 1.00 (tied highest of 3, relative score); sewage works 2398.28 m; 24.43 mm archived rain at this site on 2026-05-10. New assessment in faecal, pathogen; Experimental window (heuristic, not validated): 2026-05-11 to 2026-05-12 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown."
+          }
+        ],
+        "note": [
+          {
+            "text": "precautionary; based on 2023 results; replay Draft proposal only. A person approves it before any sampling. Draft — requires coordinator review Precautionary: avoid water contact for people and pets after heavy rain until new results are reviewed. Based on 2023 relative faecal/pathogen categories and a replay storm scenario; current contamination is unknown. The coordinator decides whether to issue the notice and when to lift it. The draft notice is not completed and has not been sent. replay scenario of the real 2026-05-10 storm — demonstration"
+          }
+        ],
+        "occurrencePeriod": {
+          "start": "2026-05-11",
+          "end": "2026-05-12"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "ServiceRequest"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:08abf070-14a4-5a2d-b2de-f37c275dabfb",
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "status": "draft",
+        "intent": "proposal",
+        "subject": {
+          "identifier": {
+            "system": "https://api.enora-oah.eu/api/sites",
+            "value": "C12"
+          },
+          "display": "Escola Agrária"
+        },
+        "meta": {
+          "tag": [
+            {
+              "system": "urn:afterstorm:export",
+              "code": "resource-shape-v2",
+              "display": "One request-type code; categories in orderDetail"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "urn:afterstorm:request-type",
+              "code": "post-storm-reassessment",
+              "display": "Post-storm reassessment (experimental)"
+            }
+          ],
+          "text": "Post-storm reassessment (experimental)"
+        },
+        "orderDetail": [
+          {
+            "coding": [
+              {
+                "system": "urn:afterstorm:assessment-category",
+                "code": "faecal",
+                "display": "faecal"
+              }
+            ],
+            "text": "faecal"
+          }
+        ],
+        "reasonCode": [
+          {
+            "text": "2023 result: faecal category 0.81 (highest of 3, relative score); sewage works 2815.42 m; 24.43 mm archived rain at this site on 2026-05-10. New assessment in faecal; Experimental window (heuristic, not validated): 2026-05-11 to 2026-05-12 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown."
+          }
+        ],
+        "note": [
+          {
+            "text": "precautionary; based on 2023 results; replay Draft proposal only. A person approves it before any sampling. Draft — requires coordinator review Precautionary: avoid water contact for people and pets after heavy rain until new results are reviewed. Based on 2023 relative faecal/pathogen categories and a replay storm scenario; current contamination is unknown. The coordinator decides whether to issue the notice and when to lift it. The draft notice is not completed and has not been sent. replay scenario of the real 2026-05-10 storm — demonstration"
+          }
+        ],
+        "occurrencePeriod": {
+          "start": "2026-05-11",
+          "end": "2026-05-12"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "ServiceRequest"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:01a4fa4f-572d-528a-b230-c4f9f6564659",
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "status": "draft",
+        "intent": "proposal",
+        "subject": {
+          "identifier": {
+            "system": "https://api.enora-oah.eu/api/sites",
+            "value": "C6"
+          },
+          "display": "Casa do Sal"
+        },
+        "meta": {
+          "tag": [
+            {
+              "system": "urn:afterstorm:export",
+              "code": "resource-shape-v2",
+              "display": "One request-type code; categories in orderDetail"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "urn:afterstorm:request-type",
+              "code": "post-storm-reassessment",
+              "display": "Post-storm reassessment (experimental)"
+            }
+          ],
+          "text": "Post-storm reassessment (experimental)"
+        },
+        "orderDetail": [
+          {
+            "coding": [
+              {
+                "system": "urn:afterstorm:assessment-category",
+                "code": "pathogen",
+                "display": "pathogen"
+              }
+            ],
+            "text": "pathogen"
+          },
+          {
+            "coding": [
+              {
+                "system": "urn:afterstorm:assessment-category",
+                "code": "faecal",
+                "display": "faecal"
+              }
+            ],
+            "text": "faecal"
+          }
+        ],
+        "reasonCode": [
+          {
+            "text": "2023 result: pathogen category 0.74 (highest of 3, relative score); sewage works 1276.96 m; 24.43 mm archived rain at this site on 2026-05-10. New assessment in pathogen, faecal; Experimental window (heuristic, not validated): 2026-05-11 to 2026-05-12 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown."
+          }
+        ],
+        "note": [
+          {
+            "text": "precautionary; based on 2023 results; replay Draft proposal only. A person approves it before any sampling. Draft — requires coordinator review Precautionary: avoid water contact for people and pets after heavy rain until new results are reviewed. Based on 2023 relative faecal/pathogen categories and a replay storm scenario; current contamination is unknown. The coordinator decides whether to issue the notice and when to lift it. The draft notice is not completed and has not been sent. replay scenario of the real 2026-05-10 storm — demonstration"
+          }
+        ],
+        "occurrencePeriod": {
+          "start": "2026-05-11",
+          "end": "2026-05-12"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "ServiceRequest"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:e18da4f7-d8a4-5b20-a11c-41f0f759ab96",
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "status": "draft",
+        "intent": "proposal",
+        "subject": {
+          "identifier": {
+            "system": "https://api.enora-oah.eu/api/sites",
+            "value": "C7"
+          },
+          "display": "São Romão"
+        },
+        "meta": {
+          "tag": [
+            {
+              "system": "urn:afterstorm:export",
+              "code": "resource-shape-v2",
+              "display": "One request-type code; categories in orderDetail"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "urn:afterstorm:request-type",
+              "code": "post-storm-reassessment",
+              "display": "Post-storm reassessment (experimental)"
+            }
+          ],
+          "text": "Post-storm reassessment (experimental)"
+        },
+        "orderDetail": [
+          {
+            "coding": [
+              {
+                "system": "urn:afterstorm:assessment-category",
+                "code": "faecal",
+                "display": "faecal"
+              }
+            ],
+            "text": "faecal"
+          }
+        ],
+        "reasonCode": [
+          {
+            "text": "2023 result: faecal category 0.57 (highest of 3, relative score); sewage works 4548.51 m; 24.43 mm archived rain at this site on 2026-05-10. New assessment in faecal; Experimental window (heuristic, not validated): 2026-05-11 to 2026-05-12 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown."
+          }
+        ],
+        "note": [
+          {
+            "text": "precautionary; based on 2023 results; replay Draft proposal only. A person approves it before any sampling. Draft — requires coordinator review Precautionary: avoid water contact for people and pets after heavy rain until new results are reviewed. Based on 2023 relative faecal/pathogen categories and a replay storm scenario; current contamination is unknown. The coordinator decides whether to issue the notice and when to lift it. The draft notice is not completed and has not been sent. replay scenario of the real 2026-05-10 storm — demonstration"
+          }
+        ],
+        "occurrencePeriod": {
+          "start": "2026-05-11",
+          "end": "2026-05-12"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "ServiceRequest"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4783d6e5-b420-5db8-97d4-fcf8c2e06982",
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "status": "draft",
+        "intent": "proposal",
+        "subject": {
+          "identifier": {
+            "system": "https://api.enora-oah.eu/api/sites",
+            "value": "C20"
+          },
+          "display": "Corujeira"
+        },
+        "meta": {
+          "tag": [
+            {
+              "system": "urn:afterstorm:export",
+              "code": "resource-shape-v2",
+              "display": "One request-type code; categories in orderDetail"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "urn:afterstorm:request-type",
+              "code": "post-storm-reassessment",
+              "display": "Post-storm reassessment (experimental)"
+            }
+          ],
+          "text": "Post-storm reassessment (experimental)"
+        },
+        "orderDetail": [
+          {
+            "coding": [
+              {
+                "system": "urn:afterstorm:assessment-category",
+                "code": "antibiotic-resistance",
+                "display": "antibiotic resistance"
+              }
+            ],
+            "text": "antibiotic resistance"
+          }
+        ],
+        "reasonCode": [
+          {
+            "text": "2023 result: antibiotic resistance category 0.56 (highest of 3, relative score); sewage works 1343.43 m; 24.43 mm archived rain at this site on 2026-05-10. New assessment in antibiotic resistance; Experimental window (heuristic, not validated): 2026-05-11 to 2026-05-12 inclusive. The next daily total is below the configured storm threshold; the actual rain-stop time is unknown."
+          }
+        ],
+        "note": [
+          {
+            "text": "precautionary; based on 2023 results; replay Draft proposal only. A person approves it before any sampling. replay scenario of the real 2026-05-10 storm — demonstration"
+          }
+        ],
+        "occurrencePeriod": {
+          "start": "2026-05-11",
+          "end": "2026-05-12"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "ServiceRequest"
+      }
+    }
+  ]
+}
