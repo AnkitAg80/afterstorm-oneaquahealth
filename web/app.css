@@ -155,7 +155,7 @@
     @media(max-width:900px){.topbar-inner{flex-wrap:wrap;padding-top:8px;padding-bottom:8px}.app-nav{order:3;width:100%;overflow-x:auto}.app-nav a{white-space:nowrap}.header-status{margin-left:auto}}
     main{padding-top:0}
     /* pages */
-    .page{display:none}.page.active{display:block}
+    .page{display:none}.page.active{display:block}.page[data-page=overview].active{margin-top:20px}
     @media(prefers-reduced-motion:no-preference){.page.active{animation:pageIn .38s cubic-bezier(.22,1,.36,1) both}@keyframes pageIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}}
     /* shared control bar (same controls on every page) */
     .controlbar{margin:18px 0 0}.controlbar .hero-bar{margin-top:0}
