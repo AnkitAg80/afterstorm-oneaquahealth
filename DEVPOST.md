@@ -22,6 +22,8 @@ Under the EU Bathing Water Directive, one extra sample confirms that a short-ter
 
 The public OneAquaHealth Resilience Map has **96 lab records**, 95 from 2023 and one from 2024. The official roster has **106 urban stream sites** across five case-study cities; ten have no lab result in the public feed. Historical relative categories cannot tell a coordinator what is in the water now. A storm forecast creates urgency, but a city still needs to decide which sites to revisit, which categories to reassess, and when, inside a fixed travel budget.
 
+We were inspired by the gap between a rain event and the next defensible monitoring action. A risk map can show old evidence, but a coordinator still needs an accountable plan for collecting new evidence.
+
 ## What AfterStorm does
 
 AfterStorm turns a **20 mm daily rain trigger** into a reviewable post-storm reassessment proposal. The threshold follows the WMO/ETCCDI R20mm precipitation index, but is a prototype setting, not a contamination or warning threshold. LIVE uses the latest saved seven-day city forecast. Archive replay uses a real past day only when **every site** in the city has a valid archived total of at least 20 mm; missing archive dates break a wet run. The Coimbra replay is the real storm on **10 May 2026**.
@@ -41,6 +43,8 @@ Open the Coimbra replay, budget 5. On **Overview**, read the storm and experimen
 `fetch.py` caches the public OneAquaHealth site roster, health risks, urban parameters and weather archive with timestamps and hashes, plus one Open-Meteo forecast per city. `plan.py` runs offline from the cache and writes the plan and draft base FHIR R4 ServiceRequests. The browser only displays and slices Python-built requests. The CSV contains exactly the visits shown, including review state, draft-notice status, confirmation date and any existing sandbox id. Review files are local JSON, checked for size, format and keys on import. Static hosting needs no application server or database.
 
 Five Coimbra replay proposals were filed **once** to the HL7 Europe OneAquaHealth sandbox as **resource shape v1**: [ServiceRequest/1046](https://sandbox.hl7europe.eu/oneaquahealth/fhir/ServiceRequest/1046) through 1050. The current **v2** export places one request-type code in `code` and the assessment categories in `orderDetail`. The official HL7 validator against **core FHIR R4 4.0.1** reported **0 errors, 17 warnings and 8 information** on the five-entry v2 replay bundle (2026-10-04). The messages concern local `urn:afterstorm:*` CodeSystems. The OneAquaHealth IG has no ServiceRequest profile, and its package URL could not be loaded, so no IG conformance is claimed. No v2 bundle was posted.
+
+The hardest part was preserving uncertainty. Two sites lack sewage distance, and two archive dates have no site data. We kept those gaps visible rather than assigning a false zero or inventing a storm. We also learned that the city forecast can change before a video is recorded, so the interface stamps when its saved forecast was fetched and keeps a real archived replay for a reproducible demonstration.
 
 ## Impact and adoption
 
