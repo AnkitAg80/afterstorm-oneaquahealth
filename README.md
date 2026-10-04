@@ -179,7 +179,7 @@ python plan.py
 python -m http.server 8765 --bind 127.0.0.1 --directory web
 ```
 
-Open [http://127.0.0.1:8765/?city=CO&mode=replay&visits=5](http://127.0.0.1:8765/?city=CO&mode=replay&visits=5) for the Coimbra replay. Open [http://127.0.0.1:8765/](http://127.0.0.1:8765/) for Oslo LIVE from the committed forecast.
+Open [http://127.0.0.1:8765/](http://127.0.0.1:8765/) for Coimbra replay by default. To inspect the saved Oslo forecast, open [Oslo LIVE](http://127.0.0.1:8765/?city=OS&mode=live&visits=5&guide=0).
 
 `python fetch.py` refreshes the public sources and needs network. After it, run `python plan.py` again. Do not post another bundle. `python fhir_export.py --city CO --mode replay --budget 5 --post` now refuses, because `web/data/filed.json` already records ServiceRequests 1046–1050.
 
@@ -199,7 +199,7 @@ These captures use the final saved cache and `?guide=0` for an unobstructed demo
 
 ![Oslo latest saved forecast](docs/screenshots/oslo-latest.png)
 
-![Narrow-screen overview capture](docs/screenshots/mobile.png)
+The phone layout was checked in a browser at 390 CSS pixels: the page has no document-level horizontal overflow, and the guide becomes a bottom sheet. The headless Chrome narrow-screen capture is cropped by its minimum window width, so it is not used as layout evidence here.
 
 ## What is not in this repository
 
