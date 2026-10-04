@@ -32,6 +32,7 @@ These notes record each build step. The submission text is `README.md` at the re
 28. `readmeR3-R3.md` — review file export and import.
 29. `readmeR3-R4.md` — animal and ecosystem observations.
 30. `readmeR3-R5.md` — split web assets.
-31. `readmeR3-R6.md` — native dark basemap.
+31. `readmeR3-R6.md` — dark basemap attempt and keyless fallback.
 32. `readmeR3-R7.md` — first-visit guide.
 33. `readmeR2-6.md` — submission text, evidence, screenshots, final source refresh.
+34. `readmeR2-7.md` — GitHub Pages workflow and publication preparation.
