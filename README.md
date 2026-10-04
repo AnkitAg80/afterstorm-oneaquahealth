@@ -17,7 +17,7 @@ AfterStorm keeps the public records unchanged and proposes visits.
 - **Live** uses one Open-Meteo 7-day forecast per city centre.
 - **Replay** uses a real archived day when every site in that city had at least 20 mm of rain. The page labels it `REPLAY of real storm on YYYY-MM-DD`.
 
-A day counts as heavy rain only at **20 mm or more**. That cut-off is a prototype setting in `config.json`, not a regulated warning level. 19.9 mm is not a storm day.
+A day counts as a storm day only at **20 mm or more**. That matches the WMO/ETCCDI "very heavy precipitation day" index (R20mm: daily rain of at least 20 mm; [ETCCDI index list](https://etccdi.pacificclimate.org/list_27_indices.shtml)). It is still a prototype setting in `config.json`, not a regulated warning level: our rain data are daily totals, so hourly intensity (for example the 7.6 mm per hour heavy-rain rate) can't be checked, and each city should calibrate the trigger locally. 19.9 mm is not a storm day.
 
 On a heavy-rain day the plan ranks sites that already have a lab record by the higher stored categories, then by nearer sewage works. Sites with no lab record are offered a first baseline sample of all three categories. The visit budget defaults to **5 site visits**. One visit collects every recommended category at that site. The lab team chooses the method. The scores are categories, not named assays.
 

@@ -21,3 +21,9 @@ These notes record each build step. The submission text is `README.md` at the re
 17. `readmeR2-S1.md` — official Citizen Science App link.
 18. `readmeR2-S2.md` — city-language citizen cards.
 19. `readmeR2-S3.md` — repository hygiene.
+20. `readmeUX-U1.md` — layout pass.
+21. `readmeUX-V1.md` — visual system for the lower half.
+22. `readmeUX-U2U3.md` — compact filing status and sticky summary bar.
+23. `readmeUX-U4U5.md` — type and colour polish, final checks, gallery.
+24. `readmeUX-T1.md` — app shell, four pages, one dark theme.
+25. `readmeUX-T2-fixall.md` — replay clarity, cited trigger, wide rows, side sheets, gallery.

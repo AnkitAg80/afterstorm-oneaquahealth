@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f6f7f2">
   <title>AfterStorm — sampling proposals</title>
+  <meta name="description" content="AfterStorm turns a storm into a reviewable post-storm reassessment plan for urban streams. OneAquaHealth IEEE Global Hackathon 2026, Track 6.">
+  <meta property="og:title" content="AfterStorm — post-storm reassessment plans for urban streams">
+  <meta property="og:description" content="Which streams to sample after heavy rain, what to test for, and when — with a protection check, citizen task cards and draft FHIR requests. OneAquaHealth IEEE Global Hackathon 2026, Track 6.">
+  <meta property="og:image" content="og.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23264f43'/%3E%3Cpath d='M6 13q5-5 10 0t10 0M6 20q5-5 10 0t10 0' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E">
   <link rel="preload" href="vendor/fonts/Geist-Variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="vendor/leaflet.css">
@@ -28,7 +34,7 @@
     .step.done .step-dot{background:var(--green);border-color:var(--green);color:#fff}.step.current button{border-color:var(--green);background:var(--pale);box-shadow:0 0 0 1px var(--green) inset}.step.current .step-dot{border-color:var(--green);color:var(--green)}.step.todo button{opacity:.75}
     .flash{animation:flash 1.3s ease}@keyframes flash{0%,40%{box-shadow:0 0 0 3px #4f7fb8,var(--shadow)}100%{box-shadow:var(--shadow)}}@media(prefers-reduced-motion:reduce){.flash{animation:none;box-shadow:0 0 0 3px #4f7fb8}}[tabindex="-1"]:focus{outline:none}
     @media(max-width:760px){.decision{padding:18px}.decision-answer{font-size:18px}.steps{grid-template-columns:1fr;gap:8px}}
-    .workspace{align-items:stretch}.map-panel{position:sticky;top:16px}.right-column{display:flex;flex-direction:column;gap:18px;min-width:0}.right-column .notice-panel{margin-top:0}.visits-scroll{max-height:none!important;overflow:visible!important}
+    .workspace{align-items:stretch}.left-column{min-width:0}.left-inner{display:flex;flex-direction:column;gap:18px}.left-column .protection{margin:0}@media(min-width:761px) and (min-height:1000px){.left-inner{position:sticky;top:16px}}.right-column{display:flex;flex-direction:column;gap:18px;min-width:0}.right-column .notice-panel{margin-top:0}.visits-scroll{max-height:none!important;overflow:visible!important}
     .pin{display:grid;place-items:center;width:26px;height:26px;border-radius:50% 50% 50% 4px;transform:rotate(-45deg);background:var(--c,#2f5a46);border:2px solid #fff;box-shadow:0 2px 6px #1f332b55;transition:transform .18s cubic-bezier(.34,1.56,.64,1),box-shadow .18s}.pin span{transform:rotate(45deg);color:#fff;font:700 12px var(--mono);line-height:1}.pin.notice{outline:3px solid #b07a2b;outline-offset:1px}.pin.held{opacity:.45;filter:grayscale(.6)}.pin.hl{transform:rotate(-45deg) scale(1.35);box-shadow:0 0 0 4px #4f7fb866,0 4px 12px #1f332b66;z-index:1000!important}.leaflet-marker-icon.pin-wrap{background:none;border:0}
     .visit-card{transition:background-color .2s,box-shadow .2s}.visit-card.hl{background:#f1f6ef;box-shadow:inset 4px 0 0 var(--green)}
     .budget-range{width:100%;max-width:160px;margin:10px 0 0;accent-color:var(--green);height:22px}
@@ -53,7 +59,7 @@
 
     /* ---------- Hero (storm band) ---------- */
     html,body{overflow-x:clip}
-    main{padding-top:0}.topbar{background:#0d2621!important;border-bottom:1px solid #ffffff12!important;backdrop-filter:none!important}.topbar .brand{color:#f3faf6}.topbar .brand svg rect{fill:#8fe0b8}.topbar .brand svg path{stroke:#0d2621}.topbar .brand-sub{color:#9fbcb0;border-left-color:#ffffff22}.topbar .project-context{color:#9fbcb0}.topbar .project-context strong{color:#eaf4ee}.skip{color:#0d2621}
+    main{padding-top:0}.topbar{background:#0d2621!important;border-bottom:1px solid #ffffff12!important;backdrop-filter:none!important}.topbar .brand{color:#f3faf6}.topbar .brand svg rect{fill:#6ee7b7}.topbar .brand svg path{stroke:#0d2621}.topbar .brand-sub{color:#b4cac0;border-left-color:#ffffff22}.topbar .project-context{color:#b4cac0}.topbar .project-context strong{color:#eaf4ee}.skip{color:#0d2621}
     .hero{position:relative;margin:0 calc(50% - 50vw);padding:26px 0 34px;color:#eaf4ee;background:linear-gradient(180deg,#0d2621 0%,#10322b 55%,#133a32 100%);overflow:hidden;isolation:isolate;border-radius:0 0 28px 28px}
     .hero-inner{max-width:1376px;margin:0 auto;padding:0 40px;position:relative}
     .hero-bg{position:absolute;inset:0;z-index:-1;pointer-events:none}.hero-bg i{position:absolute;display:block}
@@ -61,85 +67,281 @@
     .contours{inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 420' fill='none' stroke='%23cfeee0' stroke-width='1'%3E%3Cpath d='M-20 40 C 200 10, 380 90, 600 50 S 980 8, 1220 60'/%3E%3Cpath d='M-20 66 C 200 36, 380 116, 600 76 S 980 34, 1220 86'/%3E%3Cpath d='M-20 92 C 200 62, 380 142, 600 102 S 980 60, 1220 112'/%3E%3Cpath d='M-20 118 C 200 88, 380 168, 600 128 S 980 86, 1220 138'/%3E%3Cpath d='M-20 144 C 200 114, 380 194, 600 154 S 980 112, 1220 164'/%3E%3Cpath d='M-20 170 C 200 140, 380 220, 600 180 S 980 138, 1220 190'/%3E%3Cpath d='M-20 196 C 200 166, 380 246, 600 206 S 980 164, 1220 216'/%3E%3Cpath d='M-20 222 C 200 192, 380 272, 600 232 S 980 190, 1220 242'/%3E%3Cpath d='M-20 248 C 200 218, 380 298, 600 258 S 980 216, 1220 268'/%3E%3Cpath d='M-20 274 C 200 244, 380 324, 600 284 S 980 242, 1220 294'/%3E%3Cpath d='M-20 300 C 200 270, 380 350, 600 310 S 980 268, 1220 320'/%3E%3Cpath d='M-20 326 C 200 296, 380 376, 600 336 S 980 294, 1220 346'/%3E%3Cpath d='M-20 352 C 200 322, 380 402, 600 362 S 980 320, 1220 372'/%3E%3Cpath d='M-20 378 C 200 348, 380 428, 600 388 S 980 346, 1220 398'/%3E%3Cpath d='M-20 404 C 200 374, 380 454, 600 414 S 980 372, 1220 424'/%3E%3C/svg%3E") center/cover no-repeat;opacity:.09;-webkit-mask-image:radial-gradient(120% 90% at 70% 20%,#000 30%,#0000 75%);mask-image:radial-gradient(120% 90% at 70% 20%,#000 30%,#0000 75%)}
     .rain{inset:-60px 0 0 0;opacity:0;transition:opacity .6s;background:repeating-linear-gradient(103deg,#0000 0 22px,#d6ecff1f 22px 23px,#0000 23px 61px);-webkit-mask-image:linear-gradient(180deg,#000,#0000 85%);mask-image:linear-gradient(180deg,#000,#0000 85%)}.hero.storm .rain{opacity:1}
     @media(prefers-reduced-motion:no-preference){.g1{animation:drift 18s ease-in-out infinite alternate}.g2{animation:drift 22s ease-in-out infinite alternate-reverse}.hero.storm .rain{animation:fall .9s linear infinite}@keyframes drift{to{transform:translate(60px,30px) scale(1.12)}}@keyframes fall{from{transform:translate(0,0)}to{transform:translate(-14px,61px)}}}
-    .hero-lede{font-size:15px;color:#a9c2b7;max-width:70ch}.hero-lede span{color:#cfe2d8}
-    .hero :focus-visible{outline-color:#8fe0b8}
+    .hero-lede{font-size:15px;color:#b9cfc5;max-width:72ch}.hero-lede span{color:inherit;font-weight:400}
+    .hero :focus-visible{outline-color:#6ee7b7}
     .hero-bar{margin-top:16px;display:grid;grid-template-columns:minmax(0,1.5fr) auto auto;gap:28px;align-items:start;padding:16px 20px;border-radius:18px;background:#ffffff0d;border:1px solid #ffffff1f;box-shadow:inset 0 1px 0 #ffffff14;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
-    .hero .control-label{color:#a9c2b7;font-size:13px;margin-bottom:8px}
+    .hero .control-label{color:#c6d9d0;font-size:13px;margin-bottom:8px}
     .city-pills{display:flex;flex-wrap:wrap;gap:6px}.pill{display:inline-flex;align-items:center;gap:7px;padding:8px 15px;border-radius:999px;border:1px solid #ffffff2a;background:#ffffff08;color:#dcebe3;font-size:15px;font-weight:600}.pill:hover{background:#ffffff16;border-color:#ffffff44}.pill[aria-pressed=true]{background:#eaf6ef;color:#0d2621;border-color:#eaf6ef;box-shadow:0 4px 14px #00000040}.storm-dot{display:none;width:7px;height:7px;border-radius:50%;background:#f2c46d;box-shadow:0 0 0 3px #f2c46d33}.pill.has-storm .storm-dot{display:inline-block}
-    .hero .mode-toggle{background:#ffffff0a;border-color:#ffffff24}.hero .mode-toggle button{color:#cfe2d8}.hero .mode-toggle button:hover{background:#ffffff12}.hero .mode-toggle button[aria-pressed=true]{background:#8fe0b8;color:#0d2621;box-shadow:0 2px 10px #8fe0b855}
-    .hero .timestamp,.hero .budget-note{color:#9fbcb0}.hero .budget-error{color:#ffb4a8}
-    .hero .stepper{background:#ffffff0a;border-color:#ffffff2a}.hero .stepper input{background:transparent;color:#fff}.hero .stepper button{color:#eaf4ee}.hero .stepper button:hover{background:#ffffff14}.hero .budget-range{accent-color:#8fe0b8}
+    .hero .mode-toggle{background:#ffffff0a;border-color:#ffffff24}.hero .mode-toggle button{color:#cfe2d8}.hero .mode-toggle button:hover{background:#ffffff12}.hero .mode-toggle button[aria-pressed=true]{background:#6ee7b7;color:#0d2621;box-shadow:0 2px 10px #6ee7b755}
+    .hero .timestamp,.hero .budget-note{color:#b4cac0}.hero .budget-error{color:#ffb4a8}
+    .hero .stepper{background:#ffffff0a;border-color:#ffffff2a}.hero .stepper input{background:transparent;color:#fff}.hero .stepper button{color:#eaf4ee}.hero .stepper button:hover{background:#ffffff14}.hero .budget-range{accent-color:#6ee7b7}
     .replay-chip{display:flex;flex-wrap:wrap;gap:3px 12px;align-items:baseline;margin-top:22px;padding:10px 16px;border-radius:14px;background:#f2c46d1c;border:1px solid #f2c46d55;color:#f5dca8;font-size:15px;width:fit-content;max-width:100%}.replay-chip strong{color:#ffd88a}.replay-chip .demo-line{flex-basis:100%;font-size:13px;color:#d6c094}
     .hero .decision{margin:0;padding:0;border:0;background:none;box-shadow:none;border-radius:0}
-    .hero-kicker{display:flex;align-items:center;gap:10px;margin-top:26px;font-size:14px;color:#a9c2b7}.pulse{width:9px;height:9px;border-radius:50%;background:#8fe0b8;box-shadow:0 0 0 0 #8fe0b880}.pulse.warn{background:#f2c46d}.pulse.replay{background:#f2c46d}@media(prefers-reduced-motion:no-preference){.pulse{animation:pulse 2s infinite}@keyframes pulse{70%{box-shadow:0 0 0 9px #8fe0b800}100%{box-shadow:0 0 0 0 #8fe0b800}}}
-    .hero .decision-answer{margin-top:10px;font-size:clamp(26px,3vw,40px);line-height:1.2;letter-spacing:-.025em;font-weight:500;color:#f3faf6;max-width:28em}.hero .decision-answer strong{color:#8fe0b8;font-weight:600}
+    .hero-kicker{display:flex;align-items:center;gap:10px;margin-top:26px;font-size:14px;color:#c6d9d0;font-weight:500}.pulse{width:9px;height:9px;border-radius:50%;background:#6ee7b7;box-shadow:0 0 0 0 #6ee7b780}.pulse.warn{background:#f2c46d}.pulse.replay{background:#f2c46d}@media(prefers-reduced-motion:no-preference){.pulse{animation:pulse 2s infinite}@keyframes pulse{70%{box-shadow:0 0 0 9px #6ee7b700}100%{box-shadow:0 0 0 0 #6ee7b700}}}
+    .hero .decision-answer{margin-top:10px;font-size:clamp(26px,3vw,40px);line-height:1.18;letter-spacing:-.03em;font-weight:600;color:#f3faf6;max-width:28em}.hero .decision-answer strong{color:#6ee7b7;font-weight:600}
     .kpis{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:14px;margin-top:26px}.kpi{position:relative;display:flex;flex-direction:column;gap:6px;padding:18px 20px;border-radius:18px;background:linear-gradient(160deg,#ffffff12,#ffffff06);border:1px solid #ffffff1f;box-shadow:inset 0 1px 0 #ffffff12;transition:transform .25s cubic-bezier(.22,1,.36,1),border-color .25s}.kpi:hover{transform:translateY(-3px);border-color:#ffffff38}
-    .kpi-label{font-size:13px;font-weight:600;color:#a9c2b7}.kpi-value{font-size:44px;font-weight:600;letter-spacing:-.035em;line-height:1.05;color:#fff;font-variant-numeric:tabular-nums}.kpi-value.small{font-size:30px}.kpi-dash{margin:0 4px;color:#a9c2b7}.kpi-unit{font-size:17px;font-weight:500;color:#a9c2b7;margin-left:6px;letter-spacing:0}.kpi-sub{font-size:13px;color:#a9c2b7;line-height:1.5}.kpi-big-sub{font-size:20px;font-weight:600;color:#fff;margin:2px 0}
+    .kpi-label{font-size:13px;font-weight:600;color:#c6d9d0;letter-spacing:.01em}.kpi-value{font-size:44px;font-weight:600;letter-spacing:-.035em;line-height:1.05;color:#fff;font-variant-numeric:tabular-nums}.kpi-value.small{font-size:30px}.kpi-dash{margin:0 4px;color:#a9c2b7}.kpi-unit{font-size:17px;font-weight:500;color:#a9c2b7;margin-left:6px;letter-spacing:0}.kpi-sub{font-size:13px;color:#b4cac0;line-height:1.5}.kpi-big-sub{font-size:20px;font-weight:600;color:#fff;margin:2px 0}
     .mini-bars{width:100%;height:46px;display:block;margin:4px 0 2px}
-    .cal{display:flex;align-items:center;gap:10px;margin:4px 0 6px}.cal-tile{width:66px;border-radius:12px;overflow:hidden;background:#f6fbf8;color:#0d2621;text-align:center;box-shadow:0 6px 18px #00000040}.cal-tile b{display:block;background:#8fe0b8;font-size:11px;letter-spacing:.14em;padding:4px 0;font-weight:700}.cal-tile span{display:block;font:700 28px/1 var(--sans);padding:7px 0 9px;font-variant-numeric:tabular-nums}.cal-arrow{color:#8fe0b8;font-size:20px}
+    .cal{display:flex;align-items:center;gap:10px;margin:4px 0 6px}.cal-tile{width:66px;border-radius:12px;overflow:hidden;background:#f6fbf8;color:#0d2621;text-align:center;box-shadow:0 6px 18px #00000040}.cal-tile b{display:block;background:#6ee7b7;font-size:11px;letter-spacing:.14em;padding:4px 0;font-weight:700}.cal-tile span{display:block;font:700 28px/1 var(--sans);padding:7px 0 9px;font-variant-numeric:tabular-nums}.cal-arrow{color:#6ee7b7;font-size:20px}
     .hero .window-tag{display:inline-block;width:fit-content;font-size:12px;font-weight:600;color:#f5d690;background:#f2c46d1f;border:1px solid #f2c46d44;padding:2px 8px;border-radius:6px}
-    .kpi-ring{flex-direction:row;align-items:center;gap:18px}.ring-wrap{position:relative;width:92px;height:92px;flex:none}.ring{width:92px;height:92px;transform:rotate(-90deg)}.ring circle{fill:none;stroke-width:8}.ring-bg{stroke:#ffffff1f}.ring-fg{stroke:#8fe0b8;stroke-linecap:round;stroke-dasharray:100;transition:stroke-dashoffset .6s cubic-bezier(.22,1,.36,1)}.ring-num{position:absolute;inset:0;display:grid;place-content:center;text-align:center;font:600 26px/1 var(--sans);color:#fff}.ring-num small{display:block;font-size:12px;font-weight:500;color:#a9c2b7;margin-top:3px}
-    .hero .steps{margin-top:18px}.hero .step button{background:#ffffff08;border-color:#ffffff1f;color:#eaf4ee}.hero .step button:hover{background:#ffffff12;border-color:#ffffff40}.hero .step-status{color:#a9c2b7}.hero .step-go{color:#a9c2b7}.hero .step button:hover .step-go{color:#8fe0b8}.hero .step-dot{background:transparent;border-color:#ffffff40;color:#cfe2d8}.hero .step.done .step-dot{background:#8fe0b8;border-color:#8fe0b8;color:#0d2621}.hero .step.current button{background:#8fe0b81c;border-color:#8fe0b8;box-shadow:inset 0 0 0 1px #8fe0b8}.hero .step.current .step-dot{border-color:#8fe0b8;color:#8fe0b8}.hero .step.todo button{opacity:.6}
+    .kpi-ring{flex-direction:row;align-items:center;gap:18px}.ring-wrap{position:relative;width:92px;height:92px;flex:none}.ring{width:92px;height:92px;transform:rotate(-90deg)}.ring circle{fill:none;stroke-width:8}.ring-bg{stroke:#ffffff1f}.ring-fg{stroke:#6ee7b7;stroke-linecap:round;stroke-dasharray:100;transition:stroke-dashoffset .6s cubic-bezier(.22,1,.36,1)}.ring-num{position:absolute;inset:0;display:grid;place-content:center;text-align:center;font:600 26px/1 var(--sans);color:#fff}.ring-num small{display:block;font-size:12px;font-weight:500;color:#a9c2b7;margin-top:3px}
+    .hero .steps{margin-top:18px}.hero .step button{background:#ffffff08;border-color:#ffffff1f;color:#eaf4ee}.hero .step button:hover{background:#ffffff12;border-color:#ffffff40}.hero .step-status{color:#b4cac0}.hero .step-go{color:#a9c2b7}.hero .step button:hover .step-go{color:#6ee7b7}.hero .step-dot{background:transparent;border-color:#ffffff40;color:#cfe2d8}.hero .step.done .step-dot{background:#6ee7b7;border-color:#6ee7b7;color:#0d2621}.hero .step.current button{background:#6ee7b71c;border-color:#6ee7b7;box-shadow:inset 0 0 0 1px #6ee7b7}.hero .step.current .step-dot{border-color:#6ee7b7;color:#6ee7b7}.hero .step.todo button{opacity:.6}
     .chart-fig{margin:0}.chart-fig figcaption{font-size:13px;color:var(--muted);margin-top:4px}.rain-chart.tall{height:110px}
     @media(prefers-reduced-motion:no-preference){.hero-inner>*{animation:appear .5s cubic-bezier(.22,1,.36,1) both}.hero-bar{animation-delay:.05s}#decision{animation-delay:.1s}}
     @media(max-width:1000px){.hero-inner{padding:0 24px}.hero-bar{grid-template-columns:1fr 1fr}.city-control{grid-column:1/-1}.kpis{grid-template-columns:1fr 1fr}.kpi-ring{grid-column:1/-1}}
     @media(max-width:760px){.hero{border-radius:0 0 20px 20px;padding-top:18px}.hero-inner{padding:0 18px}.hero-bar{grid-template-columns:1fr;gap:16px;padding:14px}.city-pills{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -4px;padding:2px 4px}.pill{flex:none}.kpis{grid-template-columns:1fr}.kpi-value{font-size:38px}.hero .decision-answer{font-size:24px}}
     @media print{.hero{background:#fff;color:#000;margin:0;border-radius:0}.hero-bg,.hero-bar{display:none}.hero .decision-answer,.kpi-value,.ring-num{color:#000}}
+    /* U1: notices as a full-width card grid */
+    .notice-wide{margin-top:20px}.notice-wide .notice-body{padding:0 22px 22px}
+    #notices{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,350px),1fr));gap:14px;align-items:start}
+    #notices>.notice-description{grid-column:1/-1;margin:0;max-width:95ch}
+    #notices>.notice-row{border:1px solid var(--line);border-radius:14px;padding:14px 16px 12px;background:#fbfcf9;transition:border-color .2s,background-color .2s,box-shadow .2s}
+    #notices>.notice-row:hover{border-color:#c9d6c8;box-shadow:var(--shadow)}
+    #notices>.notice-row.rv-approve{border-color:#a9cdb8;background:#f2f8f3}#notices>.notice-row.rv-hold{border-color:#ead7aa;background:#fbf6ea}
+    #notices .notice-head{align-items:flex-start}#notices .notice-head .review{flex-basis:100%;margin:8px 0 0}
+    /* U1: compact visit cards */
+    .visit-card{padding:16px 22px 14px}.visit-time{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 10px;margin:8px 0 6px}.visit-time .small-window{display:inline;margin:0}
+    .filed-note{font-size:13px;font-weight:500;margin-bottom:4px}.visit-card .review{margin-top:6px;margin-bottom:8px}
+    .visit-card>details.task-card:not([open]),.visit-card>details.why:not([open]){display:inline-block;margin-right:20px;vertical-align:top}.visit-card>details.task-card:not([open]){margin-left:42px}
+    @media(max-width:760px){.visit-card>details.task-card:not([open]){margin-left:0}}
+    /* V1: visual system for the lower half (Tremor / Magic UI patterns, vanilla) */
+    :root{--fec:#a16207;--fec-bg:#fdf3dc;--path:#be123c;--path-bg:#fde8ec;--arg:#6d28d9;--arg-bg:#efe9fd}
+    body{background-image:radial-gradient(#1f332b12 1px,transparent 1.3px),radial-gradient(1100px 540px at -6% -10%,#d9eadf 0%,#d9eadf00 62%),radial-gradient(900px 500px at 106% -6%,#d8e7ef 0%,#d8e7ef00 58%),linear-gradient(180deg,#f2f5ef 0%,#f6f6f1 45%,#f2f3ed 100%);background-size:22px 22px,auto,auto,auto}
+    .category-text{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+    .chip{display:inline-flex;align-items:center;gap:6px;padding:3px 9px 3px 10px;border-radius:999px;font-size:13px;font-weight:600;border:1px solid transparent;line-height:1.5}.chip b{font:600 12px var(--mono)}
+    .chip.c-fec{background:var(--fec-bg);color:var(--fec);border-color:#f1dca8}.chip.c-path{background:var(--path-bg);color:var(--path);border-color:#f6c9d3}.chip.c-arg{background:var(--arg-bg);color:var(--arg);border-color:#ddd0fb}.chip.c-base{background:var(--blue-pale);color:var(--blue);border-color:#cfe0ec}.chip.ghost{background:transparent;font-weight:500}
+    .meter{display:inline-block;width:34px;height:5px;border-radius:9px;background:#00000014;overflow:hidden}.meter i{display:block;height:100%;border-radius:9px;background:currentColor}
+    .tracker{margin:12px 22px 0;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:#fbfcf9}.tracker-head{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:14px}.tracker-head span{font-size:13px;color:var(--muted)}
+    .tracker-bar{display:flex;gap:3px;margin:10px 0 8px;height:30px}.seg{flex:1;min-width:6px;border:0;border-radius:4px;padding:0;background:#cdd5cc;transition:transform .15s,filter .15s}.seg:hover,.seg:focus-visible{transform:scaleY(1.18);filter:brightness(1.08)}
+    .seg.k-sample,.seg-dot.k-sample{background:var(--green)}.seg.k-baseline,.seg-dot.k-baseline{background:var(--blue)}.seg.k-capacity,.seg-dot.k-capacity{background:#d9b25f}.seg.k-low,.seg-dot.k-low{background:#c3ccc1}.seg.k-excluded,.seg-dot.k-excluded{background:#c87a73}.seg.has-notice{box-shadow:inset 0 0 0 2px #fff,0 0 0 2px #b07a2b}
+    .tracker-legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:13px;color:var(--muted)}.tracker-legend span{display:inline-flex;align-items:center;gap:6px}.seg-dot{width:10px;height:10px;border-radius:3px;display:inline-block}
+    .visit-card,#notices>.notice-row,.surface.protection{position:relative;isolation:isolate}
+    .visit-card::before,#notices>.notice-row::before,.surface.protection::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),#2f5a4614,transparent 70%);opacity:0;transition:opacity .25s;pointer-events:none}
+    .visit-card:hover::before,#notices>.notice-row:hover::before,.surface.protection:hover::before{opacity:1}
+    .kpi::after{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(220px circle at var(--mx,50%) var(--my,50%),#6ee7b71f,transparent 70%);opacity:0;transition:opacity .25s;pointer-events:none}.kpi:hover::after{opacity:1}
+    @media(prefers-reduced-motion:no-preference){.visit-card.enter{animation:rise .45s cubic-bezier(.22,1,.36,1) both;animation-delay:calc(var(--i,0)*55ms)}@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+      .rain-chart rect,.mini-bars rect{transform-box:fill-box;transform-origin:bottom;animation:grow .7s cubic-bezier(.22,1,.36,1) both}@keyframes grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}}
+    /* U2: compact filing status */
+    #fhir-status{display:flex;flex-direction:column;gap:6px}.fs-line{display:inline-flex;align-items:center;gap:7px;color:var(--ink);font-weight:500}.fs-line svg{width:15px;height:15px;color:var(--green)}
+    .filed-chip{font-size:13px}.filed-chip summary{display:inline-flex;align-items:center;gap:6px;width:fit-content;max-width:100%;padding:4px 11px;border-radius:999px;background:var(--pale);color:var(--green);font-weight:600;list-style:none}.filed-chip summary::-webkit-details-marker{display:none}.filed-chip summary:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px #2f5a4622}.filed-chip ul{margin:8px 0 4px;padding-left:18px;columns:2;column-gap:20px}.filed-chip li{margin:2px 0}.filed-chip p{color:var(--muted)}
+    /* U3: sticky summary bar */
+    #weather,#visit-panel,#notice-panel,#review-progress,#protection,.visit-card,#map{scroll-margin-top:72px}
+    .summary-bar{position:fixed;left:0;right:0;top:0;z-index:1200;transform:translateY(-110%);transition:transform .3s cubic-bezier(.22,1,.36,1);background:#0d2621f2;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:#eaf4ee;border-bottom:1px solid #ffffff1a;box-shadow:0 6px 24px #0d262140}.summary-bar.show{transform:none}
+    .sb-inner{max-width:1376px;margin:0 auto;padding:9px 40px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:14px}.sb-inner strong{font-size:15px}.sb-tag{padding:2px 9px;border-radius:999px;background:#6ee7b726;color:#bff0d6;font-weight:600;font-size:13px}.sb-tag.replay{background:#f2c46d26;color:#ffd88a}
+    .sb-review{width:90px;height:6px;border-radius:9px;background:#ffffff26;overflow:hidden}.sb-review i{display:block;height:100%;background:#6ee7b7;border-radius:9px;transition:width .35s}
+    .sb-actions{margin-left:auto;display:flex;gap:6px}.sb-actions button{padding:5px 11px;border-radius:8px;border:1px solid #ffffff2e;background:#ffffff0d;color:#eaf4ee;font-size:13px;font-weight:600}.sb-actions button:hover{background:#ffffff1f}.sb-actions button:disabled{opacity:.4}
+    @media(max-width:760px){.sb-inner{padding:8px 14px;gap:8px;font-size:13px}.sb-review,.sb-actions button[data-jump]{display:none}}
+    @media(prefers-reduced-motion:reduce){.summary-bar{transition:none}}
+    @media print{.summary-bar{display:none}}
+    .hero-bar>*{min-width:0}@media(max-width:1000px){.hero-bar{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}@media(max-width:760px){.hero-bar{grid-template-columns:minmax(0,1fr)}.hero .mode-toggle{display:flex;width:100%}.hero .mode-toggle button{flex:1}}
+    /* U5: citizen task card polish */
+    details.task-card[open]{margin:6px 0 10px 42px;padding:14px 16px 16px;border:1px solid #d9e4d8;border-radius:14px;background:linear-gradient(180deg,#fbfdfb,#f4f8f3)}
+    @media(max-width:760px){details.task-card[open]{margin-left:0}}
+    details.task-card>summary{font-weight:600;color:var(--green)}
+    .task-card .lang-switch{display:inline-flex;gap:3px;padding:3px;border:1px solid #d5dfd4;border-radius:10px;background:#fff;margin:10px 0 6px}.task-card .lang-switch button{border:0;border-radius:7px;padding:5px 12px;font-size:13px;font-weight:600;background:transparent;color:var(--muted)}.task-card .lang-switch button[aria-pressed=true]{background:var(--green);color:#fff}
+    .task-card .task-safety{margin:10px 0 12px;padding:10px 12px;border-radius:10px;background:#fff5e0;border:1px solid #f1d9a6;color:#5f4116;font-size:14px}
+    .task-card fieldset{margin:0 0 8px;padding:9px 12px 10px;border:1px solid #dde6dc;border-radius:10px;background:#fff}.task-card legend{padding:0 6px;font-size:14px;font-weight:600;color:var(--ink)}
+    .task-card fieldset label{display:inline-flex;align-items:center;gap:6px;margin-right:6px;padding:4px 10px;border:1px solid #d5dfd4;border-radius:999px;font-size:13px;cursor:pointer;transition:background-color .15s,border-color .15s}
+    .task-card fieldset label:has(input:checked){background:var(--pale);border-color:var(--green);color:var(--green);font-weight:600}.task-card input[type=radio]{accent-color:var(--green);margin:0}
+    .task-card .field{display:block;margin:10px 0 0;font-size:14px;font-weight:600}.task-card .field input{display:block;width:100%;max-width:420px;margin-top:5px;height:38px;padding:0 10px;border:1px solid #cfd8cf;border-radius:8px;background:#fff;font-weight:400}
+    .task-card .task-links{margin-top:10px}.task-card .task-links a{font-weight:600}
+    .task-card .print-one,.task-card [data-print-card]{margin-top:10px;padding:7px 14px;border:1px solid #cfd8cf;border-radius:8px;background:#fff;font-size:13px;font-weight:600;color:var(--green)}
     .map-hint{position:absolute;inset:0;z-index:900;display:grid;place-items:center;padding:20px;text-align:center;background:#1f332b8c;color:#fff;font-size:15px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .25s}.map-hint.show{opacity:1}.map-frame{transition:box-shadow .2s}.map-frame.map-active{box-shadow:0 0 0 2px var(--green)}
     .distance-note{font-size:13px;color:var(--amber);margin:0 0 8px 42px}
     @media(max-width:520px){.mode-control{grid-column:1/-1}.budget-control{justify-self:stretch;grid-column:1/-1;display:grid;grid-template-columns:1fr auto;align-items:center}.budget-control .control-label{margin:0}.budget-control .budget-note,.budget-control .budget-error{grid-column:1/-1}.mode-toggle button{white-space:nowrap}.mode-meta{margin-top:8px}}
     @media(prefers-reduced-motion:no-preference){.intro,.controls,.weather,.workspace{animation:appear .4s ease both}.controls{animation-delay:.04s}.weather{animation-delay:.08s}.workspace{animation-delay:.12s}@keyframes appear{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}} @media print{.controls,.map-tools,.locate,.topbar .project-context{display:none}.shell{padding:0}.workspace{display:block}.map-panel{break-inside:avoid}.visits-scroll{max-height:none;overflow:visible}.visit-card{break-inside:avoid}.notice-panel{margin-top:12px}}
     .visit-actions{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex:none}.visit-actions button{border:1px solid #cfd8cf;background:#fff;border-radius:6px;padding:8px 12px;font-size:14px;font-weight:600;color:var(--green)}#fhir-status{margin:0;padding:10px 22px 12px;font-size:14px;color:var(--muted);line-height:1.55}.filed-note{margin:0 0 8px 42px;font-size:14px;font-weight:600;color:var(--green)}.fhir-help a{white-space:nowrap}@media(max-width:760px){.visit-actions{align-items:flex-start}}@media print{#download-fhir,#default-fhir,#fhir-status{display:none!important}}
+
+    /* ===== T1: app shell, pages, one dark "night water" theme (shadcn-style tokens) ===== */
+    :root{--canvas:#0a1a17;--paper:#10241f;--ink:#e7f1ec;--muted:#9db3a9;--line:#ffffff17;--green:#6ee7b7;--pale:#6ee7b71a;--blue:#7cc4f0;--blue-pale:#7cc4f01f;--amber:#f2c46d;--amber-pale:#f2c46d1c;--red:#f19a92;--red-pale:#f19a921f;--shadow:inset 0 1px 0 #ffffff08,0 12px 32px #0000004d;--fec:#f5c46b;--fec-bg:#f5c46b1a;--path:#fda4af;--path-bg:#fda4af1a;--arg:#c4b5fd;--arg-bg:#c4b5fd1f;--radius:14px}
+    html{color-scheme:dark}
+    body{color:var(--ink);background-color:var(--canvas);background-image:radial-gradient(#ffffff0c 1px,transparent 1.3px),radial-gradient(1200px 600px at 0% 0%,#14463a 0%,#14463a00 60%),radial-gradient(1000px 520px at 100% 0%,#173f57 0%,#173f5700 58%),linear-gradient(180deg,#0d2621 0%,#0a1a17 40%,#09161400 100%);background-size:22px 22px,auto,auto,auto;background-attachment:scroll}
+    body::before{opacity:.05;mix-blend-mode:screen}
+    a{color:var(--green)}button{color:inherit}button:hover{background:#ffffff10}
+    /* sticky header with page tabs */
+    .topbar{position:sticky;top:0;z-index:1100;background:#0a1a17d9!important;backdrop-filter:blur(14px) saturate(1.3)!important;-webkit-backdrop-filter:blur(14px) saturate(1.3)!important;border-bottom:1px solid #ffffff14!important}
+    .topbar-inner{min-height:64px;gap:18px}.topbar .brand{font-size:21px}.topbar .brand svg{width:30px;height:30px}
+    .app-nav{display:flex;gap:4px;padding:4px;border-radius:12px;background:#ffffff0a;border:1px solid #ffffff12}
+    .app-nav a{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;border-radius:9px;color:#b4cac0;font-size:14px;font-weight:600;text-decoration:none;transition:background-color .18s,color .18s}
+    .app-nav a:hover{background:#ffffff0f;color:#eaf4ee}.app-nav a[aria-current=page]{background:#ffffff17;color:#fff;box-shadow:inset 0 0 0 1px #ffffff1f,0 1px 2px #0006}
+    .nav-count:empty{display:none}.nav-count{min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:#f2c46d;color:#2a1d05;font:700 12px/20px var(--mono);text-align:center}
+    .header-status .sb-inner{max-width:none;padding:0;margin:0;gap:10px;font-size:13px;color:#b4cac0;flex-wrap:nowrap}.header-status .sb-inner strong{color:#fff;font-size:14px}
+    .header-status .sb-actions{margin-left:6px}.header-status .sb-actions button{padding:6px 12px;border-radius:9px;background:#6ee7b7;color:#0b1f1b;border:0;font-weight:700}.header-status .sb-actions button:hover{background:#86efc4}.header-status .sb-actions button:disabled{background:#ffffff1a;color:#9db3a9}
+    @media(max-width:1180px){.header-status .sb-inner>span:not(.sb-actions):not(.sb-tag){display:none}}
+    @media(max-width:900px){.topbar-inner{flex-wrap:wrap;padding-top:8px;padding-bottom:8px}.app-nav{order:3;width:100%;overflow-x:auto}.app-nav a{white-space:nowrap}.header-status{margin-left:auto}}
+    main{padding-top:0}
+    /* pages */
+    .page{display:none}.page.active{display:block}
+    @media(prefers-reduced-motion:no-preference){.page.active{animation:pageIn .38s cubic-bezier(.22,1,.36,1) both}@keyframes pageIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}}
+    /* shared control bar (same controls on every page) */
+    .controlbar{margin:18px 0 0}.controlbar .hero-bar{margin-top:0}
+    /* hero now blends into the dark canvas */
+    .hero{margin:0 calc(50% - 50vw);border-radius:0;padding-top:18px;background:linear-gradient(180deg,#0e2a24f2 0%,#10322bcc 60%,#0a1a1700 100%)}
+    .overview-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:18px;margin-top:4px}
+    @media(max-width:900px){.overview-grid{grid-template-columns:1fr}}
+    .next-list{display:flex;flex-direction:column;gap:8px;padding:0 18px 18px}.next-item{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:12px;border:1px solid #ffffff14;background:#ffffff06;color:var(--ink);text-decoration:none;transition:background-color .18s,border-color .18s,transform .18s}.next-item:hover{background:#ffffff0d;border-color:#6ee7b766;transform:translateX(2px)}.next-item span:first-child{display:flex;flex-direction:column;gap:2px;flex:1}.next-item small{font-size:13px;color:var(--muted)}.next-go{color:var(--green);font-size:18px}
+    /* surfaces: shadcn dark card */
+    .surface{background:linear-gradient(180deg,#132b25 0%,#10241f 100%);border:1px solid #ffffff14;border-radius:var(--radius);box-shadow:var(--shadow)}
+    .panel-header h2,.weather-top h2{color:#f1f8f4}
+    .badge{background:var(--pale);color:var(--green)}.badge.grey,.panel-count{background:#ffffff12;color:var(--muted)}.badge.replay{background:var(--amber-pale);color:var(--amber)}.badge.blue{background:var(--blue-pale);color:var(--blue)}
+    .locate,.visit-actions button,.rv,.protection-body .cover-notices,.task-card .print-one,.task-card [data-print-card],.leaflet-popup-content button{background:#ffffff08!important;border:1px solid #ffffff22!important;color:var(--ink)!important}
+    .locate:hover,.visit-actions button:hover,.rv:hover,.protection-body .cover-notices:hover{background:#ffffff12!important;border-color:#ffffff3a!important}
+    .protection-body .cover-notices{color:var(--amber)!important;border-color:#f2c46d66!important}
+    .rv.approve[aria-pressed=true]{background:var(--green)!important;border-color:var(--green)!important;color:#0b1f1b!important}.rv.hold[aria-pressed=true]{background:var(--amber)!important;border-color:var(--amber)!important;color:#2a1d05!important}
+    .visit-card{border-bottom-color:#ffffff12}.visit-card.hl{background:#6ee7b70d;box-shadow:inset 3px 0 0 var(--green)}.visit-card.rv-hold{background:#f2c46d0a}.visit-card.rv-approve .rank-number{background:var(--green);border-color:var(--green);color:#0b1f1b}
+    .rank-number{border-color:#ffffff26;color:var(--green);background:#ffffff06}
+    .visit-help,.capacity-details{border-color:#ffffff12}
+    .review-progress,.tracker{background:#ffffff06;border-color:#ffffff14}.rp-bar{background:#ffffff14}.rp-bar i{background:linear-gradient(90deg,#34d399,#6ee7b7)}
+    .stale-chip{background:var(--amber-pale);color:var(--amber);border-color:#f2c46d55}
+    #notices>.notice-row{background:#ffffff06;border-color:#ffffff14}#notices>.notice-row:hover{border-color:#ffffff2a}#notices>.notice-row.rv-approve{background:#6ee7b70d;border-color:#6ee7b74d}#notices>.notice-row.rv-hold{background:#f2c46d0d;border-color:#f2c46d4d}
+    .notice-text{background:#f2c46d12;border-left-color:var(--amber);color:var(--ink)}
+    .roster th{background:#ffffff08;color:var(--muted)}.roster td,.roster th{border-top-color:#ffffff12}
+    .fatal{background:#10241f}
+    .chip.c-base{background:var(--blue-pale);color:var(--blue);border-color:#7cc4f040}.chip.c-fec{border-color:#f5c46b40}.chip.c-path{border-color:#fda4af40}.chip.c-arg{border-color:#c4b5fd40}.meter{background:#ffffff1a}
+    .seg{background:#ffffff26}.seg.k-sample,.seg-dot.k-sample{background:#1f9d73}.seg.k-baseline,.seg-dot.k-baseline{background:#3b82c4}.seg.k-capacity,.seg-dot.k-capacity{background:#d9a441}.seg.k-low,.seg-dot.k-low{background:#ffffff2e}.seg.k-excluded,.seg-dot.k-excluded{background:#e0786d}.seg.has-notice{box-shadow:inset 0 0 0 2px #0a1a17,0 0 0 2px #f2c46d}
+    .dot.sample{color:#1f9d73;background:#1f9d73}.dot.baseline{color:#3b82c4;background:#3b82c4}.dot.capacity{color:#d9a441;background:#d9a441}.dot.low{color:#7d8f86;background:#7d8f86}.dot.excluded{color:#e0786d;background:#e0786d}.dot.notice{background:transparent;border-color:#f2c46d}.legend{color:var(--ink)}
+    .visit-card::before,#notices>.notice-row::before,.surface.protection::before{background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),#6ee7b712,transparent 70%)}
+    /* citizen task card on dark */
+    details.task-card[open]{background:#ffffff05;border-color:#ffffff17}.task-card .lang-switch{background:#ffffff08;border-color:#ffffff1f}.task-card .lang-switch button{color:var(--muted)}.task-card .lang-switch button[aria-pressed=true]{background:var(--green);color:#0b1f1b}
+    .task-card .task-safety{background:#f2c46d14;border-color:#f2c46d40;color:#f5dca8}.task-card fieldset{background:#ffffff05;border-color:#ffffff14}.task-card legend{color:var(--ink)}.task-card fieldset label{border-color:#ffffff22}.task-card fieldset label:has(input:checked){background:#6ee7b71a;border-color:var(--green);color:var(--green)}
+    .task-card .field input,.city-select,.stepper input{background:#ffffff0a!important;color:var(--ink);border-color:#ffffff22}
+    /* map: dark tiles, dark controls */
+    .map-frame,#map{background-color:#0e211d}#map{background-image:linear-gradient(#ffffff08 1px,transparent 1px),linear-gradient(90deg,#ffffff08 1px,transparent 1px)}
+    .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.9) contrast(.88) saturate(.55)}
+    .leaflet-control-zoom a{background:#132a24!important;color:var(--ink)!important;border-color:#ffffff1f!important}.leaflet-bar{border-color:#ffffff1f!important}
+    .leaflet-control-attribution{background:#0a1a17cc!important;color:var(--muted)!important}.leaflet-control-attribution a{color:var(--green)!important}
+    .leaflet-popup-content-wrapper,.leaflet-popup-tip{background:#132a24;color:var(--ink);box-shadow:0 10px 30px #0008}
+    .leaflet-tooltip.site-label{background:#132a24f2;color:var(--ink)}
+    .map-tools{background:#10241fe6;color:var(--ink);border-color:#ffffff1f}
+    /* plan page: map pinned full height beside the visit list (no empty column) */
+    .page[data-page=plan] .workspace{grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);margin-top:18px;align-items:start}
+    .page[data-page=plan] .left-inner{position:sticky;top:80px}
+    .page[data-page=plan] #map{height:clamp(380px,calc(100dvh - 330px),860px)!important}
+    @media(max-width:760px){.page[data-page=plan] .workspace{grid-template-columns:1fr}.page[data-page=plan] .left-inner{position:static}.page[data-page=plan] #map{height:340px!important}}
+    .page[data-page=evidence]>*+*,.page[data-page=notices]>*{margin-top:18px}
+    .footer{border-top-color:#ffffff17}.footer strong{color:var(--ink)}
+    .skip{background:#132a24;color:var(--ink)}
+
+    /* T1 tidy: compact header, dark controls everywhere, seamless hero */
+    .app-nav a{white-space:nowrap;padding:7px 13px}
+    .topbar .brand-sub{white-space:nowrap}@media(max-width:1320px){.topbar .brand-sub{display:none}}
+    .header-status .sb-review,.header-status .sb-inner>span:nth-of-type(3),.header-status .sb-inner>span:nth-of-type(4){display:none}
+    .header-status .sb-inner{white-space:nowrap}.header-status .sb-tag{white-space:nowrap}
+    .controlbar .control-label{color:#c6d9d0;font-size:13px;margin-bottom:6px}
+    .controlbar .mode-toggle{background:#ffffff0a;border-color:#ffffff24}.controlbar .mode-toggle button{color:#cfe2d8;background:transparent}.controlbar .mode-toggle button:hover{background:#ffffff12}.controlbar .mode-toggle button[aria-pressed=true]{background:#6ee7b7;color:#0b1f1b;box-shadow:0 2px 10px #6ee7b744}
+    .controlbar .stepper{background:#ffffff0a!important;border-color:#ffffff2a}.controlbar .stepper input{background:transparent!important;color:#fff}.controlbar .stepper button{color:#eaf4ee}.controlbar .stepper button:hover{background:#ffffff14}.controlbar .stepper button:disabled{opacity:.35}
+    .controlbar .timestamp,.controlbar .budget-note{color:#b4cac0}.controlbar .budget-error{color:#ffb4a8}.controlbar .budget-range{accent-color:#6ee7b7}
+    .controlbar .hero-bar{padding:14px 18px;align-items:center;background:#ffffff08;border-color:#ffffff17}
+    .controlbar .budget-control{display:grid;grid-template-columns:auto 1fr;column-gap:12px;align-items:center}.controlbar .budget-control .control-label{grid-column:1/-1}.controlbar .budget-range{margin:0;max-width:130px}.controlbar .budget-control .budget-note,.controlbar .budget-control .budget-error{grid-column:1/-1;margin-top:4px}
+    .controlbar .mode-meta{margin-top:6px}
+    .hero{background:transparent!important}
+
+    /* ===== Fix-all: replay banner, wide visit rows, side sheets, confirm strip ===== */
+    .replay-chip{display:flex!important;align-items:center;gap:14px;flex-wrap:wrap;width:100%;justify-content:space-between}
+    .replay-chip .rc-text{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}.replay-chip .rc-text span{color:#f5dca8}
+    .rc-btn{flex:none;padding:8px 14px;border-radius:10px;border:1px solid #f2c46d66;background:#f2c46d1a;color:#ffd88a;font-weight:700;font-size:14px}.rc-btn:hover{background:#f2c46d2e!important}
+    /* wide visit rows */
+    .visit-card{padding:16px 20px;isolation:auto!important}
+    .visit-card::before{display:none!important}
+    .visit-card:hover{background-image:radial-gradient(320px circle at var(--mx,50%) var(--my,50%),#6ee7b70f,transparent 70%)}
+    .vr-grid{display:grid;grid-template-columns:32px minmax(0,1fr) auto;gap:4px 16px;align-items:start}
+    .vr-main h3{font-size:16px;line-height:1.35;margin:2px 0 0}.vr-main h3 code{font-size:14px;margin-right:8px;color:var(--green)}
+    .vr-main .category-text{margin-top:7px}.vr-main .visit-time{padding-left:0;margin:8px 0 2px}.vr-main .filed-note,.vr-main .distance-note{margin-left:0}
+    .vr-side{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+    .vr-side .review{margin:0!important;justify-content:flex-end}
+    .vr-links{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+    .vr-links>details{display:inline-block!important;margin:0!important}
+    .vr-links summary,.vr-links .locate{display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:9px;border:1px solid #ffffff22;background:#ffffff08;color:var(--ink);font-size:13px;font-weight:600;list-style:none;cursor:pointer;white-space:nowrap}
+    .vr-links summary::-webkit-details-marker{display:none}.vr-links summary::before{content:none!important}.vr-links summary:hover,.vr-links .locate:hover{background:#ffffff12;border-color:#ffffff3a}
+    .vr-links details.task-card>summary::before{content:"";display:inline-block!important;width:12px;height:12px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 2h6l3 3v9H4z' fill='none' stroke='black' stroke-width='1.6'/%3E%3Cpath d='M6 8h5M6 11h4' stroke='black' stroke-width='1.6'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 2h6l3 3v9H4z' fill='none' stroke='black' stroke-width='1.6'/%3E%3Cpath d='M6 8h5M6 11h4' stroke='black' stroke-width='1.6'/%3E%3C/svg%3E") center/contain no-repeat}
+    details.task-card[open]{margin:0!important;padding:0!important;border:0!important;background:none!important}
+    @media(max-width:1100px){.vr-grid{grid-template-columns:32px minmax(0,1fr)}.vr-side{grid-column:2;align-items:flex-start}.vr-side .review,.vr-links{justify-content:flex-start}}
+    /* side sheets (shadcn Sheet pattern, Base UI-style enter animation) */
+    .sheet-panel{display:none}
+    details[open]>.sheet-panel{display:block;position:fixed;top:0;right:0;bottom:0;width:min(540px,100vw);z-index:1300;overflow:auto;overscroll-behavior:contain;background:linear-gradient(180deg,#132b25,#0f231e);border-left:1px solid #ffffff1f;box-shadow:-30px 0 80px #000a;padding:0 24px 28px;text-align:left;cursor:auto;white-space:normal;font-weight:400}
+    details.task-card[open]::after,details.why[open]::after{content:"";position:fixed;inset:0;z-index:1250;background:#020807a6;backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);cursor:pointer}
+    @media(prefers-reduced-motion:no-preference){details[open]>.sheet-panel{animation:sheetIn .32s cubic-bezier(.22,1,.36,1) both}details.task-card[open]::after,details.why[open]::after{animation:fadeIn .25s ease both}@keyframes sheetIn{from{transform:translateX(100%)}to{transform:none}}@keyframes fadeIn{from{opacity:0}to{opacity:1}}}
+    .sheet-head{position:sticky;top:0;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 -24px 14px;padding:16px 24px;background:#132b25f2;backdrop-filter:blur(8px);border-bottom:1px solid #ffffff17;font-size:14px;color:var(--muted)}.sheet-head strong{color:var(--ink)}
+    .sheet-close{width:34px;height:34px;border-radius:9px;border:1px solid #ffffff22;background:#ffffff08;color:var(--ink);font-size:20px;line-height:1}
+    body.sheet-open{overflow:hidden}
+    .sheet-panel .reason,.sheet-panel .source-fields,.sheet-panel p{color:var(--ink)}.sheet-panel .reason{color:#c9dbd2;line-height:1.7}.sheet-panel .source-fields{border-top-color:#ffffff17}.sheet-panel .source-fields dt{color:var(--muted)}
+    .sheet-panel .task-body h3{margin:8px 0 6px;font-size:18px}.sheet-panel .task-body p{margin:3px 0}
+    /* notice confirmation strip */
+    .confirm-strip{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:12px 0 10px;padding:10px 12px;border-radius:10px;background:#ffffff06;border:1px dashed #ffffff22}
+    .confirm-strip .field{display:flex;align-items:center;gap:10px;margin:0!important;font-size:13px;font-weight:600;color:var(--muted)}
+    .confirm-strip .field input{height:34px;padding:0 8px;border-radius:8px;border:1px solid #ffffff22;background:#ffffff0a;color:var(--ink);color-scheme:dark}
+    .confirm-strip .confirm-status,.confirm-strip .stale-chip{flex-basis:100%;margin:0;font-size:13px;color:var(--muted)}
+    @media print{.sheet-panel{display:block!important;position:static!important;box-shadow:none!important}details.task-card[open]::after,details.why[open]::after{display:none}}
+
+    /* Sheet containment fix: entry animations must not leave a transform behind (it would trap position:fixed), and main must not create a stacking context. */
+    .page.active,.workspace,.visit-card.enter,.hero-inner>*,.controls,.weather,.intro{animation-fill-mode:backwards!important}
+    main{z-index:auto!important}
+
+    .city-note{margin-top:8px;font-size:13px;color:#b4cac0;max-width:62ch}
   </style>
   <script src="vendor/leaflet.js" defer></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to sampling plan</a>
   <header class="topbar"><div class="shell topbar-inner">
-    <div class="brand"><svg viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="7" fill="#315b48"/><path d="M6 13q5-5 11 0t11 0M6 21q5-5 11 0t11 0" fill="none" stroke="#f4f7ee" stroke-width="1.8"/></svg><span>AfterStorm</span><span class="brand-sub">Evidence, refreshed.</span></div>
-    <div class="project-context"><strong>OneAquaHealth · Track 6</strong><br>Urban freshwater · One Health</div>
+    <div class="brand"><svg viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="7" fill="#315b48"/><path d="M6 13q5-5 11 0t11 0M6 21q5-5 11 0t11 0" fill="none" stroke="#f4f7ee" stroke-width="1.8"/></svg><span>AfterStorm</span></div>
+    <nav class="app-nav" aria-label="Pages"><a href="#/" data-page-link="overview">Overview</a><a href="#/plan" data-page-link="plan">Plan &amp; map</a><a href="#/notices" data-page-link="notices">Notices<span class="nav-count" id="nav-notice-count"></span></a><a href="#/evidence" data-page-link="evidence">Evidence &amp; data</a></nav>
+    <div class="header-status" id="header-status"></div>
   </div></header>
   <main id="main" class="shell">
     <p id="loading" class="loading" role="status">Loading the saved sampling plan…</p>
     <div id="fatal" class="fatal" role="alert" hidden></div>
     <div id="app" hidden>
+      <p id="plan-status" class="sr-only" role="status" aria-live="polite"></p>
+      <div class="controlbar" id="controlbar">
+          <div class="hero-bar" role="group" aria-label="Plan controls">
+            <div class="city-control"><span class="control-label" id="city-label">City</span><div class="city-pills" id="city-pills" role="group" aria-labelledby="city-label" aria-describedby="city-note"></div><p class="city-note" id="city-note">OneAquaHealth's own case-study cities, from the official site roster. Any city added to the roster appears here automatically.</p><label class="sr-only" for="city-select">City</label><select id="city-select" class="sr-only" tabindex="-1" aria-hidden="true"></select></div>
+            <div class="mode-control"><span class="control-label" id="mode-label">Evidence mode</span><div class="mode-toggle" role="group" aria-labelledby="mode-label"><button id="mode-live" type="button" aria-pressed="true">Latest forecast</button><button id="mode-replay" type="button" aria-pressed="false">Archive replay</button></div><div class="mode-meta"><span id="fetched-at" class="timestamp"></span></div></div>
+        
+            <div class="budget-control"><label class="control-label" for="budget">Site-visit budget</label><div class="stepper"><button id="budget-minus" type="button" aria-label="Decrease visit budget">−</button><input id="budget" type="number" min="0" step="1" value="5" aria-describedby="budget-note budget-error"><button id="budget-plus" type="button" aria-label="Increase visit budget">+</button></div><input id="budget-range" class="budget-range" type="range" min="0" max="20" step="1" value="5" aria-label="Site-visit budget slider" aria-describedby="budget-note"><p class="budget-note" id="budget-note">1 visit = 1 trip to 1 stream</p><p id="budget-error" class="budget-error" role="status" hidden></p></div>
+          </div>
+      </div>
+      <section class="page" data-page="overview" aria-label="Overview">
       <section class="hero" id="hero" aria-label="Your plan at a glance">
         <div class="hero-bg" aria-hidden="true"><i class="glow g1"></i><i class="glow g2"></i><i class="glow g3"></i><i class="contours"></i><i class="rain"></i></div>
         <div class="hero-inner">
           <p class="hero-lede">AfterStorm proposes which streams to sample after heavy rain, what to test for, and when. <span id="evidence-age"></span></p>
-          <div class="hero-bar" role="group" aria-label="Plan controls">
-            <div class="city-control"><span class="control-label" id="city-label">City</span><div class="city-pills" id="city-pills" role="group" aria-labelledby="city-label"></div><label class="sr-only" for="city-select">City</label><select id="city-select" class="sr-only" tabindex="-1" aria-hidden="true"></select></div>
-            <div class="mode-control"><span class="control-label" id="mode-label">Evidence mode</span><div class="mode-toggle" role="group" aria-labelledby="mode-label"><button id="mode-live" type="button" aria-pressed="true">Latest forecast</button><button id="mode-replay" type="button" aria-pressed="false">Archive replay</button></div><div class="mode-meta"><span id="fetched-at" class="timestamp"></span></div></div>
-        
-            <div class="budget-control"><label class="control-label" for="budget">Site-visit budget</label><div class="stepper"><button id="budget-minus" type="button" aria-label="Decrease visit budget">−</button><input id="budget" type="number" min="0" step="1" value="5" aria-describedby="budget-note budget-error"><button id="budget-plus" type="button" aria-label="Increase visit budget">+</button></div><input id="budget-range" class="budget-range" type="range" min="0" max="20" step="1" value="5" aria-label="Site-visit budget slider" aria-describedby="budget-note"><p class="budget-note" id="budget-note">1 visit = 1 trip to 1 stream</p><p id="budget-error" class="budget-error" role="status" hidden></p></div>
-      
-          </div>
           <div id="replay-banner" class="replay-chip" hidden></div>
           <div id="decision" class="decision"></div>
         </div>
       </section>
-      <section class="surface weather" id="weather" tabindex="-1" aria-label="Rain evidence and proposed timing"></section>
-      <p id="plan-status" class="sr-only" role="status" aria-live="polite"></p>
+        <div class="overview-grid">
+          <section class="surface protection" id="protection" hidden aria-labelledby="protection-heading"><div class="panel-header"><div><h2 id="protection-heading">Protection check</h2></div></div><div id="protection-body" class="protection-body"></div></section>
+          <section class="surface next-card" id="next-card" aria-labelledby="next-heading"></section>
+        </div>
+      </section>
+      <section class="page" data-page="plan" aria-label="Plan and map">
       <div class="workspace">
-        <div class="left-column">
+        <div class="left-column"><div class="left-inner">
           <section class="surface map-panel" aria-label="Stream map">
             <div class="panel-header"><div><h2 id="map-heading">Stream locations</h2><p id="map-count"></p></div><span class="eyebrow">Official site roster</span></div>
             <div class="map-frame"><div id="map" aria-label="Stream locations and visit status"></div><div id="map-hint" class="map-hint" aria-hidden="true">Pinch or Ctrl + scroll to zoom · click the map to zoom with scroll</div><label class="map-tools"><input id="basemap" type="checkbox" checked> Street map</label></div>
             <div class="map-footer"><div class="legend"><span><i class="dot sample" aria-hidden="true"></i>Storm visit</span><span><i class="dot baseline" aria-hidden="true"></i>Baseline visit</span><span><i class="dot capacity" aria-hidden="true"></i>If capacity allows</span><span><i class="dot low" aria-hidden="true"></i>No visit</span><span><i class="dot excluded" aria-hidden="true"></i>Excluded</span><span><i class="dot notice" aria-hidden="true"></i>Draft notice</span></div><p class="map-note"><strong>Zoom:</strong> pinch the touchpad, hold Ctrl and scroll, double-click, or use + and −. Click the map once to zoom with plain scrolling.</p><p id="map-status" class="map-note">Map tiles need internet. Pins and the plan use saved data.</p><p class="map-note">Coordinates: OneAquaHealth's official site roster. Numbered pins match the visit list. Hover a visit to find it on the map; click a pin to jump to its visit.</p></div>
           </section>
 
-        </div>
+        </div></div>
         <div class="right-column">
-        <section class="surface protection" id="protection" hidden aria-labelledby="protection-heading"><div class="panel-header"><div><h2 id="protection-heading">Protection check</h2></div></div><div id="protection-body" class="protection-body"></div></section>
-        <section class="surface visit-panel" id="visit-panel" tabindex="-1" aria-labelledby="visit-heading"><div class="panel-header"><div><h2 id="visit-heading">Proposed site visits</h2><p id="visit-subtitle"></p></div><div class="visit-actions"><span id="visit-count" class="panel-count"></span><button type="button" id="print-all-cards">Print all task cards</button><button type="button" id="download-fhir">Download FHIR bundle</button></div></div><p class="visit-help fhir-help">One trip per site covers every test listed. The lab team chooses the method.</p><div id="review-progress" class="review-progress" tabindex="-1" hidden></div><p id="fhir-status" role="status"></p><div class="visits-scroll" id="visits"></div><div id="capacity"></div></section>
-        <section class="surface notice-panel" id="notice-panel" tabindex="-1" aria-labelledby="notice-heading"><div class="panel-header"><div><h2 id="notice-heading">Draft contact notices</h2><p>Human and animal health · coordinator review</p></div><span id="notice-count" class="panel-count"></span></div><div id="notices" class="notice-body"></div></section>
+        <section class="surface visit-panel" id="visit-panel" tabindex="-1" aria-labelledby="visit-heading"><div class="panel-header"><div><h2 id="visit-heading">Proposed site visits</h2><p id="visit-subtitle"></p></div><div class="visit-actions"><span id="visit-count" class="panel-count"></span><button type="button" id="print-all-cards">Print all task cards</button><button type="button" id="download-fhir">Download FHIR bundle</button></div></div><p class="visit-help fhir-help">One trip per site covers every test listed. The lab team chooses the method.</p><div id="tracker" class="tracker"></div><div id="review-progress" class="review-progress" tabindex="-1" hidden></div><p id="fhir-status" role="status"></p><div class="visits-scroll" id="visits"></div><div id="capacity"></div></section>
         </div>
       </div>
+      </section>
+      <section class="page" data-page="notices" aria-label="Draft contact notices">
+      <section class="surface notice-panel notice-wide" id="notice-panel" tabindex="-1" aria-labelledby="notice-heading"><div class="panel-header"><div><h2 id="notice-heading">Draft contact notices</h2><p>Human and animal health · coordinator review</p></div><span id="notice-count" class="panel-count"></span></div><div id="notices" class="notice-body"></div></section>
+      </section>
+      <section class="page" data-page="evidence" aria-label="Evidence and data">
+      <section class="surface weather" id="weather" tabindex="-1" aria-label="Rain evidence and proposed timing"></section>
       <details id="coverage" class="surface coverage"></details>
       <details class="surface roster" id="roster"><summary><span id="roster-heading">All sites and planning status</span><span class="badge grey">Full roster</span></summary><p class="roster-note">Every official site is retained, including baselines, sites outside the budget and invalid records. Status describes the sampling proposal, not water safety.</p><div class="table-wrap"><table><thead><tr><th scope="col">Site</th><th scope="col">Location</th><th scope="col">Planning status</th><th scope="col">Reason / evidence</th><th scope="col">Locate</th></tr></thead><tbody id="all-sites"></tbody></table></div></details>
       <details class="surface excluded-panel" id="excluded"><summary id="excluded-heading">Excluded and why</summary><div id="excluded-body"></div></details>
       <details class="surface sources-summary" id="sources"><summary>Data sources and settings</summary><div id="source-summary"></div><p>Saved FHIR file for validation: <a id="default-fhir" href="data/fhir-bundle.json">default bundle</a></p></details>
       <footer class="footer"><p><strong>Historical evidence</strong>2023–24 relative categories, not concentrations or current health ratings. Visits use greedy ranking; no field validation yet.</p><p><strong>Experimental timing</strong>The post-rain window is an adjustable heuristic, not a validated sampling protocol or safety clearance.</p><p><strong>Coordinator review</strong>Assessment methods and contact notices require human judgment. Forecast rain triggers sampling proposals, not contamination predictions.</p></footer>
+      </section>
+
       <div class="footer-brand"><span>AfterStorm · From streams to systems.</span><span id="data-stamp"></span></div>
     </div>
   </main>
@@ -173,23 +375,23 @@
 
   function view(){const city=data.cities[cityId], plan=city.modes[mode];return {city,plan,allocated:new Set(plan.ranking.slice(0,budget))};}
   function planningStatus(site,allocated){
-    if(site.status==='invalid source data') return {label:'Invalid source data',color:'#963e39',kind:'excluded'};
-    if(site.action==='first baseline assessment') return allocated.has(site.code) ? {label:'Baseline visit planned',color:'#286486',kind:'baseline'} : {label:'Baseline · if capacity allows',color:'#b18334',kind:'capacity'};
-    if(site.action==='new category assessment') return allocated.has(site.code) ? {label:'Sample this storm',color:'#315b48',kind:'sample'} : {label:'If capacity allows',color:'#b18334',kind:'capacity'};
-    return {label:site.status,color:'#899486',kind:'low'};
+    if(site.status==='invalid source data') return {label:'Invalid source data',color:'#e0786d',kind:'excluded'};
+    if(site.action==='first baseline assessment') return allocated.has(site.code) ? {label:'Baseline visit planned',color:'#3b82c4',kind:'baseline'} : {label:'Baseline · if capacity allows',color:'#d9a441',kind:'capacity'};
+    if(site.action==='new category assessment') return allocated.has(site.code) ? {label:'Sample this storm',color:'#1f9d73',kind:'sample'} : {label:'If capacity allows',color:'#d9a441',kind:'capacity'};
+    return {label:site.status,color:'#7d8f86',kind:'low'};
   }
   function rainChart(period){
     if(!period?.rain_mm_by_date) return '';
     const entries=Object.entries(period.rain_mm_by_date), max=Math.max(data.config.RAIN_MM,...entries.map(([,v])=>numeric(v)?v:0));
     const width=455,height=80,base=56,scale=40/max,step=width/entries.length;
     const threshold=base-data.config.RAIN_MM*scale;
-    return `<svg class="rain-chart" viewBox="0 0 ${width} ${height}" role="img" aria-label="Cached seven-day rainfall forecast in millimetres. Dashed line: ${escapeHTML(data.config.RAIN_MM)} mm storm threshold."><title>${escapeHTML(entries.map(([d,v])=>`${d}: ${displayedNumber(v)} mm`).join('; '))}</title><line x1="0" x2="${width}" y1="${threshold}" y2="${threshold}" stroke="#a7b8a4" stroke-dasharray="3 3"/>${entries.map(([day,rain],i)=>{const wet=numeric(rain)&&rain>=data.config.RAIN_MM, h=numeric(rain)?Math.max(2,rain*scale):0;return `<rect x="${i*step+16}" y="${base-h}" width="${step-32}" height="${h}" rx="2" fill="${wet?'#315b48':'#cbd7c8'}"/><text x="${i*step+step/2}" y="${base-h-4}" text-anchor="middle" font-family="Geist,Segoe UI,system-ui,sans-serif" font-size="11.5" fill="${wet?'#315b48':'#687567'}">${numeric(rain)&&rain>0?escapeHTML(rain):numeric(rain)?'':'?'}</text><text x="${i*step+step/2}" y="76" text-anchor="middle" font-family="Geist,Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#687567">${escapeHTML(shortDate(day))}</text>`;}).join('')}</svg>`;
+    return `<svg class="rain-chart" viewBox="0 0 ${width} ${height}" role="img" aria-label="Cached seven-day rainfall forecast in millimetres. Dashed line: ${escapeHTML(data.config.RAIN_MM)} mm storm threshold."><title>${escapeHTML(entries.map(([d,v])=>`${d}: ${displayedNumber(v)} mm`).join('; '))}</title><line x1="0" x2="${width}" y1="${threshold}" y2="${threshold}" stroke="#f2c46d" stroke-dasharray="3 3"/>${entries.map(([day,rain],i)=>{const wet=numeric(rain)&&rain>=data.config.RAIN_MM, h=numeric(rain)?Math.max(2,rain*scale):0;return `<rect x="${i*step+16}" y="${base-h}" width="${step-32}" height="${h}" rx="2" fill="${wet?'#6ee7b7':'#ffffff33'}"/><text x="${i*step+step/2}" y="${base-h-4}" text-anchor="middle" font-family="Geist,Segoe UI,system-ui,sans-serif" font-size="11.5" fill="${wet?'#6ee7b7':'#9db3a9'}">${numeric(rain)&&rain>0?escapeHTML(rain):numeric(rain)?'':'?'}</text><text x="${i*step+step/2}" y="76" text-anchor="middle" font-family="Geist,Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#9db3a9">${escapeHTML(shortDate(day))}</text>`;}).join('')}</svg>`;
   }
   function siteRainChart(plan){
     const storm=plan.storm; if(!storm?.rain_mm_by_site_by_date) return '';
     const day=storm.anchor_date, entries=Object.entries(storm.rain_mm_by_site_by_date).map(([c,d])=>[c,d[day]]).filter(([,v])=>numeric(v)).sort((x,y)=>y[1]-x[1]);
     const max=Math.max(data.config.RAIN_MM,...entries.map(([,v])=>v)),width=455,height=96,base=70,scale=58/max,step=width/entries.length,thr=base-data.config.RAIN_MM*scale;
-    return `<svg class="rain-chart tall" viewBox="0 0 ${width} ${height}" role="img" aria-label="Rain at each of ${entries.length} sites on ${escapeHTML(day)}; every bar is above the ${data.config.RAIN_MM} mm line."><title>${escapeHTML(entries.map(([c,v])=>`${c}: ${v} mm`).join('; '))}</title>${entries.map(([c,v],i)=>{const h=Math.max(2,v*scale);return `<rect x="${i*step+step*.18}" y="${base-h}" width="${step*.64}" height="${h}" rx="2" fill="#2f5a46"/><text x="${i*step+step/2}" y="86" text-anchor="middle" font-family="Geist Mono,monospace" font-size="${entries.length>16?8:10}" fill="#536158">${escapeHTML(c)}</text>`;}).join('')}<line x1="0" x2="${width}" y1="${thr}" y2="${thr}" stroke="#b88a3e" stroke-dasharray="4 3"/></svg>`;
+    return `<svg class="rain-chart tall" viewBox="0 0 ${width} ${height}" role="img" aria-label="Rain at each of ${entries.length} sites on ${escapeHTML(day)}; every bar is above the ${data.config.RAIN_MM} mm line."><title>${escapeHTML(entries.map(([c,v])=>`${c}: ${v} mm`).join('; '))}</title>${entries.map(([c,v],i)=>{const h=Math.max(2,v*scale);return `<rect x="${i*step+step*.18}" y="${base-h}" width="${step*.64}" height="${h}" rx="2" fill="#6ee7b7"/><text x="${i*step+step/2}" y="86" text-anchor="middle" font-family="Geist Mono,monospace" font-size="${entries.length>16?8:10}" fill="#9db3a9">${escapeHTML(c)}</text>`;}).join('')}<line x1="0" x2="${width}" y1="${thr}" y2="${thr}" stroke="#f2c46d" stroke-dasharray="4 3"/></svg>`;
   }
   function renderWeather(city,plan,allocated){
     const storm=plan.storm;
@@ -199,25 +401,26 @@
     const why=unknown?`Rain data for ${escapeHTML(city.name)} is incomplete, so a storm can't be ruled out. Only visits to streams with no lab result in the public feed are planned.`
       :storm?`<strong>${escapeHTML(boundaryText(storm))}</strong> A day with ${data.config.RAIN_MM} mm of rain or more triggers a plan. What's in the water is unknown until it's sampled.`
       :mode==='live'?`No day in the next week reaches ${data.config.RAIN_MM} mm, so there's no storm sampling to plan.${baseline?' Streams with no lab result in the public feed are still listed.':''}`:escapeHTML(plan.message);
-    const rule=(mode==='live'?'One forecast covers the whole city, so every site shares the same storm day.':`A past day qualifies only if <strong>every</strong> site in the city had ${data.config.RAIN_MM} mm or more. Days with missing data are never counted as dry or wet.`)+' 20 mm is a prototype setting.';
+    const rule=(mode==='live'?'One forecast covers the whole city, so every site shares the same storm day.':`A past day qualifies only if <strong>every</strong> site in the city had ${data.config.RAIN_MM} mm or more. Days with missing data are never counted as dry or wet.`)+' 20 mm in a day is the WMO/ETCCDI “very heavy precipitation day” index (R20mm), used here as a prototype setting.';
     const chart=mode==='live'?rainChart(plan.forecast_period):siteRainChart(plan);
     const caption=mode==='live'?`Daily rain forecast for ${escapeHTML(city.name)}, mm. Dashed line: ${data.config.RAIN_MM} mm.`:storm?`Rain at every ${escapeHTML(city.name)} site on ${escapeHTML(fullDate(storm.anchor_date))}, mm, highest first. Dashed line: ${data.config.RAIN_MM} mm storm line.`:'';
     $('weather').innerHTML=`<div class="weather-top"><h2>Rain evidence · ${escapeHTML(city.name)}</h2><span class="badge ${mode==='replay'?'replay':''}">${escapeHTML(tag)}</span></div><div class="weather-bottom"><div class="weather-explain"><p>${why}</p><p style="margin-top:10px">${rule}</p></div><figure class="chart-fig">${chart||'<p class="weather-explain">No rain chart for this view.</p>'}${caption?`<figcaption>${caption}</figcaption>`:''}</figure></div>`;
     $('replay-banner').hidden=mode!=='replay';
     const sentence=demonstrationSentence();
-    $('replay-banner').innerHTML=storm?`<strong>Replay of a real storm · ${escapeHTML(fullDate(storm.anchor_date))}</strong><span>Past data, shown to demonstrate the plan. Not an upcoming event.</span>${sentence?`<span class="demo-line">Filed to the HL7 sandbox as: ${escapeHTML(sentence)}</span>`:''}`:`<strong>Replay</strong><span>No past storm qualifies for this city.</span>`;
+    const liveStorm=!!data.cities[cityId].modes.live.storm;
+    $('replay-banner').innerHTML=storm?`<div class="rc-text"><strong>Replay of a real storm · ${escapeHTML(fullDate(storm.anchor_date))}</strong><span>You're seeing what AfterStorm would have planned the day after this storm, using real past data. ${liveStorm?'A storm is also forecast this week.':'No heavy rain is forecast this week.'}</span>${sentence?`<span class="demo-line">Filed to the HL7 sandbox as: ${escapeHTML(sentence)}</span>`:''}</div><button type="button" class="rc-btn" data-mode-live>See latest forecast →</button>`:`<div class="rc-text"><strong>Replay</strong><span>No past storm in the archive reached the trigger at every site in this city.</span></div><button type="button" class="rc-btn" data-mode-live>See latest forecast →</button>`;
   }
   function sourceDetails(site,plan){
     const health=site.source_health;
     const rain=plan.storm?(mode==='live'?plan.storm.rain_mm_by_date[plan.storm.anchor_date]:plan.storm.rain_mm_by_site_by_date[site.code][plan.storm.anchor_date]):null;
     const fields=health?`<dt>Lab sample date (samplingDate)</dt><dd>${escapeHTML(site.sample_date)}</dd><dt>Faecal (scaledFecalRisk)</dt><dd>${escapeHTML(scoreText(health.scaledFecalRisk))}</dd><dt>Pathogen (scaledPathogenRisk)</dt><dd>${escapeHTML(scoreText(health.scaledPathogenRisk))}</dd><dt>Antibiotic resistance (scaledArgRisk)</dt><dd>${escapeHTML(scoreText(health.scaledArgRisk))}</dd>`:'<dt>Lab evidence</dt><dd>No lab result</dd>';
-    return `<details class="why" data-keep="why-${escapeHTML(site.code)}"><summary>Why this site?</summary><p class="reason">${escapeHTML(site.reason)}</p><dl class="source-fields">${fields}<dt>Sewage distance (distanceToSewageStations)</dt><dd>${numeric(site.sewage_distance_m)?escapeHTML(site.sewage_distance_m)+' m':'Missing; last among baselines'}</dd>${plan.storm?`<dt>${mode==='live'?'City forecast rain':'Archived site rain'} on ${escapeHTML(plan.storm.anchor_date)}</dt><dd>${escapeHTML(displayedNumber(rain))} mm</dd>`:''}</dl>${site.window?`<p class="reason">${escapeHTML(site.window.why)} ${link(site.window.source,'Directive context')}</p>`:''}<details class="provenance"><summary>Source URLs and retrieval times</summary>${Object.entries(site.provenance).map(([name,ref])=>`<p>${link(ref.url,name==='rain'?(mode==='live'?'City forecast':'Site rainfall archive'):name==='health'?'Lab category results':name==='urban'?'Urban parameters':'Official roster')}<br>Fetched <span class="mono">${escapeHTML(timestamp(ref.fetched_at))}</span></p>`).join('')}</details></details>`;
+    return `<details class="why" data-keep="why-${escapeHTML(site.code)}"><summary>Why?</summary><div class="sheet-panel" role="dialog" aria-label="Why ${escapeHTML(site.code)} is in the plan"><div class="sheet-head"><span>Why this site · <strong>${escapeHTML(site.code)} ${escapeHTML(site.name)}</strong></span><button type="button" class="sheet-close" data-close-sheet aria-label="Close">×</button></div><p class="reason">${escapeHTML(site.reason)}</p><dl class="source-fields">${fields}<dt>Sewage distance (distanceToSewageStations)</dt><dd>${numeric(site.sewage_distance_m)?escapeHTML(site.sewage_distance_m)+' m':'Missing; last among baselines'}</dd>${plan.storm?`<dt>${mode==='live'?'City forecast rain':'Archived site rain'} on ${escapeHTML(plan.storm.anchor_date)}</dt><dd>${escapeHTML(displayedNumber(rain))} mm</dd>`:''}</dl>${site.window?`<p class="reason">${escapeHTML(site.window.why)} ${link(site.window.source,'Directive context')}</p>`:''}<details class="provenance"><summary>Source URLs and retrieval times</summary>${Object.entries(site.provenance).map(([name,ref])=>`<p>${link(ref.url,name==='rain'?(mode==='live'?'City forecast':'Site rainfall archive'):name==='health'?'Lab category results':name==='urban'?'Urban parameters':'Official roster')}<br>Fetched <span class="mono">${escapeHTML(timestamp(ref.fetched_at))}</span></p>`).join('')}</details></div></details>`;
   }
   let lastHeroKey='';
   function miniBars(values,threshold){
     const vals=values.filter(numeric); if(!vals.length) return '';
     const max=Math.max(threshold*1.15,...vals),w=220,h=46,step=w/vals.length,thr=h-threshold/max*h;
-    return `<svg class="mini-bars" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true">${vals.map((v,i)=>{const bh=Math.max(1.5,v/max*h);return `<rect x="${i*step+step*.2}" y="${h-bh}" width="${step*.6}" height="${bh}" rx="1.5" fill="${v>=threshold?'#8fe0b8':'#ffffff40'}"/>`;}).join('')}<line x1="0" x2="${w}" y1="${thr}" y2="${thr}" stroke="#f2c46d" stroke-width="1" stroke-dasharray="3 3" vector-effect="non-scaling-stroke"/></svg>`;
+    return `<svg class="mini-bars" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true">${vals.map((v,i)=>{const bh=Math.max(1.5,v/max*h);return `<rect x="${i*step+step*.2}" y="${h-bh}" width="${step*.6}" height="${bh}" rx="1.5" fill="${v>=threshold?'#6ee7b7':'#ffffff40'}"/>`;}).join('')}<line x1="0" x2="${w}" y1="${thr}" y2="${thr}" stroke="#f2c46d" stroke-width="1" stroke-dasharray="3 3" vector-effect="non-scaling-stroke"/></svg>`;
   }
   function calTile(day){return `<span class="cal-tile"><b>${months[Number(day.slice(5,7))-1].toUpperCase()}</b><span>${Number(day.slice(8,10))}</span></span>`;}
   function countUp(root){
@@ -270,8 +473,8 @@
       :`<div class="kpi-value small">${allBaselines?'Any day':'—'}</div><p class="kpi-sub">${allBaselines?`${plural(allBaselines,'stream')} with no public lab result · no storm timing needed`:'No storm, so no sampling window'}</p>`;
     const pct=budget?Math.min(100,n/budget*100):0;
     const ring=`<svg class="ring" viewBox="0 0 84 84" aria-hidden="true"><circle cx="42" cy="42" r="36" pathLength="100" class="ring-bg"/><circle cx="42" cy="42" r="36" pathLength="100" class="ring-fg" style="stroke-dashoffset:${100-pct}"/></svg>`;
-    const kicker=mode==='live'?`<span class="pulse${storm&&plan.weather_status!=='unknown'?' warn':''}"></span>Latest saved forecast · fetched ${escapeHTML(niceTime(data.sources[`forecasts/${cityId}.json`]?.fetched_at))}`:`<span class="pulse replay"></span>Archive replay · past data`;
-    $('decision').innerHTML=`<p class="hero-kicker">${kicker}</p><h1 class="decision-answer" id="decision-answer">${answer}</h1>
+    const kicker=mode==='live'?`<span class="pulse${storm&&plan.weather_status!=='unknown'?' warn':''}"></span>Latest saved forecast · fetched ${escapeHTML(niceTime(data.sources[`forecasts/${cityId}.json`]?.fetched_at))}`:'';
+    $('decision').innerHTML=`${kicker?`<p class="hero-kicker">${kicker}</p>`:''}<h1 class="decision-answer" id="decision-answer">${answer}</h1>
       <div class="kpis">
         <div class="kpi"><p class="kpi-label">${escapeHTML(rainLabel)}</p><div class="kpi-value">${rainVal}${rainUnit?`<span class="kpi-unit">${rainUnit}</span>`:''}</div>${bars}<p class="kpi-sub">${escapeHTML(rainSub)}</p></div>
         <div class="kpi"><p class="kpi-label">${storm&&plan.weather_status!=='unknown'?'Proposed reassessment dates':'Sampling window'}</p>${dateTile}</div>
@@ -279,16 +482,84 @@
       </div>
       <nav aria-label="Plan progress"><ol class="steps">${steps.map(([title,status,target],i)=>`<li class="step ${state[i]}"><button type="button" data-jump="${target}" ${state[i]==='current'?'aria-current="step"':''}><span class="step-dot" aria-hidden="true">${state[i]==='done'?'<svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>':i+1}</span><span class="step-text"><span class="step-title">${escapeHTML(title)}</span><span class="step-status">${escapeHTML(status)}</span></span><span class="step-go" aria-hidden="true">→</span></button></li>`).join('')}</ol></nav>`;
     $('hero').classList.toggle('storm',!!storm&&plan.weather_status!=='unknown');$('hero').classList.toggle('replay',mode==='replay');
-    const key=`${cityId}|${mode}`; if(key!==lastHeroKey){lastHeroKey=key;countUp($('decision'));}
+    const key=`${cityId}|${mode}`; if(key!==lastHeroKey){lastHeroKey=key;countUp($('decision'));document.querySelectorAll('.visit-card').forEach((c,i)=>{c.classList.remove('enter');void c.offsetWidth;c.style.setProperty('--i',i);c.classList.add('enter');});}
     // city pills: pressed state + storm marker for the current mode
     $('city-pills').querySelectorAll('[data-city]').forEach(btn=>{const id=btn.dataset.city,modePlan=data.cities[id].modes[mode],has=modePlan.weather_status!=='unknown'&&!!modePlan.storm;btn.setAttribute('aria-pressed',String(id===cityId));btn.classList.toggle('has-storm',has);btn.title=modePlan.weather_status==='unknown'?'Rain data incomplete':has?(mode==='live'?'Storm in the latest saved forecast':'Past storm available'):'No storm';});
   }
+  const PAGES=['overview','plan','notices','evidence'];
+  const PAGE_OF={weather:'evidence',coverage:'evidence',roster:'evidence',sources:'evidence','visit-panel':'plan','review-progress':'plan',tracker:'plan',map:'plan','notice-panel':'notices',protection:'overview',hero:'overview'};
+  let page='overview';
+  function pageFromHash(){
+    const h=location.hash;
+    if(h.startsWith('#card-')) return 'plan';
+    if(h.startsWith('#notice-')) return 'notices';
+    if(!h||h==='#'||h==='#/') return 'overview';
+    const m=h.match(/^#\/([a-z]+)/);
+    return m&&PAGES.includes(m[1])?m[1]:page;
+  }
+  function setPage(next,{scroll=true}={}){
+    page=next;document.body.dataset.page=next;
+    document.querySelectorAll('.page').forEach(el=>el.classList.toggle('active',el.dataset.page===next));
+    document.querySelectorAll('[data-page-link]').forEach(a=>{if(a.dataset.pageLink===next)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
+    if(next==='plan'&&leafletMap) requestAnimationFrame(()=>{leafletMap.invalidateSize();previousMapCity=null;const v=view();renderMap(v.city,v.plan,v.allocated);});
+    if(scroll) window.scrollTo({top:0});
+  }
+  function goPage(next){
+    if(next===page) return;
+    history.pushState(null,'',`${location.search}${next==='overview'?'#/':'#/'+next}`);
+    setPage(next);
+  }
   function jumpTo(id){
+    const target=PAGE_OF[id];
+    if(target&&target!==page){goPage(target);requestAnimationFrame(()=>jumpTo(id));return;}
     const el=$(id); if(!el) return;
     const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
     el.scrollIntoView({behavior:reduce?'instant':'smooth',block:'start'});
     el.focus({preventScroll:true});
     el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash');
+  }
+  const CAT_FIELD={'faecal':'scaledFecalRisk','pathogen':'scaledPathogenRisk','antibiotic resistance':'scaledArgRisk'};
+  const CAT_CLASS={'faecal':'c-fec','pathogen':'c-path','antibiotic resistance':'c-arg'};
+  function catChips(site){
+    if(site.action==='first baseline assessment'){
+      return `<span class="chip c-base">First baseline · no public lab result</span>`+site.categories.map(c=>`<span class="chip ${CAT_CLASS[c]||''} ghost">${escapeHTML(c)}</span>`).join('');
+    }
+    return site.categories.map(c=>{
+      const v=site.source_health?.[CAT_FIELD[c]];
+      const shown=numeric(v)?Number(v).toFixed(2):'?';
+      const pct=numeric(v)?Math.max(4,Math.min(100,v*100)):0;
+      return `<span class="chip ${CAT_CLASS[c]||''}" title="Stored ${escapeHTML(site.sample_date?.slice(0,4)||'')} relative score ${shown} (not a concentration)">${escapeHTML(c)} <b>${shown}</b><i class="meter" aria-hidden="true"><i style="width:${pct}%"></i></i></span>`;
+    }).join('');
+  }
+  // Tremor-style tracker: one segment per site, ranked first, coloured by planning status.
+  function renderTracker(plan,allocated){
+    const el=$('tracker'); if(!el) return;
+    const ranked=plan.ranking.map(c=>plan.sites.find(s=>s.code===c)).filter(Boolean);
+    const rest=plan.sites.filter(s=>!plan.ranking.includes(s.code));
+    const order=[...ranked,...rest];
+    const counts={};
+    const segs=order.map(site=>{
+      const st=planningStatus(site,allocated);counts[st.kind]=(counts[st.kind]||0)+1;
+      const label=`${site.code} ${site.name} · ${st.label}${site.draft_notice?' · draft notice':''}`;
+      return `<button type="button" class="seg k-${st.kind}${site.draft_notice?' has-notice':''}" data-seg="${escapeHTML(site.code)}" title="${escapeHTML(label)}" aria-label="${escapeHTML(label)}"></button>`;
+    }).join('');
+    const legend=[['sample','planned storm visit'],['baseline','planned first sample'],['capacity','if capacity allows'],['low','no visit'],['excluded','excluded']].filter(([k])=>counts[k]).map(([k,l])=>`<span><i class="seg-dot k-${k}"></i>${counts[k]} ${l}</span>`).join('');
+    el.innerHTML=`<div class="tracker-head"><strong>All ${plan.sites.length} ${escapeHTML(data.cities[cityId].name)} sites at a glance</strong><span>ranked first · ring = draft notice</span></div><div class="tracker-bar" role="group" aria-label="Planning status of every site">${segs}</div><div class="tracker-legend">${legend}</div>`;
+  }
+  function renderSummaryBar(city,plan,allocated){
+    const t=reviewTally(plan),storm=plan.storm;
+    const when=storm?(mode==='live'?`Storm forecast ${shortDate(storm.anchor_date)}`:'Past storm'):(mode==='live'?'No storm this week':'No qualifying storm');
+    const pct=t.total?Math.round(t.done/t.total*100):0;
+    $('header-status').innerHTML=`<div class="sb-inner"><strong>${escapeHTML(city.name)}</strong><span class="sb-tag${mode==='replay'?' replay':''}">${escapeHTML(when)}</span><span>${allocated.size} of ${budget} visits</span>${t.total?`<span class="sb-review"><i style="width:${pct}%"></i></span><span>${t.done}/${t.total} reviewed</span>`:''}<span class="sb-actions"><button type="button" data-sb-download${$('download-fhir').disabled?' disabled':''}>${escapeHTML($('download-fhir').textContent)}</button></span></div>`;
+  }
+  function renderNext(city,plan,allocated){
+    const t=reviewTally(plan),n=allocated.size,notices=plan.notices.length;
+    const items=[
+      ['plan',`${n?`Review ${n} planned visit${n===1?'':'s'}`:'No visits planned'}`,n?'Map, ranked visits, citizen task cards and the FHIR download.':'See every site on the map and the full roster.'],
+      ['notices',notices?`${notices} draft contact notice${notices===1?'':'s'}`:'No draft notices',notices?'Approve or hold each notice and set its confirmation sample date.':'Notices are drafted only for a storm scenario.'],
+      ['evidence','Rain evidence and data','The rain chart, how often storms like this happen, sources, settings and the full roster.']];
+    $('next-card').innerHTML=`<div class="panel-header"><div><h2 id="next-heading">Next steps</h2><p>${t.total?`${t.done} of ${t.total} items reviewed`:'Nothing to review in this view'}</p></div></div><div class="next-list">${items.map(([pg,title,sub])=>`<a class="next-item" href="${pg==='overview'?'#/':'#/'+pg}"><span><strong>${escapeHTML(title)}</strong><small>${escapeHTML(sub)}</small></span><span class="next-go" aria-hidden="true">→</span></a>`).join('')}</div>`;
+    $('nav-notice-count').textContent=notices?String(notices):'';
   }
   function renderVisits(plan,allocated){
     const sites=new Map(plan.sites.map(s=>[s.code,s]));
@@ -296,7 +567,7 @@
     $('visit-count').textContent=`${selected.length} planned`;
     $('visit-subtitle').textContent=plan.storm?'Within the experimental post-rain window':'Routine baseline visits where lab evidence is missing';
     if(selected.length){
-      $('visits').innerHTML=`<ol class="visit-list">${selected.map(site=>`<li class="visit-card rv-${reviewOf('visit',site.code)||'none'}" id="visit-${escapeHTML(site.code)}" data-code="${escapeHTML(site.code)}"><div class="visit-heading"><span class="rank-number">${site.rank}</span><div class="site-title"><h3><code>${escapeHTML(site.code)}</code>${escapeHTML(site.name)}</h3><p class="category-text">${site.action==='first baseline assessment'?'<span class="badge blue">First baseline</span> ':''}${escapeHTML(site.categories.join(' + '))}</p></div>${site.position?`<button type="button" class="locate" data-locate="${escapeHTML(site.code)}" aria-label="Show ${escapeHTML(site.code)} on map">Show on map</button>`:''}</div><p class="visit-time"><strong>${escapeHTML(dateRange(site.window))}</strong>${site.window?'<span class="small-window">Experimental window (heuristic, not validated)</span>':'<span class="small-window">No storm window</span>'}</p>${filedLine(site.code)}${reviewNote('visit',site.code)}${reviewButtons('visit',site.code,site.code+' '+site.name)}${citizenCard(site)}${site.action==='first baseline assessment'&&site.sewage_distance_m===null?'<p class="distance-note">Missing sewage distance · last among baseline sites</p>':''}${sourceDetails(site,plan)}${site.map_note?`<p class="reason muted small">${escapeHTML(site.map_note)}</p>`:''}</li>`).join('')}</ol>`;
+      $('visits').innerHTML=`<ol class="visit-list">${selected.map(site=>`<li class="visit-card rv-${reviewOf('visit',site.code)||'none'}" id="visit-${escapeHTML(site.code)}" data-code="${escapeHTML(site.code)}"><div class="vr-grid"><span class="rank-number">${site.rank}</span><div class="vr-main"><h3><code>${escapeHTML(site.code)}</code>${escapeHTML(site.name)}</h3><p class="category-text">${catChips(site)}</p><p class="visit-time"><strong>${escapeHTML(dateRange(site.window))}</strong>${site.window?'<span class="small-window">Experimental window (heuristic, not validated)</span>':'<span class="small-window">No storm window</span>'}</p>${filedLine(site.code)}${reviewNote('visit',site.code)}${site.action==='first baseline assessment'&&site.sewage_distance_m===null?'<p class="distance-note">Missing sewage distance · last among baseline sites</p>':''}${site.map_note?`<p class="reason muted small">${escapeHTML(site.map_note)}</p>`:''}</div><div class="vr-side">${reviewButtons('visit',site.code,site.code+' '+site.name)}<div class="vr-links">${citizenCard(site)}${sourceDetails(site,plan)}${site.position?`<button type="button" class="locate" data-locate="${escapeHTML(site.code)}" aria-label="Show ${escapeHTML(site.code)} on map">Map</button>`:''}</div></div></div></li>`).join('')}</ol>`;
     }else{
       let reason;
       if(budget===0) reason='The site-visit budget is zero. Increase it to allocate eligible visits; the full roster and evidence remain available.';
@@ -324,7 +595,7 @@
     if(!selected.length) $('fhir-status').textContent='No visits are in this list, so there is nothing to download.';
     else if(!sendable.length) $('fhir-status').textContent='Every visit is on hold, so there is nothing to download.';
     else if(!ready) $('fhir-status').textContent='The FHIR requests are missing. Run python plan.py, then reload.';
-    else $('fhir-status').textContent=`Downloads ${sendable.length} visit${sendable.length===1?'':'s'} as draft FHIR requests${held?` (${held} on hold left out)`:''}. Nothing is sent.${filedSummary()}`;
+    else $('fhir-status').innerHTML=`<span class="fs-line"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>${sendable.length} draft request${sendable.length===1?'':'s'} ready${held?` · ${held} on hold left out`:''} · nothing is sent</span>${filedChip()}`;
   }
   function demonstrationSentence(){
     const demo=data.fhir?.demonstration;
@@ -338,6 +609,14 @@
     if(!filedMatches()) return '';
     const item=filed.resources.find(row=>row.code===code&&row.id);
     return item?`<p class="filed-note">Filed as FHIR ServiceRequest/${escapeHTML(item.id)} (filed with resource shape v1)</p>`:'';
+  }
+  function filedChip(){
+    if(!filedMatches()) return '';
+    const shown=filed.resources.filter(item=>item.id);
+    if(!shown.length) return '';
+    const base=String(filed.sandbox||'').replace(/\/$/,'');
+    const when=filed.posted_at?niceTime(filed.posted_at):'';
+    return `<details class="filed-chip"><summary>Filed once to the HL7 Europe sandbox · ServiceRequest ${escapeHTML(shown[0].id)}–${escapeHTML(shown.at(-1).id)} · shape v1</summary><ul>${shown.map(item=>`<li><code>${escapeHTML(item.code)}</code> → ${link(`${base}/ServiceRequest/${item.id}`,`ServiceRequest/${item.id}`)}</li>`).join('')}</ul><p>Filed as drafts${when?` on ${escapeHTML(when)}`:''} for this replay demonstration. The current export uses resource shape v2 (one request-type code, categories in orderDetail).</p></details>`;
   }
   function filedSummary(){
     if(!filedMatches()) return '';
@@ -727,7 +1006,7 @@
     const pack=cardPack(), text=pack.text, english=pack.lang==='en';
     const fields=CITIZEN_QUESTIONS.map((id,index)=>`<fieldset><legend>${escapeHTML(text['q'+(index+1)])}</legend>${[['yes',text.yes],['no',text.no],['unsure',text.unsure]].map(([value,label])=>`<label class="task-choice"><input type="radio" name="task-${escapeHTML(site.code)}-${id}" data-q="${id}" value="${value}"${saved[id]===value?' checked':''}> ${escapeHTML(label)}</label>`).join('')}</fieldset>`).join('');
     const draft=english?'':`<p class="translation-draft" lang="en">Translation draft — have a native speaker check it before field use.</p>`;
-    return `<details class="task-card" lang="${pack.lang}" data-code="${escapeHTML(site.code)}"><summary lang="en">Citizen task card</summary><div class="lang-switch" role="group" aria-label="Card language" lang="en"><button type="button" data-card-lang="city" aria-pressed="${!english}">City language</button><button type="button" data-card-lang="en" aria-pressed="${english}">English</button></div><div class="task-body"><h3>${escapeHTML(citizenTitle(site,text))}</h3><p><strong>${escapeHTML(site.code)}</strong> ${escapeHTML(site.name)}</p><p>${escapeHTML(citizenWhere(site))}</p><p>${escapeHTML(citizenWhen(site))}</p><p class="task-safety">${escapeHTML(text.safety)}</p>${fields}<label class="field">${escapeHTML(text.observed)}<input type="text" data-q-text="observed" value="${escapeHTML(saved.observed||'')}"></label><label class="field">${escapeHTML(text.photo)}<input type="text" data-q-text="photo" value="${escapeHTML(saved.photo||'')}"></label>${draft}<p lang="en">Saved in this browser only. Nothing is sent.</p><p class="task-links" lang="en"><a href="https://apps.oneaquahealth.eu/" target="_blank" rel="noopener">Open the OneAquaHealth Citizen Science App</a> · <a href="https://www.oneaquahealth.eu/citizen-science-project/" target="_blank" rel="noopener">How to install it</a></p><p lang="en">These observations give the coordinator context. They don't change the visit order, the tests, or any notice. Record the full stream assessment in the official OneAquaHealth Citizen Science App (a login is required); this card only adds the after-storm checks.</p><button type="button" class="print-one" lang="en" data-print-card="${escapeHTML(site.code)}">Print this card</button></div></details>`;
+    return `<details class="task-card" lang="${pack.lang}" data-code="${escapeHTML(site.code)}"><summary lang="en">Task card</summary><div class="sheet-panel" role="dialog" aria-label="Citizen task card for ${escapeHTML(site.code)}"><div class="sheet-head" lang="en"><span>Citizen task card · <strong>${escapeHTML(site.code)}</strong></span><button type="button" class="sheet-close" data-close-sheet aria-label="Close">×</button></div><div class="lang-switch" role="group" aria-label="Card language" lang="en"><button type="button" data-card-lang="city" aria-pressed="${!english}">City language</button><button type="button" data-card-lang="en" aria-pressed="${english}">English</button></div><div class="task-body"><h3>${escapeHTML(citizenTitle(site,text))}</h3><p><strong>${escapeHTML(site.code)}</strong> ${escapeHTML(site.name)}</p><p>${escapeHTML(citizenWhere(site))}</p><p>${escapeHTML(citizenWhen(site))}</p><p class="task-safety">${escapeHTML(text.safety)}</p>${fields}<label class="field">${escapeHTML(text.observed)}<input type="text" data-q-text="observed" value="${escapeHTML(saved.observed||'')}"></label><label class="field">${escapeHTML(text.photo)}<input type="text" data-q-text="photo" value="${escapeHTML(saved.photo||'')}"></label>${draft}<p lang="en">Saved in this browser only. Nothing is sent.</p><p class="task-links" lang="en"><a href="https://apps.oneaquahealth.eu/" target="_blank" rel="noopener">Open the OneAquaHealth Citizen Science App</a> · <a href="https://www.oneaquahealth.eu/citizen-science-project/" target="_blank" rel="noopener">How to install it</a></p><p lang="en">These observations give the coordinator context. They don't change the visit order, the tests, or any notice. Record the full stream assessment in the official OneAquaHealth Citizen Science App (a login is required); this card only adds the after-storm checks.</p><button type="button" class="print-one" lang="en" data-print-card="${escapeHTML(site.code)}">Print this card</button></div></div></details>`;
   }
   function citizenPrintArticle(site,answers){
     const pack=cardPack(), text=pack.text;
@@ -778,18 +1057,24 @@
       return [['faecal',health.scaledFecalRisk],['pathogen',health.scaledPathogenRisk]].filter(([,value])=>numeric(value)&&value>=0.45).map(([label,value])=>`${label} ${two(value)}`).join(', ');
     };
     const parts=[];
+    if(!plan.storm) parts.push(`<p>No storm in this view, so no contact notices are drafted.</p>`);
     noticeOutside.forEach(site=>{
       const metres=numeric(site.sewage_distance_m)?`${Math.round(site.sewage_distance_m)} m`:'distance missing';
       parts.push(`<p><strong>${escapeHTML(site.code)} ${escapeHTML(site.name)}</strong> has a draft contact notice (${escapeHTML(contactPhrase(site))} · sewage works ${escapeHTML(metres)}) but sits outside the ${budget}-visit budget. Only a new sample there can confirm or lift its notice.</p>`);
     });
-    noNoticeVisits.forEach(site=>{
-      parts.push(`<p>Visit ${site.rank}, <strong>${escapeHTML(site.code)}</strong>, reassesses ${escapeHTML(categoryList(site.categories))} and drafts no contact notice.</p>`);
+    // Group no-notice visits by their categories so five identical lines read as one sentence.
+    const groups=new Map();
+    noNoticeVisits.forEach(site=>{const key=categoryList(site.categories);if(!groups.has(key))groups.set(key,[]);groups.get(key).push(site);});
+    groups.forEach((list,cats)=>{
+      if(list.length===1){const site=list[0];parts.push(`<p>Visit ${site.rank}, <strong>${escapeHTML(site.code)}</strong>, reassesses ${escapeHTML(cats)} and drafts no contact notice.</p>`);return;}
+      const all=list.length===picked.length;
+      parts.push(`<p>${all?`All ${list.length} planned visits`:`Visits ${list.map(s=>s.rank).join(', ')}`} (${list.map(s=>`<strong>${escapeHTML(s.code)}</strong>`).join(', ')}) reassess ${escapeHTML(cats)} and draft no contact notice.</p>`);
     });
     if(noticeOutside.length&&noNoticeVisits.length&&budgetForAllNotices!==null){
       parts.push(`<p><button type="button" class="cover-notices" data-cover-notices="${budgetForAllNotices}">Show a budget that covers every notice site (${budgetForAllNotices} visits)</button></p>`);
     }
     if(nearLine.length){
-      parts.push(`<p>Just under the prototype notice setting (${escapeHTML(String(line))}): ${nearLine.map(site=>`<strong>${escapeHTML(site.code)}</strong> ${escapeHTML(nearPhrase(site))}`).join('; ')}.</p>`);
+      parts.push(`<p>${plan.storm?'Just under':'Closest to'} the prototype notice setting (${escapeHTML(String(line))}): ${nearLine.map(site=>`<strong>${escapeHTML(site.code)}</strong> ${escapeHTML(nearPhrase(site))}`).join('; ')}.</p>`);
     }
     if(plan.notices.length&&!noticeOutside.length) parts.push('<p>Every site with a draft notice is in this plan.</p>');
     parts.push('<p class="protection-foot">The plan ranks visits by the highest stored category. This check shows what that order leaves out for people-and-pets protection. It does not change the order or the filed requests.</p>');
@@ -797,7 +1082,7 @@
   }
   function renderSources(){
     const refs=[['sites.json','Official site roster'],['health-risks.json','Lab category results'],['urban-parameters.json','Urban parameters'],[`forecasts/${cityId}.json`,'City forecast']];
-    $('source-summary').innerHTML=refs.map(([name,label])=>{const s=data.sources[name]||{};return `<p>${link(s.url,label)} · fetched <span class="mono">${escapeHTML(timestamp(s.fetched_at))}</span></p>`;}).join('')+`<p><strong>Prototype settings, not validated environmental rules:</strong> a storm is ${data.config.RAIN_MM} mm of rain or more in a day. A test is proposed when its 2023–24 score is ${data.config.TEST_MIN} or higher. A contact notice is drafted when the faecal or pathogen score is ${data.config.ADVISORY_MIN} or higher. Sampling covers the ${data.config.WINDOW_DAYS} days after the rain. Changing the visit budget never changes the scores or the order.</p>`;
+    $('source-summary').innerHTML=refs.map(([name,label])=>{const s=data.sources[name]||{};return `<p>${link(s.url,label)} · fetched <span class="mono">${escapeHTML(timestamp(s.fetched_at))}</span></p>`;}).join('')+`<p><strong>Prototype settings, not validated environmental rules:</strong> a storm is ${data.config.RAIN_MM} mm of rain or more in a day. A test is proposed when its 2023–24 score is ${data.config.TEST_MIN} or higher. A contact notice is drafted when the faecal or pathogen score is ${data.config.ADVISORY_MIN} or higher. Sampling covers the ${data.config.WINDOW_DAYS} days after the rain. Changing the visit budget never changes the scores or the order.</p><p><strong>Why ${data.config.RAIN_MM} mm?</strong> ${data.config.RAIN_MM===20?`It matches the WMO/ETCCDI “very heavy precipitation day” index (R20mm: daily rain of at least 20 mm; ${link('https://etccdi.pacificclimate.org/list_27_indices.shtml','ETCCDI index list')}).`:'It is a configurable daily total.'} Our rain data are daily totals, so hourly intensity (for example the 7.6 mm per hour heavy-rain rate) can't be checked. Each city should calibrate the trigger locally.</p>`;
   }
   function render(){
     const {city,plan,allocated}=view();
@@ -809,9 +1094,9 @@
     $('budget').max=String(plan.sites.length);$('budget').value=String(budget);
     $('budget-minus').disabled=budget===0;$('budget-plus').disabled=budget===plan.sites.length;
     const range=$('budget-range');range.max=String(Math.max(plan.ranking.length,budget,1));range.value=String(budget);range.setAttribute('aria-valuetext',`${budget} site visits`);
-    renderWeather(city,plan,allocated);renderVisits(plan,allocated);renderProtection(plan,allocated);renderDecision(city,plan,allocated);renderNotices(plan);renderReview(plan);renderRoster(plan,allocated);renderCoverage(plan);renderMap(city,plan,allocated);renderSources();
+    renderWeather(city,plan,allocated);renderVisits(plan,allocated);renderProtection(plan,allocated);renderDecision(city,plan,allocated);renderNotices(plan);renderReview(plan);renderTracker(plan,allocated);renderSummaryBar(city,plan,allocated);renderNext(city,plan,allocated);renderRoster(plan,allocated);renderCoverage(plan);renderMap(city,plan,allocated);renderSources();
     $('plan-status').textContent=`${city.name} · ${mode==='live'?'latest saved forecast':plan.label} · ${allocated.size} visits proposed · ${plan.notices.length} draft notices requiring coordinator review`;
-    history.replaceState(null,'',`?city=${encodeURIComponent(cityId)}&mode=${mode}&visits=${budget}`);
+    history.replaceState(null,'',`?city=${encodeURIComponent(cityId)}&mode=${mode}&visits=${budget}${location.hash}`);
   }
   function applyBudget(value){
     const maximum=data.cities[cityId].modes[mode].sites.length;
@@ -868,9 +1153,31 @@
       document.addEventListener('input',event=>{const card=event.target.closest('.task-card');if(card&&event.target.matches('[data-q-text]'))saveCitizenCard(card);});
       document.addEventListener('click',event=>{const button=event.target.closest('[data-cover-notices]');if(!button)return;const visits=Number(button.dataset.coverNotices);applyBudget(visits);$('plan-status').textContent=`Visit budget is now ${visits}, which covers every notice site. The visit order is unchanged.`;});
       document.addEventListener('click',e=>{const b=e.target.closest('[data-review]');if(b){setReview(b.dataset.review,b.dataset.code,b.dataset.val);return;}if(e.target.closest('[data-clear-review]')){const pre=`${cityId}|${mode}|`;Object.keys(reviews).filter(k=>k.startsWith(pre)).forEach(k=>delete reviews[k]);try{localStorage.setItem(REVIEW_KEY,JSON.stringify(reviews));}catch{}render();$('plan-status').textContent='Review cleared for this city and mode.';}});
+      document.addEventListener('click',e=>{const sg=e.target.closest('[data-seg]');if(!sg)return;const code=sg.dataset.seg;if($(`visit-${code}`))focusCard(code);else{const m=markers.get(code);if(m){leafletMap.panTo(m.getLatLng());m.openPopup();$('map').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'center'});}}});
+      document.addEventListener('pointermove',e=>{const c=e.target.closest('.visit-card,#notices>.notice-row,.surface.protection,.kpi');if(!c)return;const r=c.getBoundingClientRect();c.style.setProperty('--mx',`${e.clientX-r.left}px`);c.style.setProperty('--my',`${e.clientY-r.top}px`);},{passive:true});
+      document.addEventListener('click',e=>{if(e.target.closest('[data-sb-download]')){downloadFhir();return;}if(e.target.closest('[data-sb-top]')){window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});return;}const j=e.target.closest('#header-status [data-jump]');if(j)jumpTo(j.dataset.jump);});
+      const SHEETS='details.task-card,details.why';
+      const syncSheets=()=>document.body.classList.toggle('sheet-open',!!document.querySelector('details.task-card[open],details.why[open]'));
+      document.addEventListener('toggle',e=>{const d=e.target;if(!(d instanceof HTMLDetailsElement)||!d.matches(SHEETS))return;
+        if(d.open){document.querySelectorAll(SHEETS).forEach(o=>{if(o!==d&&o.open)o.open=false;});requestAnimationFrame(()=>d.querySelector('.sheet-close')?.focus({preventScroll:true}));}
+        else if(d.isConnected&&!document.querySelector(SHEETS.split(',').map(x=>x+'[open]').join(','))) d.querySelector('summary')?.focus({preventScroll:true});
+        syncSheets();},true);
+      document.addEventListener('click',e=>{
+        if(e.target.closest('[data-mode-live]')){changeMode('live');return;}
+        const close=e.target.closest('[data-close-sheet]');if(close){const d=close.closest('details');if(d)d.open=false;return;}
+        if(e.target.matches&&e.target.matches('details.task-card[open],details.why[open]')){e.target.open=false;}
+      });
+      document.addEventListener('keydown',e=>{if(e.key==='Escape'){const d=document.querySelector('details.task-card[open],details.why[open]');if(d){d.open=false;e.preventDefault();}}});
       $('decision').addEventListener('click',event=>{const step=event.target.closest('[data-jump]');if(step)jumpTo(step.dataset.jump);});
-      document.addEventListener('click',event=>{const button=event.target.closest('[data-locate]');if(!button)return;const marker=markers.get(button.dataset.locate);if(!marker)return;leafletMap.panTo(marker.getLatLng());marker.openPopup();$('map').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'center'});});
+      document.addEventListener('click',event=>{const button=event.target.closest('[data-locate]');if(!button)return;if(page!=='plan'){goPage('plan');setTimeout(()=>button.isConnected?button.click():null,60);}const marker=markers.get(button.dataset.locate);if(!marker)return;leafletMap.panTo(marker.getLatLng());marker.openPopup();$('map').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'center'});});
       render();$('loading').hidden=true;
+      // Deep links: #card-C5 opens that citizen task card, #notice-C16 opens that notice.
+      const openFromHash=()=>{const m=location.hash.match(/^#(card|notice)-([A-Za-z0-9_-]+)$/);if(!m)return;
+        const el=m[1]==='card'?$(`visit-${m[2]}`)?.querySelector('details.task-card'):document.querySelector(`#notices .notice-row[data-code="${CSS.escape(m[2])}"] details.notice-more`);
+        if(!el)return;el.open=true;if(m[1]==='notice')el.closest('.notice-row').scrollIntoView({block:'start'});};
+      setPage(pageFromHash(),{scroll:false});openFromHash();
+      const onRoute=()=>{setPage(pageFromHash(),{scroll:!location.hash.match(/^#(card|notice)-/)});openFromHash();};
+      window.addEventListener('hashchange',onRoute);window.addEventListener('popstate',onRoute);
     }catch(error){$('app').hidden=true;$('loading').hidden=true;$('fatal').hidden=false;$('fatal').innerHTML=`<strong>Sampling plan unavailable</strong><p>${escapeHTML(error.message)}</p><p>Serve the web folder with the local Python web server, then reload this page. See docs/changes/readmeUI.md for the command.</p>`;}
   }
   document.addEventListener('DOMContentLoaded',start,{once:true});

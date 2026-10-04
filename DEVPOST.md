@@ -45,7 +45,7 @@ AfterStorm is one page for a coordinator.
 - Choose a city among Benevento, Coimbra, Ghent, Oslo, and Toulouse.
 - **Live** shows the cached 7-day city-centre forecast.
 - **Replay** shows a real archived heavy-rain day, labelled with the date. In this cache those days are Benevento 2026-04-01, Coimbra 2026-05-10, Ghent 2025-07-06, Oslo 2026-06-09, and Toulouse 2026-08-03.
-- Heavy rain means at least 20 mm in a day. That threshold is a setting, not a regulatory limit.
+- A storm day means at least 20 mm of rain in a day, the WMO/ETCCDI "very heavy precipitation day" index (R20mm). It is a prototype setting, not a regulatory limit: the rain data are daily totals, so hourly intensity can't be checked, and each city should calibrate it locally.
 - The page lists up to five site visits. Each visit names the categories to assess and an experimental window: the two calendar days after the heavy-rain day. The window is marked heuristic, not validated.
 - Sites with no lab result are offered a first baseline sample of all three categories.
 - Where a 2023 or 2024 faecal or pathogen category is at least 0.5, the page drafts a water-contact notice for people and pets. The coordinator decides whether to issue it.
