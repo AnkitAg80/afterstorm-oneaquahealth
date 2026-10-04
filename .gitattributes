@@ -1,3 +1,5 @@
 # Preserve original response bytes and provenance hashes across operating systems.
 data/raw/** -text
 web/vendor/** -text
+# The browser's CSV download is an exact-byte fixture (UTF-8 BOM + CRLF).
+docs/validation/lab-sheet-coimbra-replay.csv -text -diff
