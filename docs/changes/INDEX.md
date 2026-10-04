@@ -36,3 +36,4 @@ These notes record each build step. The submission text is `README.md` at the re
 32. `readmeR3-R7.md` — first-visit guide.
 33. `readmeR2-6.md` — submission text, evidence, screenshots, final source refresh.
 34. `readmeR2-7.md` — GitHub Pages workflow and publication preparation.
+35. `readmeUX-light.md` — overcast storm field, full-width headlines, visit slider.
